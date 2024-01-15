@@ -1,7 +1,6 @@
-package com.example.system.building;
+package com.example.system.model.building;
 
-import com.example.system.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.system.model.requestcontract.RequestContract;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +26,6 @@ public class Building {
     private int status;
     @OneToMany(mappedBy = "building")
     private Set<BuildingDetail> buildingDetail;
+    @OneToMany(mappedBy = "building")
+    private Set<RequestContract> requestContracts;
 }

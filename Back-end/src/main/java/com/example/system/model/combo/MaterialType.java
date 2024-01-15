@@ -1,4 +1,4 @@
-package com.example.system.combo;
+package com.example.system.model.combo;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,13 +13,12 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "combo_building")
-public class ComboBuilding {
+@Table(name = "material_type")
+public class MaterialType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long comboBuildingId;
-    private String comboBuildingName;
-    private Double unitPrice;
-    @OneToMany(mappedBy = "comboBuilding")
-    Set<ComboDetail> comboDetails;
+    private Long materialTypeId;
+    private String typeName;
+    @OneToMany(mappedBy = "materialType")
+    Set<Material> materials;
 }

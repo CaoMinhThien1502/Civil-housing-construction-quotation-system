@@ -1,13 +1,12 @@
-package com.example.system.user;
+package com.example.system.model.user;
 
-import com.example.system.building.Building;
-import com.example.system.token.Token;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.system.model.blog.Blog;
+import com.example.system.model.requestcontract.RequestContract;
+import com.example.system.model.token.Token;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -34,4 +33,8 @@ public class User {
     private boolean gender;
     @OneToMany(mappedBy = "user")
     private Set<Token> tokens;
+    @OneToMany(mappedBy = "user")
+    private Set<RequestContract> requestContracts;
+    @OneToMany(mappedBy = "user")
+    private Set<Blog> blogs;
 }
