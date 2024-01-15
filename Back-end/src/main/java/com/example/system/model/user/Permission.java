@@ -1,4 +1,4 @@
-package com.example.system.user;
+package com.example.system.model.user;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.system.building;
+package com.example.system.model.combo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -7,20 +7,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "item_type")
-public class ItemType {
+@Table(name = "combo_detail")
+public class ComboDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long itemTypeId;
-    private String itemTypeName;
-    @OneToMany(mappedBy = "itemType")
+    private Long comboDetailId;
+    @ManyToOne()
+    @JoinColumn(name = "material_id")
     @JsonIgnore
-    private Set<Item> items;
+    private Material material;
+    @ManyToOne()
+    @JoinColumn(name = "combo_building_id")
+    @JsonIgnore
+    private ComboBuilding comboBuilding;
 }

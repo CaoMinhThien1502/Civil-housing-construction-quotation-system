@@ -1,4 +1,4 @@
-package com.example.system.combo;
+package com.example.system.model.combo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

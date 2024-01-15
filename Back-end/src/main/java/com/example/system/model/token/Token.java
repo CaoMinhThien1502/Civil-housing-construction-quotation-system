@@ -1,6 +1,6 @@
-package com.example.system.token;
+package com.example.system.model.token;
 
-import com.example.system.user.User;
+import com.example.system.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +13,7 @@ import lombok.*;
 @Table(name = "token")
 public class Token {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String token;
     @Enumerated(EnumType.STRING)
