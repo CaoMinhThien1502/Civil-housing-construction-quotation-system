@@ -19,9 +19,11 @@ public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buildingId;
-    private String buildingName;
-    private String description;
+/*    private String buildingName;
+    private String description;*/
+    @Column(nullable = false)
     private Double length;
+    @Column(nullable = false)
     private Double width;
     private int status;
     @OneToMany(mappedBy = "building")

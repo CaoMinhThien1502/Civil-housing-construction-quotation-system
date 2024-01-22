@@ -19,7 +19,9 @@ public class ComboBuilding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long comboBuildingId;
+    @Column(nullable = false, columnDefinition = "varchar(255)")
     private String comboBuildingName;
+    @Column(nullable = false)
     private Double unitPrice;
     @OneToMany(mappedBy = "comboBuilding")
     Set<ComboDetail> comboDetails;
