@@ -19,8 +19,9 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long materialId;
+    @Column(nullable = false, columnDefinition = "varchar(255)")
     private String materialName;
-    private int quantity;
+    @Column(nullable = false)
     private Double unitPrice;
     @ManyToOne
     @JoinColumn(name = "material_type_id")

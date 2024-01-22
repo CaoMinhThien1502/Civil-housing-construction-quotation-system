@@ -19,10 +19,13 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long blogId;
+    @Column(nullable = false, columnDefinition = "varchar(200)")
     private String blogName;
+    @Column(nullable = false, columnDefinition = "varchar(2000)")
     private String blogContent;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate createDay;
+    @Column(columnDefinition = "varchar(500)")
     private String imgPath;
     @ManyToOne
     @JoinColumn(name = "user_id")

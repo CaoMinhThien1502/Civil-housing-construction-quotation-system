@@ -18,6 +18,7 @@ public class MaterialType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long materialTypeId;
+    @Column(nullable = false, columnDefinition = "varchar(50)", unique = true)
     private String typeName;
     @OneToMany(mappedBy = "materialType")
     Set<Material> materials;
