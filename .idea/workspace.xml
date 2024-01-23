@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fe172c7d-7f70-40ab-9776-7b944a44445e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Civil-housing-construction-quotation-system.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/controller/ComboBuildingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/blog/Blog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/building/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/requestcontract/RequestContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/token/TokenType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/user/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/repository/blog/BlogRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/repository/building/BuildingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/repository/combo/ComboBuildingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/repository/combo/MaterialRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/repository/combo/MaterialTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/repository/requestcontract/RequestContractRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/repository/user/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/blog/BlogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/building/BuildingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/combobuilding/ComboBuildingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/combobuilding/MaterialService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/combobuilding/MaterialTypeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/requestContract/RequestContractService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/user/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/BlogServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/BuildingServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/ComboBuildingServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/MateiralTypeServieImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/MaterialServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/RequestContractServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/UserServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/building/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/building/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/building/BuildingDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/building/BuildingDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/building/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/building/ItemType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/building/ItemType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/combo/ComboBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/combo/ComboBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/combo/ComboDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/combo/ComboDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/combo/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/combo/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/combo/MaterialType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/combo/MaterialType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/token/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/token/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/token/TokenType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/user/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/user/Permission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/user/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/model/user/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/user/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2bD5COtJH8Ph60H60VQ6pFkzKAA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Merging TinBE",
+    "last_opened_file_path": "C:/Users/Admin/Documents/ChuyenNganh/CN7/SWP391/Code_Demo/Civil-housing-construction-quotation-system/Back-end",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fe172c7d-7f70-40ab-9776-7b944a44445e" name="Changes" comment="" />
+      <created>1705736680959</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1705736680959</updated>
+      <workItem from="1705736681992" duration="9000" />
+      <workItem from="1705970187213" duration="14000" />
+      <workItem from="1705975870329" duration="28000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

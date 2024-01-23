@@ -1,2 +1,4 @@
 # Civil-housing-construction-quotation-system
-SWP392 - Mini Project
+## Members
+- Cao Minh Thiên - SE162148
+- Trịnh Quốc Cường - SE162149
