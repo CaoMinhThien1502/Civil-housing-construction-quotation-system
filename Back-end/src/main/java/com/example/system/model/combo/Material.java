@@ -19,7 +19,7 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long materialId;
-    @Column(nullable = false, columnDefinition = "varchar(255)")
+    @Column(nullable = false, columnDefinition = "varchar(255)", unique = true)
     private String materialName;
     @Column(nullable = false)
     private Double unitPrice;
