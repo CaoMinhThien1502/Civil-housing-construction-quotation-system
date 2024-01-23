@@ -17,19 +17,30 @@ public class MateiralTypeServieImp implements MaterialTypeService {
     }
 
     @Override
-    public MaterialType createMaterialType(MaterialType materialType) {
-        MaterialType newMaterialType = new MaterialType();
-        newMaterialType.setTypeName(materialType.getTypeName());
-        return materialTypeRepository.save(newMaterialType);
+    public boolean createMaterialType(MaterialType materialType) {
+        try {
+            MaterialType newMaterialType = new MaterialType();
+            newMaterialType.setTypeName(materialType.getTypeName());
+            materialTypeRepository.save(newMaterialType);
+            return true;
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean updateMaterialType(Long materialTypeId, MaterialType materialType) {
-        MaterialType materialTypeUpdate = materialTypeRepository.findById(materialTypeId)
-                .orElseThrow(
-                        () -> new IllegalStateException("student with id " + materialTypeId + " does not exists"));
-        materialTypeUpdate.setTypeName(materialType.getTypeName());
-        materialTypeRepository.save(materialTypeUpdate);
-        return true;
+        try {
+            MaterialType materialTypeUpdate = materialTypeRepository.findById(materialTypeId)
+                    .orElseThrow(
+                            () -> new IllegalStateException("student with id " + materialTypeId + " does not exists"));
+            materialTypeUpdate.setTypeName(materialType.getTypeName());
+            materialTypeRepository.save(materialTypeUpdate);
+            return true;
+        }catch (Exception e) {
+            //e.printStackTrace();
+            return false;
+        }
     }
 }
