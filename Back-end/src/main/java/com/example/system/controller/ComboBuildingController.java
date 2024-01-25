@@ -1,8 +1,10 @@
 package com.example.system.controller;
+import com.example.system.dto.combodto.ComboResponseDto;
 import com.example.system.dto.combodto.MaterialDto;
 import com.example.system.dto.combodto.MaterialTypeDto;
 import com.example.system.model.combo.Material;
 import com.example.system.model.combo.MaterialType;
+import com.example.system.service.combobuilding.ComboBuildingService;
 import com.example.system.service.combobuilding.MaterialService;
 import com.example.system.service.combobuilding.MaterialTypeService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 public class ComboBuildingController {
     private final MaterialTypeService materialTypeService;
     private final MaterialService materialService;
+    private final ComboBuildingService comboBuildingService;
 
 
     // -------Material Type controller-------
@@ -50,5 +53,11 @@ public class ComboBuildingController {
     public ResponseEntity<?> updateMaterial(@RequestParam Long materialId, @RequestBody MaterialDto material){
         boolean checkUpdate = materialService.updateMaterial(materialId, material);
         return ResponseEntity.ok(checkUpdate);
+    }
+    // ------Combo Building controller------
+    @GetMapping("/combo/get")
+    public ResponseEntity<?> getCombo(){
+        List<ComboResponseDto> comboResponseDtoList = comboBuildingService.getListCombo();
+        return ResponseEntity.ok(comboResponseDtoList);
     }
 }

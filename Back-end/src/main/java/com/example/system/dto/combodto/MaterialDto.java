@@ -6,8 +6,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class MaterialDto {
     private String materialName;
-    private Double unitPrice;
+    private Long unitPrice;
 }
