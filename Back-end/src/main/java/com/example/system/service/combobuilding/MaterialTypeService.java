@@ -1,5 +1,6 @@
 package com.example.system.service.combobuilding;
 
+import com.example.system.dto.combodto.MaterialTypeDto;
 import com.example.system.model.combo.MaterialType;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface MaterialTypeService {
     List<MaterialType> getListMaterialType();
 
-    boolean createMaterialType(MaterialType materialType);
+    boolean createMaterialType(MaterialTypeDto materialType);
 
-    boolean updateMaterialType(Long materialTypeId, MaterialType materialType);
+    boolean updateMaterialType(Long materialTypeId, MaterialTypeDto materialType);
 }

@@ -1,5 +1,6 @@
 package com.example.system.serviceImplement;
 
+import com.example.system.dto.combodto.MaterialTypeDto;
 import com.example.system.model.combo.MaterialType;
 import com.example.system.repository.combo.MaterialTypeRepository;
 import com.example.system.service.combobuilding.MaterialTypeService;
@@ -17,7 +18,7 @@ public class MateiralTypeServieImp implements MaterialTypeService {
     }
 
     @Override
-    public boolean createMaterialType(MaterialType materialType) {
+    public boolean createMaterialType(MaterialTypeDto materialType) {
         try {
             MaterialType newMaterialType = new MaterialType();
             newMaterialType.setTypeName(materialType.getTypeName());
@@ -30,7 +31,7 @@ public class MateiralTypeServieImp implements MaterialTypeService {
     }
 
     @Override
-    public boolean updateMaterialType(Long materialTypeId, MaterialType materialType) {
+    public boolean updateMaterialType(Long materialTypeId, MaterialTypeDto materialType) {
         try {
             MaterialType materialTypeUpdate = materialTypeRepository.findById(materialTypeId)
                     .orElseThrow(
