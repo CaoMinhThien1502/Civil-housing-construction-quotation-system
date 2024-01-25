@@ -22,7 +22,9 @@ public class ComboBuilding {
     @Column(nullable = false, columnDefinition = "varchar(255)")
     private String comboBuildingName;
     @Column(nullable = false)
-    private Double unitPrice;
+    private Long unitPrice;
+    @Column(nullable = false)
+    private int status; // 0: xây nhà phần thô - 1: xây nhà hoàn thiện - 2: xây dựng trọn gói
     @OneToMany(mappedBy = "comboBuilding")
     Set<ComboDetail> comboDetails;
     @OneToMany(mappedBy = "comboBuilding")
