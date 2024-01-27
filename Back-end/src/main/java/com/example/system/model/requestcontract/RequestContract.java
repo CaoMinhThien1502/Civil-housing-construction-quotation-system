@@ -9,6 +9,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -20,9 +21,10 @@ public class RequestContract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long requestContractId;
-    private boolean status;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate requestDate;
+    private boolean status; //false: đang xử lý // true: đã xử lý
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date requestDate;
     @ManyToOne
     @JoinColumn(name = "combo_building_id")
     @JsonIgnore

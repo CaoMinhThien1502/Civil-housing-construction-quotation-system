@@ -39,9 +39,9 @@ public class User {
     private String firstName;
     @Column(nullable = false, columnDefinition = "varchar(50)")
     private String lastName;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Column(columnDefinition = "varchar(150)")
-    private LocalDate birthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
     private boolean gender;
     @OneToMany(mappedBy = "user")
     private Set<Token> tokens;
