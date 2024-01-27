@@ -20,7 +20,10 @@ public class MaterialServiceImpl implements MaterialService {
     public List<Material> getListMaterial() {
         return materialRepository.findAll();
     }
-
+    @Override
+    public List<Material> getListMaterialByTypeId(Long materialTypeId) {
+        return materialRepository.findAllByMaterialType(materialTypeId);
+    }
 
     @Override
     public boolean createMaterial(Long materialTypeId, MaterialDto material) {
@@ -54,4 +57,6 @@ public class MaterialServiceImpl implements MaterialService {
             return false;
         }
     }
+
+
 }
