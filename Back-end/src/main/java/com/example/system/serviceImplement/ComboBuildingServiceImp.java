@@ -1,10 +1,11 @@
 package com.example.system.serviceImplement;
 
+import com.example.system.dto.combodto.ComboRequestDto;
 import com.example.system.dto.combodto.ComboResponseDto;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.combo.ComboDetail;
 import com.example.system.model.combo.Material;
-import com.example.system.model.combo.MaterialType;
+import com.example.system.repository.combo.ComboBuildingRepository;
 import com.example.system.repository.combo.ComboDetailRepository;
 import com.example.system.service.combobuilding.ComboBuildingService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ComboBuildingServiceImp implements ComboBuildingService {
     private final ComboDetailRepository comboDetailRepository;
+    private final ComboBuildingRepository comboBuildingRepository;
     @Override
     public List<ComboResponseDto> getListCombo() {
         List<ComboResponseDto> listComboResponse = new ArrayList<>();
@@ -46,5 +48,14 @@ public class ComboBuildingServiceImp implements ComboBuildingService {
             listComboResponse.add(comboResponseDto);
         }
         return listComboResponse;
+    }
+
+    @Override
+    public ComboBuilding createComboBuilding(ComboRequestDto comboRequestDto) {
+            ComboBuilding newComboBuilding = new ComboBuilding();
+            newComboBuilding.setComboBuildingName(comboRequestDto.getComboBuildingName());
+            newComboBuilding.setStatus(comboRequestDto.getStatus());
+            comboBuildingRepository.save(newComboBuilding);
+            return newComboBuilding;
     }
 }

@@ -19,9 +19,9 @@ public class ComboBuilding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long comboBuildingId;
-    @Column(nullable = false, columnDefinition = "varchar(255)")
+    @Column(nullable = false, columnDefinition = "varchar(255)", unique = true)
     private String comboBuildingName;
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private Long unitPrice;
     @Column(nullable = false)
     private int status; // 0: xây nhà phần thô - 1: xây nhà hoàn thiện - 2: xây dựng trọn gói

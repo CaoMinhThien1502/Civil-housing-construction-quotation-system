@@ -16,7 +16,10 @@ public class MateiralTypeServieImp implements MaterialTypeService {
     public List<MaterialType> getListMaterialType() {
         return materialTypeRepository.findAll();
     }
-
+    @Override
+    public MaterialType getMaterialTypeById(Long materialTypeId) {
+        return materialTypeRepository.findById(materialTypeId).orElseThrow();
+    }
     @Override
     public boolean createMaterialType(MaterialTypeDto materialType) {
         try {
@@ -44,4 +47,6 @@ public class MateiralTypeServieImp implements MaterialTypeService {
             return false;
         }
     }
+
+
 }
