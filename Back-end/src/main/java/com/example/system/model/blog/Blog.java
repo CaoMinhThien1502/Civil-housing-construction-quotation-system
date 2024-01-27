@@ -9,6 +9,8 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,8 +25,9 @@ public class Blog {
     private String blogName;
     @Column(nullable = false, columnDefinition = "varchar(2000)")
     private String blogContent;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate createDay;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date createDay;
     @Column(columnDefinition = "varchar(500)")
     private String imgPath;
     @ManyToOne
