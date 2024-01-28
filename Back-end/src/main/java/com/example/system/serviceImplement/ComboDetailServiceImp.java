@@ -64,6 +64,7 @@ public class ComboDetailServiceImp implements ComboDetailService {
         }
         //update combobuilding
         Long price = comboDetailRepository.calculateTotalUnitPriceByComboBuilding(comboBuilding);
+        comboBuilding.setComboBuildingId(comboBuilding.getComboBuildingId());
         comboBuilding.setUnitPrice(price);
         comboBuilding.setComboBuildingName(comboRequestDto.getComboBuildingName());
         comboBuilding.setStatus(comboRequestDto.getStatus());
