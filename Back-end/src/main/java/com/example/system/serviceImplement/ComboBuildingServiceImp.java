@@ -58,4 +58,9 @@ public class ComboBuildingServiceImp implements ComboBuildingService {
             comboBuildingRepository.save(newComboBuilding);
             return newComboBuilding;
     }
+
+    @Override
+    public List<ComboBuilding> getListComboBuilding() {
+        return comboBuildingRepository.findAll();
+    }
 }
