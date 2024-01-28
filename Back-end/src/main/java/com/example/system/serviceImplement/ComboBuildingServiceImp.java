@@ -26,7 +26,6 @@ public class ComboBuildingServiceImp implements ComboBuildingService {
         List<ComboResponseDto> listComboResponse = new ArrayList<>();
 
         Set<ComboBuilding> comboBuildingList = new HashSet<>();
-        List<Material> materialOfCombo = new ArrayList<>();
 
 
         List<ComboDetail> detailList = comboDetailRepository.findAll();
@@ -34,6 +33,7 @@ public class ComboBuildingServiceImp implements ComboBuildingService {
             comboBuildingList.add(c.getComboBuilding());
         }
         for (ComboBuilding c:comboBuildingList) {
+            List<Material> materialOfCombo = new ArrayList<>();
             ComboResponseDto comboResponseDto = new ComboResponseDto();
             comboResponseDto.setComboBuildingName(c.getComboBuildingName());
             comboResponseDto.setUnitPrice(c.getUnitPrice());
