@@ -1,5 +1,7 @@
 package com.example.system.service.requestContract;
 
+import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.requestcontract.RequestContract;
 
@@ -9,7 +11,8 @@ public interface RequestContractService {
     RequestContract getByBuilding(Building building);
 
     List<RequestContract> findAll();
+    List<RequestContractDto> findAllDto();
 
-    RequestContract createRequestContract(RequestContract requestContract);
-    RequestContract updateRequestContract(RequestContract requestContract);
+//    RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId);
+//    RequestContract updateRequestContract(RequestContract requestContract);
 }

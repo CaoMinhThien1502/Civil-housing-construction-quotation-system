@@ -12,6 +12,6 @@ public interface BuildingDetailService {
 
     BuildingDetail createBuildingDetail(Building building, Item item);
 
-    boolean updateBuildingDetail(Long id, Set<Long> items);
+    boolean updateBuildingDetail(Long id, List<Long> items);
 
 }

@@ -3,6 +3,7 @@ package com.example.system.controller;
 
 import com.example.system.dto.buildingdto.BuildingDetailDto;
 import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.buildingdto.ItemTypeDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.building.Item;
@@ -38,9 +39,9 @@ public class BuildingController{
 
     //Item Type Controller
     @GetMapping("/item-type/list")
-    public ResponseEntity<List<ItemType>> getItemtypes(){
-        List<ItemType> itemTypes = itemTypeService.findAll();
-        return ResponseEntity.ok(itemTypes);
+    public ResponseEntity<List<ItemTypeDto>> getItemtypes(){
+        List<ItemTypeDto> itemTypeDtos = itemTypeService.findItemTypeDtos();
+        return ResponseEntity.ok(itemTypeDtos);
     }
     @PostMapping("/item-type/create")
     public ResponseEntity<ItemType> createItemtype(@RequestBody ItemType itemType){
@@ -49,7 +50,7 @@ public class BuildingController{
     }
     @PutMapping("/item-type/update")
     public ResponseEntity<ItemType> updateItemtype(@RequestParam Long itemTypeId, @RequestBody ItemType itemType){
-        ItemType updateItemType = itemTypeService.updateItemType(itemType);
+        ItemType updateItemType = itemTypeService.updateItemType(itemTypeId, itemType);
         return ResponseEntity.ok(updateItemType);
     }
 
@@ -65,43 +66,28 @@ public class BuildingController{
         return ResponseEntity.ok(newItem);
     }
     @PutMapping("/item/update")
-    public ResponseEntity<Item> updateItemtype(@RequestParam Long itemId, @RequestParam Long itemTypeId, @RequestBody Item item){
+    public ResponseEntity<Item> updateItem(@RequestParam Long itemId, @RequestParam Long itemTypeId, @RequestBody Item item){
         Item updateItem = itemService.updateItem(itemId, itemTypeId, item);
         return ResponseEntity.ok(updateItem);
     }
 
     //Building Controller
     @GetMapping("/building/list")
-    public ResponseEntity<List<Building>> getBuildings(){
-        List<Building> buildings = buildingService.findAll();
+    public ResponseEntity<List<BuildingDto>> getBuildings(){
+        List<BuildingDto> buildings = buildingService.findBuildingDtos();
         return ResponseEntity.ok(buildings);
     }
 
     @PostMapping("/building/create")
     public ResponseEntity<BuildingDto> createBuilding(@RequestBody BuildingDto buildingDto){
-        Building newBuilding = new Building();
-        newBuilding.setWidth(buildingDto.getWidth());
-        newBuilding.setLength(buildingDto.getLength());
-        newBuilding.setStatus(-1);
-        buildingService.createBuilding(newBuilding);
-        for (Long id: buildingDto.getItemIdList()){
-            Item item = itemService.findByItemId(id);
-            if(item == null) return ResponseEntity.ok(null);
-            buildingDetailService.createBuildingDetail(newBuilding,item);
-        }
-        return ResponseEntity.ok(buildingDto);
+        BuildingDto newDto = buildingService.createBuilding(buildingDto);
+        return ResponseEntity.ok(newDto);
     }
 
     @PutMapping("/building/update")
-    public ResponseEntity<Building> updateBuilding(@RequestParam Long buildingId, @RequestBody BuildingDto buildingDto){
-        Building inputBuilding = new Building();
-        inputBuilding.setStatus(buildingDto.getStatus());
-        inputBuilding.setWidth(buildingDto.getWidth());
-        inputBuilding.setLength(buildingDto.getLength());
-        buildingService.updateBuilding(buildingId, inputBuilding);
-        buildingDetailService.updateBuildingDetail(buildingId, buildingDto.getItemIdList());
-        Building updateBuilding = buildingService.updateBuilding(buildingId, inputBuilding);
-        return ResponseEntity.ok(updateBuilding);
+    public ResponseEntity<BuildingDto> updateBuilding(@RequestParam Long buildingId, @RequestBody BuildingDto buildingDto){
+        BuildingDto updated = buildingService.updateBuilding(buildingId,buildingDto);
+        return ResponseEntity.ok(updated);
     }
 
     //Building Detail Controller

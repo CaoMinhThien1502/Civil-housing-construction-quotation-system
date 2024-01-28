@@ -1,5 +1,6 @@
 package com.example.system.service.building;
 
+import com.example.system.dto.buildingdto.ItemTypeDto;
 import com.example.system.model.building.ItemType;
 
 import java.util.List;
@@ -7,8 +8,10 @@ import java.util.List;
 public interface ItemTypeService {
     List<ItemType> findAll();
 
+    List<ItemTypeDto> findItemTypeDtos();
+
     ItemType createItemType(ItemType itemType);
 
-    ItemType updateItemType(ItemType itemType);
+    ItemType updateItemType(Long id, ItemType itemType);
 
 }

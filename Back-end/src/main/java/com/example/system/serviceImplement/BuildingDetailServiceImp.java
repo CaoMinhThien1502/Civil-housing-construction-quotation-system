@@ -7,6 +7,8 @@ import com.example.system.repository.building.BuildingDetailRepository;
 import com.example.system.repository.building.BuildingRepository;
 import com.example.system.service.building.BuildingDetailService;
 import com.example.system.service.building.BuildingService;
+import com.example.system.service.building.ItemService;
+import com.example.system.service.building.ItemTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,11 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
     BuildingDetailRepository buildingDetailRepository;
     @Autowired
     BuildingRepository buildingRepository;
+    @Autowired
+    ItemTypeService itemTypeService;
+    @Autowired
+    ItemService itemService;
+
     @Override
     public List<BuildingDetail> findAll() {
         return buildingDetailRepository.findAll();
@@ -35,9 +42,17 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
     }
 
     @Override
-    public boolean updateBuildingDetail(Long id, Set<Long> items) {
-        List<BuildingDetail> buildingDetails = buildingDetailRepository.findByBuilding(buildingRepository.findByBuildingId(id));
-        return false;
+    public boolean updateBuildingDetail(Long id, List<Long> items) {
+        try{
+            List<BuildingDetail> buildingDetails = buildingDetailRepository.findByBuilding(buildingRepository.findByBuildingId(id));
+            for (int i = 0; i < itemTypeService.findAll().size(); i++) {
+                Item item = itemService.findByItemId(items.get(i));
+                buildingDetails.get(i).setItem(item);
+            }
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 

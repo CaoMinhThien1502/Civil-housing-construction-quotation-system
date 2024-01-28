@@ -1,6 +1,7 @@
 package com.example.system.service.building;
 
 import com.example.system.dto.buildingdto.BuildingDetailDto;
+import com.example.system.dto.buildingdto.BuildingDto;
 import com.example.system.model.building.Building;
 
 import java.util.List;
@@ -8,9 +9,15 @@ import java.util.List;
 public interface BuildingService {
     List<Building> findAll();
 
-    Building createBuilding(Building building);
+    Building findByBuildingId(Long id);
 
-    Building updateBuilding(Long buildingId, Building building);
+    List<BuildingDto> findBuildingDtos();
+
+    BuildingDto findByBuilding(Building building);
+
+    BuildingDto createBuilding(BuildingDto buildingDto);
+
+    BuildingDto updateBuilding(Long buildingId, BuildingDto buildingDto);
 
     List<BuildingDetailDto> findAllBD();
 }
