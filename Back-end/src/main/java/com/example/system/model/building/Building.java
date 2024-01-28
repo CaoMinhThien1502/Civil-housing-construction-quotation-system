@@ -19,8 +19,6 @@ public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buildingId;
-/*    private String buildingName;
-    private String description;*/
     @Column(nullable = false)
     private Double length;
     @Column(nullable = false)

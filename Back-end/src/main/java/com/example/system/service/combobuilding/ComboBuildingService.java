@@ -10,4 +10,6 @@ public interface ComboBuildingService {
     List<ComboResponseDto> getListCombo();
 
     ComboBuilding createComboBuilding(ComboRequestDto comboRequestDto);
+
+    List<ComboBuilding> getListComboBuilding();
 }

@@ -22,6 +22,5 @@ public class ItemType {
     @Column(nullable = false, columnDefinition = "varchar(255)")
     private String itemTypeName;
     @OneToMany(mappedBy = "itemType")
-    @JsonIgnore
     private Set<Item> items;
 }
