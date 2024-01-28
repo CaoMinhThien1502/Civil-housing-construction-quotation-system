@@ -1,13 +1,17 @@
 package com.example.system.serviceImplement;
 
+import com.example.system.model.building.Building;
+import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
+import com.example.system.repository.building.BuildingDetailRepository;
 import com.example.system.repository.building.ItemRepository;
 import com.example.system.repository.building.ItemTypeRepository;
 import com.example.system.service.building.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,9 +21,21 @@ public class ItemServiceImp implements ItemService {
     @Autowired
     ItemTypeRepository itemTypeRepository;
 
+    @Autowired
+    BuildingDetailRepository buildingDetailRepository;
     @Override
     public List<Item> findALl() {
         return itemRepository.findAll();
+    }
+
+    @Override
+    public List<Item> findByBuilding(Building building) {
+        List<BuildingDetail> buildingDetails = buildingDetailRepository.findByBuilding(building);
+        List<Item> items = new ArrayList<>();
+        for (BuildingDetail bd: buildingDetails) {
+            items.add(bd.getItem());
+        }
+        return items;
     }
 
     @Override
@@ -46,7 +62,7 @@ public class ItemServiceImp implements ItemService {
     }
 
     @Override
-    public Item updateItem(Long itemId, Long itemTypeId, Item newItem) {
+    public Item updateItem(Long itemId, Long itemTypeId, Item inputItem) {
         try{
             Item updateItem = itemRepository.findById(itemId)
                     .orElseThrow(
@@ -54,10 +70,10 @@ public class ItemServiceImp implements ItemService {
             ItemType newItemType = itemTypeRepository.findById(itemTypeId)
                     .orElseThrow(
                             () -> new IllegalStateException("Item Type with id " + itemTypeId + " does not exists"));
-            updateItem.setPriceItem(newItem.getPriceItem());
+            updateItem.setPriceItem(inputItem.getPriceItem());
             updateItem.setItemType(newItemType);
-            updateItem.setItemName(newItem.getItemName());
-            return itemRepository.save(newItem);
+            updateItem.setItemName(inputItem.getItemName());
+            return itemRepository.save(updateItem);
         }catch (Exception e){
             return null;
         }
