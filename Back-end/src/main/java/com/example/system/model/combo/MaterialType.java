@@ -22,4 +22,5 @@ public class MaterialType {
     private String typeName;
     @OneToMany(mappedBy = "materialType")
     Set<Material> materials;
+    private boolean status;
 }

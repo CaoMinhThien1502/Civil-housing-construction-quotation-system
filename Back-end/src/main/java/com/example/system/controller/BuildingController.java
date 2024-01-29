@@ -54,6 +54,12 @@ public class BuildingController{
         return ResponseEntity.ok(updateItemType);
     }
 
+    @PutMapping("/item-type/disble")
+    public ResponseEntity<ItemType> disableItemtype(@RequestParam Long itemTypeId){
+        ItemType disableItemType = itemTypeService.disableItemType(itemTypeId);
+        return ResponseEntity.ok(disableItemType);
+    }
+
     //ItemController
     @GetMapping("/item/list")
     public ResponseEntity<List<Item>> getItems(){
@@ -69,6 +75,12 @@ public class BuildingController{
     public ResponseEntity<Item> updateItem(@RequestParam Long itemId, @RequestParam Long itemTypeId, @RequestBody Item item){
         Item updateItem = itemService.updateItem(itemId, itemTypeId, item);
         return ResponseEntity.ok(updateItem);
+    }
+
+    @PutMapping("/item/disable")
+    public ResponseEntity<Item> disableItem(@RequestParam Long itemId){
+        Item disableItem = itemService.disableItem(itemId);
+        return ResponseEntity.ok(disableItem);
     }
 
     //Building Controller
@@ -91,12 +103,12 @@ public class BuildingController{
     }
 
     //Building Detail Controller
-    @GetMapping("/building-detail/list")
-    public ResponseEntity<List<BuildingDetail>> getBuildingDetails(){
-        List<BuildingDetail> buildingDetails = buildingDetailService.findAll();
-        return ResponseEntity.ok(buildingDetails);
-    }
-
+//    @GetMapping("/building-detail/list")
+//    public ResponseEntity<List<BuildingDetail>> getBuildingDetails(){
+//        List<BuildingDetail> buildingDetails = buildingDetailService.findAll();
+//        return ResponseEntity.ok(buildingDetails);
+//    }
+//
 
 //    @PostMapping("/building-detail/create")
 //    public ResponseEntity<BuildingDetail> createBuildingDetail(@RequestBody BuildingDetail buildingDetail){
@@ -110,9 +122,9 @@ public class BuildingController{
 //        return ResponseEntity.ok(updateBuildingDetail);
 //    }
     //BuildingDetailDto
-    @GetMapping("/buildingDetailDto/list")
-    public ResponseEntity<?> getBuildingDetailDto(){
-        List<BuildingDetailDto> buildingDetailDtos = buildingService.findAllBD();
-        return ResponseEntity.ok(buildingDetailDtos);
-    }
+//    @GetMapping("/buildingDetailDto/list")
+//    public ResponseEntity<?> getBuildingDetailDto(){
+//        List<BuildingDetailDto> buildingDetailDtos = buildingService.findAllBD();
+//        return ResponseEntity.ok(buildingDetailDtos);
+//    }
 }

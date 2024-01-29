@@ -30,4 +30,5 @@ public class Material {
     @OneToMany(mappedBy = "material")
     @JsonIgnore
     Set<ComboDetail> comboDetails;
+    private boolean status;
 }

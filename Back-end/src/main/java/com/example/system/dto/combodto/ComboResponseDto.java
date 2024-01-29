@@ -11,6 +11,7 @@ import java.util.List;
 public class ComboResponseDto {
     private String comboBuildingName;
     private Long unitPrice;
-    private int status;
+    private int type;
     private List<Material> materialList;
+    private boolean status;
 }

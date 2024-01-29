@@ -48,27 +48,28 @@ public class ComboDetailServiceImp implements ComboDetailService {
     @Override
     public boolean updateComboDetail(String comboBuildingName, ComboRequestDto comboRequestDto) {
         try {
-        List<ComboDetail> oldComboDetail = comboDetailRepository.findAllByComboBuildingName(comboBuildingName);
-        comboDetailRepository.deleteAll(oldComboDetail);
-        ComboBuilding comboBuilding = comboBuildingRepository.findByComboBuildingName(comboBuildingName);
-        //update list material for combo
-        ComboDetail updateComboDetail;
-        for (String materialId : comboRequestDto.getMaterialIdList()) {
-            Material material = materialRepository.findById(Long.valueOf(materialId))
-                    .orElseThrow(
-                            () -> new IllegalStateException("material with id " + materialId + " does not exists"));
-            updateComboDetail = new ComboDetail();
-            updateComboDetail.setComboBuilding(comboBuilding);
-            updateComboDetail.setMaterial(material);
-            comboDetailRepository.save(updateComboDetail);
-        }
-        //update combobuilding
-        Long price = comboDetailRepository.calculateTotalUnitPriceByComboBuilding(comboBuilding);
-        comboBuilding.setComboBuildingId(comboBuilding.getComboBuildingId());
-        comboBuilding.setUnitPrice(price);
-        comboBuilding.setComboBuildingName(comboRequestDto.getComboBuildingName());
-        comboBuilding.setStatus(comboRequestDto.getStatus());
-        comboBuildingRepository.save(comboBuilding);
+
+            List<ComboDetail> oldComboDetail = comboDetailRepository.findAllByComboBuildingName(comboBuildingName);
+            comboDetailRepository.deleteAll(oldComboDetail);
+            ComboBuilding comboBuilding = comboBuildingRepository.findByComboBuildingName(comboBuildingName);
+            //update list material for combo
+            ComboDetail updateComboDetail;
+            for (String materialId : comboRequestDto.getMaterialIdList()) {
+                Material material = materialRepository.findById(Long.valueOf(materialId))
+                        .orElseThrow(
+                                () -> new IllegalStateException("material with id " + materialId + " does not exists"));
+                updateComboDetail = new ComboDetail();
+                updateComboDetail.setComboBuilding(comboBuilding);
+                updateComboDetail.setMaterial(material);
+                comboDetailRepository.save(updateComboDetail);
+            }
+            //update combobuilding
+            Long price = comboDetailRepository.calculateTotalUnitPriceByComboBuilding(comboBuilding);
+            comboBuilding.setUnitPrice(price);
+            comboBuilding.setComboBuildingName(comboRequestDto.getComboBuildingName());
+            comboBuilding.setStatus(comboRequestDto.isStatus());
+            comboBuilding.setType(comboRequestDto.getType());
+            comboBuildingRepository.save(comboBuilding);
             return true;
         } catch (Exception e) {
             return false;

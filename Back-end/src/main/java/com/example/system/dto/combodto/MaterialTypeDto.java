@@ -8,4 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 public class MaterialTypeDto {
     private String typeName;
+    private boolean status;
 }

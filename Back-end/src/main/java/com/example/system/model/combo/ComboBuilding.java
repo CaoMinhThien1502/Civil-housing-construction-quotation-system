@@ -25,11 +25,12 @@ public class ComboBuilding {
     //@Column(nullable = false)
     private Long unitPrice;
     @Column(nullable = false)
-    private int status; // 0: xây nhà phần thô - 1: xây nhà hoàn thiện - 2: xây dựng trọn gói
+    private int type; // 0: xây nhà phần thô - 1: xây nhà hoàn thiện - 2: xây dựng trọn gói
     @OneToMany(mappedBy = "comboBuilding")
     @JsonIgnore
     Set<ComboDetail> comboDetails;
     @OneToMany(mappedBy = "comboBuilding")
     @JsonIgnore
     private Set<RequestContract> requestContracts;
+    private boolean status;
 }

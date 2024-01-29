@@ -28,55 +28,55 @@ INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('bl
 INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('blog 3','Blog number 3',4,'2021-08-29',null);
 
 -- item type
-INSERT INTO item_type(item_type_name) VALUES ('mai');
-INSERT INTO item_type(item_type_name) VALUES ('nen');
-INSERT INTO item_type(item_type_name) VALUES ('lau');
-INSERT INTO item_type(item_type_name) VALUES ('cua so');
+INSERT INTO item_type(item_type_name, status) VALUES ('mai',1);
+INSERT INTO item_type(item_type_name, status) VALUES ('nen',1);
+INSERT INTO item_type(item_type_name, status) VALUES ('lau',1);
+INSERT INTO item_type(item_type_name, status) VALUES ('cua so',1);
 
 -- item 
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (1,'mai ngoi',40000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (1,'mai ton',20000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (3,'lau 1',80000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (3,'lau 2',80000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (3,'lau 3',80000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (3,'lau 4',80000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (2,'dat',10000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (2,'gach',20000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (4,'cua so kieu Nhat',10000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (4,'cua so kieu Han',11000000);
-INSERT INTO item(item_type_id,item_name,price_item) VALUES (4,'cua so kieu Trung',9000000);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (1,'mai ngoi',40000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (1,'mai ton',20000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (3,'lau 1',80000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (3,'lau 2',80000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (3,'lau 3',80000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (3,'lau 4',80000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (2,'dat',10000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (2,'gach',20000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (4,'cua so kieu Nhat',10000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (4,'cua so kieu Han',11000000,1);
+INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (4,'cua so kieu Trung',9000000,1);
 
 -- material type
-INSERT INTO material_type(type_name) VALUES ('sat');
-INSERT INTO material_type(type_name) VALUES ('thep');
-INSERT INTO material_type(type_name) VALUES ('xi mang');
-INSERT INTO material_type(type_name) VALUES ('cat');
-INSERT INTO material_type(type_name) VALUES ('gach');
+INSERT INTO material_type(type_name, status) VALUES ('sat',1);
+INSERT INTO material_type(type_name, status) VALUES ('thep',1);
+INSERT INTO material_type(type_name, status) VALUES ('xi mang',1);
+INSERT INTO material_type(type_name, status) VALUES ('cat',1);
+INSERT INTO material_type(type_name, status) VALUES ('gach',1);
 
 -- material
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('sat 1',1, 12000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('sat 2',1, 11500);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('sat 3',1, 13000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('thep 1',2, 10000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('thep 2',2, 11000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('xi mang 1',3, 89000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('xi mang 2',3, 92000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('xi mang 3',3, 108000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('cat 1',4, 135000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('cat 2',4, 120000);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('gach 1',5, 1200);
-INSERT INTO material(material_name,material_type_id,unit_price) VALUES ('gach 2',5, 3000);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('sat 1',1, 12000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('sat 2',1, 11500,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('sat 3',1, 13000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('thep 1',2, 10000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('thep 2',2, 11000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('xi mang 1',3, 89000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('xi mang 2',3, 92000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('xi mang 3',3, 108000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('cat 1',4, 135000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('cat 2',4, 120000,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('gach 1',5, 1200,1);
+INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('gach 2',5, 3000,1);
 
 -- combo building
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('tho 1',3200000, 0);
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('tho 2',3500000, 0);
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('hoan thien cafe',5000000, 1);
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('hoan thien nha pho',5500000, 1);
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('hoan thien biet thu',7000000, 1);
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('tron goi cafe 1',8000000, 2);
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('tron goi cafe 2',8400000, 2);
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('tron goi nha pho 1',8200000, 2);
-INSERT INTO combo_building(combo_building_name,unit_price,status) VALUES ('tron goi biet thu 1',10000000, 2);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tho 1',3200000, 0,1);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tho 2',3500000, 0,1);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('hoan thien cafe',5000000, 1,1);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('hoan thien nha pho',5500000, 1,1);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('hoan thien biet thu',7000000, 1,1);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tron goi cafe 1',8000000, 2,1);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tron goi cafe 2',8400000, 2,1);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tron goi nha pho 1',8200000, 2,1);
+INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tron goi biet thu 1',10000000, 2,1);
 
 -- combo detail
 INSERT INTO combo_detail(combo_building_id,material_id) VALUES (1,7);

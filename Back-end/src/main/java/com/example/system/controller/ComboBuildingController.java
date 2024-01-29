@@ -47,6 +47,11 @@ public class ComboBuildingController {
         boolean checkUpdate = materialTypeService.updateMaterialType(materialTypeId, materialType);
         return ResponseEntity.ok(checkUpdate);
     }
+    @PutMapping("/material-type/disable")
+    public ResponseEntity<?> disableMaterialType(@RequestParam Long materialTypeId){
+        boolean checkUpdate = materialTypeService.disableMaterialType(materialTypeId);
+        return ResponseEntity.ok(checkUpdate);
+    }
     // ------Material controller------
     @GetMapping("/material/get")
     public ResponseEntity<List<Material>> getMaterial(){
@@ -66,6 +71,11 @@ public class ComboBuildingController {
     @PutMapping("/material/update")
     public ResponseEntity<?> updateMaterial(@RequestParam Long materialId, @RequestBody MaterialDto material){
         boolean checkUpdate = materialService.updateMaterial(materialId, material);
+        return ResponseEntity.ok(checkUpdate);
+    }
+    @PutMapping("/material/disable")
+    public ResponseEntity<?> disableMaterial(@RequestParam Long materialId){
+        boolean checkUpdate = materialService.disableMaterial(materialId);
         return ResponseEntity.ok(checkUpdate);
     }
     // ------Combo Building------

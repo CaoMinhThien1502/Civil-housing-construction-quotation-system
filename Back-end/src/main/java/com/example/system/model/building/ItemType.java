@@ -23,4 +23,5 @@ public class ItemType {
     private String itemTypeName;
     @OneToMany(mappedBy = "itemType")
     private Set<Item> items;
+    private boolean status;
 }

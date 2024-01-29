@@ -9,4 +9,5 @@ import lombok.*;
 public class MaterialDto {
     private String materialName;
     private Long unitPrice;
+    private boolean status;
 }
