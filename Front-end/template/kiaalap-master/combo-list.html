@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Library Assets | Kiaalap - Kiaalap Admin Template</title>
+    <title>Combo List</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -125,9 +125,10 @@
                         <li>
                             <a href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Combo Management</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Library" href="library-assets.html"><span class="mini-sub-pro">Combo List</span></a></li>
-                                <li><a title="Add Library" href="add-library-assets.html"><span class="mini-sub-pro">Add Combo</span></a></li>
-                                <li><a title="Edit Library" href="edit-library-assets.html"><span class="mini-sub-pro">Edit Combo</span></a></li>
+                                <li><a title="Combo List" href="combo-list.html"><span class="mini-sub-pro">Combo List</span></a></li>
+                                <!-- <li><a title="Add Combo" href="add-combo.html"><span class="mini-sub-pro">Add Combo</span></a></li>
+                                <li><a title="Edit Combo" href="edit-combo.html"><span class="mini-sub-pro">Edit Combo</span></a></li> -->
+                                <li><a title="Material List" href="material-list.html"><span class="mini-sub-pro">Material List</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -912,11 +913,13 @@
                                         </li> -->
                                         <li><a data-toggle="collapse" data-target="#demolibra" href="#">Combo Management <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demolibra" class="collapse dropdown-header-top">
-                                                <li><a href="library-assets.html">Library Assets</a>
+                                                <li><a href="combo-list.html">Combo List</a>
                                                 </li>
-                                                <li><a href="add-library-assets.html">Add Library Asset</a>
+                                                <!-- <li><a href="add-combo.html">Add Combo</a>
                                                 </li>
-                                                <li><a href="edit-library-assets.html">Edit Library Asset</a>
+                                                <li><a href="edit-combo.html">Edit Combo</a>
+                                                </li> -->
+                                                <li><a href="material-list.html">Material List</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -1076,7 +1079,16 @@
                         <div class="product-status-wrap">
                             <h4>Library List</h4>
                             <div class="add-product">
-                                <a href="#">Add Library</a>
+                                <a href="add-combo.html">Add Library</a>
+                            </div>
+                            <div class="custom-pagination">
+								<ul class="pagination">
+									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item"><a class="page-link" href="#">Next</a></li>
+								</ul>
                             </div>
                             <div class="asset-inner">
                                 <table>
@@ -1103,8 +1115,8 @@
                                         <td>Book</td>
                                         <td>$1500</td>
                                         <td>
-                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <a href="edit-combo.html"><button  data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1119,8 +1131,8 @@
                                         <td>CD</td>
                                         <td>$1700</td>
                                         <td>
-                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <a href="edit-combo.html"><button  data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1135,8 +1147,8 @@
                                         <td>Book</td>
                                         <td>$1500</td>
                                         <td>
-                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <a href="edit-combo.html"><button  data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1151,8 +1163,8 @@
                                         <td>CD</td>
                                         <td>$1200</td>
                                         <td>
-                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <a href="edit-combo.html"><button  data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1167,8 +1179,8 @@
                                         <td>Book</td>
                                         <td>$1800</td>
                                         <td>
-                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <a href="edit-combo.html"><button  data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1183,21 +1195,13 @@
                                         <td>CD</td>
                                         <td>$1000</td>
                                         <td>
-                                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <a href="edit-combo.html"><button  data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="custom-pagination">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">Next</a></li>
-								</ul>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

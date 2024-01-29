@@ -2365,6 +2365,7 @@ ul.two-part-sp li{
     width: 60px;
 }
 .product-status-wrap .pd-setting {
+    width: 90px;
     border: none;
     color: #fff;
     padding: 5px 15px;
@@ -2374,20 +2375,22 @@ ul.two-part-sp li{
 	outline:none;
 }
 .product-status-wrap .ps-setting {
+    width: 90px;
     border: none;
     color: #fff;
     padding: 5px 15px;
     font-size: 15px;
-    background: #933EC5;
+    background: #eca92c;
     border-radius: 3px;
 	outline:none;
 }
 .product-status-wrap .ds-setting {
+    width: 90px;
     border: none;
     color: #fff;
     padding: 5px 15px;
     font-size: 15px;
-    background: #D80027;
+    background: #c92442;
     border-radius: 3px;
 	outline:none;
 }
