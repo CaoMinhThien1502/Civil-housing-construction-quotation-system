@@ -19,15 +19,16 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long materialId;
-    @Column(nullable = false, columnDefinition = "varchar(255)")
+    @Column(nullable = false, columnDefinition = "varchar(255)", unique = true)
     private String materialName;
     @Column(nullable = false)
-    private Double unitPrice;
+    private Long unitPrice;
     @ManyToOne
     @JoinColumn(name = "material_type_id")
     @JsonIgnore
     private MaterialType materialType;
     @OneToMany(mappedBy = "material")
+    @JsonIgnore
     Set<ComboDetail> comboDetails;
-
+    private boolean status;
 }
