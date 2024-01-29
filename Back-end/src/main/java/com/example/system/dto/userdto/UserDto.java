@@ -30,6 +30,5 @@ public class UserDto {
     private String address;
     private Date birthday;
     private boolean gender;
-    private List<RequestContract> requestContracts;
     private boolean status;
 }
