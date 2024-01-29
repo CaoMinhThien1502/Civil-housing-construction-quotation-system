@@ -79,13 +79,11 @@ public class ComboBuildingController {
         return ResponseEntity.ok(checkUpdate);
     }
     // ------Combo Building------
-/*
     @GetMapping("/combo-building/get")
     public ResponseEntity<?> getComboBuilding(){
-        List<ComboResponseDto> comboResponseDtoList = comboBuildingService.getListCombo();
-        return ResponseEntity.ok(comboResponseDtoList);
+        List<ComboBuilding> comboBuildingList = comboBuildingService.getListComboBuilding();
+        return ResponseEntity.ok(comboBuildingList);
     }
-*/
 
     // ------Combo controller------
     @GetMapping("/combo/get")

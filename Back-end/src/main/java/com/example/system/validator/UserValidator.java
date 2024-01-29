@@ -20,13 +20,13 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user =(User) target;
-        if(user.getUserName().isEmpty())
+        if(user.getUsername().isEmpty())
             errors.rejectValue("username","error.username","Must fill this!!");
-        else if(user.getUserName().matches("^([a-zA-Z0-9]\\S+)$"))
+        else if(user.getUsername().matches("^([a-zA-Z0-9]\\S+)$"))
             errors.rejectValue("username","error.username","Non-whitespace please!!");
-        else if(user.getUserName().matches("^[a-zA-Z][a-zA-Z0-9]{4,}+$"))
+        else if(user.getUsername().matches("^[a-zA-Z][a-zA-Z0-9]{4,}+$"))
             errors.rejectValue("username","error.username","Non special chars please!!");
-        else if(userRepository.findByUserName(user.getUserName()) != null)
+        else if(userRepository.findByUserName(user.getUsername()) != null)
             errors.rejectValue("username","error.username","Username exist!!");
 
         if(user.getPassword().isEmpty())

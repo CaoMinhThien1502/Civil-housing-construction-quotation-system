@@ -48,6 +48,7 @@ public class ComboDetailServiceImp implements ComboDetailService {
     @Override
     public boolean updateComboDetail(String comboBuildingName, ComboRequestDto comboRequestDto) {
         try {
+
             List<ComboDetail> oldComboDetail = comboDetailRepository.findAllByComboBuildingName(comboBuildingName);
             comboDetailRepository.deleteAll(oldComboDetail);
             ComboBuilding comboBuilding = comboBuildingRepository.findByComboBuildingName(comboBuildingName);

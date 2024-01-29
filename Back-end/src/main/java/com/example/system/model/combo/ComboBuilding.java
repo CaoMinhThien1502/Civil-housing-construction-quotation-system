@@ -1,6 +1,7 @@
 package com.example.system.model.combo;
 
 import com.example.system.model.requestcontract.RequestContract;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +27,10 @@ public class ComboBuilding {
     @Column(nullable = false)
     private int type; // 0: xây nhà phần thô - 1: xây nhà hoàn thiện - 2: xây dựng trọn gói
     @OneToMany(mappedBy = "comboBuilding")
+    @JsonIgnore
     Set<ComboDetail> comboDetails;
     @OneToMany(mappedBy = "comboBuilding")
+    @JsonIgnore
     private Set<RequestContract> requestContracts;
     private boolean status;
 }
