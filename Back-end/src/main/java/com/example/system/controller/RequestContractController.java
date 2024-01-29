@@ -27,11 +27,16 @@ public class RequestContractController {
         return ResponseEntity.ok(list);
     }
 
-//    @PostMapping("/request-contract/create")
-//    public ResponseEntity<RequestContractDto> createRequestContracts(@RequestBody BuildingDto bdto, @RequestParam Long comboId, @RequestParam Long userId){
-//        //User auth = new User();
-//        RequestContractDto dto = requestContractService.createRequestContract(bdto, comboId, userId);
-//        return ResponseEntity.ok(dto);
-//    }
+    @PostMapping("/request-contract/create")
+    public ResponseEntity<RequestContractDto> createRequestContract(@RequestBody BuildingDto bdto, @RequestParam Long comboId, @RequestParam Long userId){
+        //User auth = new User();
+        RequestContractDto dto = requestContractService.createRequestContract(bdto, comboId, userId);
+        return ResponseEntity.ok(dto);
+    }
+    @PostMapping("/request-contract/comfirm")
+    public ResponseEntity<RequestContractDto> comfirmRequestContract(@RequestParam Long requestContractId){
+        RequestContractDto dto = requestContractService.confirmRequestContract(requestContractId);
+        return ResponseEntity.ok(dto);
+    }
 
 }

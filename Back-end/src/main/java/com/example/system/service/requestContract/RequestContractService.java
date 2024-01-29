@@ -13,6 +13,9 @@ public interface RequestContractService {
     List<RequestContract> findAll();
     List<RequestContractDto> findAllDto();
 
-//    RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId);
-//    RequestContract updateRequestContract(RequestContract requestContract);
+    RequestContractDto getRequestContractDto(RequestContract rc);
+    RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId);
+
+    RequestContractDto confirmRequestContract(Long rcId);
+    RequestContract updateRequestContract(RequestContract requestContract);
 }
