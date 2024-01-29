@@ -15,7 +15,7 @@ public interface BuildingService {
 
     BuildingDto findByBuilding(Building building);
 
-    BuildingDto createBuilding(BuildingDto buildingDto);
+    Building createBuilding(BuildingDto buildingDto);
 
     BuildingDto updateBuilding(Long buildingId, BuildingDto buildingDto);
 
