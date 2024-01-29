@@ -3726,8 +3726,11 @@ div#sparklinehome canvas {
     background-color: #86bc42;
 }
 .footer-copyright-area {
+    /* position: fixed; */
+    /* bottom: 0; */
+    /* width: 100%; */
     background: rgb(52, 152, 219);
-	padding: 20px 0px;
+	padding: 10px 0px;
     text-align: center;
 }
 .message-single-top h1, .notification-single-top h1 {
