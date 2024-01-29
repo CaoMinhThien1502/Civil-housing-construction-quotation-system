@@ -19,8 +19,8 @@ public class UserServiceImp implements UserService {
     @Override
     public UserDto getProfile() {
         UserDto profile = new UserDto();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByUserName(((UserDetails)authentication.getPrincipal()).getUsername());
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByUserName(userDetails.getUsername());
         profile.setAddress(user.getAddress());
         profile.setBirthday(user.getBirthday());
         profile.setUserId(user.getUserId());
