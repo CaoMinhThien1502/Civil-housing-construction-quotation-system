@@ -35,6 +35,7 @@ public class MaterialServiceImpl implements MaterialService {
             newMaterial.setMaterialName(material.getMaterialName());
             newMaterial.setMaterialType(materialType);
             newMaterial.setUnitPrice(material.getUnitPrice());
+            newMaterial.setStatus(true);
             materialRepository.save(newMaterial);
             return true;
         }
@@ -50,7 +51,22 @@ public class MaterialServiceImpl implements MaterialService {
                     .orElseThrow(() -> new IllegalStateException("Material with id " + materialId + " does not exists"));
             updateMaterial.setMaterialName(material.getMaterialName());
             updateMaterial.setUnitPrice(material.getUnitPrice());
+            updateMaterial.setStatus(material.isStatus());
             materialRepository.save(updateMaterial);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean disableMaterial(Long materialId) {
+        try{
+            Material disable = materialRepository.findById(materialId)
+                    .orElseThrow(() -> new IllegalStateException("Material with id " + materialId + " does not exists"));
+            disable.setStatus(false);
+            materialRepository.save(disable);
             return true;
         }
         catch (Exception e){

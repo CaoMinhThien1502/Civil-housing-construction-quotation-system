@@ -12,5 +12,7 @@ public interface MaterialTypeService {
 
     boolean updateMaterialType(Long materialTypeId, MaterialTypeDto materialType);
 
+    boolean disableMaterialType(Long materialTypeId);
+
     MaterialType getMaterialTypeById(Long materialTypeId);
 }

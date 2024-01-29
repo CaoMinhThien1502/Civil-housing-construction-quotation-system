@@ -33,11 +33,12 @@ public class ComboBuildingServiceImp implements ComboBuildingService {
         for (ComboDetail c: detailList) {
             comboBuildingList.add(c.getComboBuilding());
         }
-        for (ComboBuilding c:comboBuildingList) {
+        for (ComboBuilding c: comboBuildingList) {
             ComboResponseDto comboResponseDto = new ComboResponseDto();
             comboResponseDto.setComboBuildingName(c.getComboBuildingName());
             comboResponseDto.setUnitPrice(c.getUnitPrice());
-            comboResponseDto.setStatus(c.getStatus());
+            comboResponseDto.setStatus(c.isStatus());
+            comboResponseDto.setType(c.getType());
             List<ComboDetail> findMaterialByCombo = comboDetailRepository.findByComboBuilding(c);
             if (!findMaterialByCombo.isEmpty()) {
                 for (ComboDetail comboDetail : findMaterialByCombo) {
@@ -52,10 +53,15 @@ public class ComboBuildingServiceImp implements ComboBuildingService {
 
     @Override
     public ComboBuilding createComboBuilding(ComboRequestDto comboRequestDto) {
+        try{
             ComboBuilding newComboBuilding = new ComboBuilding();
             newComboBuilding.setComboBuildingName(comboRequestDto.getComboBuildingName());
-            newComboBuilding.setStatus(comboRequestDto.getStatus());
+            newComboBuilding.setStatus(comboRequestDto.isStatus());
+            newComboBuilding.setType(comboRequestDto.getType());
             comboBuildingRepository.save(newComboBuilding);
             return newComboBuilding;
+        }catch (Exception e){
+            return null;
+        }
     }
 }

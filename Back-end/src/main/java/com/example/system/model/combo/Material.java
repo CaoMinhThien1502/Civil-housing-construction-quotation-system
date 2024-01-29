@@ -29,4 +29,5 @@ public class Material {
     private MaterialType materialType;
     @OneToMany(mappedBy = "material")
     Set<ComboDetail> comboDetails;
+    private boolean status;
 }

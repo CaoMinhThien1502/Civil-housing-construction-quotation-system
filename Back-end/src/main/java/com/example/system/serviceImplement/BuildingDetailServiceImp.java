@@ -35,10 +35,14 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
 
     @Override
     public BuildingDetail createBuildingDetail(Building building, Item item) {
-        BuildingDetail buildingDetail = new BuildingDetail();
-        buildingDetail.setBuilding(building);
-        buildingDetail.setItem(item);
-        return buildingDetailRepository.save(buildingDetail);
+        try{
+            BuildingDetail buildingDetail = new BuildingDetail();
+            buildingDetail.setBuilding(building);
+            buildingDetail.setItem(item);
+            return buildingDetailRepository.save(buildingDetail);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override

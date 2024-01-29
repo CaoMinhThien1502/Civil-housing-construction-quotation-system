@@ -3,7 +3,9 @@ package com.example.system.serviceImplement;
 import com.example.system.dto.buildingdto.ItemTypeDto;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
+import com.example.system.repository.building.ItemRepository;
 import com.example.system.repository.building.ItemTypeRepository;
+import com.example.system.service.building.ItemService;
 import com.example.system.service.building.ItemTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,10 @@ public class ItemTypeServiceImp implements ItemTypeService {
 
     @Autowired
     ItemTypeRepository itemTypeRepository;
-
+    @Autowired
+    ItemRepository itemRepository;
+    @Autowired
+    ItemService itemService;
     @Override
     public List<ItemType> findAll() {
         return itemTypeRepository.findAll();
@@ -35,6 +40,7 @@ public class ItemTypeServiceImp implements ItemTypeService {
                 itemIds.add(i.getItemId());
             }
             dto.setItemIds(itemIds);
+            dto.setStatus(it.isStatus());
             list.add(dto);
         }
         return list;
@@ -42,17 +48,43 @@ public class ItemTypeServiceImp implements ItemTypeService {
 
     @Override
     public ItemType createItemType(ItemType itemType) {
-        ItemType newItemType = new ItemType();
-        newItemType.setItemTypeName(itemType.getItemTypeName());
-        return itemTypeRepository.save(newItemType);
+        try{
+            ItemType newItemType = new ItemType();
+            newItemType.setItemTypeName(itemType.getItemTypeName());
+            newItemType.setStatus(itemType.isStatus());
+            return itemTypeRepository.save(newItemType);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override
     public ItemType updateItemType(Long id, ItemType itemType) {
-        ItemType update = itemTypeRepository.findById(id)
-                .orElseThrow(
-                        () -> new IllegalStateException("Item Type with id " + id + " does not exists"));
-        update.setItemTypeName(itemType.getItemTypeName());
-        return itemTypeRepository.save(update);
+        try{
+            ItemType update = itemTypeRepository.findById(id)
+                    .orElseThrow(
+                            () -> new IllegalStateException("Item Type with id " + id + " does not exists"));
+            update.setItemTypeName(itemType.getItemTypeName());
+            update.setStatus(itemType.isStatus());
+            return itemTypeRepository.save(update);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public ItemType disableItemType(Long id) {
+        try{
+            ItemType disable = itemTypeRepository.findById(id)
+                    .orElseThrow(
+                            () -> new IllegalStateException("Item Type with id " + id + " does not exists"));
+            disable.setStatus(false);
+            for (Item i: itemRepository.findByItemType(disable)){
+                itemService.disableItem(i.getItemId());
+            }
+            return itemTypeRepository.save(disable);
+        }catch (Exception e){
+            return null;
+        }
     }
 }

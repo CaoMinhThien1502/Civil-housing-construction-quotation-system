@@ -15,4 +15,5 @@ import java.util.Set;
 public class ItemTypeDto {
     private String itemTypeName;
     private Set<Long> itemIds;
+    private boolean status;
 }

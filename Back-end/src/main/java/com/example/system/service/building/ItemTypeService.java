@@ -14,4 +14,6 @@ public interface ItemTypeService {
 
     ItemType updateItemType(Long id, ItemType itemType);
 
+    ItemType disableItemType(Long id);
+
 }

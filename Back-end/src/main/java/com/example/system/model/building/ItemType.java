@@ -24,4 +24,5 @@ public class ItemType {
     @OneToMany(mappedBy = "itemType")
     @JsonIgnore
     private Set<Item> items;
+    private boolean status;
 }

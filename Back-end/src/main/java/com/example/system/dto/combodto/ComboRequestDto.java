@@ -13,6 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class ComboRequestDto {
     private String comboBuildingName;
-    private int status;
+    private int type;
     private Set<String> materialIdList;
+    private boolean status;
 }

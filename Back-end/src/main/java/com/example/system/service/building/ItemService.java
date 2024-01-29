@@ -15,4 +15,6 @@ public interface ItemService {
     Item createItem(Long itemTypeId,Item newItem);
 
     Item updateItem(Long itemId, Long itemTypeId, Item newItem);
+
+    Item disableItem(Long itemId);
 }

@@ -54,6 +54,7 @@ public class ItemServiceImp implements ItemService {
             newItem.setItemName(inputItem.getItemName());
             newItem.setItemType(itemType);
             newItem.setPriceItem(inputItem.getPriceItem());
+            newItem.setStatus(true);
             return itemRepository.save(newItem);
         }catch (Exception e){
             return null;
@@ -73,7 +74,21 @@ public class ItemServiceImp implements ItemService {
             updateItem.setPriceItem(inputItem.getPriceItem());
             updateItem.setItemType(newItemType);
             updateItem.setItemName(inputItem.getItemName());
+            updateItem.setStatus(inputItem.isStatus());
             return itemRepository.save(updateItem);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public Item disableItem(Long itemId) {
+        try{
+            Item disable = itemRepository.findById(itemId)
+                    .orElseThrow(
+                            () -> new IllegalStateException("Item with id " + itemId + " does not exists"));
+            disable.setStatus(false);
+            return itemRepository.save(disable);
         }catch (Exception e){
             return null;
         }
