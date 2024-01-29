@@ -3,8 +3,10 @@ package com.example.system.serviceImplement;
 import com.example.system.dto.buildingdto.BuildingDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.building.Building;
+import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
+import com.example.system.repository.combo.ComboBuildingRepository;
 import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.repository.user.UserRepository;
 import com.example.system.service.building.BuildingService;
@@ -26,6 +28,8 @@ public class RequestContractServiceImp implements RequestContractService {
     BuildingService buildingService;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ComboBuildingRepository comboBuildingRepository;
     @Override
     public RequestContract getByBuilding(Building building) {
         return requestContractRepository.findByBuilding(building);
@@ -41,41 +45,53 @@ public class RequestContractServiceImp implements RequestContractService {
         List<RequestContract> requestContractList = requestContractRepository.findAll();
         List<RequestContractDto> dtos = new ArrayList<>();
         for (RequestContract rc: requestContractList) {
-            RequestContractDto dto = new RequestContractDto();
-            dto.setRequestContractId(rc.getRequestContractId());
-            dto.setUserId(rc.getUser().getUserId());
-            dto.setComboId(rc.getComboBuilding().getComboBuildingId());
-            dto.setStatus(rc.isStatus());
-            dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
-            dtos.add(dto);
+            dtos.add(getRequestContractDto(rc));
         }
         return dtos;
     }
 
-//    @Override
-//    public RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId) {
-//        RequestContract newRequestContract = new RequestContract();
-//        newRequestContract.setStatus(false);
-//        newRequestContract.setBuilding(buildingService.findByBuildingId(dto.getBuildingId()));
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(
-//                        () -> new IllegalStateException("Item with id " + userId + " does not exists"));
-//
-//        newRequestContract.setUser(user);
-//        Date now = new Date();
-//        newRequestContract.setRequestDate(now);
-//        requestContractRepository.save(newRequestContract);
-//        RequestContractDto rcDto = new RequestContractDto();
-//        rcDto.setRequestContractId(newRequestContract.getRequestContractId());
-//        rcDto.setUserId(newRequestContract.getUser().getUserId());
-//        rcDto.setComboId(newRequestContract.getComboBuilding().getComboBuildingId());
-//        rcDto.setStatus(newRequestContract.isStatus());
-//        rcDto.setBuildingDto(buildingService.findByBuilding(newRequestContract.getBuilding()));
-//        return rcDto;
-//    }
-//
-//    @Override
-//    public RequestContract updateRequestContract(RequestContract requestContract) {
-//        return requestContractRepository.save(requestContract);
-//    }
+    @Override
+    public RequestContractDto getRequestContractDto(RequestContract rc) {
+        RequestContractDto dto = new RequestContractDto();
+        dto.setRequestContractId(rc.getRequestContractId());
+        dto.setUserId(rc.getUser().getUserId());
+        dto.setComboId(rc.getComboBuilding().getComboBuildingId());
+        dto.setStatus(rc.isStatus());
+        dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
+        return dto;
+    }
+
+    @Override
+    public RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId) {
+        RequestContract newRequestContract = new RequestContract();
+        Building newBuilding = buildingService.createBuilding(dto);
+        newRequestContract.setStatus(false);
+        newRequestContract.setBuilding(newBuilding);
+        User user = userRepository.findById(userId)
+                .orElseThrow(
+                        () -> new IllegalStateException("User with id " + userId + " does not exists"));
+        ComboBuilding comboBuilding = comboBuildingRepository.findById(comboId)
+                .orElseThrow(
+                        () -> new IllegalStateException("Combo Building with id " + comboId + " does not exists"));
+        newRequestContract.setComboBuilding(comboBuilding);
+        newRequestContract.setUser(user);
+        Date now = new Date();
+        newRequestContract.setRequestDate(now);
+        RequestContract added = requestContractRepository.save(newRequestContract);
+        return getRequestContractDto(added);
+    }
+
+    @Override
+    public RequestContractDto confirmRequestContract(Long rcId) {
+        RequestContract updaRequestContract = requestContractRepository.findById(rcId)
+                .orElseThrow(
+                        () -> new IllegalStateException("Request contract with id " + rcId + " does not exists"));
+        updaRequestContract.setStatus(true);
+        return getRequestContractDto(updaRequestContract);
+    }
+
+    @Override
+    public RequestContract updateRequestContract(RequestContract requestContract) {
+        return requestContractRepository.save(requestContract);
+    }
 }

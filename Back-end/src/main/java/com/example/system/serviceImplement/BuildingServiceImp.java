@@ -65,7 +65,6 @@ public class BuildingServiceImp implements BuildingService {
     @Override
     public BuildingDto findByBuilding(Building b) {
         BuildingDto dto = new BuildingDto();
-        dto.setBuildingId(b.getBuildingId());
         dto.setStatus(b.getStatus());
         dto.setWidth(b.getWidth());
         dto.setLength(b.getLength());
@@ -78,7 +77,7 @@ public class BuildingServiceImp implements BuildingService {
     }
 
     @Override
-    public BuildingDto createBuilding(BuildingDto buildingDto) {
+    public Building createBuilding(BuildingDto buildingDto) {
         try{
             Building newBuilding = new Building();
             newBuilding.setLength(buildingDto.getLength());
@@ -91,9 +90,7 @@ public class BuildingServiceImp implements BuildingService {
                                 () -> new IllegalStateException("Item with id " + id + " does not exists"));
                 buildingDetailService.createBuildingDetail(newBuilding,item);
             }
-            buildingDto.setBuildingId(added.getBuildingId());
-            buildingDto.setStatus(added.getStatus());
-            return buildingDto;
+            return newBuilding;
         }catch (Exception e){
             return null;
         }
@@ -110,7 +107,7 @@ public class BuildingServiceImp implements BuildingService {
             updateBuilding.setStatus(buildingDto.getStatus());
             buildingRepository.save(updateBuilding);
             buildingDetailService.updateBuildingDetail(buildingId, buildingDto.getItemIdList());
-            buildingDto.setBuildingId(updateBuilding.getBuildingId());
+            //buildingDto.setBuildingId(updateBuilding.getBuildingId());
             return buildingDto;
         }catch (Exception e){
             return null;

@@ -78,11 +78,11 @@ public class BuildingController{
         return ResponseEntity.ok(buildings);
     }
 
-    @PostMapping("/building/create")
-    public ResponseEntity<BuildingDto> createBuilding(@RequestBody BuildingDto buildingDto){
-        BuildingDto newDto = buildingService.createBuilding(buildingDto);
-        return ResponseEntity.ok(newDto);
-    }
+//    @PostMapping("/building/create")
+//    public ResponseEntity<BuildingDto> createBuilding(@RequestBody BuildingDto buildingDto){
+//        BuildingDto newDto = buildingService.createBuilding(buildingDto);
+//        return ResponseEntity.ok(newDto);
+//    }
 
     @PutMapping("/building/update")
     public ResponseEntity<BuildingDto> updateBuilding(@RequestParam Long buildingId, @RequestBody BuildingDto buildingDto){

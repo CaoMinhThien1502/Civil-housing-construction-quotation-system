@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BuildingDto {
-    private Long buildingId;
+    //private Long buildingId;
     private Double width;
     private Double length;
     private List<Long> itemIdList;
