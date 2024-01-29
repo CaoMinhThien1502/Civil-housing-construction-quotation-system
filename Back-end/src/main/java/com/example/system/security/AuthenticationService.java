@@ -10,6 +10,7 @@ import com.example.system.model.user.User;
 import com.example.system.repository.token.TokenRepository;
 import com.example.system.repository.user.UserRepository;
 import com.example.system.security.JwtService;
+import com.example.system.validator.UserValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,6 +33,7 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final UserValidator userValidator;
 
     public AuthenticationResponse register(RegisterRequest request) {
         Optional<User> userexist = userRepository.findByEmail(request.getEmail());
@@ -48,6 +50,8 @@ public class AuthenticationService {
                 .role(Role.CUSTOMER)
                 .phone(request.getPhone())
                 .address(request.getAddress())
+                .gender(request.isGender())
+                .birthday(request.getBirthday())
                 .build();
         var saveUser = userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

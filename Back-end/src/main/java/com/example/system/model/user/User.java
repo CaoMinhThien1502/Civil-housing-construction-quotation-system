@@ -4,6 +4,9 @@ import com.example.system.model.blog.Blog;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.token.Token;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,28 +30,51 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+
     @Column(nullable = false, columnDefinition = "varchar(50)")
+    @NotBlank(message = "Name cannot be blank")
     private String userName;
-    @Column(nullable = false, columnDefinition = "varchar(100)")
-    private String password;
+
     @Column(nullable = false, columnDefinition = "varchar(50)")
+    @NotBlank(message = "Email cannot be blank")
     private String email;
-    @Enumerated(EnumType.STRING)
-    private Role role;
-    @Column(nullable = false)
-    private boolean status;
-    @Column(nullable = false)
+
+    @Column(nullable = false, columnDefinition = "varchar(100)")
+    @NotBlank(message = "Password cannot be blank")
+    private String password;
+
+    @Column(nullable = false, columnDefinition = "varchar(20)")
+    @Pattern(regexp = "0[0-9]{9}", message = "The phone number must consist of 10 numbers and start with 0")
+    @NotBlank(message = "Phone cannot be blank")
     private String phone;
+
     @Column(nullable = false, columnDefinition = "varchar(50)")
+    @NotBlank(message = "Address cannot be blank")
     private String address;
+
+    @Column(nullable = false)
+    @NotNull(message = "Invalid status format (True - False)")
+    private boolean status;
+
     @Column(nullable = false, columnDefinition = "varchar(50)")
+    @NotBlank(message = "First name cannot be blank")
     private String firstName;
+
     @Column(nullable = false, columnDefinition = "varchar(50)")
+    @NotBlank(message = "Last name cannot be blank")
     private String lastName;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date birthday;
+
+    @Column(nullable = false)
+    @NotNull(message = "Invalid status format (True - False)") // 1:Nam - 0:Nu
     private boolean gender;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @OneToMany(mappedBy = "user")
     private Set<Token> tokens;
     @OneToMany(mappedBy = "user")
