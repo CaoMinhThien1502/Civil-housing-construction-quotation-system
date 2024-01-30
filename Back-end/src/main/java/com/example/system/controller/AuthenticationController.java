@@ -4,16 +4,17 @@ import com.example.system.auth.AuthenticationRequest;
 import com.example.system.auth.AuthenticationResponse;
 import com.example.system.auth.RegisterRequest;
 import com.example.system.security.AuthenticationService;
+import com.example.system.security.LogoutService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.LockedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+    private final LogoutService logoutService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(
@@ -65,5 +67,12 @@ public class AuthenticationController {
                 .header(HttpHeaders.SET_COOKIE, accessTokenCookie.toString())
                 .header(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString())
                 .build();
+    }
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    Authentication authentication){
+        logoutService.logout(request, response, authentication);
+        return ResponseEntity.ok().body("Logout successfully");
     }
 }

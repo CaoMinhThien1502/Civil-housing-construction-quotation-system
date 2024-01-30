@@ -37,6 +37,7 @@ public class User implements UserDetails {
 
     @Column(nullable = false, columnDefinition = "varchar(50)")
     @NotBlank(message = "Email cannot be blank")
+    @Pattern(regexp = "^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "The email must consist @")
     private String email;
 
     @Column(nullable = false, columnDefinition = "varchar(100)")
@@ -44,8 +45,9 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = false, columnDefinition = "varchar(20)")
-    @Pattern(regexp = "0[0-9]{9}", message = "The phone number must consist of 10 numbers and start with 0")
+
     @NotBlank(message = "Phone cannot be blank")
+    @Pattern(regexp = "0[0-9]{9}", message = "The phone number must consist of 10 numbers and start with 0")
     private String phone;
 
     @Column(nullable = false, columnDefinition = "varchar(50)")
