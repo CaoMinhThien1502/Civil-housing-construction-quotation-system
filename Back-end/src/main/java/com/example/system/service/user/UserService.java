@@ -5,4 +5,6 @@ import com.example.system.model.user.User;
 
 public interface UserService {
     UserDto getProfile();
+    UserDto updateProfile(UserDto dto);
+
 }

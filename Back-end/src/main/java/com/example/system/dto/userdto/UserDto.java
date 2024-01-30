@@ -21,9 +21,11 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserDto {
     private Long userId;
-    private String fullName;//private String firstName + lastName;
-//    private String userName;
-//    private String password;
+    //private String fullName;//private String firstName + lastName;
+    private String firstName;
+    private String lastName;
+    private String userName;
+    private String password;
     private String email;
     private Role role;
     private String phone;
