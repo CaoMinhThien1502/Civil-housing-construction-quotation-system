@@ -60,7 +60,7 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout
                         .logoutUrl(LOGOUT_URL) // URL để xử lý quá trình đăng xuất
-                        .logoutSuccessUrl(LOGIN_URL) // URL mặc định sau khi đăng xuất thành công
+/*                        .logoutSuccessUrl(LOGIN_URL) // URL mặc định sau khi đăng xuất thành công*/
                         .invalidateHttpSession(true) // Hủy bỏ phiên làm việc của người dùng sau khi đăng xuất
                         .clearAuthentication(true)
                         .deleteCookies("access_token")
