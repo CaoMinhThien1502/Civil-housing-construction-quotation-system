@@ -24,12 +24,35 @@ public class UserServiceImp implements UserService {
         profile.setAddress(user.getAddress());
         profile.setBirthday(user.getBirthday());
         profile.setUserId(user.getUserId());
-        profile.setFullName(user.getLastName()+" "+user.getFirstName());
+        //profile.setFullName(user.getLastName()+" "+user.getFirstName());
+        profile.setFirstName(user.getFirstName());
+        profile.setLastName(user.getLastName());
         profile.setEmail(user.getEmail());
         profile.setGender(user.isGender());
         profile.setPhone(user.getPhone());
         profile.setRole(user.getRole());
         profile.setStatus(user.isStatus());
         return profile;
+    }
+
+    @Override
+    public UserDto updateProfile(UserDto dto) {
+        try{
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = userRepository.findByUserName(userDetails.getUsername());
+            user.setAddress(dto.getAddress());
+            user.setGender(dto.isGender());
+            user.setEmail(dto.getEmail());
+            user.setBirthday(dto.getBirthday());
+            user.setPhone(dto.getPhone());
+            user.setFirstName(dto.getFirstName());
+            user.setLastName(dto.getLastName());
+            userRepository.save(user);
+            return getProfile();
+        }catch (Exception e){
+            return null;
+        }
+
+
     }
 }
