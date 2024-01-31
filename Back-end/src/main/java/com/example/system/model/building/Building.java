@@ -19,13 +19,11 @@ public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buildingId;
-/*    private String buildingName;
-    private String description;*/
     @Column(nullable = false)
     private Double length;
     @Column(nullable = false)
     private Double width;
-    private int status;
+    private int status; //-1: mẫu /  0: hủy /  1: đang thi công /  2 : đã xong
     @OneToMany(mappedBy = "building")
     private Set<BuildingDetail> buildingDetail;
     @OneToMany(mappedBy = "building")
