@@ -35,7 +35,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(a);
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
@@ -69,10 +69,7 @@ public class AuthenticationController {
                 .build();
     }
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    Authentication authentication){
-        logoutService.logout(request, response, authentication);
+    public ResponseEntity<?> logout(){
         return ResponseEntity.ok().body("Logout successfully");
     }
 }

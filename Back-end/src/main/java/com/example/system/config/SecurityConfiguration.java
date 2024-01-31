@@ -27,7 +27,7 @@ public class SecurityConfiguration {
     private final LogoutHandler logoutHandler;
 
     public static final String LOGIN_URL = "/login";
-    public static final String LOGOUT_URL = "/logout";
+    public static final String LOGOUT_URL = "/api/v1/auth/logout";
 
 
     @Bean
@@ -48,7 +48,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizeRequests ->
                                 authorizeRequests
                                         .requestMatchers("/api/v1/auth/**","/swagger-ui/**","/swagger-resources/*",
-                                                "/v3/api-docs/**","/logout").permitAll()
+                                                "/v3/api-docs/**").permitAll()
 /*                                        .requestMatchers("").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                                         .requestMatchers(LOGIN_URL).permitAll()*/
                                         .anyRequest().authenticated()
