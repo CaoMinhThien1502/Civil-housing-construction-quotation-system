@@ -30,6 +30,18 @@ public class SecurityConfiguration {
     public static final String LOGOUT_URL = "/logout";
 
 
+    public static final String[] ENDPOINTS_WHITELIST = {
+            "/login",
+            "/logout",
+            "/swagger-ui/**",
+            "/swagger-resources/*",
+            "/v3/api-docs/**",
+            "/api/v1/auth/**",
+
+
+
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -47,8 +59,13 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                                 authorizeRequests
-                                        .requestMatchers("/api/v1/auth/**","/swagger-ui/**","/swagger-resources/*",
-                                                "/v3/api-docs/**","/logout").permitAll()
+                                        .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
+                                        .requestMatchers(
+                                                "/building/**",
+                                                "/combobuilding/**",
+                                                "/request-contract/**",
+                                                "/user/**"
+                                        ).permitAll()
 /*                                        .requestMatchers("").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                                         .requestMatchers(LOGIN_URL).permitAll()*/
                                         .anyRequest().authenticated()

@@ -68,7 +68,7 @@ public class User implements UserDetails {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date birthday;
+    private LocalDate birthday;
 
     @Column(nullable = false)
     @NotNull(message = "Invalid status format (True - False)") // 1:Nam - 0:Nu
