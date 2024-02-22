@@ -62,6 +62,8 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 </head>
 
 <body>
@@ -1093,26 +1095,27 @@
                             </div>
                             <div class="asset-inner">
                                 <table>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Image</th>
-                                        <th>Name of Combo</th>
-                                        <th>Status</th>
-                                        <!-- <th>Subject</th> -->
-                                        <!-- <th>Department</th> -->
-                                        <th>Type</th>
-                                        <th>Price</th>
-                                        <th>Setting</th>
-                                    </tr>
-                                    <tr>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <!-- <th>Image</th> -->
+                                            <th>Name of Combo</th>
+                                            <th>Status</th>
+                                            <th>Type</th>
+                                            <th>Price</th>
+                                            <th>Setting</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                    <!-- <tr>
                                         <td>1</td>
                                         <td><img src="img/product/book-1.jpg" alt="" /></td>
                                         <td>Gói thô 1</td>
                                         <td>
                                             <button class="pd-setting">Active</button>
                                         </td>
-                                        <!-- <td>Html, Css</td> -->
-                                        <!-- <td>CSE</td> -->
                                         <td>Thô</td>
                                         <td>$1500</td>
                                         <td>
@@ -1127,8 +1130,6 @@
                                         <td>
                                             <button class="ps-setting">Paused</button>
                                         </td>
-                                        <!-- <td>PHP</td> -->
-                                        <!-- <td>CSE</td> -->
                                         <td>Thô</td>
                                         <td>$1700</td>
                                         <td>
@@ -1143,8 +1144,6 @@
                                         <td>
                                             <button class="ds-setting">Disabled</button>
                                         </td>
-                                        <!-- <td>Java</td> -->
-                                        <!-- <td>CSE</td> -->
                                         <td>Thô</td>
                                         <td>$1500</td>
                                         <td>
@@ -1159,8 +1158,6 @@
                                         <td>
                                             <button class="pd-setting">Active</button>
                                         </td>
-                                        <!-- <td>PHP</td> -->
-                                        <!-- <td>CSE</td> -->
                                         <td>Hoàn thiện</td>
                                         <td>$1200</td>
                                         <td>
@@ -1175,8 +1172,6 @@
                                         <td>
                                             <button class="pd-setting">Active</button>
                                         </td>
-                                        <!-- <td>Wordpress</td> -->
-                                        <!-- <td>CSE</td> -->
                                         <td>Hoàn thiện</td>
                                         <td>$1800</td>
                                         <td>
@@ -1191,15 +1186,13 @@
                                         <td>
                                             <button class="ps-setting">Paused</button>
                                         </td>
-                                        <!-- <td>Java</td> -->
-                                        <!-- <td>CSE</td> -->
                                         <td>Trọn gói</td>
                                         <td>$1000</td>
                                         <td>
                                             <a href="edit-combo.html"><button  data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                             <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 </table>
                             </div>
                             
@@ -1271,6 +1264,119 @@
     <!-- tawk chat JS
 		============================================ -->
     <script src="js/tawk-chat.js"></script>
+
+    <script>
+        // axios.get('http://localhost:8080/combobuilding/combo-building/get')
+        //     .then(response => console.log(response.data))
+        //     .catch(error => console.error(error));
+
+        // function populateTable(comboBuildings) {
+        //     const tableBody = document.querySelector('tbody'); // Assuming you have a tbody element
+
+        //     // Clear existing rows (optional)
+        //     tableBody.innerHTML = '';
+
+        //     comboBuildings.forEach(comboBuilding => {
+        //         const row = document.createElement('tr');
+
+        //         // Create table cells with appropriate data
+        //         const cells = [
+        //             `<td>${comboBuilding.comboBuildingId}</td>`,
+        //             `<td>${comboBuilding.comboBuildingName}</td>`,
+        //             `<td>${comboBuilding.status ? 'Active' : 'Inactive'}</td>`, // Convert status to string
+        //             `<td>${comboBuilding.type === 0 ? 'Thô' : comboBuilding.type === 1 ? 'Hoàn thiện' : 'Trọn gói'}</td>`, // Convert type to string
+        //             `<td>$${comboBuilding.unitPrice.toLocaleString('vi-VN')}</td>`, // Format price with Vietnamese locale
+        //             `<td>
+        //     <a href="edit-combo.html"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+        //     <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        //   </td>`,
+        //         ];
+
+        //         row.innerHTML = cells.join('');
+        //         tableBody.appendChild(row);
+        //     });
+        // }
+
+    // // Call the function after fetching data
+    // axios.get('http://localhost:8080/combobuilding/combo-building/get')
+    //     .then(response => populateTable(response.data))
+    //     .catch(error => console.error('Error fetching data:', error));
+
+    // const tableBody = document.querySelector('tbody');
+    // tableBody.innerHTML = '<div>Loading...</div>';
+
+
+    $.ajax({
+        url: 'http://localhost:8080/combobuilding/combo-building/get',
+        type: 'GET',
+        dataType: 'json',
+        crossDomain: true,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+        },
+        success: function (data) {
+            // Populate table with the received data
+            console.log(data);
+            populateTable(data);
+        },
+        error: function (error) {
+            console.error('Error', error);
+        }
+    });
+
+    function populateTable(comboBuildings) {
+        const tableBody = $('tbody'); // Thay đổi theo cấu trúc HTML của bạn
+
+        // Xóa các hàng hiện có (tùy chọn)
+        tableBody.html('');
+
+        $.each(comboBuildings, function (index, comboBuilding) {
+            const row = $('<tr>');
+
+            // Tạo các ô dữ liệu với thông tin phù hợp
+            const cells = [
+                `<td>${comboBuilding.comboBuildingId}</td>`,
+                // `<td><img src="img/product/book-${comboBuilding.type + 1}.jpg" alt=""></td>`, // Thay đổi đường dẫn ảnh theo type
+                `<td>${comboBuilding.comboBuildingName}</td>`,
+                `<td><button class="pd-setting">${comboBuilding.status ? 'Active' : 'Paused'}</button></td>`, // Chuyển đổi trạng thái sang chuỗi
+                `<td>${comboBuilding.type === 0 ? 'Thô' : comboBuilding.type === 1 ? 'Hoàn thiện' : 'Trọn gói'}</td>`, // Chuyển đổi type sang chuỗi
+                `<td>$${comboBuilding.unitPrice.toLocaleString('vi-VN')}</td>`, // Định dạng giá theo định vị Việt Nam
+                `<td>
+        <a href="edit-combo.html"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+        <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+      </td>`,
+            ];
+
+            row.html(cells.join(''));
+            tableBody.append(row);
+        });
+    }
+
+        // // Assuming you have a tbody element with the ID "table-body"
+        // const tableBody = document.getElementById('tbody');
+
+        // fetch('http://localhost:8080/combobuilding/combo-building/get', {
+        // method: 'GET',
+        // })
+        //     .then(response => response.json()) // Parse the JSON response
+        //     .then(comboBuildings => {
+        //         comboBuildings.forEach(comboBuilding => {
+        //             const row = document.createElement('tr');
+
+        //             // Create table cells with appropriate data
+        //             row.innerHTML = `
+        // <td>${comboBuilding.comboBuildingId}</td>
+        // <td>${comboBuilding.comboBuildingName}</td>
+        // <td>$${comboBuilding.unitPrice.toLocaleString('vi-VN')}</td>
+        // `;
+
+        //             tableBody.appendChild(row);
+        //         });
+        //     })
+        //     .catch(error => console.error('Error fetching data:', error));
+
+    </script>
 </body>
 
 </html>
