@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Combo Building List</title>
+    <title>Combo Detail</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -1080,11 +1080,11 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap">
-                            <h4>Combo Building List</h4>
-                            <!-- <div class="add-product">
+                            <h4>Gói Thô 1</h4>
+                            <div class="add-product">
                                 <a href="add-combo.html">Add Combo</a>
-                            </div> -->
-                            <!-- <div class="custom-pagination">
+                            </div>
+                            <div class="custom-pagination">
 								<ul class="pagination">
 									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
 									<li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -1092,18 +1092,18 @@
 									<li class="page-item"><a class="page-link" href="#">3</a></li>
 									<li class="page-item"><a class="page-link" href="#">Next</a></li>
 								</ul>
-                            </div> -->
+                            </div>
                             <div class="asset-inner">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <!-- <th>No</th> -->
                                             <!-- <th>Image</th> -->
                                             <th>Name of Combo</th>
                                             <th>Status</th>
                                             <th>Type</th>
                                             <th>Price</th>
-                                            <th>Detail</th>
+                                            <th>Setting</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1307,7 +1307,7 @@
 
 
     $.ajax({
-        url: 'http://localhost:8080/combobuilding/combo-building/get',
+        url: 'http://localhost:8080/combobuilding/combo/get',
         type: 'GET',
         dataType: 'json',
         crossDomain: true,
@@ -1336,15 +1336,15 @@
 
             // Tạo các ô dữ liệu với thông tin phù hợp
             const cells = [
-                `<td>${comboBuilding.comboBuildingId}</td>`,
+                // `<td>${comboBuilding.comboBuildingId}</td>`,
                 // `<td><img src="img/product/book-${comboBuilding.type + 1}.jpg" alt=""></td>`, // Thay đổi đường dẫn ảnh theo type
                 `<td>${comboBuilding.comboBuildingName}</td>`,
                 `<td><button class="pd-setting">${comboBuilding.status ? 'Active' : 'Paused'}</button></td>`, // Chuyển đổi trạng thái sang chuỗi
                 `<td>${comboBuilding.type === 0 ? 'Thô' : comboBuilding.type === 1 ? 'Hoàn thiện' : 'Trọn gói'}</td>`, // Chuyển đổi type sang chuỗi
                 `<td>$${comboBuilding.unitPrice.toLocaleString('vi-VN')}</td>`, // Định dạng giá theo định vị Việt Nam
                 `<td>
-        <a href="${comboBuilding.comboBuildingName.replace(/ /g, "-")}.html"><button title="Combo Detail" class="pd-setting-ed"><i class="fa fa-book" aria-hidden="true"></i></button></a>
-        
+        <a href="edit-combo.html"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+        <button data-toggle="tooltip" title="Delete" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
       </td>`,
             ];
 
