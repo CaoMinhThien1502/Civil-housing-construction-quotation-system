@@ -7,7 +7,6 @@ import com.example.system.model.user.User;
 import com.example.system.repository.user.UserRepository;
 import com.example.system.security.AuthenticationService;
 import com.example.system.security.JwtService;
-import com.example.system.security.LogoutService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,7 +28,6 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
-    private final LogoutService logoutService;
     private final JwtService jwtService;
     private final UserRepository userRepository;
 
@@ -44,7 +42,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(a);
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
@@ -133,15 +131,19 @@ public class AuthenticationController {
         // Trả về phản hồi thành công
         return ResponseEntity.ok().build();
     }
+    @GetMapping("confirm")
+    public String confirm(@RequestParam("token") String token){
+        return authenticationService.confirmToken(token);
+    }
 
 
 
 
-    @PostMapping("/logout")
+/*    @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request,
                                     HttpServletResponse response,
                                     Authentication authentication){
         logoutService.logout(request, response, authentication);
         return ResponseEntity.ok().body("Logout successfully");
-    }
+    }*/
 }

@@ -14,12 +14,12 @@ public enum Role {
     CUSTOMER(Collections.emptySet()),
     MANAGER(
             Set.of(
-                    Permission.ADMIN_FULLACCESS,
                     Permission.MANAGER_FULLACCSESS
             )
     ),
     ADMIN(
             Set.of(
+                    Permission.ADMIN_FULLACCESS,
                     Permission.MANAGER_FULLACCSESS
             )
     );

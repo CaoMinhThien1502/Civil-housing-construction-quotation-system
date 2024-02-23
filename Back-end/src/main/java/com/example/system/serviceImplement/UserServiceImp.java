@@ -24,9 +24,7 @@ public class UserServiceImp implements UserService {
         profile.setAddress(user.getAddress());
         profile.setBirthday(user.getBirthday());
         profile.setUserId(user.getUserId());
-        //profile.setFullName(user.getLastName()+" "+user.getFirstName());
-        profile.setFirstName(user.getFirstName());
-        profile.setLastName(user.getLastName());
+        profile.setFullName(user.getUsername());
         profile.setEmail(user.getEmail());
         profile.setGender(user.isGender());
         profile.setPhone(user.getPhone());
@@ -45,8 +43,7 @@ public class UserServiceImp implements UserService {
             user.setEmail(dto.getEmail());
             user.setBirthday(dto.getBirthday());
             user.setPhone(dto.getPhone());
-            user.setFirstName(dto.getFirstName());
-            user.setLastName(dto.getLastName());
+            user.setUserName(dto.getFullName());
             userRepository.save(user);
             return getProfile();
         }catch (Exception e){

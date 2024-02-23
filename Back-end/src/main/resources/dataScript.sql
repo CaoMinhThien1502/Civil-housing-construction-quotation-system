@@ -1,15 +1,15 @@
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status)
-VALUES ('Cuong','Trinh',true,'2002-04-07','04 Le Van Viet','cuong@gmail.com','cuong','1','customer','0938472721',1);
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status)
-VALUES ('Hong','Trinh',false,'2002-08-04','18 Le Van Viet','hong@gmail.com','hong','1','customer','0938472722',1);
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status)
-VALUES ('Nam','Trinh',true,'2000-07-01','06 Le Van Viet','nam@gmail.com','nam','1','customer','0938472723',1);
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status)
-VALUES ('Tien','Trinh',true,'2006-01-20','09 La Xuan Oai','tien@gmail.com','manager','1','manager','0938472724',1);
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status)
-VALUES ('Dat','Trinh',true,'2006-01-20','111 Le Viet Luong','dat@gmail.com','dat','1','customer','0938472725',1);
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status)
-VALUES ('Linh','Trinh',false,'2001-11-08','14 Xuan Huong','linh@gmail.com','admin','1','admin','0938472726',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (true,'2002-04-07','04 Le Van Viet','cuong@gmail.com','cuong','1','customer','0938472721',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (false,'2002-08-04','18 Le Van Viet','hong@gmail.com','hong','1','customer','0938472722',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (true,'2000-07-01','06 Le Van Viet','nam@gmail.com','nam','1','customer','0938472723',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (true,'2006-01-20','09 La Xuan Oai','tien@gmail.com','manager','1','manager','0938472724',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (true,'2006-01-20','111 Le Viet Luong','dat@gmail.com','dat','1','customer','0938472725',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (false,'2001-11-08','14 Xuan Huong','linh@gmail.com','admin','1','admin','0938472726',1);
 
 INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('blog 1','Blog number 1',4,'2020-10-22',null);
 INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('blog 2','Blog number 2',4,'2020-11-22',null);

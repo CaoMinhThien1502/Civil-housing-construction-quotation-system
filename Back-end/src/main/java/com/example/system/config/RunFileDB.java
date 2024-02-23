@@ -39,9 +39,7 @@ public class RunFileDB implements CommandLineRunner {
         // If user does not exist, create a new user
         if (!userExist.isPresent()) {
             User user = User.builder()
-                    .userName("admin")
-                    .firstName("Admin")
-                    .lastName("Admin")
+                    .userName("Admin")
                     .email("admin@gmail.com")
                     .password(passwordEncoder.encode("12345"))
                     .role(Role.ADMIN)

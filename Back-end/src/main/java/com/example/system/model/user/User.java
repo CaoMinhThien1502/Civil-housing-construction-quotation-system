@@ -58,14 +58,6 @@ public class User implements UserDetails {
     @NotNull(message = "Invalid status format (True - False)")
     private boolean status;
 
-    @Column(nullable = false, columnDefinition = "varchar(50)")
-    @NotBlank(message = "First name cannot be blank")
-    private String firstName;
-
-    @Column(nullable = false, columnDefinition = "varchar(50)")
-    @NotBlank(message = "Last name cannot be blank")
-    private String lastName;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private LocalDate birthday;

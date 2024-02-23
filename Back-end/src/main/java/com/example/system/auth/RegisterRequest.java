@@ -14,9 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
-    private String username;
-    private String firstname;
-    private String lastname;
+    private String fullname;
     private String email;
     private String password;
     private String phone;

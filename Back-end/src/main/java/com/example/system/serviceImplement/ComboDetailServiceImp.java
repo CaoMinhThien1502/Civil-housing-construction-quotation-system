@@ -12,6 +12,7 @@ import com.example.system.service.combobuilding.ComboDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -74,5 +75,22 @@ public class ComboDetailServiceImp implements ComboDetailService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public ComboResponseDto getComboDetailById(String comboBuildingName) {
+        ComboResponseDto comboResponseDto = new ComboResponseDto();
+        ComboBuilding comboBuilding = comboBuildingRepository.findByComboBuildingName(comboBuildingName);
+        comboResponseDto.setComboBuildingName(comboBuilding.getComboBuildingName());
+        comboResponseDto.setType(comboBuilding.getType());
+        comboResponseDto.setUnitPrice(comboBuilding.getUnitPrice());
+        comboResponseDto.setStatus(comboBuilding.isStatus());
+        List<ComboDetail> comboDetailList = comboDetailRepository.findAllByComboBuildingName(comboBuildingName);
+        List<Material> materialList = new ArrayList<>();
+        for (ComboDetail c : comboDetailList) {
+            materialList.add(c.getMaterial());
+        }
+        comboResponseDto.setMaterialList(materialList);
+        return comboResponseDto;
     }
 }
