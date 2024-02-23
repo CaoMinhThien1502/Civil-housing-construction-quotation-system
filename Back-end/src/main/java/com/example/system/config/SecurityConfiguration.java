@@ -1,5 +1,6 @@
 package com.example.system.config;
 
+import com.example.system.model.user.Role;
 import com.example.system.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,21 +26,15 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
-
-    public static final String LOGIN_URL = "/login";
     public static final String LOGOUT_URL = "/logout";
 
 
     public static final String[] ENDPOINTS_WHITELIST = {
-            "/login",
             "/logout",
             "/swagger-ui/**",
             "/swagger-resources/*",
             "/v3/api-docs/**",
             "/api/v1/auth/**",
-
-
-
     };
 
     @Bean
@@ -66,8 +61,6 @@ public class SecurityConfiguration {
                                                 "/request-contract/**",
                                                 "/user/**"
                                         ).permitAll()
-/*                                        .requestMatchers("").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
-                                        .requestMatchers(LOGIN_URL).permitAll()*/
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->
