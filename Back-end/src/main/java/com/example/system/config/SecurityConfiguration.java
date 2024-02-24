@@ -26,7 +26,13 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
+
+
+    public static final String LOGIN_URL = "/login";
+    public static final String LOGOUT_URL = "/api/v1/auth/logout";
+
     public static final String LOGOUT_URL = "/logout";
+
 
 
     public static final String[] ENDPOINTS_WHITELIST = {
@@ -54,6 +60,12 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                                 authorizeRequests
+
+                                        .requestMatchers("/api/v1/auth/**","/swagger-ui/**","/swagger-resources/*",
+                                                "/v3/api-docs/**").permitAll()
+/*                                        .requestMatchers("").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                                        .requestMatchers(LOGIN_URL).permitAll()*/
+
                                         .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                                         .requestMatchers(
                                                 "/building/**",
@@ -61,6 +73,7 @@ public class SecurityConfiguration {
                                                 "/request-contract/**",
                                                 "/user/**"
                                         ).permitAll()
+
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->
