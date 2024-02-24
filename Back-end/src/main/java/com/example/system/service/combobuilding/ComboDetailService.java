@@ -8,4 +8,6 @@ public interface ComboDetailService{
     boolean createComboDetail(ComboBuilding newComboBuilding, ComboRequestDto comboRequestDto);
 
     boolean updateComboDetail(String comboBuildingName, ComboRequestDto comboRequestDto);
+
+    ComboResponseDto getComboDetailById(String comboBuildingName);
 }

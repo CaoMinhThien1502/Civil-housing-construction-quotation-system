@@ -91,6 +91,13 @@ public class ComboBuildingController {
         List<ComboResponseDto> comboResponseDtoList = comboBuildingService.getListCombo();
         return ResponseEntity.ok(comboResponseDtoList);
     }
+
+    @GetMapping("/combo/getbyid")
+    public ResponseEntity<?> getComboById(@RequestParam String comboBuildingName ){
+        ComboResponseDto comboResponseDto = comboDetailService.getComboDetailById(comboBuildingName);
+        return ResponseEntity.ok(comboResponseDto);
+    }
+
     @PostMapping("/combo/create")
     public ResponseEntity<?> createCombo(@RequestBody ComboRequestDto comboRequestDto){
         ComboBuilding newComboBuilding = comboBuildingService.createComboBuilding(comboRequestDto);
