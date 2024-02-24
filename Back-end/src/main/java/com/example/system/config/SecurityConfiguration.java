@@ -29,7 +29,7 @@ public class SecurityConfiguration {
 
 
     public static final String LOGIN_URL = "/login";
-    public static final String LOGOUT_URL = "/api/v1/auth/logout";
+//    public static final String LOGOUT_URL = "/api/v1/auth/logout";
 
     public static final String LOGOUT_URL = "/logout";
 
