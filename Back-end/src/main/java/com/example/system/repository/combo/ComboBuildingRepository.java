@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface ComboBuildingRepository extends JpaRepository<ComboBuilding, Long> {
     @Query("SELECT c FROM ComboBuilding c WHERE c.comboBuildingName = :comboBuildingName")
     ComboBuilding findByComboBuildingName(@Param("comboBuildingName")String comboBuildingName);
+    @Query("SELECT c FROM ComboBuilding c WHERE c.comboBuildingId = :comboBuildingId")
+    ComboBuilding findByComboBuildingId(@Param("comboBuildingId")Long comboBuildingId);
 }

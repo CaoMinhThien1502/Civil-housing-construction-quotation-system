@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MaterialDto {
+    private Long materialId;
     private String materialName;
     private Long unitPrice;
     private boolean status;
