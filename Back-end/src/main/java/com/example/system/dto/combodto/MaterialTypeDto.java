@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MaterialTypeDto {
+    private Long materialTypeId;
     private String typeName;
     private boolean status;
 }

@@ -19,4 +19,7 @@ public interface ComboDetailRepository extends JpaRepository<ComboDetail, Long> 
 
     @Query("SELECT cd FROM ComboDetail cd WHERE cd.comboBuilding.comboBuildingName = :comboBuildingName")
     List<ComboDetail> findAllByComboBuildingName(@Param("comboBuildingName")String comboBuildingName);
+
+    @Query("SELECT cd FROM ComboDetail cd WHERE cd.comboBuilding.comboBuildingId = :comboBuildingId")
+    List<ComboDetail> findAllByComboBuildingId(@Param("comboBuildingId")Long comboBuildingId);
 }

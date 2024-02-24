@@ -2,55 +2,73 @@ package com.example.system.serviceImplement;
 
 import com.example.system.dto.combodto.ComboRequestDto;
 import com.example.system.dto.combodto.ComboResponseDto;
+import com.example.system.dto.combodto.MaterialTypeDto;
+import com.example.system.dto.combodto.MaterialTypeOfComboDto;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.combo.ComboDetail;
 import com.example.system.model.combo.Material;
+import com.example.system.model.combo.MaterialType;
 import com.example.system.repository.combo.ComboBuildingRepository;
 import com.example.system.repository.combo.ComboDetailRepository;
 import com.example.system.service.combobuilding.ComboBuildingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class ComboBuildingServiceImp implements ComboBuildingService {
     private final ComboDetailRepository comboDetailRepository;
     private final ComboBuildingRepository comboBuildingRepository;
-    @Override
-    public List<ComboResponseDto> getListCombo() {
-        List<ComboResponseDto> listComboResponse = new ArrayList<>();
+@Override
+public List<ComboResponseDto> getListCombo() {
+    List<ComboResponseDto> listComboResponse = new ArrayList<>();
 
-        Set<ComboBuilding> comboBuildingList = new HashSet<>();
+    List<ComboDetail> detailList = comboDetailRepository.findAll();
 
+    // Duyệt qua danh sách ComboDetail và tạo các ComboResponseDto
+    for (ComboDetail comboDetail : detailList) {
+        ComboBuilding comboBuilding = comboDetail.getComboBuilding();
 
-        List<ComboDetail> detailList = comboDetailRepository.findAll();
-        for (ComboDetail c: detailList) {
-            comboBuildingList.add(c.getComboBuilding());
-        }
+        // Kiểm tra xem ComboBuilding đã được xử lý chưa, nếu chưa thì tạo mới một ComboResponseDto
+        Optional<ComboResponseDto> optionalComboResponseDto = listComboResponse.stream()
+                .filter(dto -> dto.getComboBuildingId().equals(comboBuilding.getComboBuildingId()))
+                .findFirst();
 
-        for (ComboBuilding c:comboBuildingList) {
-            List<Material> materialOfCombo = new ArrayList<>();
-            ComboResponseDto comboResponseDto = new ComboResponseDto();
-            comboResponseDto.setComboBuildingName(c.getComboBuildingName());
-            comboResponseDto.setUnitPrice(c.getUnitPrice());
-            comboResponseDto.setStatus(c.isStatus());
-            comboResponseDto.setType(c.getType());
-            List<ComboDetail> findMaterialByCombo = comboDetailRepository.findByComboBuilding(c);
-            if (!findMaterialByCombo.isEmpty()) {
-                for (ComboDetail comboDetail : findMaterialByCombo) {
-                    materialOfCombo.add(comboDetail.getMaterial());
-                }
-            }
-            comboResponseDto.setMaterialList(materialOfCombo);
+        ComboResponseDto comboResponseDto;
+        if (optionalComboResponseDto.isPresent()) {
+            comboResponseDto = optionalComboResponseDto.get();
+        } else {
+            comboResponseDto = new ComboResponseDto();
+            comboResponseDto.setComboBuildingId(comboBuilding.getComboBuildingId());
+            comboResponseDto.setComboBuildingName(comboBuilding.getComboBuildingName());
+            comboResponseDto.setUnitPrice(comboBuilding.getUnitPrice());
+            comboResponseDto.setStatus(comboBuilding.isStatus());
+            comboResponseDto.setType(comboBuilding.getType());
+            comboResponseDto.setMaterialTypeOfComboDto(new ArrayList<>()); // Khởi tạo danh sách materialTypeOfComboDto
             listComboResponse.add(comboResponseDto);
         }
-        return listComboResponse;
+
+        // Lấy hoặc tạo MaterialTypeOfComboDto cho ComboResponseDto hiện tại
+        Material material = comboDetail.getMaterial();
+        MaterialType materialType = material.getMaterialType();
+        MaterialTypeDto materialTypeDto = new MaterialTypeDto(materialType.getMaterialTypeId(), materialType.getTypeName(), materialType.isStatus());
+        MaterialTypeOfComboDto materialTypeOfComboDto = comboResponseDto.getMaterialTypeOfComboDto().stream()
+                .filter(dto -> dto.getMaterialTypeDto().getMaterialTypeId().equals(materialType.getMaterialTypeId()))
+                .findFirst()
+                .orElseGet(() -> {
+                    MaterialTypeOfComboDto newDto = new MaterialTypeOfComboDto(materialTypeDto, new ArrayList<>());
+                    comboResponseDto.getMaterialTypeOfComboDto().add(newDto);
+                    return newDto;
+                });
+
+        // Thêm Material vào danh sách materialList của MaterialTypeOfComboDto
+        materialTypeOfComboDto.getMaterialList().add(material);
     }
+    return listComboResponse;
+}
+
 
     @Override
     public ComboBuilding createComboBuilding(ComboRequestDto comboRequestDto) {

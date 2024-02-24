@@ -9,9 +9,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ComboResponseDto {
+    private Long comboBuildingId;
     private String comboBuildingName;
     private Long unitPrice;
     private int type;
-    private List<Material> materialList;
+    private List<MaterialTypeOfComboDto> materialTypeOfComboDto;
     private boolean status;
 }

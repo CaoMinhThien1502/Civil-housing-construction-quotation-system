@@ -2,9 +2,12 @@ package com.example.system.serviceImplement;
 
 import com.example.system.dto.combodto.ComboRequestDto;
 import com.example.system.dto.combodto.ComboResponseDto;
+import com.example.system.dto.combodto.MaterialTypeDto;
+import com.example.system.dto.combodto.MaterialTypeOfComboDto;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.combo.ComboDetail;
 import com.example.system.model.combo.Material;
+import com.example.system.model.combo.MaterialType;
 import com.example.system.repository.combo.ComboBuildingRepository;
 import com.example.system.repository.combo.ComboDetailRepository;
 import com.example.system.repository.combo.MaterialRepository;
@@ -27,8 +30,8 @@ public class ComboDetailServiceImp implements ComboDetailService {
         try {
             ComboDetail newComboDetail;
             if (newComboBuilding != null) {
-                for (String materialId : comboRequestDto.getMaterialIdList()) {
-                    Material material = materialRepository.findById(Long.valueOf(materialId))
+                for (Long materialId : comboRequestDto.getMaterialIdList()) {
+                    Material material = materialRepository.findById(materialId)
                             .orElseThrow(
                                     () -> new IllegalStateException("material with id " + materialId + " does not exists"));
                     newComboDetail = new ComboDetail();
@@ -47,16 +50,16 @@ public class ComboDetailServiceImp implements ComboDetailService {
     }
 
     @Override
-    public boolean updateComboDetail(String comboBuildingName, ComboRequestDto comboRequestDto) {
+    public boolean updateComboDetail(Long comboBuildingId, ComboRequestDto comboRequestDto) {
         try {
 
-            List<ComboDetail> oldComboDetail = comboDetailRepository.findAllByComboBuildingName(comboBuildingName);
+            List<ComboDetail> oldComboDetail = comboDetailRepository.findAllByComboBuildingId(comboBuildingId);
             comboDetailRepository.deleteAll(oldComboDetail);
-            ComboBuilding comboBuilding = comboBuildingRepository.findByComboBuildingName(comboBuildingName);
+            ComboBuilding comboBuilding = comboBuildingRepository.findByComboBuildingId(comboBuildingId);
             //update list material for combo
             ComboDetail updateComboDetail;
-            for (String materialId : comboRequestDto.getMaterialIdList()) {
-                Material material = materialRepository.findById(Long.valueOf(materialId))
+            for (Long materialId : comboRequestDto.getMaterialIdList()) {
+                Material material = materialRepository.findById(materialId)
                         .orElseThrow(
                                 () -> new IllegalStateException("material with id " + materialId + " does not exists"));
                 updateComboDetail = new ComboDetail();
@@ -77,20 +80,54 @@ public class ComboDetailServiceImp implements ComboDetailService {
         }
     }
 
-    @Override
-    public ComboResponseDto getComboDetailById(String comboBuildingName) {
-        ComboResponseDto comboResponseDto = new ComboResponseDto();
-        ComboBuilding comboBuilding = comboBuildingRepository.findByComboBuildingName(comboBuildingName);
-        comboResponseDto.setComboBuildingName(comboBuilding.getComboBuildingName());
-        comboResponseDto.setType(comboBuilding.getType());
-        comboResponseDto.setUnitPrice(comboBuilding.getUnitPrice());
-        comboResponseDto.setStatus(comboBuilding.isStatus());
-        List<ComboDetail> comboDetailList = comboDetailRepository.findAllByComboBuildingName(comboBuildingName);
-        List<Material> materialList = new ArrayList<>();
-        for (ComboDetail c : comboDetailList) {
-            materialList.add(c.getMaterial());
-        }
-        comboResponseDto.setMaterialList(materialList);
-        return comboResponseDto;
+@Override
+public ComboResponseDto getComboDetailById(Long comboBuildingId) {
+    ComboBuilding comboBuilding = comboBuildingRepository.findByComboBuildingId(comboBuildingId);
+
+    if (comboBuilding == null) {
+        return null; // Trả về null nếu không tìm thấy ComboBuilding có tên tương ứng
     }
+
+    ComboResponseDto comboResponseDto = new ComboResponseDto();
+    comboResponseDto.setComboBuildingId(comboBuilding.getComboBuildingId());
+    comboResponseDto.setComboBuildingName(comboBuilding.getComboBuildingName());
+    comboResponseDto.setUnitPrice(comboBuilding.getUnitPrice());
+    comboResponseDto.setStatus(comboBuilding.isStatus());
+    comboResponseDto.setType(comboBuilding.getType());
+    comboResponseDto.setMaterialTypeOfComboDto(new ArrayList<>());
+
+    // Lấy danh sách tất cả các ComboDetail của ComboBuilding
+    List<ComboDetail> comboDetails = comboDetailRepository.findAllByComboBuildingName(comboBuilding.getComboBuildingName());
+
+    // Duyệt qua từng ComboDetail và thu thập thông tin về loại vật liệu
+    for (ComboDetail comboDetail : comboDetails) {
+        Material material = comboDetail.getMaterial();
+        MaterialType materialType = material.getMaterialType();
+
+        // Kiểm tra xem loại vật liệu đã được thêm vào danh sách hay chưa
+        boolean materialTypeExists = comboResponseDto.getMaterialTypeOfComboDto().stream()
+                .anyMatch(dto -> dto.getMaterialTypeDto().getMaterialTypeId().equals(materialType.getMaterialTypeId()));
+
+        if (!materialTypeExists) {
+            // Nếu loại vật liệu chưa tồn tại, thêm vào danh sách MaterialTypeOfComboDto
+            MaterialTypeDto materialTypeDto = new MaterialTypeDto(materialType.getMaterialTypeId(), materialType.getTypeName(), materialType.isStatus());
+            MaterialTypeOfComboDto materialTypeOfComboDto = new MaterialTypeOfComboDto(materialTypeDto, new ArrayList<>());
+            comboResponseDto.getMaterialTypeOfComboDto().add(materialTypeOfComboDto);
+        }
+
+        // Thêm vật liệu vào danh sách của loại vật liệu tương ứng
+        MaterialTypeOfComboDto materialTypeOfComboDto = comboResponseDto.getMaterialTypeOfComboDto().stream()
+                .filter(dto -> dto.getMaterialTypeDto().getMaterialTypeId().equals(materialType.getMaterialTypeId()))
+                .findFirst()
+                .orElse(null); // Không thể xảy ra vì chúng ta đã đảm bảo loại vật liệu tồn tại
+
+        if (materialTypeOfComboDto != null) {
+            materialTypeOfComboDto.getMaterialList().add(material);
+        }
+    }
+
+    return comboResponseDto;
+}
+
+
 }
