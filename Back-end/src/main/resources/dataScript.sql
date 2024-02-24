@@ -1,39 +1,25 @@
--- DROP DATABASE chcqs;
--- CREATE DATABASE chcqs;
--- USE chcqs;
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (true,'2002-04-07','04 Le Van Viet','cuong@gmail.com','cuong','1','customer','0938472721',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (false,'2002-08-04','18 Le Van Viet','hong@gmail.com','hong','1','customer','0938472722',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (true,'2000-07-01','06 Le Van Viet','nam@gmail.com','nam','1','customer','0938472723',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (true,'2006-01-20','09 La Xuan Oai','tien@gmail.com','manager','1','manager','0938472724',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (true,'2006-01-20','111 Le Viet Luong','dat@gmail.com','dat','1','customer','0938472725',1);
+INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+VALUES (false,'2001-11-08','14 Xuan Huong','linh@gmail.com','admin','1','admin','0938472726',1);
 
-
--- user
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status) 
-VALUES ('Cuong','Trinh',true,'2002-04-07','04 Le Van Viet','cuong@gmail.com','cuong','1','customer','0938472721',1);
-
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status) 
-VALUES ('Hong','Trinh',false,'2002-08-04','18 Le Van Viet','hong@gmail.com','hong','1','customer','0938472722',1);
-
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status) 
-VALUES ('Nam','Trinh',true,'2000-07-01','06 Le Van Viet','nam@gmail.com','nam','1','customer','0938472723',1);
-
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status) 
-VALUES ('Tien','Trinh',true,'2006-01-20','09 La Xuan Oai','tien@gmail.com','manager','1','manager','0938472724',1);
-
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status) 
-VALUES ('Dat','Trinh',true,'2006-01-20','111 Le Viet Luong','dat@gmail.com','dat','1','customer','0938472725',1);
-
-INSERT INTO user(first_name,last_name,gender,birthday,address,email,user_name,password,role,phone,status) 
-VALUES ('Linh','Trinh',false,'2001-11-08','14 Xuan Huong','linh@gmail.com','admin','1','admin','0938472726',1);
-
--- blog
 INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('blog 1','Blog number 1',4,'2020-10-22',null);
 INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('blog 2','Blog number 2',4,'2020-11-22',null);
 INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('blog 3','Blog number 3',4,'2021-08-29',null);
 
--- item type
 INSERT INTO item_type(item_type_name, status) VALUES ('mai',1);
 INSERT INTO item_type(item_type_name, status) VALUES ('nen',1);
 INSERT INTO item_type(item_type_name, status) VALUES ('lau',1);
 INSERT INTO item_type(item_type_name, status) VALUES ('cua so',1);
 
--- item 
 INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (1,'mai ngoi',40000000,1);
 INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (1,'mai ton',20000000,1);
 INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (3,'lau 1',80000000,1);
@@ -46,14 +32,12 @@ INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (4,'cua so ki
 INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (4,'cua so kieu Han',11000000,1);
 INSERT INTO item(item_type_id,item_name,price_item, status) VALUES (4,'cua so kieu Trung',9000000,1);
 
--- material type
 INSERT INTO material_type(type_name, status) VALUES ('sat',1);
 INSERT INTO material_type(type_name, status) VALUES ('thep',1);
 INSERT INTO material_type(type_name, status) VALUES ('xi mang',1);
 INSERT INTO material_type(type_name, status) VALUES ('cat',1);
 INSERT INTO material_type(type_name, status) VALUES ('gach',1);
 
--- material
 INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('sat 1',1, 12000,1);
 INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('sat 2',1, 11500,1);
 INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('sat 3',1, 13000,1);
@@ -67,7 +51,6 @@ INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES (
 INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('gach 1',5, 1200,1);
 INSERT INTO material(material_name,material_type_id,unit_price, status) VALUES ('gach 2',5, 3000,1);
 
--- combo building
 INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tho 1',3200000, 0,1);
 INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tho 2',3500000, 0,1);
 INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('hoan thien cafe',5000000, 1,1);
@@ -78,7 +61,6 @@ INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('
 INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tron goi nha pho 1',8200000, 2,1);
 INSERT INTO combo_building(combo_building_name,unit_price,type,status) VALUES ('tron goi biet thu 1',10000000, 2,1);
 
--- combo detail
 INSERT INTO combo_detail(combo_building_id,material_id) VALUES (1,7);
 INSERT INTO combo_detail(combo_building_id,material_id) VALUES (1,10);
 INSERT INTO combo_detail(combo_building_id,material_id) VALUES (1,11);
@@ -112,7 +94,6 @@ INSERT INTO combo_detail(combo_building_id,material_id) VALUES (9,9);
 INSERT INTO combo_detail(combo_building_id,material_id) VALUES (9,10);
 INSERT INTO combo_detail(combo_building_id,material_id) VALUES (9,11);
 
--- building
 INSERT INTO building(length,width,status) VALUES (10,50,-1);
 INSERT INTO building(length,width,status) VALUES (5,70,2);
 INSERT INTO building(length,width,status) VALUES (12,50,0);
@@ -125,7 +106,6 @@ INSERT INTO building(length,width,status) VALUES (12,40,1);
 INSERT INTO building(length,width,status) VALUES (17,60,2);
 INSERT INTO building(length,width,status) VALUES (13,58,1);
 
--- building_detail
 INSERT INTO building_detail(building_id,item_id) VALUES (1,1);
 INSERT INTO building_detail(building_id,item_id) VALUES (1,3);
 INSERT INTO building_detail(building_id,item_id) VALUES (1,7);
@@ -171,8 +151,6 @@ INSERT INTO building_detail(building_id,item_id) VALUES (11,4);
 INSERT INTO building_detail(building_id,item_id) VALUES (11,8);
 INSERT INTO building_detail(building_id,item_id) VALUES (11,9);
 
-
--- request contract
 INSERT INTO request_contract(building_id,request_date,status,combo_building_id,user_id) VALUES (1,'2023-10-22',1,1,1);
 INSERT INTO request_contract(building_id,request_date,status,combo_building_id,user_id) VALUES (2,'2024-01-25',0,2,1);
 INSERT INTO request_contract(building_id,request_date,status,combo_building_id,user_id) VALUES (3,'2023-10-10',1,3,1);

@@ -3,12 +3,16 @@ package com.example.system.controller;
 import com.example.system.auth.AuthenticationRequest;
 import com.example.system.auth.AuthenticationResponse;
 import com.example.system.auth.RegisterRequest;
+import com.example.system.model.user.User;
+import com.example.system.repository.user.UserRepository;
 import com.example.system.security.AuthenticationService;
-import com.example.system.security.LogoutService;
+import com.example.system.security.JwtService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.LockedException;
@@ -16,13 +20,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
-    private final LogoutService logoutService;
+    private final JwtService jwtService;
+    private final UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(
@@ -68,8 +75,76 @@ public class AuthenticationController {
                 .header(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString())
                 .build();
     }
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(){
-        return ResponseEntity.ok().body("Logout successfully");
+
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<?> refreshToken(HttpServletRequest request, HttpServletResponse response) {
+        // Lấy access token và refresh token từ cookie
+        Cookie[] cookies = request.getCookies();
+        String accessToken = null;
+        String refreshToken = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    accessToken = cookie.getValue();
+                } else if (cookie.getName().equals("refresh_token")) {
+                    refreshToken = cookie.getValue();
+                }
+            }
+        }
+
+        // Kiểm tra nếu không tìm thấy refresh token trong cookie
+        if (refreshToken == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh token not found in cookie");
+        }
+
+        // Xác định user từ refresh token và kiểm tra tính hợp lệ của token
+        String userEmail = jwtService.extractUsername(refreshToken);
+        if (userEmail == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid refresh token");
+        }
+
+        // Lấy thông tin user từ cơ sở dữ liệu
+        User user = userRepository.findByEmail(userEmail).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+        }
+
+        // Kiểm tra tính hợp lệ của refresh token
+        if (!jwtService.isTokenValid(refreshToken, user)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid refresh token");
+        }
+
+        // Tạo access token mới
+        String newAccessToken = jwtService.generateToken(user);
+
+        // Lưu trạng thái mới của user
+        authenticationService.revokeAllUserTokens(user);
+        authenticationService.saveUserToken(user, newAccessToken);
+
+        // Cập nhật cookie với access token mới
+        Cookie newAccessTokenCookie = new Cookie("access_token", newAccessToken);
+        newAccessTokenCookie.setHttpOnly(true);
+        newAccessTokenCookie.setMaxAge(604800); // 1 week
+        newAccessTokenCookie.setPath("/");
+        response.addCookie(newAccessTokenCookie);
+
+        // Trả về phản hồi thành công
+        return ResponseEntity.ok().build();
     }
+    @GetMapping("confirm")
+    public String confirm(@RequestParam("token") String token){
+        return authenticationService.confirmToken(token);
+    }
+
+
+
+
+/*    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    Authentication authentication){
+        logoutService.logout(request, response, authentication);
+        return ResponseEntity.ok().body("Logout successfully");
+    }*/
 }
