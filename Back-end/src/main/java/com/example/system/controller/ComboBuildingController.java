@@ -93,8 +93,8 @@ public class ComboBuildingController {
     }
 
     @GetMapping("/combo/getbyid")
-    public ResponseEntity<?> getComboById(@RequestParam String comboBuildingName ){
-        ComboResponseDto comboResponseDto = comboDetailService.getComboDetailById(comboBuildingName);
+    public ResponseEntity<?> getComboById(@RequestParam Long comboBuildingId ){
+        ComboResponseDto comboResponseDto = comboDetailService.getComboDetailById(comboBuildingId);
         return ResponseEntity.ok(comboResponseDto);
     }
 
@@ -105,8 +105,8 @@ public class ComboBuildingController {
         return ResponseEntity.ok(newComboDetail);
     }
     @PutMapping("/combo/update")
-    public ResponseEntity<?> updateCombo(@RequestParam String comboBuildingName, @RequestBody ComboRequestDto comboRequestDto){
-        boolean updateCombo = comboDetailService.updateComboDetail(comboBuildingName, comboRequestDto);
+    public ResponseEntity<?> updateCombo(@RequestParam Long comboBuildingId, @RequestBody ComboRequestDto comboRequestDto){
+        boolean updateCombo = comboDetailService.updateComboDetail(comboBuildingId, comboRequestDto);
         return ResponseEntity.ok(updateCombo);
     }
 }

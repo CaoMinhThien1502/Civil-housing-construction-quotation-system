@@ -7,7 +7,7 @@ import com.example.system.model.combo.ComboBuilding;
 public interface ComboDetailService{
     boolean createComboDetail(ComboBuilding newComboBuilding, ComboRequestDto comboRequestDto);
 
-    boolean updateComboDetail(String comboBuildingName, ComboRequestDto comboRequestDto);
+    boolean updateComboDetail(Long comboBuildingId, ComboRequestDto comboRequestDto);
 
-    ComboResponseDto getComboDetailById(String comboBuildingName);
+    ComboResponseDto getComboDetailById(Long comboBuildingId);
 }
