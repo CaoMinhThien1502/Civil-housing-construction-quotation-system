@@ -1323,9 +1323,9 @@
 
         // Tạo dữ liệu để gửi đến API
         const data = {
+            materialTypeId: materialTypeId,
             materialName: materialName,
             unitPrice: unitPrice,
-            materialTypeId: materialTypeId,
             status: status
         };
 
@@ -1339,8 +1339,8 @@
             type: 'POST',
             dataType: 'json',
             caches: 'false',
-            crossDomain: true,
-            contentType:'application/json',
+            // crossDomain: true,
+            // contentType:'application/json',
             headers: {
                 // 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
