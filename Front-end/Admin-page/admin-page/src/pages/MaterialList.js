@@ -50,7 +50,7 @@ export const MaterialList = () => {
                                         {material.status ? 'Active' : 'Disabled'}
                                     </button>
                                 </td>
-                                <td>{material.price}</td>
+                                <td>{material.unitPrice.toLocaleString('vi-VN')}</td>
                                 <td>
                                     <button className="edit-setting">Edit</button>
                                     <button className="delete-setting">Delete</button>
