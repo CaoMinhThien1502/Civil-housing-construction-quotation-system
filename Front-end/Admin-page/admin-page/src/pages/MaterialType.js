@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const MaterialType = () => {
     const [materialTypes, setMaterialTypes] = useState([]);
@@ -26,13 +27,17 @@ export const MaterialType = () => {
     
     return (
         <>
-            <h2>Material Type</h2>
+            <h2>Material Type List</h2>
+            <div>
+                <Link to="/add-material-type">Add Material Type</Link>
+            </div>
             <div className="asset-inner">
                 <table>
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Name of Material Type</th>
+                            <th>Status</th>
                             <th>Setting</th>
                         </tr>
                     </thead>
@@ -41,6 +46,13 @@ export const MaterialType = () => {
                             <tr key={materialType.materialTypeId}>
                                 <td>{materialType.materialTypeId}</td>
                                 <td>{materialType.typeName}</td>
+                                <td>
+                                    <button
+                                        className={`${materialType.status ? 'pd' : 'ds'}-setting`}
+                                    >
+                                        {materialType.status ? 'Active' : 'Disabled'}
+                                    </button>
+                                </td>
                                 <td>
                                     <button className="edit-setting">Edit</button>
                                     <button className="delete-setting">Delete</button>

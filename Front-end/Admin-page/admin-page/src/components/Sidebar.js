@@ -5,8 +5,11 @@ import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Collapse from 'react-bootstrap/Collapse';
+import { useNavigate } from 'react-router-dom';
 
 function Example() {
+    const navigate = useNavigate();
+
     const [show, setShow] = useState(false);
     const [showTab2, setShowTab2] = useState(false);
     const [showTab3, setShowTab3] = useState(false);
@@ -58,13 +61,13 @@ function Example() {
                             <Collapse in={showTab2}>
                                 <div>
                                     <NavItem>
-                                        <NavLink href="/combolist">Combo Building List</NavLink>
+                                        <NavLink onClick={() => navigate('/bombo-list')}>Combo Building List</NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink href="/materiallist">Material List</NavLink>
+                                        <NavLink onClick={() => navigate('/material-list')}>Material List</NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink href="/materialtype">Material Type</NavLink>
+                                        <NavLink onClick={() => navigate('/material-type-list')}>Material Type</NavLink>
                                     </NavItem>
                                 </div>
                             </Collapse>

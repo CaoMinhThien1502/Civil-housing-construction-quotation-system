@@ -34,7 +34,7 @@ export const AddMaterial = () => {
             }
 
             // Handle successful (e.g., navigate to a different page, store user data)
-            navigate('/materiallist');
+            navigate('/material-list');
         } catch (error) {
             console.error('Error during submit:', error);
             // Handle submit errors (e.g., display an error message to the user)
@@ -113,7 +113,8 @@ export const AddMaterial = () => {
                 <div className="form-group">
                     <span id="status-label">Status: Active</span>
                 </div>
-              
+                
+                <button id="cancel" type="button" className="btn btn-primary waves-effect waves-light" onClick={() => navigate('/material-list')}>Cancel</button>
                 <button id="submit" type="submit" className="btn btn-primary waves-effect waves-light">Submit</button>
             </div>
         </form>

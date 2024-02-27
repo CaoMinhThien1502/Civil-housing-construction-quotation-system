@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const MaterialList = () => {
     const [materials, setMaterials] = useState([]);
@@ -27,6 +28,9 @@ export const MaterialList = () => {
     return (
         <>
             <h2>Material List</h2>
+            <div>
+                <Link to="/add-material">Add Material</Link>
+            </div>
             <div className="asset-inner">
                 <table>
                     <thead>
