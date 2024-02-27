@@ -11,6 +11,7 @@ import { MaterialList } from './pages/MaterialList';
 import { MaterialType } from './pages/MaterialType';
 import { AddMaterial } from './pages/AddMaterial';
 import { AddMaterialType } from './pages/AddMaterialType';
+import Footer from './components/Footer';
 
 export const Session = createContext(null);
 
@@ -25,12 +26,13 @@ function App() {
           <Route path='/home' element={<Home/>}></Route>
           <Route path='/modal' element={<Modal/>}></Route>
           <Route path='/combo-list' element={<ComboList/>}></Route>
+          <Route path='/combo-list/:id' element={<ComboList/>}></Route>
           <Route path='/material-list' element={<MaterialList/>}></Route>
           <Route path='/material-type-list' element={<MaterialType/>}></Route>
           <Route path='/add-material' element={<AddMaterial/>}></Route>
           <Route path='/add-material-type' element={<AddMaterialType/>}></Route>
-          {/* <Route path='/detail/:id' element={<Detail/>}></Route> */}
         </Routes>
+        <Footer />
         {/* {JSON.stringify(user)} */}
       </div>
     </Session.Provider>

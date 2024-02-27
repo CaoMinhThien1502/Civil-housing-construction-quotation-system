@@ -22,6 +22,7 @@ function Example() {
             case 'tab1':
                 setShowTab2(false);
                 setShowTab3(false);
+                navigate('/');
                 break;
             case 'tab2':
                 setShowTab2(true);
@@ -49,7 +50,7 @@ function Example() {
                 <Offcanvas.Body>
                     <Nav variant="pills" className="flex-column">
                         <NavItem>
-                            <NavLink href="/" onClick={() => handleTabClick('tab1')}>Dashboard</NavLink>
+                            <NavLink onClick={() => handleTabClick('tab1')}>Dashboard</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink
@@ -61,7 +62,7 @@ function Example() {
                             <Collapse in={showTab2}>
                                 <div>
                                     <NavItem>
-                                        <NavLink onClick={() => navigate('/bombo-list')}>Combo Building List</NavLink>
+                                        <NavLink onClick={() => navigate('/combo-list')}>Combo Building List</NavLink>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink onClick={() => navigate('/material-list')}>Material List</NavLink>
@@ -82,7 +83,7 @@ function Example() {
                             <Collapse in={showTab3}>
                                 <div>
                                     <NavItem>
-                                        <NavLink href="/">Building Management Content</NavLink>
+                                        <NavLink onClick={() => navigate('/')}>Building Management Content</NavLink>
                                     </NavItem>
                                 </div>
                             </Collapse>
