@@ -3,26 +3,24 @@ import { useNavigate } from 'react-router-dom';
 
 export const AddMaterial = () => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
     const [materialTypeId, setMaterialTypeId] = useState("");
     const [materialName, setMaterialName] = useState("");
     const [unitPrice, setUnitPrice] = useState("");
-    const [status, setStatus] = useState("");
+    const [materialTypes, setMaterialTypes] = useState([]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         
         const data = {
             materialID: 0,
             materialName: materialName,
             unitPrice: unitPrice,
-            status: status
+            status: 1
         };
 
         try {
-            const response = await fetch(`http://localhost:8080/combobuilding/material/create?materialTypeId=${1}`, {
+            const response = await fetch(`http://localhost:8080/combobuilding/material/create?materialTypeId=${materialTypeId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
@@ -43,26 +41,55 @@ export const AddMaterial = () => {
         }
     };
 
+    useEffect(() => {
+        const fetchMaterialTypes = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/combobuilding/material-type/get', {
+                    method: 'GET',
+                    headers: {
+                        // 'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                setMaterialTypes(data);
+            } catch (error) {
+                console.error('Error fetching material types:', error);
+            }
+        };
+
+        fetchMaterialTypes();
+    }, []); // Empty dependency array to fetch data only once on component mount
+
+    const handleMaterialTypeChange = (event) => {
+        setMaterialTypeId(event.target.value);
+        console.log('Material Type ID:', event.target.value);
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <h1>Add material</h1>
             <div className="flex flex-col gap-2 w-[400px]">
-                <input
-                    type="email"
-                    placeholder="Enter Your Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Login in</button>
-            </div>
+                <div className="form-group">
+                    <span id="status-label">Material Type:</span>
+                    <select 
+                    id="status-dropdown" 
+                    className="form-control"
+                    onChange={handleMaterialTypeChange}>
+                        {materialTypes.map((materialType) => (
+                            <option key={materialType.materialTypeId} value={materialType.materialTypeId}>
+                                {materialType.typeName}
+                            </option>
+                        ))}
+                    </select>
+                    <input 
+                    type="hidden" 
+                    id="status-field-dropdown" 
+                    value=""
+                    onChange={(e) => setMaterialTypeId(e.target.value)}/>
+                </div>
 
-            <div className="flex flex-col gap-2 w-[400px]">
                 <div className="form-group">
                     <input 
                     type="text" 
@@ -84,48 +111,9 @@ export const AddMaterial = () => {
                 </div>
 
                 <div className="form-group">
-                    <input 
-                    type="number" 
-                    className="form-control" 
-                    placeholder="Material type id"
-                    value={materialTypeId}
-                    onChange={(e) => setMaterialTypeId(e.target.value)}
-                    />
+                    <span id="status-label">Status: Active</span>
                 </div>
-
-                <div className="form-group">
-                    <input 
-                    type="text" 
-                    className="form-control" 
-                    placeholder="Status"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    />
-                </div>
-
-                {/* <div className="form-group">
-                    <span id="status-label">Material Type:</span>
-                    <select id="status-dropdown" className="form-control">
-
-                    </select>
-                    <input 
-                    type="hidden" 
-                    id="status-field-dropdown" 
-                    value=""
-                    onChange={(e) => setMaterialTypeId(e.target.value)}/>
-                </div>
-
-                <div className="form-group">
-                    <span id="status-label">Status:</span>
-                    <button id="btn-active" className="btn">Active</button>
-                    <button id="btn-inactive" className="btn">Inactive</button>
-                    <input 
-                    type="hidden" 
-                    id="status-field-button" 
-                    value=""
-                    onChange={(e) => setStatus(e.target.value)}/>
-                </div> */}
-
+              
                 <button id="submit" type="submit" className="btn btn-primary waves-effect waves-light">Submit</button>
             </div>
         </form>
