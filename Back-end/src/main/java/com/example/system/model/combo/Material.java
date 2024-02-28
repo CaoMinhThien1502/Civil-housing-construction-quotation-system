@@ -23,6 +23,11 @@ public class Material {
     private String materialName;
     @Column(nullable = false)
     private Long unitPrice;
+    @Column(nullable = true)
+    private String imgPath;
+    @Column(nullable = false)
+    private String unit;
+
     @ManyToOne
     @JoinColumn(name = "material_type_id")
     @JsonIgnore

@@ -92,6 +92,12 @@ public class ComboBuildingController {
         return ResponseEntity.ok(comboResponseDtoList);
     }
 
+    @GetMapping("/combo/getbytype")
+    public ResponseEntity<?> getComboByType(@RequestParam Long typeId ){
+        List<ComboResponseDto> comboResponseDtoList = comboBuildingService.getComboBuildingByType(typeId);
+        return ResponseEntity.ok(comboResponseDtoList);
+    }
+
     @GetMapping("/combo/getbyid")
     public ResponseEntity<?> getComboById(@RequestParam Long comboBuildingId ){
         ComboResponseDto comboResponseDto = comboDetailService.getComboDetailById(comboBuildingId);
