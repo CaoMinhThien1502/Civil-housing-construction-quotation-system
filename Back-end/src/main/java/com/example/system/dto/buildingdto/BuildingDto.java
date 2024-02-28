@@ -14,9 +14,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BuildingDto {
-    //private Long buildingId;
-    private Double width;
-    private Double length;
-    private List<Long> itemIdList;
-    private int status;
+        //private Long buildingId;
+        private Double width;
+        private Double length;
+        private List<Long> itemIdList;
+        //private ComboResponseDto combo;
+        private int comboType;
+        private int status;
 }

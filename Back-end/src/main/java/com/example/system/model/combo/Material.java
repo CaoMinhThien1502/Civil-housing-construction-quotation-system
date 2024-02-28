@@ -25,7 +25,7 @@ public class Material {
     private Long unitPrice;
     @Column(nullable = true)
     private String imgPath;
-    @Column(nullable = false)
+    @Column(nullable = true)////////
     private String unit;
 
     @ManyToOne
