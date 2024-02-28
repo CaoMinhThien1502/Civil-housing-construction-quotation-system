@@ -5,7 +5,9 @@ import com.example.system.dto.buildingdto.ItemTypeDto;
 import com.example.system.dto.userdto.UserDto;
 import com.example.system.model.user.User;
 import com.example.system.repository.user.UserRepository;
+import com.example.system.security.JwtService;
 import com.example.system.service.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,4 +43,10 @@ public class UserController {
         UserDto profile = userService.updateProfile(dto);
         return ResponseEntity.ok(profile);
     }
+
+    @GetMapping("/userlogin")
+    public ResponseEntity<UserDto> getUserLogin(HttpServletRequest request) {
+        return ResponseEntity.ok(userService.getUserLoginFromJWT(request));
+    }
+
 }
