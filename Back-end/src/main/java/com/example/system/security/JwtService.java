@@ -1,6 +1,7 @@
 package com.example.system.security;
 
 import com.example.system.model.token.Token;
+import com.example.system.model.user.Role;
 import com.example.system.repository.token.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
