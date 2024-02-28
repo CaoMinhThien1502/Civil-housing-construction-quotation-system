@@ -1,41 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
-import Navigation from './components/Navigation';
-import Sidebar from './components/Sidebar';
-import Modal from './components/SignInModal';
-import { Routes, Route } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { createContext, useState } from 'react';
-import { ComboList } from './pages/ComboList';
-import { MaterialList } from './pages/MaterialList';
-import { MaterialType } from './pages/MaterialType';
-import { AddMaterial } from './pages/AddMaterial';
-import { AddMaterialType } from './pages/AddMaterialType';
-import Footer from './components/Footer';
-
-export const Session = createContext(null);
+import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { ColorModeContext, useMode } from './theme';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import Topbar from './pages/global/Topbar';
+import Sidebar from './pages/global/Sidebar';
+import Dashboard from './pages/dashboard';
+import Team from "./pages/team";
+import ComboBuilding from "./pages/combobuilding";
+// import Invoices from "./pages/invoices";
+// import Contacts from "./pages/contacts";
+// import Bar from "./pages/bar";
+// import Form from "./pages/form";
+// import Line from "./pages/line";
+// import Pie from "./pages/pie";
+// import FAQ from "./pages/faq";
+// import Geography from "./pages/geography";
+// import Calendar from "./pages/calendar/calendar";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [theme, colorMode] = useMode();
   return (
-    <Session.Provider value = {{user, setUser}}>
-      <div className="App">
-        <Navigation />
-        <Sidebar />
-        <Routes>
-          <Route path='/home' element={<Home/>}></Route>
-          <Route path='/modal' element={<Modal/>}></Route>
-          <Route path='/combo-list' element={<ComboList/>}></Route>
-          <Route path='/combo-list/:id' element={<ComboList/>}></Route>
-          <Route path='/material-list' element={<MaterialList/>}></Route>
-          <Route path='/material-type-list' element={<MaterialType/>}></Route>
-          <Route path='/add-material' element={<AddMaterial/>}></Route>
-          <Route path='/add-material-type' element={<AddMaterialType/>}></Route>
-        </Routes>
-        <Footer />
-        {/* {JSON.stringify(user)} */}
-      </div>
-    </Session.Provider>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app">
+          <Sidebar />
+          <main className='content'>
+            <Topbar />
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/combobuilding" element={<ComboBuilding />} />
+              <Route path='/combobuilding/:id' element={<ComboBuilding />} />
+              {/* <Route path="/contacts" element={<Contacts />} />
+              <Route path="/invoices" element={<Invoices />} />
+              <Route path="/form" element={<Form />} />
+              <Route path="/bar" element={<Bar />} />
+              <Route path="/pie" element={<Pie />} />
+              <Route path="/line" element={<Line />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/geography" element={<Geography />} /> */}
+            </Routes>
+          </main>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
