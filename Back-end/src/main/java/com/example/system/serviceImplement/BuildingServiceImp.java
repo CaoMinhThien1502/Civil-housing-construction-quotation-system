@@ -90,13 +90,6 @@ public class BuildingServiceImp implements BuildingService {
             newBuilding.setWidth(buildingDto.getWidth());
             newBuilding.setStatus(-1);
             Building added = buildingRepository.save(newBuilding);
-            for (Long id: buildingDto.getItemIdList()){
-                Item item = itemRepository.findById(id)
-                        .orElseThrow(
-                                () -> new IllegalStateException("Item with id " + id + " does not exists"));
-                buildingDetailService.createBuildingDetail(newBuilding,item);
-            }
-            return newBuilding;
             if(combo.getType() != 0){
                 for (Long id: buildingDto.getItemIdList()){
                     Item item = itemRepository.findById(id)
