@@ -5,16 +5,17 @@ import com.example.system.dto.buildingdto.BuildingDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.building.Item;
+import com.example.system.model.combo.ComboBuilding;
 import com.example.system.repository.building.BuildingDetailRepository;
 import com.example.system.repository.building.BuildingRepository;
 import com.example.system.repository.building.ItemRepository;
+import com.example.system.repository.combo.ComboBuildingRepository;
 import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.service.building.BuildingDetailService;
 import com.example.system.service.building.BuildingService;
 import com.example.system.service.building.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class BuildingServiceImp implements BuildingService {
+
+    @Autowired
+    ComboBuildingRepository comboRepository;
 
     @Autowired
     BuildingRepository buildingRepository;
@@ -77,20 +81,23 @@ public class BuildingServiceImp implements BuildingService {
     }
 
     @Override
-    public Building createBuilding(BuildingDto buildingDto) {
+    public Building createBuilding(BuildingDto buildingDto, Long comboId) {
         try{
+            ComboBuilding combo = comboRepository.findByComboBuildingId(comboId);
             Building newBuilding = new Building();
             newBuilding.setLength(buildingDto.getLength());
             newBuilding.setWidth(buildingDto.getWidth());
             newBuilding.setStatus(-1);
             Building added = buildingRepository.save(newBuilding);
-            for (Long id: buildingDto.getItemIdList()){
-                Item item = itemRepository.findById(id)
-                        .orElseThrow(
-                                () -> new IllegalStateException("Item with id " + id + " does not exists"));
-                buildingDetailService.createBuildingDetail(newBuilding,item);
+            if(combo.getType() != 0){
+                for (Long id: buildingDto.getItemIdList()){
+                    Item item = itemRepository.findById(id)
+                            .orElseThrow(
+                                    () -> new IllegalStateException("Item with id " + id + " does not exists"));
+                    buildingDetailService.createBuildingDetail(added,item);
+                }
             }
-            return newBuilding;
+            return added;
         }catch (Exception e){
             return null;
         }
