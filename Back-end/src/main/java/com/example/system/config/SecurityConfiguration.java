@@ -27,13 +27,7 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
 
-
-    public static final String LOGIN_URL = "/login";
     public static final String LOGOUT_URL = "/api/v1/auth/logout";
-
-
-
-
 
     public static final String[] ENDPOINTS_WHITELIST = {
             "/logout",
