@@ -1,14 +1,16 @@
 package com.example.system.serviceImplement;
 
-import com.example.system.dto.buildingdto.BuildingDetailDto;
-import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.buildingdto.*;
+import com.example.system.dto.combodto.ComboFormConsultantDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.building.Item;
+import com.example.system.model.building.ItemType;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.repository.building.BuildingDetailRepository;
 import com.example.system.repository.building.BuildingRepository;
 import com.example.system.repository.building.ItemRepository;
+import com.example.system.repository.building.ItemTypeRepository;
 import com.example.system.repository.combo.ComboBuildingRepository;
 import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.service.building.BuildingDetailService;
@@ -29,22 +31,18 @@ public class BuildingServiceImp implements BuildingService {
 
     @Autowired
     ComboBuildingRepository comboRepository;
-
     @Autowired
     BuildingRepository buildingRepository;
-
     @Autowired
     RequestContractRepository requestContractRepository;
-
     @Autowired
     ItemService itemService;
-
     @Autowired
     ItemRepository itemRepository;
-
+    @Autowired
+    ItemTypeRepository itemTypeRepository;
     @Autowired
     BuildingDetailService buildingDetailService;
-
     @Autowired
     BuildingDetailRepository buildingDetailRepository;
     @Override
@@ -146,5 +144,31 @@ public class BuildingServiceImp implements BuildingService {
             buildingDetailDtos.add(buildingDetailDto);
         }
         return buildingDetailDtos;
+    }
+
+    @Override
+    public FormConsultanDto getDataFormConsultant(int comboType) {
+
+        List<ComboBuilding> comboList = comboRepository.findAll();
+        List<Item> itemList = itemRepository.findAll();
+        List<ItemType> typeList = itemTypeRepository.findAll();
+        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<ItemTypeFCDto> typeDtoList = new ArrayList<>();
+        List<ComboFormConsultantDto> cfcList = new ArrayList<>();
+
+        for (Item i : itemList)  {
+            if(i.isStatus()) {
+                itemDtoList.add(new ItemDto(i.getItemId(), i.getItemName()));
+            }
+        }
+        for (ItemType it : typeList)  typeDtoList.add(new ItemTypeFCDto(it.getItemTypeName(), itemDtoList));
+        for (ComboBuilding combo : comboList){
+            if(combo.getType() == comboType){
+                cfcList.add(new ComboFormConsultantDto(combo.getComboBuildingId(), combo.getComboBuildingName()));
+            }
+        }
+        FormConsultanDto dataForm = new FormConsultanDto(cfcList,typeDtoList);
+
+        return dataForm;
     }
 }
