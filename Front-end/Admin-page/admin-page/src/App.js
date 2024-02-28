@@ -7,8 +7,9 @@ import Sidebar from './pages/global/Sidebar';
 import Dashboard from './pages/dashboard';
 import Team from "./pages/team";
 import ComboBuilding from "./pages/combobuilding";
-// import Invoices from "./pages/invoices";
-// import Contacts from "./pages/contacts";
+import Contacts from "./pages/contacts";
+import Invoices from "./pages/invoices";
+import MaterialList from "./pages/materiallist";
 // import Bar from "./pages/bar";
 // import Form from "./pages/form";
 // import Line from "./pages/line";
@@ -32,9 +33,10 @@ function App() {
               <Route path="/team" element={<Team />} />
               <Route path="/combobuilding" element={<ComboBuilding />} />
               <Route path='/combobuilding/:id' element={<ComboBuilding />} />
-              {/* <Route path="/contacts" element={<Contacts />} />
+              <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
-              <Route path="/form" element={<Form />} />
+              <Route path="/materiallist" element={<MaterialList />} />
+              {/* <Route path="/form" element={<Form />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />
