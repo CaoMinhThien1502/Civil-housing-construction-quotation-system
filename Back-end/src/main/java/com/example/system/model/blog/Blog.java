@@ -23,7 +23,7 @@ public class Blog {
     private Long blogId;
     @Column(nullable = false, columnDefinition = "varchar(200)")
     private String blogName;
-    @Column(nullable = false, columnDefinition = "varchar(2000)")
+    @Column(nullable = false, columnDefinition = "varchar(10000)")
     private String blogContent;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
