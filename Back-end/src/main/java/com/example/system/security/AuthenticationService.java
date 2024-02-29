@@ -40,31 +40,6 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final EmailValidator emailValidator;
     private final EmailSender emailSender;
-/*    public AuthenticationResponse register(RegisterRequest request) {
-        Optional<User> userexist = userRepository.findByEmail(request.getEmail());
-        if (userexist.isPresent()) {
-            return null;
-        }
-        var user = User.builder()
-                .userName(request.getFullname())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .status(true)
-                .role(Role.CUSTOMER)
-                .phone(request.getPhone())
-                .address(request.getAddress())
-                .gender(request.isGender())
-                .birthday(request.getBirthday())
-                .build();
-        var saveUser = userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(saveUser, jwtToken);
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .build();
-    }*/
 
     public AuthenticationResponse register(RegisterRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
@@ -76,7 +51,7 @@ public class AuthenticationService {
             return null;
         }
         var user = User.builder()
-                .userName(request.getFullname())
+                .name(request.getFullname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .status(false)
@@ -147,21 +122,33 @@ public class AuthenticationService {
     }
 
 
-    public String confirmToken(String token) {
+    public boolean confirmToken(String token) {
         String userEmail = jwtService.extractUsername(token);
         User user = userRepository.findByEmail(userEmail).orElse(null);
         if (user == null) {
-            return null;
+            return false;
         }
         if (!jwtService.isTokenValid(token, user)) {
-            return null;
+            return false;
         }
         user.setStatus(true);
         userRepository.save(user);
-        return "confirm";
+        return true;
+    }
+    private String buildEmail(String name, String link) {
+        return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
+                "\n" +
+                "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
+                "\n" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Hi " + name + ",</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Thank you for registering. Please click on the below link to activate your account:</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\"><a href=\"" + link + "\">Activate Now</a></p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Link will expire in 5 minutes.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">See you soon!</p>" +
+                "</div>";
     }
 
-    private String buildEmail(String name, String link) {
+    /*private String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
@@ -228,5 +215,5 @@ public class AuthenticationService {
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
                 "</div></div>";
-    }
+    }*/
 }

@@ -49,8 +49,8 @@ public class AuthenticationController {
         AuthenticationResponse a;
         try {
             a = authenticationService.authenticate(request);
-        } catch (AuthenticationException e){
-            if (e instanceof LockedException){
+        } catch (AuthenticationException e) {
+            if (e instanceof LockedException) {
                 return ResponseEntity.status(400)
                         .body("Your account was disabled!");
             } else {
@@ -132,11 +132,24 @@ public class AuthenticationController {
         // Trả về phản hồi thành công
         return ResponseEntity.ok().build();
     }
-    @GetMapping("confirm")
-    public String confirm(@RequestParam("token") String token){
-        return authenticationService.confirmToken(token);
-    }
 
+        @GetMapping("confirm")
+        public ResponseEntity<?> confirm(@RequestParam("token") String token){
+            boolean confirm = authenticationService.confirmToken(token);
+            if(confirm){
+                return ResponseEntity.status(200).body("Active account successfully");
+            }
+            return ResponseEntity.status(400).body("Link expired");
+        }
+/*    @GetMapping("confirm")
+    public ResponseEntity<?> confirm(@RequestParam("token") String token) {
+        boolean confirm = authenticationService.confirmToken(token);
+        if (confirm) {
+            // Trả về mã trạng thái 302 và URL của trang chủ
+            return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/home").build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Link expired");
+    }*/
 
 
 

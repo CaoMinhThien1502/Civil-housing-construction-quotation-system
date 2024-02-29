@@ -6,10 +6,13 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 const Combobuilding = () => {
     const [getComboBuilding, setComboBuildings] = useState([]);
+    const [selectedRowIds, setSelectedRowIds] = useState([]);
+    const [getComboId, setCobodId] = useState([]);
     useEffect(() => {
         const fetchComboBuildings = async () => {
             try {
@@ -34,8 +37,9 @@ const Combobuilding = () => {
     console.log(getComboBuilding);
 
     const navigate = useNavigate();
-    const handleRowClick = (row) => {
-        navigate(`/combobuilding/${row.id}`); // Navigate to the desired URL
+    const handleRowClick = (id) => {
+     //   navigate(`id`); // Navigate to the desired URL
+        console.log("test", id)
     };
 
     const theme = useTheme();
@@ -70,7 +74,7 @@ const Combobuilding = () => {
             flex: 1,
             renderCell: (params) => {
                 const { row: { type } } = params; // Extract the type value
-                return type === 0 ? "Thô" : type === 1 ? "Hoàn thiện" : "Trọn gói";
+                return type === 0 ? "Xây nhà phần thô" : type === 1 ? "Xây nhà hoàn thiện" : "Xây dựng trọn gói";
             },
         },
         {
@@ -85,14 +89,14 @@ const Combobuilding = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onRowClick={(event, row) => handleRowClick(row)}
-                >
-                    Detail
-                </Button>
-            ),
+<Link
+        to={`/combobuilding/${row.comboBuildingId}`} 
+        style={{ textDecoration: 'none' }}
+      >
+       
+    detail
+      </Link>
+              ),
         },
     ];
 
@@ -132,11 +136,16 @@ const Combobuilding = () => {
                 }}
             >
                 <DataGrid
-                    rows={getComboBuilding}
-                    columns={columns}
-                    getRowId={(row) => row.comboBuildingId}
-                    components={{ Toolbar: GridToolbar }}
-                />
+  rows={getComboBuilding}
+  columns={columns}
+  getRowId={(row) => row.comboBuildingId}
+  components={{ Toolbar: GridToolbar }}
+  onSelectionModelChange={(selectionModel) => {
+    setSelectedRowIds(selectionModel);
+  }}
+  disableRowSelectionOnClick={false}
+/>
+
             </Box>
         </Box>
     );

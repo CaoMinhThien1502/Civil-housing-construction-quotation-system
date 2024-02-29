@@ -2,6 +2,7 @@ package com.example.system.controller;
 
 
 import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.buildingdto.FormConsultanDto;
 import com.example.system.dto.buildingdto.ItemTypeDto;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
@@ -101,6 +102,14 @@ public class BuildingController{
         BuildingDto updated = buildingService.updateBuilding(buildingId,buildingDto);
         return ResponseEntity.ok(updated);
     }
+
+    //Form input controller
+    @GetMapping("/form-consultant/list")
+    public ResponseEntity<FormConsultanDto> getFormConsultant(@RequestParam int typeCombo){
+        FormConsultanDto dataForm = buildingService.getDataFormConsultant(typeCombo);
+        return ResponseEntity.ok(dataForm);
+    }
+
 
     //Building Detail Controller
 //    @GetMapping("/building-detail/list")

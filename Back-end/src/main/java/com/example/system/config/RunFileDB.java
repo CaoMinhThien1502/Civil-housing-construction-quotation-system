@@ -33,14 +33,14 @@ public class RunFileDB implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
        /* executeSQLScript("dataScript.sql");*/
-        executeSQLScript("data.sql");
+        executeSQLScript("DataDemo1.sql");
 
         // Check if user exists by email
         Optional<User> userExist = userRepository.findByEmail("admin@gmail.com");
         // If user does not exist, create a new user
         if (!userExist.isPresent()) {
             User user = User.builder()
-                    .userName("Admin")
+                    .name("Admin")
                     .email("admin@gmail.com")
                     .password(passwordEncoder.encode("12345"))
                     .role(Role.ADMIN)
