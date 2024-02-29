@@ -32,8 +32,8 @@ const Login = () => {
       if (response.status === 200) {
         if (!response.data) {
           console.log("Đăng nhập thành công (không có dữ liệu)!");
-          navigate("/home");
-          // navigate("/dashboard");
+          //navigate("/home");
+          navigate("/dashboard");
         } else {
           console.log("Đăng nhập thành công!");
           navigate("/dashboard");
