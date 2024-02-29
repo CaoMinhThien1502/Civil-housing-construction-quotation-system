@@ -8,7 +8,7 @@ import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Team = () => {
+const MaterialType = () => {
     const [getMaterialType, setMaterialType] = useState([]);
     useEffect(() => {
         const fetchMaterialList = async () => {
@@ -33,7 +33,7 @@ const Team = () => {
 
     console.log(getMaterialType);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // const handleRowClick = (row) => {
     //     navigate(`/combobuilding/${row.id}`); // Navigate to the desired URL
     // };
@@ -117,6 +117,11 @@ const Team = () => {
                     },
                 }}
             >
+                <Box display="flex" justifyContent="end" mt="20px">
+                    <Button onClick={() => navigate("/addmaterialtype")} color="secondary" variant="contained">
+                        Add Material Type
+                    </Button>
+                </Box>
                 <DataGrid
                     rows={getMaterialType}
                     columns={columns}
@@ -128,4 +133,4 @@ const Team = () => {
     );
 };
 
-export default Team;
+export default MaterialType;
