@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
@@ -15,6 +16,7 @@ import Form from "./pages/form";
 import MaterialType from "./pages/materialtype"
 import Combobuildingdetail from './pages/combobuilding/combobuildingdetail';
 import AddMaterialType from './pages/addmaterialtype';
+import Login from './pages/login/login';
 
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
@@ -25,16 +27,18 @@ import AddMaterialType from './pages/addmaterialtype';
 
 function App() {
   const [theme, colorMode] = useMode();
+  const location = useLocation();
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
-          <Sidebar />
-          <main className='content'>
-            <Topbar />
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
+        {location.pathname !== '/login' && location.pathname !== '/' && (
+          <div className="app">
+            <Sidebar />
+            <main className="content">
+              <Topbar />
+              <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/team" element={<Team />} />
               <Route path="/combobuilding" element={<ComboBuilding />} />
               <Route path='/combobuilding/:id' element={<Combobuildingdetail />} />
@@ -53,9 +57,14 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} /> */}
-            </Routes>
-          </main>
-        </div>
+              </Routes>
+            </main>
+          </div>
+        )}
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
