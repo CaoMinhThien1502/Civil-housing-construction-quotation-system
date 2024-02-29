@@ -14,6 +14,7 @@ import AddMaterial from "./pages/addmaterial";
 import Form from "./pages/form";
 import MaterialType from "./pages/materialtype"
 import Combobuildingdetail from './pages/combobuilding/combobuildingdetail';
+import AddComboBuilding from './pages/combobuilding/AddComboBuilding';
 
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
@@ -42,6 +43,8 @@ function App() {
               <Route path="/materiallist" element={<MaterialList />} />
               <Route path='/addmaterial' element={<AddMaterial />} />
               <Route path="/form" element={<Form />} />
+        
+              <Route path='/combobuilding/createCombo' element={<AddComboBuilding />} />
               {/* <Route path="/bar" element={<Bar />} />
               <Route path="/materialtype" element={<MaterialType />} />
               {/* <Route path="/form" element={<Form />} />

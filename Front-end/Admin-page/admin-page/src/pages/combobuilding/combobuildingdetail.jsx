@@ -19,4 +19,4 @@ export default function Combobuildingdetail() {
         <div>
         {id}</div>
     )
-}
+} 
