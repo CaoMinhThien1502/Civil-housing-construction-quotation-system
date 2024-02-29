@@ -38,12 +38,11 @@ const Combobuilding = () => {
 
     const navigate = useNavigate();
 
-
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const columns = [
-        { 
-            field: "comboBuildingId", 
+        {
+            field: "comboBuildingId",
             headerName: "ID",
             headerAlign: "center",
             align: "center",
@@ -136,15 +135,15 @@ const Combobuilding = () => {
                 }}
             >
                 <DataGrid
-  rows={getComboBuilding}
-  columns={columns}
-  getRowId={(row) => row.comboBuildingId}
-  components={{ Toolbar: GridToolbar }}
-  onSelectionModelChange={(selectionModel) => {
-    setSelectedRowIds(selectionModel);
-  }}
-  disableRowSelectionOnClick={false}
-/>
+                    rows={getComboBuilding}
+                    columns={columns}
+                    getRowId={(row) => row.comboBuildingId}
+                    components={{ Toolbar: GridToolbar }}
+                    onSelectionModelChange={(selectionModel) => {
+                        setSelectedRowIds(selectionModel);
+                    }}
+                    disableRowSelectionOnClick={false}
+                />
 
             </Box>
         </Box>
