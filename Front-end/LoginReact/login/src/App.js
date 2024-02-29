@@ -1,4 +1,4 @@
-import Login from './componet/login/login';
+import Login from './components/login/login';
 
 import React from 'react';
 import {
@@ -16,11 +16,11 @@ import {
   ContactSection,
   Footer,
   BackToTopButton
-} from './componet/login/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
+} from './components/login/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
 import  {
   ConstructionForm, 
   ConsultImg
-} from './componet/pricing/price1.js';
+} from './components/pricing/price1.js';
 function App() {
   return (
     <Router>
