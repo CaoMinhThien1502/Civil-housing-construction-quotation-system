@@ -37,10 +37,6 @@ const Combobuilding = () => {
     console.log(getComboBuilding);
 
     const navigate = useNavigate();
-    const handleRowClick = (id) => {
-        //   navigate(`id`); // Navigate to the desired URL
-        console.log("test", id)
-    };
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -89,20 +85,23 @@ const Combobuilding = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Link
-                    to={`/combobuilding/${row.comboBuildingId}`}
-                    style={{ textDecoration: 'none' }}
-                >
+<Link
+        to={`/combobuilding/${row.comboBuildingId}`} 
+        style={{ textDecoration: 'none' }}
+      >
 
-                    detail
-                </Link>
-            ),
+   <span style={{color:'white',padding:'5px 10px', backgroundColor:'#e06262',borderRadius:'5px'}}>Detail</span> 
+      </Link>
+              ),
         },
     ];
 
     return (
-        <Box m="20px">
+        <Box m="20px" >
             <Header title="Combo Building List" subtitle="Managing the Combo Building List" />
+            <div>
+                <Link       to={`/combobuilding/createCombo`} ><span>Add Combo</span></Link>
+            </div>
             <Box
                 m="40px 0 0 0"
                 height="75vh"
