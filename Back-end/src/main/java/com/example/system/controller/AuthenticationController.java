@@ -132,8 +132,12 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
     @GetMapping("confirm")
-    public String confirm(@RequestParam("token") String token){
-        return authenticationService.confirmToken(token);
+    public ResponseEntity<?> confirm(@RequestParam("token") String token){
+        boolean confirm = authenticationService.confirmToken(token);
+        if(confirm){
+            return ResponseEntity.status(200).body("Active account successfully");
+        }
+        return ResponseEntity.status(400).body("Link expired");
     }
 
 

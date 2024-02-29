@@ -26,7 +26,7 @@ public class UserValidator implements Validator {
             errors.rejectValue("username","error.username","Non-whitespace please!!");
         else if(user.getUsername().matches("^[a-zA-Z][a-zA-Z0-9]{4,}+$"))
             errors.rejectValue("username","error.username","Non special chars please!!");
-        else if(userRepository.findByUserName(user.getUsername()) != null)
+        else if(userRepository.findByName(user.getUsername()) != null)
             errors.rejectValue("username","error.username","Username exist!!");
 
         if(user.getPassword().isEmpty())
