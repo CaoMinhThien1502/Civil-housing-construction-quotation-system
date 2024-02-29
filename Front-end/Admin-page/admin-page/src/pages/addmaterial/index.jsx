@@ -13,9 +13,6 @@ const initialValues = {
     status: 1,
 };
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
 const userSchema = yup.object().shape({
     materialName: yup.string().required("Material Name is required"),
     unitPrice: yup.string().required("Unit Price is required"),
@@ -61,30 +58,6 @@ const AddMaterial = () => {
 
         validationSchema: userSchema,
     });
-
-    // const handleFormSubmit = async (event) => {
-
-    //     try {
-    //         const response = await fetch(`http://localhost:8080/combobuilding/material/create?materialTypeId=${materialTypeId}`, {
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify(initialValues),
-    //             credentials: 'include', // Include credentials for cross-origin requests
-    //         });
-
-    //         if (!response.ok) {
-    //             throw new Error(`API request failed with status ${response.status}`);
-    //         } else {
-    //             console.log('Add successful:', initialValues);
-    //         }
-
-    //         // Handle successful (e.g., navigate to a different page, store user data)
-    //         navigate('/materiallist');
-    //     } catch (error) {
-    //         console.error('Error during submit:', error);
-    //         // Handle submit errors (e.g., display an error message to the user)
-    //     }
-    // };
 
     const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
     const handleOpen = (event) => {
@@ -138,7 +111,7 @@ const AddMaterial = () => {
                             "& > div": { gridColumn: isNonMobile ? undefined : "span 4"}, // if the screen is non-mobile, then the grid column will be span 4
                         }}
                         >
-                            <Box sx={{ gridColumn: "span 3" }}>
+                            <Box sx={{ gridColumn: "span 4" }}>
                                 <Typography variant="h6" gutterBottom>Material Type</Typography>
                                 <Select
                                     labelId="material-type-label"
@@ -170,7 +143,7 @@ const AddMaterial = () => {
                             name="materialName"
                             error={!!touched.materialName && !!errors.materialName}
                             helperText={touched.materialName && errors.materialName}
-                            sx={{ gridColumn: "span 3"}}
+                            sx={{ gridColumn: "span 2"}}
                             />
                             <TextField
                             fullWidth
@@ -183,9 +156,9 @@ const AddMaterial = () => {
                             name="unitPrice"
                             error={!!touched.unitPrice && !!errors.unitPrice}
                             helperText={touched.unitPrice && errors.unitPrice}
-                            sx={{ gridColumn: "span 3"}}
+                            sx={{ gridColumn: "span 2"}}
                             />
-                            <Typography sx={{ gridColumn: "span 3"}} variant="h6" gutterBottom>
+                            <Typography sx={{ gridColumn: "span 4"}} variant="h6" gutterBottom>
                                 Status: Active  
                             </Typography>
                         </Box>
