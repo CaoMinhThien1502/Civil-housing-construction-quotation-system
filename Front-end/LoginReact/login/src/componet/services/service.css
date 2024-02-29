@@ -1,0 +1,68 @@
+:root{
+    --white: #fff;
+    --color1: #821CD0;
+    --color2: #530DB1;
+}
+.serviceBox{
+    color: var(--white);
+    background: var(--color2);
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 10px 0 20px;
+    margin: 0 auto;
+    border: 3px solid var(--white);
+    border-radius: 20px 20px;
+    box-shadow: 8px 8px 6px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+}
+.serviceBox:before{
+    content: "";
+    background: linear-gradient(to right,var(--color1) 50%,var(--color2) 50%);
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border-radius: 10px 10px;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    z-index: -1;
+}
+.serviceBox .service-icon{
+    color: var(--color1);
+    background: var(--white);
+    font-size: 45px;
+    height: 85px;
+    line-height: 85px;
+    width: calc(100% - 20px);
+    border-radius: 10px 10px 0 0;
+    margin: 0 auto 20px;
+    position: relative;
+}
+.serviceBox .title{
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 10px 10px;
+}
+.serviceBox .description{
+    font-size: 14px;
+    line-height: 23px;
+    margin: 0 20px;
+}
+.serviceBox.red{ 
+    --color1: #F34952;
+    --color2: #CA3137; 
+}
+.serviceBox.blue{ 
+    --color1: #028DEE;
+    --color2: #0363EB;
+}
+.serviceBox.green{ 
+    --color1: #02CA94; 
+    --color2: #07A567; 
+}
+@media only screen and (max-width: 1199px){
+    .serviceBox{ margin: 0 0 30px; }
+}
