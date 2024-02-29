@@ -10,10 +10,12 @@ import ComboBuilding from "./pages/combobuilding";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
 import MaterialList from "./pages/materiallist";
+import AddMaterial from "./pages/addmaterial";
+import Form from "./pages/form";
 import MaterialType from "./pages/materialtype"
 import Combobuildingdetail from './pages/combobuilding/combobuildingdetail';
+
 // import Bar from "./pages/bar";
-// import Form from "./pages/form";
 // import Line from "./pages/line";
 // import Pie from "./pages/pie";
 // import FAQ from "./pages/faq";
@@ -38,8 +40,10 @@ function App() {
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/materiallist" element={<MaterialList />} />
+              <Route path='/addmaterial' element={<AddMaterial />} />
+              <Route path="/form" element={<Form />} />
+              {/* <Route path="/bar" element={<Bar />} />
               <Route path="/materialtype" element={<MaterialType />} />
-              
               {/* <Route path="/form" element={<Form />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />

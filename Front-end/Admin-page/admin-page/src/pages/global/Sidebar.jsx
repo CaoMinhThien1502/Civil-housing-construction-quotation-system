@@ -77,7 +77,7 @@ const Sidebarr = () => {
                                 ml="15px"
                             >
                                 <Typography variant="h3" color={colors.grey[100]}>
-                                    ADMINIS
+                                    Civil Housing
                                 </Typography>
                                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                                     <MenuOutlinedIcon />
