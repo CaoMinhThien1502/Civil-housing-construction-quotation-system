@@ -6,17 +6,14 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-
-const Combobuilding = () => {
-    const [getComboBuilding, setComboBuildings] = useState([]);
-    const [selectedRowIds, setSelectedRowIds] = useState([]);
-    const [getComboId, setCobodId] = useState([]);
+const Team = () => {
+    const [getMaterialType, setMaterialType] = useState([]);
     useEffect(() => {
-        const fetchComboBuildings = async () => {
+        const fetchMaterialList = async () => {
             try {
-                const response = await fetch('http://localhost:8080/combobuilding/combo-building/get', {
+                const response = await fetch('http://localhost:8080/combobuilding/material-type/get', {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -25,35 +22,34 @@ const Combobuilding = () => {
                 });
 
                 const data = await response.json();
-                setComboBuildings(data);
+                setMaterialType(data);
             } catch (error) {
-                console.error('Error fetching combo buildings:', error);
+                console.error('Error fetching materials:', error);
             }
         };
 
-        fetchComboBuildings();
+        fetchMaterialList();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-    console.log(getComboBuilding);
+    console.log(getMaterialType);
 
-    const navigate = useNavigate();
-    const handleRowClick = (id) => {
-     //   navigate(`id`); // Navigate to the desired URL
-        console.log("test", id)
-    };
+    // const navigate = useNavigate();
+    // const handleRowClick = (row) => {
+    //     navigate(`/combobuilding/${row.id}`); // Navigate to the desired URL
+    // };
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const columns = [
         { 
-            field: "comboBuildingId", 
+            field: "materialTypeId", 
             headerName: "ID",
             headerAlign: "center",
             align: "center",
         },
         {
-            field: "comboBuildingName",
-            headerName: "Combo Building Name",
+            field: "typeName",
+            headerName: "Material Type",
             cellClassName: "name-column--cell",
             flex: 1,
         },
@@ -69,40 +65,26 @@ const Combobuilding = () => {
             },
         },
         {
-            field: "type",
-            headerName: "Type",
-            flex: 1,
-            renderCell: (params) => {
-                const { row: { type } } = params; // Extract the type value
-                return type === 0 ? "Xây nhà phần thô" : type === 1 ? "Xây nhà hoàn thiện" : "Xây dựng trọn gói";
-            },
-        },
-        {
-            field: "unitPrice",
-            headerName: "Price",
-            flex: 1,
-        },
-        {
-            field: "detail",
-            headerName: "Detail",
+            field: "setting",
+            headerName: "Setting",
             headerAlign: "center",
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-<Link
-        to={`/combobuilding/${row.comboBuildingId}`} 
-        style={{ textDecoration: 'none' }}
-      >
-       
-    detail
-      </Link>
-              ),
+                <Button
+                    variant="contained"
+                    color="primary"
+                    // onRowClick={(event, row) => handleRowClick(row)}
+                >
+                    Edit
+                </Button>
+            ),
         },
     ];
 
     return (
         <Box m="20px">
-            <Header title="Combo Building List" subtitle="Managing the Combo Building List" />
+            <Header title="Material List" subtitle="Managing the Material List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -136,19 +118,14 @@ const Combobuilding = () => {
                 }}
             >
                 <DataGrid
-  rows={getComboBuilding}
-  columns={columns}
-  getRowId={(row) => row.comboBuildingId}
-  components={{ Toolbar: GridToolbar }}
-  onSelectionModelChange={(selectionModel) => {
-    setSelectedRowIds(selectionModel);
-  }}
-  disableRowSelectionOnClick={false}
-/>
-
+                    rows={getMaterialType}
+                    columns={columns}
+                    getRowId={(row) => row.materialTypeId}
+                    components={{ Toolbar: GridToolbar }}
+                />
             </Box>
         </Box>
     );
 };
 
-export default Combobuilding;
+export default Team;
