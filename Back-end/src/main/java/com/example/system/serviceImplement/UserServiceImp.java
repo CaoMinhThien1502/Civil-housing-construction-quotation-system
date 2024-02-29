@@ -24,7 +24,7 @@ public class UserServiceImp implements UserService {
     public UserDto getProfile() {
         UserDto profile = new UserDto();
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findByUserName(userDetails.getUsername());
+        User user = userRepository.findByName(userDetails.getUsername());
         profile.setAddress(user.getAddress());
         profile.setBirthday(user.getBirthday());
         profile.setUserId(user.getUserId());
@@ -41,13 +41,13 @@ public class UserServiceImp implements UserService {
     public UserDto updateProfile(UserDto dto) {
         try {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User user = userRepository.findByUserName(userDetails.getUsername());
+            User user = userRepository.findByName(userDetails.getUsername());
             user.setAddress(dto.getAddress());
             user.setGender(dto.isGender());
             user.setEmail(dto.getEmail());
             user.setBirthday(dto.getBirthday());
             user.setPhone(dto.getPhone());
-            user.setUserName(dto.getFullName());
+            user.setName(dto.getFullName());
             userRepository.save(user);
             return getProfile();
         } catch (Exception e) {
@@ -65,6 +65,6 @@ public class UserServiceImp implements UserService {
         }
         String userEmail = jwtService.extractUsername(accessTokenFromCookie);
         User user = userRepository.findByEmail(userEmail).orElseThrow();
-        return new UserDto(user.getUserId(), user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getPhone(), user.getAddress(), user.getBirthday(), user.isGender(), user.isStatus());
+        return new UserDto(user.getUserId(), user.getName(), user.getPassword(), user.getEmail(), user.getRole(), user.getPhone(), user.getAddress(), user.getBirthday(), user.isGender(), user.isStatus());
     }
 }

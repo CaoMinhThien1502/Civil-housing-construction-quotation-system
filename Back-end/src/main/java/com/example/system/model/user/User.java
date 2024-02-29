@@ -33,7 +33,7 @@ public class User implements UserDetails {
 
     @Column(nullable = false, columnDefinition = "varchar(50)")
     @NotBlank(message = "Name cannot be blank")
-    private String userName;
+    private String name;
 
     @Column(nullable = false, columnDefinition = "varchar(50)")
     @NotBlank(message = "Email cannot be blank")
