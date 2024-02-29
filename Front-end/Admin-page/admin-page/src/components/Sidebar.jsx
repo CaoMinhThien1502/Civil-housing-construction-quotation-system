@@ -127,7 +127,7 @@ const Sidebarr = () => {
                             color={colors.grey[300]}
                             sx={{ m: "15px 0 5px 20px" }}
                         >
-                            Data
+                            Combo Building
                         </Typography>
                         {/* <Item
                             title="Manage Team"
@@ -143,6 +143,28 @@ const Sidebarr = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
+                            {/* <Item
+                                title="Contacts Information"
+                                to="/contacts"
+                                icon={<ContactsOutlinedIcon />}
+                                selected={selected}
+                                setSelected={setSelected}
+                            /> */}
+                        {/* <Item
+                            title="Invoices Balances"
+                            to="/invoices"
+                            icon={<ReceiptOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        /> */}
+
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >
+                            Material
+                        </Typography>
                         <Item
                             title="Material List"
                             to="/materiallist"
@@ -157,29 +179,7 @@ const Sidebarr = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
-                        <Item
-                            title="Contacts Information"
-                            to="/contacts"
-                            icon={<ContactsOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Invoices Balances"
-                            to="/invoices"
-                            icon={<ReceiptOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-
-                        <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                            Pages
-                        </Typography>
-                        <Item
+                        {/* <Item
                             title="Profile Form"
                             to="/form"
                             icon={<PersonOutlinedIcon />}
@@ -199,9 +199,9 @@ const Sidebarr = () => {
                             icon={<HelpOutlineOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        />
+                        /> */}
 
-                        <Typography
+                        {/* <Typography
                             variant="h6"
                             color={colors.grey[300]}
                             sx={{ m: "15px 0 5px 20px" }}
@@ -235,7 +235,7 @@ const Sidebarr = () => {
                             icon={<MapOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        />
+                        /> */}
                     </Box>
                 </Menu>
             </ProSidebar>
