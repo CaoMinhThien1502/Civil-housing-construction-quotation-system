@@ -1,7 +1,6 @@
 package com.example.system.security;
 
 import com.example.system.model.token.Token;
-import com.example.system.model.user.Role;
 import com.example.system.repository.token.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -66,6 +65,7 @@ public class JwtService {
                 .builder()
                 .setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
+                .setHeaderParam("ROLE",userDetails.getAuthorities())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

@@ -29,10 +29,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'boxicons/css/boxicons.min.css';
 import 'glightbox/dist/css/glightbox.min.css';
 import 'remixicon/fonts/remixicon.css';
-
-
+import './TeamSection.css';
 
 import '../../../styles/lib/main/main.css';
+import { Link } from 'react-router-dom';
 
 // function handle
 
@@ -197,7 +197,7 @@ const TeamSection = () => {
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services1} className="img-fluid" alt="" />
+                <img src={services1} style={{height: 240}} className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -206,20 +206,19 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
-                
-                <ul class="..">
-                  <li>Phòng ngủ</li>
-                  <li>Diện tích</li>
-                  <li></li>
+              <ul className="icon-list">
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
                 </ul>
-                <button>Đọc ngay</button>
+                <button className="button-51" type="button">Đọc ngay</button>
               </div>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services4} className="img-fluid" alt="" />
+                <img src={services4} style= {{height : 240}}className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -228,15 +227,19 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
-                <h4>Nội dung gì đó</h4>
-                <button>Đọc ngay</button>
+              <ul className="icon-list">
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                </ul>
+                <button className="button-51" type="button">Đọc ngay</button>
               </div>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services2} className="img-fluid" alt="" />
+                <img src={services2} style = {{height: 240 }}  className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -245,15 +248,19 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
-                <h4>Nội dung gì đó</h4>
-                <button>Đọc ngay</button>
+              <ul className="icon-list">
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                </ul>
+                <button className="button-51" type="button">Đọc ngay</button>
               </div>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services3} className="img-fluid" alt="" />
+                <img src={services3} style = {{height: 240}} className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -262,8 +269,12 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
-                <h4>Nội dung gì đó</h4>
-                <button>Đọc ngay</button>
+              <ul className="icon-list">
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                </ul>
+                <button className="button-51" type="button">Đọc ngay</button>
               </div>
             </div>
           </div>
@@ -296,7 +307,7 @@ const PricingSection = () => {
                 <li className="na">Massa ultricies mi</li>
               </ul>
               <div className="btn-wrap">
-                <a href="#" className="btn-buy">Tham Khảo </a>
+              <Link to="/price" className="btn-buy">Tham Khảo</Link>
               </div>
             </div>
           </div>
@@ -312,7 +323,7 @@ const PricingSection = () => {
                 <li className="na">Massa ultricies mi</li>
               </ul>
               <div className="btn-wrap">
-                <a href="#" className="btn-buy">Tham Khảo </a>
+              <Link to="/price" className="btn-buy">Tham Khảo</Link>
               </div>
             </div>
           </div>
@@ -328,7 +339,7 @@ const PricingSection = () => {
                 <li className="na">Massa ultricies mi</li>
               </ul>
               <div className="btn-wrap">
-                <a href="#" className="btn-buy">Tham Khảo  </a>
+              <Link to="/price" className="btn-buy">Tham Khảo</Link>
               </div>
             </div>
           </div>
