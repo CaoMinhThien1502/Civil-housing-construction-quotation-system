@@ -20,14 +20,14 @@ import {
 import  {
   ConstructionForm, 
   ConsultImg
-} from './components/pricing/price1.js';
+} from './components/pricing/price.js';
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/Login" element={<Login/>}/>
         <Route path="/home" element={<HomePage />} />
-        <Route path="/price1" element={<Price1/>}/>
+        <Route path="/price" element={<PricePage/>}/>
         {/* Thêm các Route khác nếu cần */}
       </Routes>
     </Router>
@@ -49,7 +49,7 @@ const HomePage = () => {
     </>
   );
 };
-const Price1 = () => {
+const PricePage = () => {
   return (
     <>
       <ConstructionForm/>
