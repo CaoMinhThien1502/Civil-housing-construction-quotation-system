@@ -64,7 +64,7 @@ public class RequestContractServiceImp implements RequestContractService {
     @Override
     public RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId) {
         RequestContract newRequestContract = new RequestContract();
-        Building newBuilding = buildingService.createBuilding(dto);
+        Building newBuilding = buildingService.createBuilding(dto, comboId);
         newRequestContract.setStatus(false);
         newRequestContract.setBuilding(newBuilding);
         User user = userRepository.findById(userId)

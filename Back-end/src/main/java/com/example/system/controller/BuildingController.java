@@ -1,14 +1,11 @@
 package com.example.system.controller;
 
 
-import com.example.system.dto.buildingdto.BuildingDetailDto;
 import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.buildingdto.FormConsultanDto;
 import com.example.system.dto.buildingdto.ItemTypeDto;
-import com.example.system.model.building.Building;
-import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
-import com.example.system.repository.building.ItemRepository;
 import com.example.system.service.building.BuildingDetailService;
 import com.example.system.service.building.BuildingService;
 import com.example.system.service.building.ItemService;
@@ -90,10 +87,14 @@ public class BuildingController{
         return ResponseEntity.ok(buildings);
     }
 
+    @PostMapping("/building/pre-create")
+    public ResponseEntity<BuildingDto> preCreateBuilding(@RequestBody BuildingDto BuildingDto){
+        return ResponseEntity.ok(BuildingDto);
+    }
 //    @PostMapping("/building/create")
-//    public ResponseEntity<BuildingDto> createBuilding(@RequestBody BuildingDto buildingDto){
-//        BuildingDto newDto = buildingService.createBuilding(buildingDto);
-//        return ResponseEntity.ok(newDto);
+//    public ResponseEntity<BuildingDto> createBuilding(@RequestBody BuildingDto buildingDto, @RequestParam Long comboId){
+//        BuildingDto newDto = buildingService.createBuilding(buildingDto, comboId);
+//        return ResponseEntity.ok(buildingDto);
 //    }
 
     @PutMapping("/building/update")
@@ -101,6 +102,14 @@ public class BuildingController{
         BuildingDto updated = buildingService.updateBuilding(buildingId,buildingDto);
         return ResponseEntity.ok(updated);
     }
+
+    //Form input controller
+    @GetMapping("/form-consultant/list")
+    public ResponseEntity<FormConsultanDto> getFormConsultant(@RequestParam int typeCombo){
+        FormConsultanDto dataForm = buildingService.getDataFormConsultant(typeCombo);
+        return ResponseEntity.ok(dataForm);
+    }
+
 
     //Building Detail Controller
 //    @GetMapping("/building-detail/list")

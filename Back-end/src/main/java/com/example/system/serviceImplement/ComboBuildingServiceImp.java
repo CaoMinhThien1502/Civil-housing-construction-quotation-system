@@ -69,6 +69,14 @@ public List<ComboResponseDto> getListCombo() {
     return listComboResponse;
 }
 
+    @Override
+    public List<ComboResponseDto> getComboBuildingByType(Long type) {
+        List<ComboResponseDto> result = new ArrayList<>();
+        for (ComboResponseDto cr: getListCombo()) {
+            if(cr.getType() == type) result.add(cr);
+        }
+        return result;
+    }
 
     @Override
     public ComboBuilding createComboBuilding(ComboRequestDto comboRequestDto) {
