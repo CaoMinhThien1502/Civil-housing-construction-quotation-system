@@ -40,6 +40,7 @@ function App() {
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/materiallist" element={<MaterialList />} />
+              <Route path='/materialtype' element={<MaterialType />} />
               <Route path='/addmaterial' element={<AddMaterial />} />
               <Route path="/form" element={<Form />} />
               {/* <Route path="/bar" element={<Bar />} />

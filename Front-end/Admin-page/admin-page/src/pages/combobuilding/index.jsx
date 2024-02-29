@@ -38,15 +38,15 @@ const Combobuilding = () => {
 
     const navigate = useNavigate();
     const handleRowClick = (id) => {
-     //   navigate(`id`); // Navigate to the desired URL
+        //   navigate(`id`); // Navigate to the desired URL
         console.log("test", id)
     };
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const columns = [
-        { 
-            field: "comboBuildingId", 
+        {
+            field: "comboBuildingId",
             headerName: "ID",
             headerAlign: "center",
             align: "center",
@@ -89,14 +89,14 @@ const Combobuilding = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-<Link
-        to={`/combobuilding/${row.comboBuildingId}`} 
-        style={{ textDecoration: 'none' }}
-      >
-       
-    detail
-      </Link>
-              ),
+                <Link
+                    to={`/combobuilding/${row.comboBuildingId}`}
+                    style={{ textDecoration: 'none' }}
+                >
+
+                    detail
+                </Link>
+            ),
         },
     ];
 
@@ -136,15 +136,15 @@ const Combobuilding = () => {
                 }}
             >
                 <DataGrid
-  rows={getComboBuilding}
-  columns={columns}
-  getRowId={(row) => row.comboBuildingId}
-  components={{ Toolbar: GridToolbar }}
-  onSelectionModelChange={(selectionModel) => {
-    setSelectedRowIds(selectionModel);
-  }}
-  disableRowSelectionOnClick={false}
-/>
+                    rows={getComboBuilding}
+                    columns={columns}
+                    getRowId={(row) => row.comboBuildingId}
+                    components={{ Toolbar: GridToolbar }}
+                    onSelectionModelChange={(selectionModel) => {
+                        setSelectedRowIds(selectionModel);
+                    }}
+                    disableRowSelectionOnClick={false}
+                />
 
             </Box>
         </Box>

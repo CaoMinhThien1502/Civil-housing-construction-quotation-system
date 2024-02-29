@@ -33,7 +33,7 @@ const Team = () => {
 
     console.log(getMaterialList);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // const handleRowClick = (row) => {
     //     navigate(`/combobuilding/${row.id}`); // Navigate to the desired URL
     // };
@@ -122,6 +122,11 @@ const Team = () => {
                     },
                 }}
             >
+                <Box display="flex" justifyContent="end" mt="20px">
+                    <Button onClick={() => navigate("/addmaterial")} color="secondary" variant="contained">
+                        Add Material
+                    </Button>
+                </Box>
                 <DataGrid
                     rows={getMaterialList}
                     columns={columns}
