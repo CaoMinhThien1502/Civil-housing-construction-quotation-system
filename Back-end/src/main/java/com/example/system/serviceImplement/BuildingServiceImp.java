@@ -198,7 +198,7 @@ public class BuildingServiceImp implements BuildingService {
             bp.setComboName(cb.getComboBuildingName());
             for (Long id: bd.getItemIdList()) {
                 Item item = itemRepository.findByItemId(id);
-                totalPrice=+item.getPriceItem();
+                totalPrice+=item.getPriceItem();
             }
             totalPrice =  bd.getArea()*(totalPrice+cb.getUnitPrice());
             bp.setPrice(totalPrice);
