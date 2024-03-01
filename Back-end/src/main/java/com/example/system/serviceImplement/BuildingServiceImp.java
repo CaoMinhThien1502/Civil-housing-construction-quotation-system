@@ -68,8 +68,7 @@ public class BuildingServiceImp implements BuildingService {
     public BuildingDto findByBuilding(Building b) {
         BuildingDto dto = new BuildingDto();
         dto.setStatus(b.getStatus());
-        dto.setWidth(b.getWidth());
-        dto.setLength(b.getLength());
+        dto.setArea(b.getArea());
         List<Long> ids = new ArrayList<>();
         for (Item i: itemService.findByBuilding(b)){
             ids.add(i.getItemId());
@@ -83,17 +82,13 @@ public class BuildingServiceImp implements BuildingService {
         try{
             ComboBuilding combo = comboRepository.findByComboBuildingId(comboId);
             Building newBuilding = new Building();
-            newBuilding.setLength(buildingDto.getLength());
-            newBuilding.setWidth(buildingDto.getWidth());
+            newBuilding.setArea(buildingDto.getArea());
             newBuilding.setStatus(-1);
             Building added = buildingRepository.save(newBuilding);
-            if(combo.getType() != 0){
-                for (Long id: buildingDto.getItemIdList()){
-                    Item item = itemRepository.findById(id)
-                            .orElseThrow(
-                                    () -> new IllegalStateException("Item with id " + id + " does not exists"));
-                    buildingDetailService.createBuildingDetail(added,item);
-                }
+            for (Long id: buildingDto.getItemIdList()){
+                Item item = itemRepository.findById(id)
+                        .orElseThrow(() -> new IllegalStateException("Item with id " + id + " does not exists"));
+                buildingDetailService.createBuildingDetail(added,item);
             }
             return added;
         }catch (Exception e){
@@ -107,8 +102,7 @@ public class BuildingServiceImp implements BuildingService {
             Building updateBuilding = buildingRepository.findById(buildingId)
                     .orElseThrow(
                             () -> new IllegalStateException("Building with id " + buildingId + " does not exists"));
-            updateBuilding.setLength(buildingDto.getLength());
-            updateBuilding.setWidth(buildingDto.getWidth());
+            updateBuilding.setArea(buildingDto.getArea());
             updateBuilding.setStatus(buildingDto.getStatus());
             buildingRepository.save(updateBuilding);
             buildingDetailService.updateBuildingDetail(buildingId, buildingDto.getItemIdList());
@@ -131,7 +125,7 @@ public class BuildingServiceImp implements BuildingService {
             List<String> itemNames = new ArrayList<>();
             BuildingDetailDto buildingDetailDto = new BuildingDetailDto();
             buildingDetailDto.setBuildingId(b.getBuildingId());
-            buildingDetailDto.setLandArea(b.getLength() * b.getWidth());
+            buildingDetailDto.setLandArea(b.getArea());
             buildingDetailDto.setStatus(b.getStatus());
             buildingDetailDto.setUserId(requestContractRepository.findByBuilding(b).getUser().getUserId());
             List<BuildingDetail> findItems = buildingDetailRepository.findByBuilding(b);
@@ -148,27 +142,53 @@ public class BuildingServiceImp implements BuildingService {
 
     @Override
     public FormConsultanDto getDataFormConsultant(int comboType) {
+        try{
+            List<ComboBuilding> comboList = comboRepository.findAll();
+            List<Item> itemList = itemRepository.findAll();
+            List<ItemType> typeList = itemTypeRepository.findAll();
+            List<ItemTypeFCDto> typeDtoList = new ArrayList<>();
+            List<ComboFormConsultantDto> cfcList = new ArrayList<>();
 
-        List<ComboBuilding> comboList = comboRepository.findAll();
-        List<Item> itemList = itemRepository.findAll();
-        List<ItemType> typeList = itemTypeRepository.findAll();
-        List<ItemDto> itemDtoList = new ArrayList<>();
-        List<ItemTypeFCDto> typeDtoList = new ArrayList<>();
-        List<ComboFormConsultantDto> cfcList = new ArrayList<>();
-
-        for (Item i : itemList)  {
-            if(i.isStatus()) {
-                itemDtoList.add(new ItemDto(i.getItemId(), i.getItemName()));
+            for (ItemType it : typeList){
+                List<ItemDto> itemDtoList = new ArrayList<>();
+                for (Item i : itemList)  {
+                    if(i.isStatus() && i.getItemType().equals(it)) {
+                        itemDtoList.add(new ItemDto(i.getItemId(), i.getItemName()));
+                    }
+                }
+                typeDtoList.add(new ItemTypeFCDto(it.getItemTypeName(), itemDtoList));
             }
-        }
-        for (ItemType it : typeList)  typeDtoList.add(new ItemTypeFCDto(it.getItemTypeName(), itemDtoList));
-        for (ComboBuilding combo : comboList){
-            if(combo.getType() == comboType){
-                cfcList.add(new ComboFormConsultantDto(combo.getComboBuildingId(), combo.getComboBuildingName()));
+            for (ComboBuilding combo : comboList){
+                if(combo.getType() == comboType){
+                    cfcList.add(new ComboFormConsultantDto(combo.getComboBuildingId(), combo.getComboBuildingName()));
+                }
             }
+            FormConsultanDto dataForm = new FormConsultanDto(cfcList,typeDtoList);
+            return dataForm;
+        }catch (Exception e){
+            return null;
         }
-        FormConsultanDto dataForm = new FormConsultanDto(cfcList,typeDtoList);
+    }
 
-        return dataForm;
+    @Override
+    public BuildingPriceDto getBuildingPrice(BuildingDto bd, Long comboId) {
+        try{
+            BuildingPriceDto bp = new BuildingPriceDto();
+            Double totalPrice = 0.0;
+            bp.setArea(bd.getArea());
+            bp.setComboId(comboId);
+            bp.setItemIdList(bd.getItemIdList());
+            ComboBuilding cb = comboRepository.findById(comboId)
+                    .orElseThrow(() -> new IllegalStateException("Combo with id " + comboId + " does not exists"));
+            for (Long id: bd.getItemIdList()) {
+                Item item = itemRepository.findByItemId(id);
+                totalPrice=+item.getPriceItem();
+            }
+            totalPrice +=bd.getArea()*cb.getUnitPrice();
+            bp.setPrice(totalPrice);
+            return bp;
+        }catch (Exception e){
+            return null;
+        }
     }
 }

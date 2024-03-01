@@ -20,9 +20,7 @@ public class Building {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buildingId;
     @Column(nullable = false)
-    private Double length;
-    @Column(nullable = false)
-    private Double width;
+    private Double area;
     private int status; //-1: mẫu /  0: hủy /  1: đang thi công /  2 : đã xong
     @OneToMany(mappedBy = "building")
     private Set<BuildingDetail> buildingDetail;

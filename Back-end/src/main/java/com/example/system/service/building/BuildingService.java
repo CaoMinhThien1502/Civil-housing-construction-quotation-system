@@ -2,6 +2,7 @@ package com.example.system.service.building;
 
 import com.example.system.dto.buildingdto.BuildingDetailDto;
 import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.buildingdto.BuildingPriceDto;
 import com.example.system.dto.buildingdto.FormConsultanDto;
 import com.example.system.model.building.Building;
 
@@ -23,4 +24,6 @@ public interface BuildingService {
     List<BuildingDetailDto> findAllBD();
 
     FormConsultanDto getDataFormConsultant(int comboType);
+
+    BuildingPriceDto getBuildingPrice(BuildingDto bd, Long comboId);
 }
