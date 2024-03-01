@@ -2,6 +2,7 @@ package com.example.system.controller;
 
 
 import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.buildingdto.BuildingPriceDto;
 import com.example.system.dto.buildingdto.FormConsultanDto;
 import com.example.system.dto.buildingdto.ItemTypeDto;
 import com.example.system.model.building.Item;
@@ -110,6 +111,12 @@ public class BuildingController{
         return ResponseEntity.ok(dataForm);
     }
 
+    //Count price
+    @PostMapping("/price/list")
+    public ResponseEntity<BuildingPriceDto> getFormConsultant(@RequestBody BuildingDto bdto, @RequestParam Long comboId){
+        BuildingPriceDto bp = buildingService.getBuildingPrice(bdto,comboId);
+        return ResponseEntity.ok(bp);
+    }
 
     //Building Detail Controller
 //    @GetMapping("/building-detail/list")
