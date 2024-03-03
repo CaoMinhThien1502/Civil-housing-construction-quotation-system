@@ -97,7 +97,6 @@ const AddMaterial = () => {
         <Box m="20px">
             <Header title="Add Material" subtitle="Create a New Material" />
             <Formik
-            // onSubmit={handleFormSubmit}
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
             >
