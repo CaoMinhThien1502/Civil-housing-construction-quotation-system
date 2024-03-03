@@ -17,6 +17,7 @@ import Combobuildingdetail from './pages/combobuilding/comboBuildingDetail';
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
+import EditMaterialType from './pages/materialtype/editMaterialType';
 import Login from './pages/login/login';
 
 import AddDemo from './pages/combobuilding/addComboBuilding';
@@ -50,6 +51,7 @@ function App() {
               <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
               <Route path="/materialList" element={<MaterialList />} />
               <Route path="/materialType" element={<MaterialType />} />
+              <Route path="/materialType/:id" element={<EditMaterialType />} />
               <Route path="/materialList/addMaterial" element={<AddMaterial />} />
               <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
               <Route path="/form" element={<Form />} />

@@ -30,60 +30,6 @@ const ComboBuildingDetail = () => {
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const columns = [
-        {
-            field: "comboBuildingId",
-            headerName: "ID",
-            headerAlign: "center",
-            align: "center",
-        },
-        {
-            field: "comboBuildingName",
-            headerName: "Combo Building Name",
-            cellClassName: "name-column--cell",
-            flex: 1,
-        },
-        {
-            field: "status",
-            headerName: "Status",
-            headerAlign: "center",
-            align: "center",
-            flex: 1,
-            renderCell: (params) => {
-                const { row: { status } } = params; // Extract the type value
-                return status === true ? "Active" : "Inactive";
-            },
-        },
-        {
-            field: "type",
-            headerName: "Type",
-            flex: 1,
-            renderCell: (params) => {
-                const { row: { type } } = params; // Extract the type value
-                return type === 0 ? "Xây nhà phần thô" : type === 1 ? "Xây nhà hoàn thiện" : "Xây dựng trọn gói";
-            },
-        },
-        {
-            field: "unitPrice",
-            headerName: "Price",
-            flex: 1,
-        },
-        {
-            field: "detail",
-            headerName: "Detail",
-            headerAlign: "center",
-            align: "center",
-            flex: 1,
-            renderCell: ({ row }) => (
-                <Link
-                    to={`/comboBuilding/${row.comboBuildingId}`}
-                    style={{ textDecoration: 'none' }}
-                >
-                    <span style={{ color: 'white', padding: '5px 10px', backgroundColor: '#e06262', borderRadius: '5px' }}>Detail</span>
-                </Link>
-            ),
-        },
-    ];
 
     return (
         <Box m="20px" >
@@ -130,18 +76,17 @@ const ComboBuildingDetail = () => {
                     <Typography variant="h5" gutterBottom>Combo Building Price: {comboData?.unitPrice}</Typography>
                 </Box>
                 
-                {/* add some spaces */}
-                <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
-                <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
+                <Box display="flex" justifyContent="end" mt="20px">
+                    <Button onClick={() => navigate("/comboBuilding")} color="secondary" variant="contained">
+                        Cancel
+                    </Button>
+                </Box>
 
                 <Box sx={{ gridColumn: "span 4" }}>
                     <Typography variant="h3" gutterBottom>Combo Material Information</Typography>
                 </Box>
                 {comboData?.materialTypeOfComboDto.map((materialType) => (
                     <Box key={materialType.materialTypeId} sx={{ gridColumn: "span 4" }}>
-                        {/* add some spaces between items */}
-                        
-                        
                         <Typography variant="h5" gutterBottom>Material Type Name: {materialType.materialTypeDto.typeName}</Typography>
                         <DataGrid
                             rows={materialType.materialList} // Access the material list for each type
@@ -162,6 +107,7 @@ const ComboBuildingDetail = () => {
                             rowsPerPageOptions={[5]}
                         // ...other DataGrid props
                         />
+                        {/* add some spaces between material types */}
                         <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
                     </Box>
                 ))}
