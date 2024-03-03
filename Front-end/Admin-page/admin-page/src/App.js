@@ -19,6 +19,8 @@ import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
 import Login from './pages/login/login';
 
+import AddDemo from './pages/combobuilding/addComboBuilding';
+
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
 // import Pie from "./pages/pie";
@@ -45,7 +47,7 @@ function App() {
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/comboBuilding" element={<ComboBuilding />} />
               <Route path="/comboBuilding/:id" element={<Combobuildingdetail />} />
-              <Route path="/comboBuilding/addCombo" element={<AddComboBuilding />} />
+              <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
               <Route path="/materialList" element={<MaterialList />} />
               <Route path="/materialType" element={<MaterialType />} />
               <Route path="/materialList/addMaterial" element={<AddMaterial />} />

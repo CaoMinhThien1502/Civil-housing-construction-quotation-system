@@ -85,23 +85,19 @@ const Combobuilding = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-<Link
-        to={`/combobuilding/${row.comboBuildingId}`} 
-        style={{ textDecoration: 'none' }}
-      >
-
-   <span style={{color:'white',padding:'5px 10px', backgroundColor:'#e06262',borderRadius:'5px'}}>Detail</span> 
-      </Link>
-              ),
+                <Link
+                    to={`/comboBuilding/${row.comboBuildingId}`}
+                    style={{ textDecoration: 'none' }}
+                >
+                    <span style={{ color: 'white', padding: '5px 10px', backgroundColor: '#e06262', borderRadius: '5px' }}>Detail</span>
+                </Link>
+            ),
         },
     ];
 
     return (
         <Box m="20px" >
             <Header title="Combo Building List" subtitle="Managing the Combo Building List" />
-            <div>
-                <Link       to={`/combobuilding/createCombo`} ><span>Add Combo</span></Link>
-            </div>
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -134,6 +130,11 @@ const Combobuilding = () => {
                     },
                 }}
             >
+                <Box display="flex" justifyContent="end" mt="20px">
+                    <Button onClick={() => navigate("/comboBuilding/addComboBuilding")} color="secondary" variant="contained">
+                        Add Combo Building
+                    </Button>
+                </Box>
                 <DataGrid
                     rows={getComboBuilding}
                     columns={columns}
@@ -144,7 +145,6 @@ const Combobuilding = () => {
                     }}
                     disableRowSelectionOnClick={false}
                 />
-
             </Box>
         </Box>
     );
