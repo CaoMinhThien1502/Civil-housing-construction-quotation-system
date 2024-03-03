@@ -29,13 +29,13 @@ const Login = () => {
       console.log("Response status:", response.status);
       console.log("Response data:", response.data);
 
-      if (response.status === 200) {
-        if (response.data) {
+      if (response.status ) {
+        if (response.data.role !== "ADMIN" || "MANAGER") {
           console.log("Đăng nhập thành công!");
-          navigate("/dashboard");
+          navigate("/home");
         } else {
           console.log("Đăng nhập thành công (không có dữ liệu)!");
-          navigate("/");
+          navigate("/Dashboard");
         }
       } else {
         setError(`Đăng nhập thất bại với mã trạng thái: ${response.status}`);

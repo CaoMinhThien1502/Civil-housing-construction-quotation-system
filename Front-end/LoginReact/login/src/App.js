@@ -1,5 +1,6 @@
 import Login from './components/login/login';
-
+import UncontrolledExample from './components/blog/blog.js';
+import ProfilePage from './components/user/profile.js';
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -28,6 +29,8 @@ function App() {
         <Route path="/Login" element={<Login/>}/>
         <Route path="/home" element={<HomePage />} />
         <Route path="/price" element={<PricePage/>}/>
+        <Route path="/blog" element={<UncontrolledExample/>}/>
+        <Route path="/profile" element={<Profile/>}/>
         {/* Thêm các Route khác nếu cần */}
       </Routes>
     </Router>
@@ -56,6 +59,13 @@ const PricePage = () => {
       {/* <ConsultImg/> */}
     </>
   );
-}
-
+};
+const Profile= () => {
+  return (
+    <>
+      <ProfilePage/>
+      
+    </>
+  );
+};
 export default App;

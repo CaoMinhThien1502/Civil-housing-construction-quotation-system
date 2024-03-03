@@ -211,7 +211,8 @@ const TeamSection = () => {
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
                   <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
                 </ul>
-                <button className="button-51" type="button">Đọc ngay</button>
+                {/* <button className="button-51" type="button">Đọc ngay</button> */}
+                <Link to="/blog" className="button-51">Đọc ngay</Link>
               </div>
             </div>
           </div>
@@ -232,7 +233,7 @@ const TeamSection = () => {
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
                   <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
                 </ul>
-                <button className="button-51" type="button">Đọc ngay</button>
+                <Link to="/blog" className="button-51">Đọc ngay</Link>
               </div>
             </div>
           </div>
@@ -253,7 +254,7 @@ const TeamSection = () => {
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
                   <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
                 </ul>
-                <button className="button-51" type="button">Đọc ngay</button>
+                <Link to="/blog" className="button-51">Đọc ngay</Link>
               </div>
             </div>
           </div>
@@ -274,7 +275,7 @@ const TeamSection = () => {
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
                   <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
                 </ul>
-                <button className="button-51" type="button">Đọc ngay</button>
+                <Link to="/blog" className="button-51">Đọc ngay</Link>
               </div>
             </div>
           </div>
