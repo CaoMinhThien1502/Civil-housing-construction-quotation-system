@@ -118,7 +118,7 @@ const MaterialType = () => {
                 }}
             >
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/addmaterialtype")} color="secondary" variant="contained">
+                    <Button onClick={() => navigate("/materialType/addMaterialType")} color="secondary" variant="contained">
                         Add Material Type
                     </Button>
                 </Box>
