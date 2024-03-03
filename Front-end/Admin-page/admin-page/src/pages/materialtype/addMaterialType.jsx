@@ -45,7 +45,7 @@ const AddMaterialType = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                navigate('/materialtype');
+                navigate('/materialType');
             } catch (error) {
                 console.error('Error during submit:', error);
                 // Handle submit errors (e.g., display an error message to the user)
@@ -90,7 +90,7 @@ const AddMaterialType = () => {
                             </Typography>
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <Button onClick={() => navigate("/materialtype")} color="secondary" variant="contained">
+                            <Button onClick={() => navigate("/materialType")} color="secondary" variant="contained">
                                 Cancel
                             </Button>
                             <Box ml="10px"/>

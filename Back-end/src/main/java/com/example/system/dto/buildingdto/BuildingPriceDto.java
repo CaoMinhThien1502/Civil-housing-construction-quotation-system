@@ -14,7 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class BuildingPriceDto {
     private Double area;
-    private List<Long> itemIdList;
+    private List<ItemTypeFCDto> itemList;
     private Long comboId;
+    private String comboName;
     private Double price;
 }

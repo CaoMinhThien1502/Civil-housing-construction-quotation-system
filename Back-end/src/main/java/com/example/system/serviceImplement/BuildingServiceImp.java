@@ -177,14 +177,30 @@ public class BuildingServiceImp implements BuildingService {
             Double totalPrice = 0.0;
             bp.setArea(bd.getArea());
             bp.setComboId(comboId);
-            bp.setItemIdList(bd.getItemIdList());
+
+            List<ItemTypeFCDto> iTypeDto = new ArrayList<>();
+            for (Long id: bd.getItemIdList()
+                 ) {
+                List<ItemDto> iDList = new ArrayList<>();
+                ItemDto idto = new ItemDto();
+                Item item = itemRepository.findByItemId(id);
+                ItemTypeFCDto itemTypeFCDto = new ItemTypeFCDto();
+                itemTypeFCDto.setItemTypeName(item.getItemType().getItemTypeName());
+                idto.setItemId(id);
+                idto.setItemName(item.getItemName());
+                iDList.add(idto);
+                itemTypeFCDto.setItemList(iDList);
+                iTypeDto.add(itemTypeFCDto);
+            }
+            bp.setItemList(iTypeDto);
             ComboBuilding cb = comboRepository.findById(comboId)
                     .orElseThrow(() -> new IllegalStateException("Combo with id " + comboId + " does not exists"));
+            bp.setComboName(cb.getComboBuildingName());
             for (Long id: bd.getItemIdList()) {
                 Item item = itemRepository.findByItemId(id);
-                totalPrice=+item.getPriceItem();
+                totalPrice+=item.getPriceItem();
             }
-            totalPrice +=bd.getArea()*cb.getUnitPrice();
+            totalPrice =  bd.getArea()*(totalPrice+cb.getUnitPrice());
             bp.setPrice(totalPrice);
             return bp;
         }catch (Exception e){

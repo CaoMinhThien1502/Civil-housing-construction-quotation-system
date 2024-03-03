@@ -73,7 +73,8 @@ public class AuthenticationController {
                 .ok()
                 .header(HttpHeaders.SET_COOKIE, accessTokenCookie.toString())
                 .header(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString())
-                .build();
+                .body(a);
+
     }
 
 
