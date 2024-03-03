@@ -6,12 +6,12 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const MaterialType = () => {
     const [getMaterialType, setMaterialType] = useState([]);
     useEffect(() => {
-        const fetchMaterialList = async () => {
+        const fetchMaterialTypeList = async () => {
             try {
                 const response = await fetch('http://localhost:8080/combobuilding/material-type/get', {
                     method: 'GET',
@@ -28,7 +28,7 @@ const MaterialType = () => {
             }
         };
 
-        fetchMaterialList();
+        fetchMaterialTypeList();
     }, []); // Empty dependency array to fetch data only once on component mount
 
     console.log(getMaterialType);
@@ -71,13 +71,14 @@ const MaterialType = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Button
-                    variant="contained"
-                    color="primary"
-                    // onRowClick={(event, row) => handleRowClick(row)}
+                <Link
+                    to={`/materialType/${row.materialTypeId}`}
+                    style={{ textDecoration: 'none' }}
                 >
-                    Edit
-                </Button>
+                    <Button color="primary" variant="contained">
+                        Edit
+                    </Button>
+                </Link>
             ),
         },
     ];

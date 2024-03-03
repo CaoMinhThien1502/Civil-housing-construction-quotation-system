@@ -54,6 +54,11 @@ const Team = () => {
             flex: 1,
         },
         {
+            field: "unitPrice",
+            headerName: "Price",
+            flex: 1,
+        },
+        {
             field: "status",
             headerName: "Status",
             headerAlign: "center",
@@ -63,11 +68,6 @@ const Team = () => {
                 const { row: { status } } = params; // Extract the type value
                 return status === true ? "Active" : "Inactive";
             },
-        },
-        {
-            field: "unitPrice",
-            headerName: "Price",
-            flex: 1,
         },
         {
             field: "setting",
