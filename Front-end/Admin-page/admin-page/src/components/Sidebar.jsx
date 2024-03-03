@@ -138,7 +138,7 @@ const Sidebarr = () => {
                         /> */}
                         <Item
                             title="Combo Building List"
-                            to="/combobuilding"
+                            to="/comboBuilding"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
@@ -167,14 +167,14 @@ const Sidebarr = () => {
                         </Typography>
                         <Item
                             title="Material List"
-                            to="/materiallist"
+                            to="/materialList"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
                             title="Material Type"
-                            to="/materialtype"
+                            to="/materialType"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}

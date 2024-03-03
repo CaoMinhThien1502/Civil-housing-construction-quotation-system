@@ -123,7 +123,7 @@ const Team = () => {
                 }}
             >
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/addmaterial")} color="secondary" variant="contained">
+                    <Button onClick={() => navigate("/materialList/addMaterial")} color="secondary" variant="contained">
                         Add Material
                     </Button>
                 </Box>

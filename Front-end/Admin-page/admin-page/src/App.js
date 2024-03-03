@@ -7,16 +7,16 @@ import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/dashboard';
 import Team from "./pages/team";
-import ComboBuilding from "./pages/combobuilding";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
-import MaterialList from "./pages/materiallist";
-import AddMaterial from "./pages/addmaterial";
 import Form from "./pages/form";
+import ComboBuilding from "./pages/combobuilding";
+import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
-import Combobuildingdetail from './pages/combobuilding/combobuildingdetail';
-import AddComboBuilding from './pages/combobuilding/AddComboBuilding';
-import AddMaterialType from './pages/addmaterialtype';
+import Combobuildingdetail from './pages/combobuilding/comboBuildingDetail';
+import AddComboBuilding from './pages/combobuilding/addComboBuilding';
+import AddMaterial from "./pages/materiallist/addMaterial";
+import AddMaterialType from './pages/materialtype/addMaterialType';
 import Login from './pages/login/login';
 
 // import Bar from "./pages/bar";
@@ -41,17 +41,16 @@ function App() {
               <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/team" element={<Team />} />
-              <Route path="/combobuilding" element={<ComboBuilding />} />
-              <Route path='/combobuilding/:id' element={<Combobuildingdetail />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
-              <Route path="/materiallist" element={<MaterialList />} />
-              <Route path='/materialtype' element={<MaterialType />} />
-              <Route path='/addmaterial' element={<AddMaterial />} />
-              <Route path='/addmaterialtype' element={<AddMaterialType />} />
+              <Route path="/comboBuilding" element={<ComboBuilding />} />
+              <Route path="/comboBuilding/:id" element={<Combobuildingdetail />} />
+              <Route path="/comboBuilding/addCombo" element={<AddComboBuilding />} />
+              <Route path="/materialList" element={<MaterialList />} />
+              <Route path="/materialType" element={<MaterialType />} />
+              <Route path="/materialList/addMaterial" element={<AddMaterial />} />
+              <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
               <Route path="/form" element={<Form />} />
-        
-              <Route path='/combobuilding/createCombo' element={<AddComboBuilding />} />
               {/* <Route path="/bar" element={<Bar />} />
               <Route path="/materialtype" element={<MaterialType />} />
               <Route path="/bar" element={<Bar />} />
