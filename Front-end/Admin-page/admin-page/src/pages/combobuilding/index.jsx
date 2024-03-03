@@ -9,10 +9,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 
-const Combobuilding = () => {
+const ComboBuilding = () => {
     const [getComboBuilding, setComboBuildings] = useState([]);
     const [selectedRowIds, setSelectedRowIds] = useState([]);
-    const [getComboId, setCobodId] = useState([]);
     useEffect(() => {
         const fetchComboBuildings = async () => {
             try {
@@ -150,4 +149,4 @@ const Combobuilding = () => {
     );
 };
 
-export default Combobuilding;
+export default ComboBuilding;
