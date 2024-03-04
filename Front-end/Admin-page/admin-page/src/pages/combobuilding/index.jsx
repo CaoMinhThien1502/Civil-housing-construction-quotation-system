@@ -9,10 +9,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 
-const Combobuilding = () => {
+const ComboBuilding = () => {
     const [getComboBuilding, setComboBuildings] = useState([]);
     const [selectedRowIds, setSelectedRowIds] = useState([]);
-    const [getComboId, setCobodId] = useState([]);
     useEffect(() => {
         const fetchComboBuildings = async () => {
             try {
@@ -54,17 +53,6 @@ const Combobuilding = () => {
             flex: 1,
         },
         {
-            field: "status",
-            headerName: "Status",
-            headerAlign: "center",
-            align: "center",
-            flex: 1,
-            renderCell: (params) => {
-                const { row: { status } } = params; // Extract the type value
-                return status === true ? "Active" : "Inactive";
-            },
-        },
-        {
             field: "type",
             headerName: "Type",
             flex: 1,
@@ -79,6 +67,17 @@ const Combobuilding = () => {
             flex: 1,
         },
         {
+            field: "status",
+            headerName: "Status",
+            headerAlign: "center",
+            align: "center",
+            flex: 1,
+            renderCell: (params) => {
+                const { row: { status } } = params; // Extract the type value
+                return status === true ? "Active" : "Inactive";
+            },
+        },
+        {
             field: "detail",
             headerName: "Detail",
             headerAlign: "center",
@@ -89,7 +88,9 @@ const Combobuilding = () => {
                     to={`/comboBuilding/${row.comboBuildingId}`}
                     style={{ textDecoration: 'none' }}
                 >
-                    <span style={{ color: 'white', padding: '5px 10px', backgroundColor: '#e06262', borderRadius: '5px' }}>Detail</span>
+                    <Button color="primary" variant="contained">
+                        Detail
+                    </Button>
                 </Link>
             ),
         },
@@ -150,4 +151,4 @@ const Combobuilding = () => {
     );
 };
 
-export default Combobuilding;
+export default ComboBuilding;
