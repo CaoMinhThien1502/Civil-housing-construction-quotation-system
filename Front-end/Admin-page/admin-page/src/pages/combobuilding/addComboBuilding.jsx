@@ -2,7 +2,7 @@ import { Box, Button, Checkbox, FormControlLabel, Menu, MenuItem, Select, TextFi
 import { Field, Formik, useFormik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
