@@ -1,7 +1,8 @@
 // Import necessary React modules
 import "./personIn4.css";
-import AOS from "../../styles1/lib/aos/aos.js";
-import "../../styles1/lib/aos/aos.css";
+import AOS from "aos";
+import 'aos/dist/aos.css'; // Import the CSS file
+// import "../../styles1/lib/aos/aos.css";
 // import "../../styles1/lib/aos/dist/aos.css";
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -10,7 +11,7 @@ import { ReactComponent as countImg } from "../../img1/img/counts-img.svg";
 import favicon from "../../img1/img/favicon.png";
 import heroImg from "../../img1/img/hero-img.png";
 import { ReactComponent as illustration } from "../../img1/img/illustration-6.svg";
-import services1 from "../../img1/img/more-services-1.jpg";
+import services1 from "../../img1/img/more-services-1.jpg"; 
 import services2 from "../../img1/img/more-services-2.jpg";
 import services3 from "../../img1/img/more-services-3.jpg";
 import services4 from "../../img1/img/more-services-4.jpg";

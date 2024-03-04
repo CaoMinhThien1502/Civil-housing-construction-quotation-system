@@ -1,6 +1,6 @@
-import Login from './components/login/login';
-import UncontrolledExample from './components/blog/blog.js';
-import ProfilePage from './components/user/profile.js';
+import Login from '../../login/src/components1/login/login';
+import UncontrolledExample from '../src/components1/blog/blog';
+import ProfilePage from '../src/components1/user/profile';
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -17,11 +17,11 @@ import {
   ContactSection,
   Footer,
   BackToTopButton
-} from './components/login/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
+} from '../src/components1/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
 import  {
   ConstructionForm, 
   ConsultImg
-} from './components/pricing/price.js';
+} from '../src/components1/pricing/price.js';
 function App() {
   return (
     <Router>

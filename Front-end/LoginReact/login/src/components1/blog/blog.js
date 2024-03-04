@@ -4,10 +4,11 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import anh1 from '../../img/img/house.jpg';
-import anh2 from '../../img/img/bedroom.jpg';
-import anh3 from '../../img/img/kitchen.jpg';
-import construct from '../../img/img/sodo.png';
+// import anh1 from '../../img/img/house.jpg';
+import anh1 from '../../img1/img/house.jpg'
+import anh2 from '../../img1/img/bedroom.jpg';
+import anh3 from '../../img1/img/kitchen.jpg';
+import construct from '../../img1/img/sodo.png';
 import './blog.css'; // Thay thế yourStyles.css bằng đường dẫn thực tế đến tệp CSS của bạn
 
 function UncontrolledExample() {
