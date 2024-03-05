@@ -3,10 +3,13 @@ package com.example.system.controller;
 import com.example.system.dto.buildingdto.BuildingDetailDto;
 import com.example.system.dto.buildingdto.BuildingDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
+import com.example.system.dto.userdto.UserDto;
 import com.example.system.model.combo.Material;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
 import com.example.system.service.requestContract.RequestContractService;
+import com.example.system.service.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,9 @@ public class RequestContractController {
 
     @Autowired
     RequestContractService requestContractService;
+    @Autowired
+    UserService userService;
+
     @GetMapping("/request-contract/get")
     public ResponseEntity<List<RequestContractDto>> getRequestContracts(){
         List<RequestContractDto> list = requestContractService.findAllDto();
@@ -28,9 +34,10 @@ public class RequestContractController {
     }
 
     @PostMapping("/request-contract/create")
-    public ResponseEntity<RequestContractDto> createRequestContract(@RequestBody BuildingDto bdto, @RequestParam Long comboId, @RequestParam Long userId){
+    public ResponseEntity<RequestContractDto> createRequestContract(@RequestBody BuildingDto bdto, @RequestParam Long comboId, HttpServletRequest request){
         //User auth = new User();
-        RequestContractDto dto = requestContractService.createRequestContract(bdto, comboId, userId);
+        UserDto udto = userService.getUserLoginFromJWT(request);
+        RequestContractDto dto = requestContractService.createRequestContract(bdto, comboId, udto.getUserId());
         return ResponseEntity.ok(dto);
     }
     @PostMapping("/request-contract/comfirm")

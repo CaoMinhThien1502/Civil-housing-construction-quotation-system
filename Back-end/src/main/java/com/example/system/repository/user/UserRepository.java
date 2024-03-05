@@ -9,8 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Override
-    List<User> findAll();
 
     User findByUserId(Long id);
     List<User> findByRole(String role);

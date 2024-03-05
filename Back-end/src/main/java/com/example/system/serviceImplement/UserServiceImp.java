@@ -38,7 +38,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDto updateProfile(UserDto dto) {
+    public UserDto updateProfile(UserDto dto, HttpServletRequest request) {
         try {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User user = userRepository.findByName(userDetails.getUsername());
@@ -49,7 +49,7 @@ public class UserServiceImp implements UserService {
             user.setPhone(dto.getPhone());
             user.setName(dto.getFullName());
             userRepository.save(user);
-            return getProfile();
+            return getUserLoginFromJWT(request);
         } catch (Exception e) {
             return null;
         }

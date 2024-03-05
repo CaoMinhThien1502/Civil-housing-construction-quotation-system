@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public interface UserService {
     UserDto getProfile();
-    UserDto updateProfile(UserDto dto);
+    UserDto updateProfile(UserDto dto, HttpServletRequest request);
 
     UserDto getUserLoginFromJWT(HttpServletRequest request);
 }

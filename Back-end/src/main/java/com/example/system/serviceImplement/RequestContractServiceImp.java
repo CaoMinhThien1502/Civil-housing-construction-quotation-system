@@ -63,22 +63,26 @@ public class RequestContractServiceImp implements RequestContractService {
 
     @Override
     public RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId) {
-        RequestContract newRequestContract = new RequestContract();
-        Building newBuilding = buildingService.createBuilding(dto, comboId);
-        newRequestContract.setStatus(false);
-        newRequestContract.setBuilding(newBuilding);
-        User user = userRepository.findById(userId)
-                .orElseThrow(
-                        () -> new IllegalStateException("User with id " + userId + " does not exists"));
-        ComboBuilding comboBuilding = comboBuildingRepository.findById(comboId)
-                .orElseThrow(
-                        () -> new IllegalStateException("Combo Building with id " + comboId + " does not exists"));
-        newRequestContract.setComboBuilding(comboBuilding);
-        newRequestContract.setUser(user);
-        Date now = new Date();
-        newRequestContract.setRequestDate(now);
-        RequestContract added = requestContractRepository.save(newRequestContract);
-        return getRequestContractDto(added);
+        try{
+            RequestContract newRequestContract = new RequestContract();
+            Building newBuilding = buildingService.createBuilding(dto, comboId);
+            newRequestContract.setStatus(false);
+            newRequestContract.setBuilding(newBuilding);
+            User user = userRepository.findById(userId)
+                    .orElseThrow(
+                            () -> new IllegalStateException("User with id " + userId + " does not exists"));
+            ComboBuilding comboBuilding = comboBuildingRepository.findById(comboId)
+                    .orElseThrow(
+                            () -> new IllegalStateException("Combo Building with id " + comboId + " does not exists"));
+            newRequestContract.setComboBuilding(comboBuilding);
+            newRequestContract.setUser(user);
+            Date now = new Date();
+            newRequestContract.setRequestDate(now);
+            RequestContract added = requestContractRepository.save(newRequestContract);
+            return getRequestContractDto(added);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override
