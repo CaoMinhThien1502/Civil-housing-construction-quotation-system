@@ -4,37 +4,36 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import appleIcon from "../../../img/img/apple-touch-icon.png";
-import { ReactComponent as countImg } from "../../../img/img/counts-img.svg";
-import favicon from "../../../img/img/favicon.png";
-import heroImg from "../../../img/img/hero-img.png";
-import { ReactComponent as illustration } from "../../../img/img/illustration-6.svg";
-import services1 from "../../../img/img/more-services-1.jpg";
-import services2 from "../../../img/img/more-services-2.jpg";
-import services3 from "../../../img/img/more-services-3.jpg";
-import services4 from "../../../img/img/more-services-4.jpg";
-import testimonials1 from "../../../img/img/testimonials/testimonials-1.jpg";
-import testimonials2 from "../../../img/img/testimonials/testimonials-2.jpg";
-import testimonials3 from "../../../img/img/testimonials/testimonials-3.jpg";
-import testimonials4 from "../../../img/img/testimonials/testimonials-4.jpg";
-import testimonials5 from "../../../img/img/testimonials/testimonials-5.jpg";
-import team1 from "../../../img/img/team/team-1.jpg";
-import team2 from "../../../img/img/team/team-2.jpg";
-import team3 from "../../../img/img/team/team-3.jpg";
-import team4 from "../../../img/img/team/team-4.jpg";
+
+import appleIcon from "../../img/apple-touch-icon.png";
+import { ReactComponent as countImg } from "../../img/counts-img.svg";
+import favicon from "../../img/favicon.png";
+import heroImg from "../../img/hero-img.png";
+import { ReactComponent as illustration } from "../../img/illustration-6.svg";
+import services1 from "../../img/more-services-1.jpg";
+import services2 from "../../img/more-services-2.jpg";
+import services3 from "../../img/more-services-3.jpg";
+import services4 from "../../img/more-services-4.jpg";
+import testimonials1 from "../../img/testimonials/testimonials-1.jpg";
+import testimonials2 from "../../img/testimonials/testimonials-2.jpg";
+import testimonials3 from "../../img/testimonials/testimonials-3.jpg";
+import testimonials4 from "../../img/testimonials/testimonials-4.jpg";
+import testimonials5 from "../../img/testimonials/testimonials-5.jpg";
+import team1 from "../../img/team/team-1.jpg";
+import team2 from "../../img/team/team-2.jpg";
+import team3 from "../../img/team/team-3.jpg";
+import team4 from "../../img/team/team-4.jpg";
+
 // Import CSS files (if using any)
-import '../../../styles/lib/aos/aos.css';
+import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import for bootstrap icon
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'boxicons/css/boxicons.min.css';
-import 'glightbox/dist/css/glightbox.min.css';
+// import 'glightbox/dist/css/glightbox.min.css';
 import 'remixicon/fonts/remixicon.css';
 
-
-
-import '../../../styles/lib/main/main.css';
-
-// function handle
+import '../../styles/main/main.css';
 
 // Create a functional component for the header
 const Header = () => {
