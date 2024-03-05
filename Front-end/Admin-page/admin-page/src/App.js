@@ -20,8 +20,6 @@ import AddMaterialType from './pages/materialtype/addMaterialType';
 import EditMaterialType from './pages/materialtype/editMaterialType';
 import Login from './pages/login/login';
 
-import AddDemo from './pages/combobuilding/addComboBuilding';
-
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
 // import Pie from "./pages/pie";
@@ -29,14 +27,36 @@ import AddDemo from './pages/combobuilding/addComboBuilding';
 // import Geography from "./pages/geography";
 // import Calendar from "./pages/calendar/calendar";
 
+import {
+  Header,
+  HeroSection,
+  AboutUsSection,
+  PersonIn4,
+  TeamSection,
+  PricingSection,
+  ContactSection,
+  Footer,
+  BackToTopButton
+} from './pages/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
+import  {
+  ConstructionForm, 
+  ConsultImg
+} from './pages/pricing/price.js';
+
 function App() {
   const [theme, colorMode] = useMode();
   const location = useLocation();
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
+      
+      
+      {location.pathname !== '/login' 
+      && location.pathname !== '/' 
+      && location.pathname != '/home' 
+      && location.pathname != '/price'
+      && (
+        <ThemeProvider theme={theme}>
         <CssBaseline />
-        {location.pathname !== '/login' && location.pathname !== '/' && (
           <div className="app">
             <Sidebar />
             <main className="content">
@@ -55,6 +75,7 @@ function App() {
               <Route path="/materialList/addMaterial" element={<AddMaterial />} />
               <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
               <Route path="/form" element={<Form />} />
+              
               {/* <Route path="/bar" element={<Bar />} />
               <Route path="/materialtype" element={<MaterialType />} />
               <Route path="/bar" element={<Bar />} />
@@ -66,13 +87,40 @@ function App() {
               </Routes>
             </main>
           </div>
-        )}
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </ThemeProvider>
+        </ThemeProvider>
+      )}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/price" element={<PricePage />} />
+      </Routes>
     </ColorModeContext.Provider>
+  );
+}
+
+const HomePage = () => {
+  return (
+    <>
+      <Header /> 
+      <HeroSection />
+      <AboutUsSection />
+      <PersonIn4 />
+      <TeamSection />
+      <PricingSection />
+      <ContactSection />
+      <Footer />
+      <BackToTopButton />
+    </>
+  );
+};
+
+const PricePage = () => {
+  return (
+    <>
+      <ConstructionForm/>
+      {/* <ConsultImg/> */}
+    </>
   );
 }
 
