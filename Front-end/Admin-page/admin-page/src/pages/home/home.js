@@ -27,10 +27,9 @@ import team4 from "../../img/team/team-4.jpg";
 // Import CSS files (if using any)
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import for bootstrap icon
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'boxicons/css/boxicons.min.css';
-// import 'glightbox/dist/css/glightbox.min.css';
+import 'glightbox/dist/css/glightbox.min.css';
 import 'remixicon/fonts/remixicon.css';
 
 import '../../styles/main/main.css';

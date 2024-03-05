@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../home/home";
 import image1 from "../../img/BaoGiaPTtietkiem-01.jpg"
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/esm/Form";
 
 const ConstructionForm = () => {
   const [landArea, setLandArea] = useState("");
