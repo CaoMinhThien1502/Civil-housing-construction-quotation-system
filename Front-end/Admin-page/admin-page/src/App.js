@@ -48,8 +48,6 @@ function App() {
   const location = useLocation();
   return (
     <ColorModeContext.Provider value={colorMode}>
-      
-      
       {location.pathname !== '/login' 
       && location.pathname !== '/' 
       && location.pathname != '/home' 
