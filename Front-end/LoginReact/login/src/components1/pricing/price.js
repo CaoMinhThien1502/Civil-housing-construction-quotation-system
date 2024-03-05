@@ -85,7 +85,7 @@ const ConstructionForm = () => {
         setSelectedItemNames((prevNames) => ({
           ...prevNames,
           Combo: data.comboList[0]?.comboBuildingId || "",
-          "Loại nhà": data.itemTypeList[0]?.itemList[0]?.itemId || "",
+          "Loại nhà": data.itemTypeList[0]?.itemId || "",
           Hầm: "",
           Tầng: "",
           Mái: "",
@@ -110,7 +110,7 @@ const ConstructionForm = () => {
   
         if (data && data.comboList && data.itemTypeList) {
           setSelectedItemNames({
-            Combo: data.comboList[0]?.comboBuildingId || "",
+            Combo: data.comboList[0]?.comboBuildingId|| "",
             "Loại nhà": data.itemTypeList[0]?.itemList[0]?.itemId || "",
             Hầm: "",
             Tầng: "",
@@ -163,10 +163,12 @@ const ConstructionForm = () => {
               <Form.Select
                 id="comboList.comboBuildingId"
                 onChange={(e) => {
-                  // setSelectedItemIds({...selectedItemIds,'Combo' : e.target.value});
-                  console.log(e.target.value);
-                }
-                }
+                  const selectedName = e.target.options[e.target.selectedIndex].text;
+                  setSelectedItemNames((prevNames) => ({
+                    ...prevNames,
+                    Combo: selectedName || "",
+                  }));
+                }}
               >
                 {swaggerData.comboList.map((combo) => (
                   <option key={combo.comboBuildingId}>{combo.comboBuildingName}</option>
