@@ -15,4 +15,6 @@ public interface MaterialRepository extends JpaRepository<Material, Long > {
     List<Material>findAllByMaterialType(@Param("materialTypeId") Long materialTypeId);
 
     List<Material> findByMaterialType(MaterialType materialType);
+
+    Material findByMaterialId(Long materialId);
 }
