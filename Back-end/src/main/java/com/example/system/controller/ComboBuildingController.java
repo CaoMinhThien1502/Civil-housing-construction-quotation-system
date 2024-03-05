@@ -63,6 +63,11 @@ public class ComboBuildingController {
         List<Material> list = materialService.getListMaterialByTypeId(materialTypeId);
         return ResponseEntity.ok(list);
     }
+    @GetMapping("/material/getbyid")
+    public ResponseEntity<Material> getMaterialByIds(@RequestParam Long materialId){
+        Material material= materialService.getById(materialId);
+        return ResponseEntity.ok(material);
+    }
     @PostMapping("/material/create")
     public ResponseEntity<?> createMaterial(@RequestParam Long materialTypeId, @RequestBody MaterialDto material){
         boolean newMaterial = materialService.createMaterial(materialTypeId, material);
