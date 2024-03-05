@@ -60,7 +60,6 @@ const EditMaterialType = () => {
                     body: JSON.stringify(values),
                     credentials: 'include', // Include credentials for cross-origin requests
                 });
-                
 
                 if (!response.ok) {
                     throw new Error(`API request failed with status ${response.status}`);
@@ -69,6 +68,7 @@ const EditMaterialType = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
+                window.alert('Material Type updated successfully');
                 navigate('/materialType');
             } catch (error) {
                 console.error('Error during submit:', error);
@@ -87,28 +87,6 @@ const EditMaterialType = () => {
     setAnchorEl(null); // Close dropdown on selection or outside click
     };
 
-    const [materialTypeId, setMaterialTypeId] = useState("");
-    const [materialTypes, setMaterialTypes] = useState([]);
-    useEffect(() => {
-        const fetchMaterialTypes = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/combobuilding/material-type/get', {
-                    method: 'GET',
-                    headers: {
-                        // 'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                const data = await response.json();
-                setMaterialTypes(data);
-            } catch (error) {
-                console.error('Error fetching material types:', error);
-            }
-        };
-
-        fetchMaterialTypes();
-    }, []); // Empty dependency array to fetch data only once on component mount
     const handleChanges = (event) => {
         formik.setFieldValue("status", event.target.value);
         console.log(event.target.value);
@@ -141,8 +119,8 @@ const EditMaterialType = () => {
                             value={formik.values.typeName}
                             name="typeName"
                             error={!!touched.typeName && !!errors.typeName}
-                                helperText={touched.typeName && errors.typeName}
-                                sx={{ gridColumn: "span 4" }}
+                            helperText={touched.typeName && errors.typeName}
+                            sx={{ gridColumn: "span 4" }}
                             />
                             <Typography sx={{ gridColumn: "span 4" }} variant="h6" gutterBottom>
                                 Previous Status: {formik.initialValues.status === "true" ? "Active" : "Inactive"}
@@ -154,7 +132,7 @@ const EditMaterialType = () => {
                                 id="material-type-status"
                                 defaultValue="" 
                                 onChange={handleChanges}
-                                error={!!touched.materialTypeID && !!errors.materialType} // Add error logic
+                                error={!!touched.materialTypeID && !!errors.materialTypeID} // Add error logic
                                 open={Boolean(anchorEl)} // Open dropdown based on state
                                 onClose={handleClose} // Close dropdown on selection or outside click
                                 onOpen={handleOpen} // Open dropdown on click
