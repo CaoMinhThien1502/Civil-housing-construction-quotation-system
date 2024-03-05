@@ -45,6 +45,7 @@ const AddMaterialType = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
+                window.alert('Material Type added successfully');
                 navigate('/materialType');
             } catch (error) {
                 console.error('Error during submit:', error);

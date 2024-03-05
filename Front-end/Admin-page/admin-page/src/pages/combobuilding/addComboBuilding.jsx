@@ -51,6 +51,7 @@ const AddComboBuilding = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
+                window.alert('Combo Building added successfully');
                 navigate('/comboBuilding');
             } catch (error) {
                 console.error('Error during submit:', error);
