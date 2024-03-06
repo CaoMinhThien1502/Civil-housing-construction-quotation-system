@@ -32,26 +32,51 @@ public class RunFileDB implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-       /* executeSQLScript("dataScript.sql");*/
+        /* executeSQLScript("dataScript.sql");*/
         executeSQLScript("DataDemo1.sql");
 
         // Check if user exists by email
-        Optional<User> userExist = userRepository.findByEmail("admin@gmail.com");
+/*        Optional<User> userExist = userRepository.findByEmail("admin@gmail.com");
         // If user does not exist, create a new user
-        if (!userExist.isPresent()) {
-            User user = User.builder()
-                    .name("Admin")
-                    .email("admin@gmail.com")
-                    .password(passwordEncoder.encode("12345"))
-                    .role(Role.ADMIN)
-                    .status(true)
-                    .phone("0000000000")
-                    .address("Admin")
-                    .gender(true)
-                    .birthday(LocalDate.parse("2002-01-05"))
-                    .build();
-            userRepository.save(user);
-        }
+        if (!userExist.isPresent()) {*/
+        User user = User.builder()
+                .name("Admin")
+                .email("admin@gmail.com")
+                .password(passwordEncoder.encode("1"))
+                .role(Role.ADMIN)
+                .status(true)
+                .phone("0000000000")
+                .address("Admin")
+                .gender(true)
+                .birthday(LocalDate.parse("1998-05-06"))
+                .build();
+        userRepository.save(user);
+        user = User.builder()
+                .name("Manager")
+                .email("manager@gmail.com")
+                .password(passwordEncoder.encode("1"))
+                .role(Role.MANAGER)
+                .status(true)
+                .phone("0000000000")
+                .address("Manager")
+                .gender(true)
+                .birthday(LocalDate.parse("1999-11-10"))
+                .build();
+        userRepository.save(user);
+        user = User.builder()
+                .name("Hoang Nam")
+                .email("customer@gmail.com")
+                .password(passwordEncoder.encode("1"))
+                .role(Role.CUSTOMER)
+                .status(true)
+                .phone("0779558502")
+                .address("Ba ria - Vung Tau")
+                .gender(false)
+                .birthday(LocalDate.parse("2002-01-05"))
+                .build();
+        userRepository.save(user);
+
+        /*        }*/
     }
 
     private void executeSQLScript(String fileName) throws IOException {
