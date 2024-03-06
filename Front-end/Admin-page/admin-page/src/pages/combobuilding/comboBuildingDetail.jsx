@@ -10,9 +10,6 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const ComboBuildingDetail = () => {
-    const [getComboBuilding, setComboBuildings] = useState([]);
-    const [selectedRowIds, setSelectedRowIds] = useState([]);
-
     const {id} = useParams();
     const [comboData, setComboData] = useState(null);
     useEffect(() => {
@@ -24,7 +21,7 @@ const ComboBuildingDetail = () => {
                 console.error('Error fetching combo data:', error);
             });
     }, [id]);
-    console.log(comboData)
+    console.log(comboData);
 
     const navigate = useNavigate();
 
@@ -33,7 +30,7 @@ const ComboBuildingDetail = () => {
 
     return (
         <Box m="20px" >
-            <Header title="Combo Building Detail" subtitle="Managing the Combo Building Detail" />
+            <Header title="Combo Building Detail" subtitle="View the Combo Building Detail" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
