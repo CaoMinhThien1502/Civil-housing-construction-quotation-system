@@ -1,10 +1,9 @@
 package com.example.system.controller;
 
 
-import com.example.system.dto.buildingdto.BuildingDto;
-import com.example.system.dto.buildingdto.BuildingPriceDto;
-import com.example.system.dto.buildingdto.FormConsultanDto;
-import com.example.system.dto.buildingdto.ItemTypeDto;
+import com.example.system.dto.buildingdto.*;
+import com.example.system.dto.buildingdto.itemdto.ItemUpdateDto;
+import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
 import com.example.system.service.building.BuildingDetailService;
@@ -64,6 +63,12 @@ public class BuildingController{
         List<Item> items = itemService.findALl();
         return ResponseEntity.ok(items);
     }
+    @GetMapping("/item/update-page")
+    public ResponseEntity<ItemUpdateDto> getItemById(@RequestParam Long itemid){
+        ItemUpdateDto item = itemService.findItemUpdate(itemid);
+        return ResponseEntity.ok(item);
+    }
+
     @PostMapping("/item/create")
     public ResponseEntity<Item> createItem(@RequestParam Long itemTypeId,@RequestBody Item item){
         Item newItem = itemService.createItem(itemTypeId,item);
@@ -106,7 +111,7 @@ public class BuildingController{
 
     //Form input controller
     @GetMapping("/form-consultant/list")
-    public ResponseEntity<FormConsultanDto> getFormConsultant(@RequestParam int typeCombo){
+    public ResponseEntity<FormConsultanDto> getFormConsultant(@RequestParam int typeCombo) {
         FormConsultanDto dataForm = buildingService.getDataFormConsultant(typeCombo);
         return ResponseEntity.ok(dataForm);
     }
