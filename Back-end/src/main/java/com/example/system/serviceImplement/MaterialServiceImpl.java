@@ -20,6 +20,12 @@ public class MaterialServiceImpl implements MaterialService {
     public List<Material> getListMaterial() {
         return materialRepository.findAll();
     }
+
+    @Override
+    public Material getById(Long materialId) {
+        return materialRepository.findByMaterialId(materialId);
+    }
+
     @Override
     public List<Material> getListMaterialByTypeId(Long materialTypeId) {
         return materialRepository.findAllByMaterialType(materialTypeId);

@@ -1,23 +1,23 @@
-INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (false,'2001-11-01','11 Ben Nghe','admin123@gmail.com','admin1','admin123','admin','0938472726',1);
-INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (true,'2002-10-21','08 Nguyen Binh Khiem, Quang Ngai','quangtin1@gmail.com','manager1','manager123','manager','0395115975',1);
-INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (true,'2003-10-23','2123 Le Viet Luong','tintq2@gmail.com','tintq2','123456a~','customer','0938472725',1);
-INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (true,'2002-02-02','DakLak','thiencm02@gmail.com','thiencm02Aa','Tian1a)','manager','0938472720',1);
-INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (true,'2002-04-07','04 Le Van Viet','cuong@gmail.com','cuong3Que','chrissTrinha123^','customer','0938472721',1);
-INSERT INTO user(gender,birthday,address,email,user_name,password,role,phone,status)
+INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (false,'2000-09-02','113 Quang Trung, Da Nang','vanh khuyen43@gmail.com','Vanhkh43','Bon3@!.','customer','0395117976',1);
 
 
-INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('Cẩm Nang Xây Dựng','Thiết Kế Phòng Khách Tivi Treo Tường Hiện Đại Đẹp Không Góc Chết',2,'2023-02-05',null);
-INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('Cẩm Nang Xây Dựng','11+ Mẫu Phòng Bếp Nhà Ống',3,'2023-02-05',null);
-INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('Cẩm Nang Xây Dựng','30+ Mẫu Thiết Kế Phòng Khách Có Cầu Thang Dọc Không Thể Bỏ Lỡ',4,'2024-02-20',null);
-INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('Thiết Kế Kiến Trúc','Quy Trình Thiết Kế Nhà Trọn Gói',5,'2023-02-05',null);
-INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('Thiết Kế Kiến Trúc','TOP 25 Mẫu Nhà Phố Có Garage Đẹp Mới Nhất',2,'2023-02-05',null);
-INSERT INTO blog(blog_name,blog_content,user_id,create_day,img_path) VALUES ('Thiết Kế Kiến Trúc','Bật Mí Xu Hướng Thiết Kế Nội Thất Phòng Khách Hiện Đại, Sang Trọng',4,'2023-02-05',null);
+INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) VALUES ('Cẩm Nang Xây Dựng','Thiết Kế Phòng Khách Tivi Treo Tường Hiện Đại Đẹp Không Góc Chết','hihi',2,'2023-02-05',null);
+INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) VALUES ('Cẩm Nang Xây Dựng','11+ Mẫu Phòng Bếp Nhà Ống','hihi',3,'2023-02-05',null);
+INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) VALUES ('Cẩm Nang Xây Dựng','30+ Mẫu Thiết Kế Phòng Khách Có Cầu Thang Dọc Không Thể Bỏ Lỡ','hihi',4,'2024-02-20',null);
+INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) VALUES ('Thiết Kế Kiến Trúc','Quy Trình Thiết Kế Nhà Trọn Gói','hihi',5,'2023-02-05',null);
+INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) VALUES ('Thiết Kế Kiến Trúc','TOP 25 Mẫu Nhà Phố Có Garage Đẹp Mới Nhất','hihi',2,'2023-02-05',null);
+INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) VALUES ('Thiết Kế Kiến Trúc','Bật Mí Xu Hướng Thiết Kế Nội Thất Phòng Khách Hiện Đại, Sang Trọng','hihi',4,'2023-02-05',null);
 
 INSERT INTO item_type(item_type_name, status) VALUES ('Mái',1);
 INSERT INTO item_type(item_type_name, status) VALUES ('Hầm',1);

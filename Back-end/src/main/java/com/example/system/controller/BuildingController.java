@@ -1,14 +1,11 @@
 package com.example.system.controller;
 
 
-import com.example.system.dto.buildingdto.BuildingDetailDto;
-import com.example.system.dto.buildingdto.BuildingDto;
-import com.example.system.dto.buildingdto.ItemTypeDto;
-import com.example.system.model.building.Building;
-import com.example.system.model.building.BuildingDetail;
+import com.example.system.dto.buildingdto.*;
+import com.example.system.dto.buildingdto.itemdto.ItemUpdateDto;
+import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
-import com.example.system.repository.building.ItemRepository;
 import com.example.system.service.building.BuildingDetailService;
 import com.example.system.service.building.BuildingService;
 import com.example.system.service.building.ItemService;
@@ -43,11 +40,6 @@ public class BuildingController{
         List<ItemTypeDto> itemTypeDtos = itemTypeService.findItemTypeDtos();
         return ResponseEntity.ok(itemTypeDtos);
     }
-    @GetMapping("/item-type/id")
-    public ResponseEntity<ItemType> getItemtypeById(@RequestParam Long typeId){
-        ItemType it = itemTypeService.findById(typeId);
-        return ResponseEntity.ok(it);
-    }
     @PostMapping("/item-type/create")
     public ResponseEntity<ItemType> createItemtype(@RequestBody ItemType itemType){
         ItemType newItemType = itemTypeService.createItemType(itemType);
@@ -71,11 +63,12 @@ public class BuildingController{
         List<Item> items = itemService.findALl();
         return ResponseEntity.ok(items);
     }
-    @GetMapping("/item/id")
-    public ResponseEntity<Item> getItemById(@RequestParam Long id){
-        Item it = itemService.findByItemId(id);
-        return ResponseEntity.ok(it);
+    @GetMapping("/item/update-page")
+    public ResponseEntity<ItemUpdateDto> getItemById(@RequestParam Long itemid){
+        ItemUpdateDto item = itemService.findItemUpdate(itemid);
+        return ResponseEntity.ok(item);
     }
+
     @PostMapping("/item/create")
     public ResponseEntity<Item> createItem(@RequestParam Long itemTypeId,@RequestBody Item item){
         Item newItem = itemService.createItem(itemTypeId,item);
@@ -100,16 +93,34 @@ public class BuildingController{
         return ResponseEntity.ok(buildings);
     }
 
+    @PostMapping("/building/pre-create")
+    public ResponseEntity<BuildingDto> preCreateBuilding(@RequestBody BuildingDto BuildingDto){
+        return ResponseEntity.ok(BuildingDto);
+    }
 //    @PostMapping("/building/create")
-//    public ResponseEntity<BuildingDto> createBuilding(@RequestBody BuildingDto buildingDto){
-//        BuildingDto newDto = buildingService.createBuilding(buildingDto);
-//        return ResponseEntity.ok(newDto);
+//    public ResponseEntity<BuildingDto> createBuilding(@RequestBody BuildingDto buildingDto, @RequestParam Long comboId){
+//        BuildingDto newDto = buildingService.createBuilding(buildingDto, comboId);
+//        return ResponseEntity.ok(buildingDto);
 //    }
 
     @PutMapping("/building/update")
     public ResponseEntity<BuildingDto> updateBuilding(@RequestParam Long buildingId, @RequestBody BuildingDto buildingDto){
         BuildingDto updated = buildingService.updateBuilding(buildingId,buildingDto);
         return ResponseEntity.ok(updated);
+    }
+
+    //Form input controller
+    @GetMapping("/form-consultant/list")
+    public ResponseEntity<FormConsultanDto> getFormConsultant(@RequestParam int typeCombo) {
+        FormConsultanDto dataForm = buildingService.getDataFormConsultant(typeCombo);
+        return ResponseEntity.ok(dataForm);
+    }
+
+    //Count price
+    @PostMapping("/price/list")
+    public ResponseEntity<BuildingPriceDto> getFormConsultant(@RequestBody BuildingDto bdto, @RequestParam Long comboId){
+        BuildingPriceDto bp = buildingService.getBuildingPrice(bdto,comboId);
+        return ResponseEntity.ok(bp);
     }
 
     //Building Detail Controller

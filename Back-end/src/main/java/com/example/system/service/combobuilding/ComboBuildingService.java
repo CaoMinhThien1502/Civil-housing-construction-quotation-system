@@ -12,4 +12,6 @@ public interface ComboBuildingService {
     ComboBuilding createComboBuilding(ComboRequestDto comboRequestDto);
 
     List<ComboBuilding> getListComboBuilding();
+
+    List<ComboResponseDto> getComboBuildingByType(Long type);
 }

@@ -1,5 +1,7 @@
 package com.example.system.serviceImplement;
 
+import com.example.system.dto.buildingdto.itemdto.ItemUpdateDto;
+import com.example.system.dto.buildingdto.itemtypedto.ItemTypeNameDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.building.Item;
@@ -41,6 +43,24 @@ public class ItemServiceImp implements ItemService {
     @Override
     public Item findByItemId(Long id) {
         return itemRepository.findByItemId(id);
+    }
+
+    @Override
+    public ItemUpdateDto findItemUpdate(Long id) {
+        ItemUpdateDto update = new ItemUpdateDto();
+        Item item = itemRepository.findByItemId(id);
+        List<ItemTypeNameDto> itemTypeNameDtos = new ArrayList<>();
+        for (ItemType it: itemTypeRepository.findAll()
+             ) {
+            ItemTypeNameDto itd = new ItemTypeNameDto(it.getItemTypeId(), it.getItemTypeName());
+            itemTypeNameDtos.add(itd);
+        }
+        update.setItemId(item.getItemId());
+        update.setStatus(item.isStatus());
+        update.setPriceItem(item.getPriceItem());
+        update.setItemName(item.getItemName());
+        update.setItemTypes(itemTypeNameDtos);
+        return update;
     }
 
 

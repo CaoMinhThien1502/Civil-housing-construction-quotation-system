@@ -63,6 +63,11 @@ public class ComboBuildingController {
         List<Material> list = materialService.getListMaterialByTypeId(materialTypeId);
         return ResponseEntity.ok(list);
     }
+    @GetMapping("/material/getbyid")
+    public ResponseEntity<Material> getMaterialByIds(@RequestParam Long materialId){
+        Material material= materialService.getById(materialId);
+        return ResponseEntity.ok(material);
+    }
     @PostMapping("/material/create")
     public ResponseEntity<?> createMaterial(@RequestParam Long materialTypeId, @RequestBody MaterialDto material){
         boolean newMaterial = materialService.createMaterial(materialTypeId, material);
@@ -89,6 +94,12 @@ public class ComboBuildingController {
     @GetMapping("/combo/get")
     public ResponseEntity<?> getCombo(){
         List<ComboResponseDto> comboResponseDtoList = comboBuildingService.getListCombo();
+        return ResponseEntity.ok(comboResponseDtoList);
+    }
+
+    @GetMapping("/combo/getbytype")
+    public ResponseEntity<?> getComboByType(@RequestParam Long typeId ){
+        List<ComboResponseDto> comboResponseDtoList = comboBuildingService.getComboBuildingByType(typeId);
         return ResponseEntity.ok(comboResponseDtoList);
     }
 

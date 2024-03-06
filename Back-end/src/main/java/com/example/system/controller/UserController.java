@@ -5,7 +5,9 @@ import com.example.system.dto.buildingdto.ItemTypeDto;
 import com.example.system.dto.userdto.UserDto;
 import com.example.system.model.user.User;
 import com.example.system.repository.user.UserRepository;
+import com.example.system.security.JwtService;
 import com.example.system.service.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +33,20 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<UserDto> getProfile(){
-        UserDto profile = userService.getProfile();
+    public ResponseEntity<UserDto> getProfile(HttpServletRequest request){
+        //UserDto profile = userService.getProfile();
+        UserDto profile = userService.getUserLoginFromJWT(request);
         return ResponseEntity.ok(profile);
     }
 
     @PutMapping("/profile/update")
-    public ResponseEntity<UserDto> updateProfile(@RequestBody UserDto dto){
-        UserDto profile = userService.updateProfile(dto);
+    public ResponseEntity<UserDto> updateProfile(@RequestBody UserDto dto, HttpServletRequest request){
+        UserDto profile = userService.updateProfile(dto, request);
         return ResponseEntity.ok(profile);
+    }
+
+    @GetMapping("/userlogin")
+    public ResponseEntity<UserDto> getUserLogin(HttpServletRequest request) {
+        return ResponseEntity.ok(userService.getUserLoginFromJWT(request));
     }
 }
