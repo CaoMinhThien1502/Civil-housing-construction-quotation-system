@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ItemTypeService {
     List<ItemType> findAll();
-
+    ItemType findById(Long id);
     List<ItemTypeDto> findItemTypeDtos();
 
     ItemType createItemType(ItemType itemType);

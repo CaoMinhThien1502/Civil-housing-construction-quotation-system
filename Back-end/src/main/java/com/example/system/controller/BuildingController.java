@@ -40,6 +40,12 @@ public class BuildingController{
         List<ItemTypeDto> itemTypeDtos = itemTypeService.findItemTypeDtos();
         return ResponseEntity.ok(itemTypeDtos);
     }
+    @GetMapping("/item-type/id")
+    public ResponseEntity<ItemType> getItemtypeById(@RequestParam Long typeId){
+        ItemType it = itemTypeService.findById(typeId);
+        return ResponseEntity.ok(it);
+    }
+
     @PostMapping("/item-type/create")
     public ResponseEntity<ItemType> createItemtype(@RequestBody ItemType itemType){
         ItemType newItemType = itemTypeService.createItemType(itemType);
