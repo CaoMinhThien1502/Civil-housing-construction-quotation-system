@@ -66,7 +66,7 @@ const EditMaterialType = () => {
                 } else {
                     console.log('Edit successful:', values);
                 }
-    
+                
                 // Handle successful (e.g., navigate to a different page, store user data)
                 window.alert('Material Type updated successfully');
                 navigate('/materialType');
