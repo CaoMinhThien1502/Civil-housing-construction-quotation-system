@@ -130,3 +130,5 @@ const PricePage = () => {
 }
 
 export default App;
+
+// pls don't change anything related to logical code
