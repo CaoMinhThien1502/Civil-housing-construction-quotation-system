@@ -10,16 +10,22 @@ import Team from "./pages/team";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
 import Form from "./pages/form";
+
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
+
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
+
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
+
+import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
+
 import Login from './pages/login/login';
 
 // import Bar from "./pages/bar";
@@ -66,6 +72,7 @@ function App() {
 
               <Route path="/comboBuilding" element={<ComboBuilding />} />
               <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
+              <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
               <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
               
               <Route path="/materialList" element={<MaterialList />} />

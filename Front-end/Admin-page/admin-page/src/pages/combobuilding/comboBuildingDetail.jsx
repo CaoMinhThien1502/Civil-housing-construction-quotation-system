@@ -21,7 +21,7 @@ const ComboBuildingDetail = () => {
                 console.error('Error fetching combo data:', error);
             });
     }, [id]);
-    console.log(comboData)
+    console.log(comboData);
 
     const navigate = useNavigate();
 

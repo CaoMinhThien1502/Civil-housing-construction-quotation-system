@@ -78,6 +78,23 @@ const ComboBuilding = () => {
             },
         },
         {
+            field: "setting",
+            headerName: "Setting",
+            headerAlign: "center",
+            align: "center",
+            flex: 1,
+            renderCell: ({ row }) => (
+                <Link
+                    to={`/comboBuilding/${row.comboBuildingId}`}
+                    style={{ textDecoration: 'none' }}
+                >
+                    <Button color="primary" variant="contained">
+                        Edit
+                    </Button>
+                </Link>
+            ),
+        },
+        {
             field: "detail",
             headerName: "Detail",
             headerAlign: "center",
