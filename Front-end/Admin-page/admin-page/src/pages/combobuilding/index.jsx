@@ -85,7 +85,7 @@ const ComboBuilding = () => {
             flex: 1,
             renderCell: ({ row }) => (
                 <Link
-                    to={`/comboBuilding/${row.comboBuildingId}`}
+                    to={`/comboBuilding/detail/${row.comboBuildingId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
