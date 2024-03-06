@@ -18,6 +18,7 @@ import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
 import EditMaterialType from './pages/materialtype/editMaterialType';
+import EditMaterial from './pages/materiallist/editMaterial';
 import Login from './pages/login/login';
 
 // import Bar from "./pages/bar";
@@ -61,20 +62,25 @@ function App() {
               <Topbar />
               <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
+
+              <Route path="/comboBuilding" element={<ComboBuilding />} />
+              <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
+              <Route path="/comboBuilding/:id" element={<Combobuildingdetail />} />
+              
+              <Route path="/materialList" element={<MaterialList />} />
+              <Route path="/materialList/addMaterial" element={<AddMaterial />} />
+              <Route path="/materialList/:id" element={<EditMaterial />} />
+
+              <Route path="/materialType" element={<MaterialType />} />
+              <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
+              <Route path="/materialType/:id" element={<EditMaterialType />} />
+              <Route path="/form" element={<Form />} />
+              
+              {/* 
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
-              <Route path="/comboBuilding" element={<ComboBuilding />} />
-              <Route path="/comboBuilding/:id" element={<Combobuildingdetail />} />
-              <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
-              <Route path="/materialList" element={<MaterialList />} />
-              <Route path="/materialType" element={<MaterialType />} />
-              <Route path="/materialType/:id" element={<EditMaterialType />} />
-              <Route path="/materialList/addMaterial" element={<AddMaterial />} />
-              <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
-              <Route path="/form" element={<Form />} />
-              
-              {/* <Route path="/bar" element={<Bar />} />
+              <Route path="/bar" element={<Bar />} />
               <Route path="/materialtype" element={<MaterialType />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />

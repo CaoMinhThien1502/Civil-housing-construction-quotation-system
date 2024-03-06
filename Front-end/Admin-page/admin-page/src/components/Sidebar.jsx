@@ -6,6 +6,11 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
+import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
+import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
+import FormatListNumberedOutlinedIcon from '@mui/icons-material/FormatListNumberedOutlined';
+
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -115,9 +120,16 @@ const Sidebarr = () => {
 
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
                         <Item
+                            title="Home Page"
+                            to="/home"
+                            icon={<HomeOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
                             title="Dashboard"
                             to="/dashboard"
-                            icon={<HomeOutlinedIcon />}
+                            icon={<AccountBoxOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
@@ -139,7 +151,7 @@ const Sidebarr = () => {
                         <Item
                             title="Combo Building List"
                             to="/comboBuilding"
-                            icon={<PeopleOutlinedIcon />}
+                            icon={<BusinessOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
@@ -168,14 +180,14 @@ const Sidebarr = () => {
                         <Item
                             title="Material List"
                             to="/materialList"
-                            icon={<PeopleOutlinedIcon />}
+                            icon={<FormatListBulletedOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
                             title="Material Type"
                             to="/materialType"
-                            icon={<PeopleOutlinedIcon />}
+                            icon={<FormatListNumberedOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />

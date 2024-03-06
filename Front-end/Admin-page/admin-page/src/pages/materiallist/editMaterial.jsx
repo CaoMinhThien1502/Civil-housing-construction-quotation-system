@@ -4,52 +4,74 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const initialValues = {
     materialID: 0,
     materialName: "",
     unitPrice: "",
-    status: 1,
+    status: "",
 };
 
 const userSchema = yup.object().shape({
     materialName: yup.string().required("Material Name is required"),
-    unitPrice: yup.string().required("Unit Price is required"),
-});
+    unitPrice: yup.number().required("Unit Price is required"),
+}); 
 
-const AddMaterial = () => {
+const EditMaterial = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
-    const [materialTypeId, setMaterialTypeId] = useState("");
-    
+    const {id} = useParams();
+
+    const [getMaterial, setMaterial] = useState({});
+    useEffect(() => {
+        const fetchMaterialById = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/combobuilding/material/getbyid?materialId=${id}`, {
+                    method: 'GET',
+                    headers: {
+                        // 'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                setMaterial(data);
+            } catch (error) {
+                console.error('Error fetching materials:', error);
+            }
+        };
+
+        fetchMaterialById();
+    }, []); // Empty dependency array to fetch data only once on component mount
+
     const formik = useFormik({
         initialValues: {
             materialID: 0,
-            materialName: "",
-            unitPrice: "",
-            status: 1,
+            materialName: `${getMaterial.materialName}`,
+            unitPrice: `${getMaterial.unitPrice}`,
+            status: `${getMaterial.status}`,
         },
+        enableReinitialize: true,
 
         onSubmit: async (values) => {
             console.log("Values in onSubmit:", values);
             try {
-                const response = await fetch(`http://localhost:8080/combobuilding/material/create?materialTypeId=${materialTypeId}`, {
-                    method: 'POST',
+                const response = await fetch(`http://localhost:8080/combobuilding/material/update?materialId=${id}`, {
+                    method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values),
                     credentials: 'include', // Include credentials for cross-origin requests
                 });
-                
 
                 if (!response.ok) {
                     throw new Error(`API request failed with status ${response.status}`);
                 } else {
-                    console.log('Add successful:', values);
+                    console.log('Edit successful:', values);
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Material added successfully');
+                window.alert("Material updated successfully!");
                 navigate('/materialList');
             } catch (error) {
                 console.error('Error during submit:', error);
@@ -68,35 +90,14 @@ const AddMaterial = () => {
     setAnchorEl(null); // Close dropdown on selection or outside click
     };
 
-    const [materialTypes, setMaterialTypes] = useState([]);
-    useEffect(() => {
-        const fetchMaterialTypes = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/combobuilding/material-type/get', {
-                    method: 'GET',
-                    headers: {
-                        // 'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                const data = await response.json();
-                setMaterialTypes(data);
-            } catch (error) {
-                console.error('Error fetching material types:', error);
-            }
-        };
-
-        fetchMaterialTypes();
-    }, []); // Empty dependency array to fetch data only once on component mount
     const handleChanges = (event) => {
-        setMaterialTypeId(event.target.value);
+        formik.setFieldValue("status", event.target.value);
         console.log(event.target.value);
     }
 
     return (
         <Box m="20px">
-            <Header title="Add Material" subtitle="Create a New Material" />
+            <Header title="Edit Material" subtitle="Edit an Existing Material" />
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
@@ -111,27 +112,6 @@ const AddMaterial = () => {
                             "& > div": { gridColumn: isNonMobile ? undefined : "span 4"}, // if the screen is non-mobile, then the grid column will be span 4
                         }}
                         >
-                            <Box sx={{ gridColumn: "span 4" }}>
-                                <Typography variant="h6" gutterBottom>Material Type</Typography>
-                                <Select
-                                    labelId="material-type-label"
-                                    id="material-type"
-                                    defaultValue="" 
-                                    onChange={handleChanges}
-                                    error={!!touched.materialType && !!errors.materialType} // Add error logic
-                                    open={Boolean(anchorEl)} // Open dropdown based on state
-                                    onClose={handleClose} // Close dropdown on selection or outside click
-                                    onOpen={handleOpen} // Open dropdown on click
-                                    fullWidth={true}
-                                >
-                                    {/* get menu item name from api above */}
-                                    {materialTypes.map((materialType) => (
-                                        <MenuItem key={materialType.materialTypeId} value={materialType.materialTypeId}>
-                                            {materialType.typeName}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </Box>
                             <TextField
                             fullWidth
                             variant="filled"
@@ -158,17 +138,38 @@ const AddMaterial = () => {
                             helperText={touched.unitPrice && errors.unitPrice}
                             sx={{ gridColumn: "span 2"}}
                             />
-                            <Typography sx={{ gridColumn: "span 4"}} variant="h6" gutterBottom>
-                                Status: Active  
+                            <Typography sx={{ gridColumn: "span 4" }} variant="h6" gutterBottom>
+                                Previous Status: {formik.initialValues.status === "true" ? "Active" : "Inactive"}
                             </Typography>
                         </Box>
+                        <Box sx={{ gridColumn: "span 4" }}>
+                            <Select
+                                labelId="material-status-label"
+                                id="material-status"
+                                defaultValue="" 
+                                onChange={handleChanges}
+                                error={!!touched.materialID && !!errors.materialID} // Add error logic
+                                open={Boolean(anchorEl)} // Open dropdown based on state
+                                onClose={handleClose} // Close dropdown on selection or outside click
+                                onOpen={handleOpen} // Open dropdown on click
+                                fullWidth={true}
+                            >
+                                <MenuItem key={true} value={true}>
+                                    Active
+                                </MenuItem>
+                                <MenuItem key={false} value={false}>
+                                    Inactive
+                                </MenuItem>
+                            </Select>
+                        </Box>
+                        
                         <Box display="flex" justifyContent="end" mt="20px">
                             <Button onClick={() => navigate("/materialList")} color="secondary" variant="contained">
                                 Cancel
                             </Button>
                             <Box ml="10px"/>
                             <Button type="submit" color="secondary" variant="contained">
-                                Create New Material
+                                Edit Material
                             </Button>
                         </Box>
                         
@@ -179,4 +180,4 @@ const AddMaterial = () => {
     )
 }
 
-export default AddMaterial;
+export default EditMaterial;
