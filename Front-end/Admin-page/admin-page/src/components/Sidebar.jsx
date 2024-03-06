@@ -196,19 +196,19 @@ const Sidebarr = () => {
                             color={colors.grey[300]}
                             sx={{ m: "15px 0 5px 20px" }}
                         >
-                            Item in constructor
+                            Item In Constructor
                         </Typography>
                         <Item
                             title="Item List"
                             to="/itemList"
-                            icon={<PeopleOutlinedIcon />}
+                            icon={<FormatListBulletedOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
                             title="Item Type"
-                            to="/itemTypeList"
-                            icon={<PeopleOutlinedIcon />}
+                            to="/itemType"
+                            icon={<FormatListNumberedOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />

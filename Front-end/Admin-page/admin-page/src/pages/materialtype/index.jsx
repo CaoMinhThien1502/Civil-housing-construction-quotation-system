@@ -81,6 +81,23 @@ const MaterialType = () => {
                 </Link>
             ),
         },
+        {
+            field: "detail",
+            headerName: "Detail",
+            headerAlign: "center",
+            align: "center",
+            flex: 1,
+            renderCell: ({ row }) => (
+                <Link
+                    to={`/materialType/detail/${row.materialTypeId}`}
+                    style={{ textDecoration: 'none' }}
+                >
+                    <Button color="primary" variant="contained">
+                        Detail
+                    </Button>
+                </Link>
+            ),
+        },
     ];
 
     return (
