@@ -30,6 +30,15 @@ public class ItemTypeServiceImp implements ItemTypeService {
     }
 
     @Override
+    public ItemType findById(Long id) {
+        ItemType it = itemTypeRepository.findById(id)
+                .orElseThrow(
+                        () -> new IllegalStateException("Item Type with id " + id + " does not exists"));
+
+        return it;
+    }
+
+    @Override
     public List<ItemTypeDto> findItemTypeDtos() {
         List<ItemTypeDto> list = new ArrayList<>();
         for (ItemType it: itemTypeRepository.findAll()) {
