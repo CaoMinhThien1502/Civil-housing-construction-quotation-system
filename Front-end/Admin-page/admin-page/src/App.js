@@ -98,6 +98,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} /> */}
+              
               </Routes>
             </main>
           </div>
