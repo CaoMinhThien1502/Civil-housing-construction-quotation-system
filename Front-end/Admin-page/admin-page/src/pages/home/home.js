@@ -4,7 +4,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
+import UncontrolledExample from "../blog/blog";
 import appleIcon from "../../img/apple-touch-icon.png";
 import { ReactComponent as countImg } from "../../img/counts-img.svg";
 import favicon from "../../img/favicon.png";
@@ -31,7 +32,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'boxicons/css/boxicons.min.css';
 import 'glightbox/dist/css/glightbox.min.css';
 import 'remixicon/fonts/remixicon.css';
-
+import './TeamSection.css';
 import '../../styles/main/main.css';
 
 // Create a functional component for the header
@@ -195,7 +196,7 @@ const TeamSection = () => {
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services1} className="img-fluid" alt="" />
+                <img src={services1} style={{height: 240}} className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -204,20 +205,20 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
-                
-                <ul class="..">
-                  <li>Phòng ngủ</li>
-                  <li>Diện tích</li>
-                  <li></li>
+              <ul className="icon-list">
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
                 </ul>
-                <button>Đọc ngay</button>
+                {/* <button className="button-51" type="button">Đọc ngay</button> */}
+                <Link to="/blog" className="button-51">Đọc ngay</Link>
               </div>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services4} className="img-fluid" alt="" />
+                <img src={services4} style= {{height : 240}}className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -226,15 +227,19 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
-                <h4>Nội dung gì đó</h4>
-                <button>Đọc ngay</button>
+              <ul className="icon-list">
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                </ul>
+                <Link to="/blog" className="button-51">Đọc ngay</Link>
               </div>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services2} className="img-fluid" alt="" />
+                <img src={services2} style = {{height: 240 }}  className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -243,15 +248,19 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
-                <h4>Nội dung gì đó</h4>
-                <button>Đọc ngay</button>
+              <ul className="icon-list">
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                </ul>
+                <Link to="/blog" className="button-51">Đọc ngay</Link>
               </div>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services3} className="img-fluid" alt="" />
+                <img src={services3} style = {{height: 240}} className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -260,8 +269,12 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
-                <h4>Nội dung gì đó</h4>
-                <button>Đọc ngay</button>
+              <ul className="icon-list">
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                </ul>
+                <Link to="/blog" className="button-51">Đọc ngay</Link>
               </div>
             </div>
           </div>
@@ -273,6 +286,12 @@ const TeamSection = () => {
 };
 
 const PricingSection = () => {
+    const navigate = useNavigate();
+  
+    const redirectToPrice = (id) => {
+      // Navigate to /price with the id parameter
+      navigate(`/price?id=${id}`);
+    };
   return (
     <section id="pricing" className="pricing">
       <div className="container">
@@ -294,7 +313,14 @@ const PricingSection = () => {
                 <li className="na">Massa ultricies mi</li>
               </ul>
               <div className="btn-wrap">
-                <a href="#" className="btn-buy">Tham Khảo </a>
+              <button
+                id="button0"
+                data-id="0"
+                onClick={() => redirectToPrice(0)}
+                className="btn-buy"
+              >
+              Tham Khảo
+              </button>
               </div>
             </div>
           </div>
@@ -310,7 +336,14 @@ const PricingSection = () => {
                 <li className="na">Massa ultricies mi</li>
               </ul>
               <div className="btn-wrap">
-                <a href="#" className="btn-buy">Tham Khảo </a>
+              <button
+                id="button1"
+                data-id="1"
+                onClick={() => redirectToPrice(1)}
+                className="btn-buy"
+              >
+              Tham Khảo
+              </button>
               </div>
             </div>
           </div>
@@ -326,7 +359,14 @@ const PricingSection = () => {
                 <li className="na">Massa ultricies mi</li>
               </ul>
               <div className="btn-wrap">
-                <a href="#" className="btn-buy">Tham Khảo  </a>
+              <button
+                id="button2"
+                data-id="2"
+                onClick={() => redirectToPrice(2)}
+                className="btn-buy"
+              >
+              Tham Khảo
+              </button>
               </div>
             </div>
           </div>
@@ -431,4 +471,4 @@ const BackToTopButton = () => {
 
 
 // Export the component for use in other parts of your React application
-export { Header, HeroSection, AboutUsSection,PersonIn4, TeamSection, PricingSection, ContactSection, Footer, BackToTopButton };
+export { Header, HeroSection, AboutUsSection,PersonIn4, TeamSection, PricingSection, ContactSection, Footer, BackToTopButton  };

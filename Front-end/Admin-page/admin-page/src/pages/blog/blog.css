@@ -1,0 +1,16 @@
+/* yourStyles.css */
+.card-img-zoom {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-img-zoom:hover {
+  transform: scale(1.1);
+}
+/* Modal zoom */
+.modal-img-zoom {
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-img-zoom:hover {
+  transform: scale(2.6);
+}
