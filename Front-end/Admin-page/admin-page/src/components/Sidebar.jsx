@@ -200,7 +200,7 @@ const Sidebarr = () => {
                         </Typography>
                         <Item
                             title="Item List"
-                            to="/itemList"
+                            to="/item"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}

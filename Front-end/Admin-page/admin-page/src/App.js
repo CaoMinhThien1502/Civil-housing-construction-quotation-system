@@ -20,6 +20,7 @@ import AddMaterialType from './pages/materialtype/addMaterialType';
 import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
 import Login from './pages/login/login';
+import Item from "./pages/item";
 
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
@@ -75,6 +76,8 @@ function App() {
               <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
               <Route path="/materialType/:id" element={<EditMaterialType />} />
               <Route path="/form" element={<Form />} />
+
+              <Route path="/item" element={<Item />} />
               
               {/* 
               <Route path="/team" element={<Team />} />
