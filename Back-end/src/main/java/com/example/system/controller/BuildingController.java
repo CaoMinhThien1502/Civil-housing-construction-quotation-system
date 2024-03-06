@@ -71,6 +71,11 @@ public class BuildingController{
         List<Item> items = itemService.findALl();
         return ResponseEntity.ok(items);
     }
+    @GetMapping("/item/id")
+    public ResponseEntity<Item> getItemById(@RequestParam Long id){
+        Item it = itemService.findByItemId(id);
+        return ResponseEntity.ok(it);
+    }
     @PostMapping("/item/create")
     public ResponseEntity<Item> createItem(@RequestParam Long itemTypeId,@RequestBody Item item){
         Item newItem = itemService.createItem(itemTypeId,item);
