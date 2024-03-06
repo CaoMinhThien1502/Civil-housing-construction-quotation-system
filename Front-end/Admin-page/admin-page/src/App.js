@@ -6,28 +6,9 @@ import {
   BrowserRouter as Router,
   Routes,
   Route
-} from 'react-router-dom';
+} from 'react-router-dom' 
 
-import {
-  Header,
-  HeroSection,
-  AboutUsSection,
-  PersonIn4,
-  TeamSection,
-  PricingSection,
-  ContactSection,
-  Footer,
-  BackToTopButton
-} from './homepage/components1/home/home.js';
-
-import {
-  ConstructionForm, 
-  ConsultImg
-} from './homepage/components1/pricing/price.js';
-
-import UncontrolledExample from './homepage/components1/blog/blog.js';
-import ProfilePage from './homepage/components1/user/profile.js';
-
+import UncontrolledExample from './pages/blog/blog.js';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/dashboard';
@@ -43,7 +24,31 @@ import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
 import EditMaterialType from './pages/materialtype/editMaterialType';
+import EditMaterial from './pages/materiallist/editMaterial';
 import Login from './pages/login/login';
+
+// import Bar from "./pages/bar";
+// import Line from "./pages/line";
+// import Pie from "./pages/pie";
+// import FAQ from "./pages/faq";
+// import Geography from "./pages/geography";
+// import Calendar from "./pages/calendar/calendar";
+
+import {
+  Header,
+  HeroSection,
+  AboutUsSection,
+  PersonIn4,
+  TeamSection,
+  PricingSection,
+  ContactSection,
+  Footer,
+  BackToTopButton
+} from './pages/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
+import  {
+  ConstructionForm, 
+  ConsultImg
+} from './pages/pricing/price.js';
 
 function App() {
   const colorMode = ''/* some value */;
@@ -51,7 +56,13 @@ function App() {
 
   return (
     <ThemeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
+      {window.location.pathname !== '/login' 
+      && window.location.pathname !== '/' 
+      && window.location.pathname != '/home' 
+      && window.location.pathname != '/price'
+      && window.location.pathname != '/blog'
+      && (
+        <ThemeProvider theme={theme}>
         <CssBaseline />
           <div className="app">
             {window.location.pathname !== '/login' && window.location.pathname !== '/' && (
@@ -60,66 +71,80 @@ function App() {
             <main className="content">
               <Topbar />
               <Routes>
-                {/* Routes from the first file */}
-                {/* <Route path="/Login" element={<Login />} />
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/price" element={<PricePage />} />
-                <Route path="/blog" element={<UncontrolledExample />} />
-                <Route path="/profile" element={<Profile />} /> */}
+              <Route path="/dashboard" element={<Dashboard />} />
 
-                {/* Routes from the second file */}
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/team" element={<Team />} />
-                <Route path="/contacts" element={<Contacts />} />
-                <Route path="/invoices" element={<Invoices />} />
-                <Route path="/comboBuilding" element={<ComboBuilding />} />
-                <Route path="/comboBuilding/:id" element={<Combobuildingdetail />} />
-                <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
-                <Route path="/materialList" element={<MaterialList />} />
-                <Route path="/materialType" element={<MaterialType />} />
-                <Route path="/materialList/addMaterial" element={<AddMaterial />} />
-                <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
-                <Route path="/form" element={<Form />} />
+              <Route path="/comboBuilding" element={<ComboBuilding />} />
+              <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
+              <Route path="/comboBuilding/:id" element={<Combobuildingdetail />} />
+              
+              <Route path="/materialList" element={<MaterialList />} />
+              <Route path="/materialList/addMaterial" element={<AddMaterial />} />
+              <Route path="/materialList/:id" element={<EditMaterial />} />
+
+              <Route path="/materialType" element={<MaterialType />} />
+              <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
+              <Route path="/materialType/:id" element={<EditMaterialType />} />
+              <Route path="/form" element={<Form />} />
+              
+              {/* 
+              <Route path="/team" element={<Team />} />
+              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/invoices" element={<Invoices />} />
+              <Route path="/bar" element={<Bar />} />
+              <Route path="/materialtype" element={<MaterialType />} />
+              <Route path="/bar" element={<Bar />} />
+              <Route path="/pie" element={<Pie />} />
+              <Route path="/line" element={<Line />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/geography" element={<Geography />} /> */}
               </Routes>
             </main>
           </div>
-      </ThemeProvider>
+        </ThemeProvider>
+      )}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/price" element={<PricePage />} />
+        <Route path="/blog" element={<BlogPage />} />
+      </Routes>
     </ThemeContext.Provider>
   );
 }
-// // Remaining components from the first file
-// const HomePage = () => {
-//   return (
-//     <>
-//       <Header /> 
-//       <HeroSection />
-//       <AboutUsSection />
-//       <PersonIn4 />
-//       <TeamSection />
-//       <PricingSection />
-//       <ContactSection />
-//       <Footer />
-//       <BackToTopButton />
-//     </>
-//   );
-// };
 
-// const PricePage = () => {
-//   return (
-//     <>
-//       <ConstructionForm/>
-//       {/* <ConsultImg/> */}
-//     </>
-//   );
-// };
+const HomePage = () => {
+  return (
+    <>
+      <Header /> 
+      <HeroSection />
+      <AboutUsSection />
+      <PersonIn4 />
+      <TeamSection />
+      <PricingSection />
+      <ContactSection />
+      <Footer />
+      <BackToTopButton />
+    </>
+  );
+};
 
-// const Profile = () => {
-//   return (
-//     <>
-//       <ProfilePage/>
-//     </>
-//   );
-// };
+const PricePage = () => {
+  return (
+    <>
+      <ConstructionForm/>
+      {/* <ConsultImg/> */}
+    </>
+  );
+}
+const BlogPage = () => {
+  return (
+    <>
+      <UncontrolledExample/>
+    </>
+  );
+}
 
 export default App;
 

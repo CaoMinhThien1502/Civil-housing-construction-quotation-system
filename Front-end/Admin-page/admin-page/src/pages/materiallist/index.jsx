@@ -6,7 +6,7 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Team = () => {
     const [getMaterialList, setMaterialList] = useState([]);
@@ -76,13 +76,14 @@ const Team = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Button
-                    variant="contained"
-                    color="primary"
-                    // onRowClick={(event, row) => handleRowClick(row)}
+                <Link
+                    to={`/materialList/${row.materialId}`}
+                    style={{ textDecoration: 'none' }}
                 >
-                    Edit
-                </Button>
+                    <Button color="primary" variant="contained">
+                        Edit
+                    </Button>
+                </Link>
             ),
         },
     ];
