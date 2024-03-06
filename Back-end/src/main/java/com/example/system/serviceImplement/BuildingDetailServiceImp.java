@@ -39,7 +39,7 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
             BuildingDetail buildingDetail = new BuildingDetail();
             buildingDetail.setBuilding(building);
             buildingDetail.setItem(item);
-            return buildingDetailRepository.save(buildingDetail);
+            return buildingDetailRepository.saveAndFlush(buildingDetail);
         }catch (Exception e){
             return null;
         }

@@ -80,16 +80,19 @@ public class BuildingServiceImp implements BuildingService {
     @Override
     public Building createBuilding(BuildingDto buildingDto, Long comboId) {
         try{
-            ComboBuilding combo = comboRepository.findByComboBuildingId(comboId);
+            //ComboBuilding combo = comboRepository.findByComboBuildingId(comboId);
             Building newBuilding = new Building();
             newBuilding.setArea(buildingDto.getArea());
             newBuilding.setStatus(-1);
-            Building added = buildingRepository.save(newBuilding);
+            Building added = buildingRepository.saveAndFlush(newBuilding);
+            Set<BuildingDetail> buildingDetails = new HashSet<>();
             for (Long id: buildingDto.getItemIdList()){
                 Item item = itemRepository.findById(id)
                         .orElseThrow(() -> new IllegalStateException("Item with id " + id + " does not exists"));
-                buildingDetailService.createBuildingDetail(added,item);
+                BuildingDetail newBD = buildingDetailService.createBuildingDetail(newBuilding,item);
+                buildingDetails.add(newBD);
             }
+            added.setBuildingDetail(buildingDetails);
             return added;
         }catch (Exception e){
             return null;
