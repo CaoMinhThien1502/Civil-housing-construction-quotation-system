@@ -1,14 +1,8 @@
-import React from 'react';
-import { ThemeContext } from '@emotion/react';
-import { ThemeProvider } from '@emotion/react';
-import CssBaseline from '@mui/material/CssBaseline';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from 'react-router-dom' 
-
-import UncontrolledExample from './pages/blog/blog.js';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { ColorModeContext, useMode } from './theme';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/dashboard';
@@ -18,7 +12,7 @@ import Invoices from "./pages/invoices";
 import Form from "./pages/form";
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
-import MaterialType from './pages/materialtype';
+import MaterialType from "./pages/materialtype"
 import Combobuildingdetail from './pages/combobuilding/comboBuildingDetail';
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -51,23 +45,19 @@ import  {
 } from './pages/pricing/price.js';
 
 function App() {
-  const colorMode = ''/* some value */;
-  const theme = ''/* some value */;
-
+  const [theme, colorMode] = useMode();
+  const location = useLocation();
   return (
-    <ThemeContext.Provider value={colorMode}>
-      {window.location.pathname !== '/login' 
-      && window.location.pathname !== '/' 
-      && window.location.pathname != '/home' 
-      && window.location.pathname != '/price'
-      && window.location.pathname != '/blog'
+    <ColorModeContext.Provider value={colorMode}>
+      {location.pathname !== '/login' 
+      && location.pathname !== '/' 
+      && location.pathname != '/home' 
+      && location.pathname != '/price'
       && (
         <ThemeProvider theme={theme}>
         <CssBaseline />
           <div className="app">
-            {window.location.pathname !== '/login' && window.location.pathname !== '/' && (
-              <Sidebar />
-            )}
+            <Sidebar />
             <main className="content">
               <Topbar />
               <Routes>
@@ -98,6 +88,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} /> */}
+              
               </Routes>
             </main>
           </div>
@@ -108,9 +99,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/price" element={<PricePage />} />
-        <Route path="/blog" element={<BlogPage />} />
       </Routes>
-    </ThemeContext.Provider>
+    </ColorModeContext.Provider>
   );
 }
 
@@ -138,92 +128,7 @@ const PricePage = () => {
     </>
   );
 }
-const BlogPage = () => {
-  return (
-    <>
-      <UncontrolledExample/>
-    </>
-  );
-}
 
 export default App;
 
-// import { useState } from 'react';
-// import { useLocation } from 'react-router-dom';
-// import { Route, Routes } from 'react-router-dom';
-// import { ColorModeContext, useMode } from './theme';
-// import { CssBaseline, ThemeProvider } from '@mui/material';
-// import Topbar from './components/Topbar';
-// import Sidebar from './components/Sidebar';
-// import Dashboard from './pages/dashboard';
-// import Team from "./pages/team";
-// import Contacts from "./pages/contacts";
-// import Invoices from "./pages/invoices";
-// import Form from "./pages/form";
-// import ComboBuilding from "./pages/combobuilding";
-// import MaterialList from "./pages/materiallist";
-// import MaterialType from "./pages/materialtype"
-// import Combobuildingdetail from './pages/combobuilding/comboBuildingDetail';
-// import AddComboBuilding from './pages/combobuilding/addComboBuilding';
-// import AddMaterial from "./pages/materiallist/addMaterial";
-// import AddMaterialType from './pages/materialtype/addMaterialType';
-// import EditMaterialType from './pages/materialtype/editMaterialType';
-// import Login from './pages/login/login';
-
-// import AddDemo from './pages/combobuilding/addComboBuilding';
-
-// // import Bar from "./pages/bar";
-// // import Line from "./pages/line";
-// // import Pie from "./pages/pie";
-// // import FAQ from "./pages/faq";
-// // import Geography from "./pages/geography";
-// // import Calendar from "./pages/calendar/calendar";
-
-// function App() {
-//   const [theme, colorMode] = useMode();
-//   const location = useLocation();
-//   return (
-//     <ColorModeContext.Provider value={colorMode}>
-//       <ThemeProvider theme={theme}>
-//         <CssBaseline />
-//         {location.pathname !== '/login' && location.pathname !== '/' && (
-//           <div className="app">
-//             <Sidebar />
-//             <main className="content">
-//               <Topbar />
-//               <Routes>
-//               <Route path="/dashboard" element={<Dashboard />} />
-//               <Route path="/team" element={<Team />} />
-//               <Route path="/contacts" element={<Contacts />} />
-//               <Route path="/invoices" element={<Invoices />} />
-//               <Route path="/comboBuilding" element={<ComboBuilding />} />
-//               <Route path="/comboBuilding/:id" element={<Combobuildingdetail />} />
-//               <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
-//               <Route path="/materialList" element={<MaterialList />} />
-//               <Route path="/materialType" element={<MaterialType />} />
-//               <Route path="/materialType/:id" element={<EditMaterialType />} />
-//               <Route path="/materialList/addMaterial" element={<AddMaterial />} />
-//               <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
-//               <Route path="/form" element={<Form />} />
-//               {/* <Route path="/bar" element={<Bar />} />
-//               <Route path="/materialtype" element={<MaterialType />} />
-//               <Route path="/bar" element={<Bar />} />
-//               <Route path="/pie" element={<Pie />} />
-//               <Route path="/line" element={<Line />} />
-//               <Route path="/faq" element={<FAQ />} />
-//               <Route path="/calendar" element={<Calendar />} />
-//               <Route path="/geography" element={<Geography />} /> */}
-//               </Routes>
-//             </main>
-//           </div>
-//         )}
-//         <Routes>
-//           <Route path="/" element={<Login />} />
-//           <Route path="/login" element={<Login />} />
-//         </Routes>
-//       </ThemeProvider>
-//     </ColorModeContext.Provider>
-//   );
-// }
-
-// export default App;
+// pls don't change anything related to logical code
