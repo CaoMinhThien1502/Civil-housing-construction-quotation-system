@@ -13,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemTypeDto {
+    private  Long itemTypeId;
     private String itemTypeName;
     private Set<Long> itemIds;
     private boolean status;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import {
@@ -26,9 +27,8 @@ const Login = () => {
         password: password,
       }, { withCredentials: true });
 
-      console.log("Response status:", response.status);
-      console.log("Response data:", response.data);
-
+      const token = jwtDecode(response.data.access_Token)
+      
       if (response.status === 200) {
         if (!response.data) {
           console.log("Đăng nhập thành công (không có dữ liệu)!");
@@ -51,7 +51,7 @@ const Login = () => {
       }
     }
   };
-
+  
   return (
 
     <MDBContainer fluid className="p-3 my-5">

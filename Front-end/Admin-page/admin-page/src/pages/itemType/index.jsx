@@ -7,12 +7,12 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-const Item = () => {
-    const [getItemList, setItemlList] = useState([]);
+const ItemType = () => {
+    const [getItemTypeList, setItemTypelList] = useState([]);
     useEffect(() => {
-        const fetchItemList = async () => {
+        const fetchIteTypelList = async () => {
             try {
-                const response = await fetch('http://localhost:8080/building/item/list', {
+                const response = await fetch('http://localhost:8080/building/item-type/list', {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -21,16 +21,16 @@ const Item = () => {
                 });
 
                 const data = await response.json();
-                setItemlList(data);
+                setItemTypelList(data);
             } catch (error) {
                 console.error('Error fetching items:', error);
             }
         };
 
-        fetchItemList();
+        fetchIteTypelList();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-    console.log(getItemList);
+    console.log(getItemTypeList);
 
     const navigate = useNavigate();
     // const handleRowClick = (row) => {
@@ -41,20 +41,15 @@ const Item = () => {
     const colors = tokens(theme.palette.mode);
     const columns = [
         { 
-            field: "itemId", 
+            field: "itemTypeId", 
             headerName: "ID",
             headerAlign: "center",
             align: "center",
         },
         {
-            field: "itemName",
+            field: "itemTypeName",
             headerName: "Item Name",
             cellClassName: "name-column--cell",
-            flex: 1,
-        },
-        {
-            field: "priceItem",
-            headerName: "Price",
             flex: 1,
         },
         {
@@ -75,7 +70,7 @@ const Item = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Link                    to={`/item/${row.itemId}`}
+                <Link                    to={`/itemType/${row.itemTypeId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
@@ -84,11 +79,28 @@ const Item = () => {
                 </Link>
             ),
         },
+        {
+            field: "detail",
+            headerName: "Detail",
+            headerAlign: "center",
+            align: "center",
+            flex: 1,
+            renderCell: ({ row }) => (
+                <Link
+                    to={`/itemType/detail/${row.itemTypeId}`}
+                    style={{ textDecoration: 'none' }}
+                >
+                    <Button color="primary" variant="contained">
+                        Detail
+                    </Button>
+                </Link>
+            ),
+        },
     ];
 
     return (
         <Box m="20px">
-            <Header title="Item List" subtitle="Managing the Item List" />
+            <Header title="Item type List" subtitle="Managing the Item type List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -122,14 +134,14 @@ const Item = () => {
                 }}
             >
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/item/addItem")} color="secondary" variant="contained">
-                        Add Item
+                    <Button onClick={() => navigate("/itemType/addItemType")} color="secondary" variant="contained">
+                        Add Item type
                     </Button>
                 </Box>
                 <DataGrid
-                    rows={getItemList}
+                    rows={getItemTypeList}
                     columns={columns}
-                    getRowId={(row) => row.itemId}
+                    getRowId={(row) => row.itemTypeId}
                     components={{ Toolbar: GridToolbar }}
                 />
             </Box>
@@ -137,4 +149,4 @@ const Item = () => {
     );
 };
 
-export default Item;
+export default ItemType;

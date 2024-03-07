@@ -54,8 +54,8 @@ public class ComboBuildingController {
     }
     // ------Material controller------
     @GetMapping("/material/get")
-    public ResponseEntity<List<Material>> getMaterial(){
-        List<Material> list = materialService.getListMaterial();
+    public ResponseEntity<List<MaterialDto>> getMaterial(){
+        List<MaterialDto> list = materialService.getListMaterial();
         return ResponseEntity.ok(list);
     }
     @GetMapping("/material/getByMaterialType")

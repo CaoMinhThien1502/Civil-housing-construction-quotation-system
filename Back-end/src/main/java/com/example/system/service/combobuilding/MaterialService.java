@@ -6,7 +6,7 @@ import com.example.system.model.combo.Material;
 import java.util.List;
 
 public interface MaterialService {
-    List<Material> getListMaterial();
+    List<MaterialDto> getListMaterial();
 
     Material getById(Long materialId);
     boolean createMaterial(Long materialTypeId, MaterialDto material);
