@@ -57,7 +57,7 @@ public class UserServiceImp implements UserService {
             profile.setAddress(user.getAddress());
             profile.setBirthday(user.getBirthday());
             profile.setUserId(user.getUserId());
-            profile.setFullName(user.getUsername());
+            profile.setFullName(user.getName());
             profile.setEmail(user.getEmail());
             profile.setGender(user.isGender());
             profile.setPhone(user.getPhone());

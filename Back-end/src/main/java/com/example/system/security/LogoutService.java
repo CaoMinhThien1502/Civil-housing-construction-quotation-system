@@ -34,6 +34,9 @@ public class LogoutService implements LogoutHandler {
             HttpServletResponse response,
             Authentication authentication
     ) {
+        // Xóa dữ liệu từ localStorage
+        response.setHeader("Clear-Site-Data", "\"localStorage\"");
+
         final String jwt;
         if (extractRefreshTokenFromCookie(request) == null){
             return;

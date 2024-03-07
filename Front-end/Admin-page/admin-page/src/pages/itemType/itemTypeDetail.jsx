@@ -11,11 +11,11 @@ import axios from 'axios';
 
 const ItemTypeDetail = () => {
     const {id} = useParams();
-    const [materialData, setMaterialData] = useState([]);
+    const [item, setItem] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:8080/combobuilding/material/getByMaterialType?materialTypeId=${id}`)
+        axios.get(`http://localhost:8080/building/item-type/id?typeId=${id}`)
             .then(response => {
-                setMaterialData(response.data);
+                setItem(response.data);
             })
             .catch(error => {
                 console.error('Error fetching material data:', error);
