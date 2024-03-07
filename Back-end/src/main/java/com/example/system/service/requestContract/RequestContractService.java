@@ -9,13 +9,12 @@ import java.util.List;
 
 public interface RequestContractService {
     RequestContract getByBuilding(Building building);
-
     List<RequestContract> findAll();
     List<RequestContractDto> findAllDto();
-
+    List<RequestContractDto> findDtosByUserId(Long userid);
+    RequestContractDto findById(Long rcId);
     RequestContractDto getRequestContractDto(RequestContract rc);
     RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId);
-
     RequestContractDto confirmRequestContract(Long rcId);
     RequestContract updateRequestContract(RequestContract requestContract);
 }
