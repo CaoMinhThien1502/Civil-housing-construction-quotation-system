@@ -12,4 +12,5 @@ import lombok.Setter;
 public class ComboFormConsultantDto {
     private Long comboBuildingId;
     private String comboBuildingName;
+    private double comboPrice;
 }
