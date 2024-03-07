@@ -59,6 +59,11 @@ const Team = () => {
             flex: 1,
         },
         {
+            field: "materialTypeName",
+            headerName: "Type",
+            flex: 1,
+        },
+        {
             field: "status",
             headerName: "Status",
             headerAlign: "center",

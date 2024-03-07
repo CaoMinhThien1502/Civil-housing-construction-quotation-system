@@ -2,8 +2,6 @@ package com.example.system.service.building;
 
 
 import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
-import com.example.system.dto.buildingdto.ItemTypeDto;
-import com.example.system.model.building.Item;
 
 import com.example.system.model.building.ItemType;
 

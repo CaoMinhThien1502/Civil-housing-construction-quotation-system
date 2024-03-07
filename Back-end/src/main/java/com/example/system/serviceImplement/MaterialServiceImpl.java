@@ -9,6 +9,7 @@ import com.example.system.service.combobuilding.MaterialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,8 +18,20 @@ public class MaterialServiceImpl implements MaterialService {
     private final MaterialRepository materialRepository;
     private final MaterialTypeRepository materialTypeRepository;
     @Override
-    public List<Material> getListMaterial() {
-        return materialRepository.findAll();
+    public List<MaterialDto> getListMaterial() {
+        List<Material> materials = materialRepository.findAll();
+        MaterialDto materialDto;
+        List<MaterialDto> materialDtos = new ArrayList<>();
+        for (Material m:materials) {
+            materialDto = new MaterialDto();
+            materialDto.setMaterialId(m.getMaterialId());
+            materialDto.setMaterialName(m.getMaterialName());
+            materialDto.setUnitPrice(m.getUnitPrice());
+            materialDto.setMaterialTypeName(m.getMaterialType().getTypeName());
+            materialDto.setStatus(m.isStatus());
+            materialDtos.add(materialDto);
+        }
+        return materialDtos;
     }
 
     @Override

@@ -27,6 +27,8 @@
     "boxicons": "^2.1.4",
     "formik": "^2.4.5",
     "glightbox": "^3.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "mdb-react-ui-kit": "^7.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",

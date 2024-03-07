@@ -79,6 +79,23 @@ const ItemType = () => {
                 </Link>
             ),
         },
+        {
+            field: "detail",
+            headerName: "Detail",
+            headerAlign: "center",
+            align: "center",
+            flex: 1,
+            renderCell: ({ row }) => (
+                <Link
+                    to={`/itemType/detail/${row.itemTypeId}`}
+                    style={{ textDecoration: 'none' }}
+                >
+                    <Button color="primary" variant="contained">
+                        Detail
+                    </Button>
+                </Link>
+            ),
+        },
     ];
 
     return (

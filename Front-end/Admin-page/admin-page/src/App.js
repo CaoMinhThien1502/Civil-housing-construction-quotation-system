@@ -27,12 +27,14 @@ import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
 
 import Login from './pages/login/login';
+
 import Item from './pages/item';
 import EditItem from './pages/item/editItem';
 import AddItem from './pages/item/addItem';
 import ItemType from './pages/itemType';
 import AddItemType from './pages/itemType/addItemType';
 import EditItemType from './pages/itemType/editItemType';
+import ItemTypeDetail from './pages/itemType/itemTypeDetail';
 
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
@@ -98,6 +100,7 @@ function App() {
               <Route path="/itemType" element={<ItemType />} />
               <Route path="/itemType/:id" element={<EditItemType />} />
               <Route path="/itemType/addItemType" element={<AddItemType />} />
+              <Route path="/itemType/itemTypeDetail" element={<ItemTypeDetail />} />
               
               {/* 
               <Route path="/team" element={<Team />} />

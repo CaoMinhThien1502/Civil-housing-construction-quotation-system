@@ -95,6 +95,7 @@ public class UserServiceImp implements UserService {
         try{
             User u = userRepository.findByUserId(id);
             u.setRole(role);
+            userRepository.save(u);
             UserDto dto = new UserDto(u.getUserId(), u.getName(),"", u.getEmail(), u.getRole(),u.getPhone(),u.getAddress(),u.getBirthday(),u.isGender(),u.isStatus());
             return dto;
         }catch (Exception e){

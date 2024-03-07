@@ -43,6 +43,7 @@ public class SecurityConfiguration {
 
 
         http
+
                 .cors(c -> c
                         .configurationSource(request -> {
                             CorsConfiguration config = new CorsConfiguration();
@@ -56,9 +57,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
+                                .requestMatchers(HttpMethod.POST,"/api/v1/auth/refresh-token").permitAll()
                                 //User
                                 .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
-                                .requestMatchers(HttpMethod.PUT, "/profile/update").hasRole(Role.CUSTOMER.name())
+                                .requestMatchers(HttpMethod.PUT, "/user/profile/update").hasRole(Role.CUSTOMER.name())
+                                .requestMatchers(HttpMethod.PUT, "/user/update-role").hasRole(Role.ADMIN.name())
                                 //Combo building
                                 .requestMatchers(HttpMethod.GET, "/combobuilding/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())

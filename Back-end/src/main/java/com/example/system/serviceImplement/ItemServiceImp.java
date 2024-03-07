@@ -1,5 +1,6 @@
 package com.example.system.serviceImplement;
 
+import com.example.system.dto.buildingdto.itemdto.ItemDto;
 import com.example.system.dto.buildingdto.itemdto.ItemUpdateDto;
 import com.example.system.dto.buildingdto.itemtypedto.ItemTypeNameDto;
 import com.example.system.model.building.Building;
@@ -26,8 +27,15 @@ public class ItemServiceImp implements ItemService {
     @Autowired
     BuildingDetailRepository buildingDetailRepository;
     @Override
-    public List<Item> findALl() {
-        return itemRepository.findAll();
+    public List<ItemDto> findALl() {
+        List<Item> items = itemRepository.findAll();
+        List<ItemDto> itemDtos = new ArrayList<>();
+        ItemDto itemDto;
+        for (Item i: items) {
+            itemDto = new ItemDto(i.getItemId(), i.getItemName(), i.getPriceItem(), i.isStatus(), i.getItemType().getItemTypeName());
+            itemDtos.add(itemDto);
+        }
+        return itemDtos;
     }
 
     @Override

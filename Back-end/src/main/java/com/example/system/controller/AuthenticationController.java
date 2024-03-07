@@ -134,30 +134,11 @@ public class AuthenticationController {
     }
 
         @GetMapping("confirm")
-        public ResponseEntity<?> confirm(@RequestParam("token") String token){
+        public ResponseEntity<?> confirm(@RequestParam("token") String token) {
             boolean confirm = authenticationService.confirmToken(token);
-            if(confirm){
+            if (confirm) {
                 return ResponseEntity.status(200).body("Active account successfully");
             }
             return ResponseEntity.status(400).body("Link expired");
         }
-/*    @GetMapping("confirm")
-    public ResponseEntity<?> confirm(@RequestParam("token") String token) {
-        boolean confirm = authenticationService.confirmToken(token);
-        if (confirm) {
-            // Trả về mã trạng thái 302 và URL của trang chủ
-            return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/home").build();
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Link expired");
-    }*/
-
-
-
-/*    @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    Authentication authentication){
-        logoutService.logout(request, response, authentication);
-        return ResponseEntity.ok().body("Logout successfully");
-    }*/
 }
