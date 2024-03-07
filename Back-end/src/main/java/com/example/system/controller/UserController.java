@@ -29,15 +29,15 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<UserDto> getProfile(HttpServletRequest request){
-        //UserDto profile = userService.getProfile();
-        UserDto profile = userService.getUserLoginFromJWT(request);
+    public ResponseEntity<UserDto> getProfile(@RequestParam String email){
+        UserDto profile = userService.getProfile(email);
+        //UserDto profile = userService.getUserLoginFromJWT(request);
         return ResponseEntity.ok(profile);
     }
 
     @PutMapping("/profile/update")
-    public ResponseEntity<UserDto> updateProfile(@RequestBody UserDto dto, HttpServletRequest request){
-        UserDto profile = userService.updateProfile(dto, request);
+    public ResponseEntity<UserDto> updateProfile(@RequestBody UserDto dto, @RequestParam String email){
+        UserDto profile = userService.updateProfile(dto, email);
         return ResponseEntity.ok(profile);
     }
 

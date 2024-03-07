@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import {
@@ -11,12 +12,14 @@ import {
   MDBInput,
   MDBCheckbox
 } from 'mdb-react-ui-kit';
+import Header from '../../components/Header';
 
 const Login = () => {
   const navigate = useNavigate(); // Đảm bảo sử dụng useNavigate trong functional component
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [status,setStatus] = useState(0);
 
   const login = async (e) => {
     e.preventDefault();
@@ -26,16 +29,19 @@ const Login = () => {
         password: password,
       }, { withCredentials: true });
 
-      console.log("Response status:", response.status);
-      console.log("Response data:", response.data);
-
+      const token = jwtDecode(response.data.access_Token)
+      
       if (response.status === 200) {
-        if (!response.data) {
-          console.log("Đăng nhập thành công (không có dữ liệu)!");
+        setStatus(200);
+        if (response.data.role === "CUSTOMER") {
+          console.log (response.data.role);
+          console.log("Hello Customer");
           //navigate("/home");
-          navigate("/dashboard");
-        } else {
-          console.log("Đăng nhập thành công!");
+          <Header status={status} />
+
+          navigate("/home");}
+        else {
+          console.log("Hello Admin");
           navigate("/dashboard");
         }
       } else {
@@ -51,7 +57,7 @@ const Login = () => {
       }
     }
   };
-
+  
   return (
 
     <MDBContainer fluid className="p-3 my-5">

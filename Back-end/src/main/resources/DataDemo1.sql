@@ -1157,3 +1157,54 @@ INSERT INTO combo_detail(combo_building_id,material_id) VALUES (19,137);
 INSERT INTO combo_detail(combo_building_id,material_id) VALUES (19,138);
 INSERT INTO combo_detail(combo_building_id,material_id) VALUES (19,141);
 
+INSERT INTO building(area, status) VALUES (125, -1);
+INSERT INTO building(area, status) VALUES (230, 0);
+INSERT INTO building(area, status) VALUES (114, 1);
+INSERT INTO building(area, status) VALUES (152, 2);
+INSERT INTO building(area, status) VALUES (225, 1);
+INSERT INTO building(area, status) VALUES (180, 2);
+INSERT INTO building(area, status) VALUES (220, -1);
+
+INSERT INTO building_detail(building_id, item_id) VALUES (1,1);
+INSERT INTO building_detail(building_id, item_id) VALUES (1,6);
+INSERT INTO building_detail(building_id, item_id) VALUES (1,12);
+INSERT INTO building_detail(building_id, item_id) VALUES (1,19);
+INSERT INTO building_detail(building_id, item_id) VALUES (1,20);
+INSERT INTO building_detail(building_id, item_id) VALUES (2,5);
+INSERT INTO building_detail(building_id, item_id) VALUES (2,9);
+INSERT INTO building_detail(building_id, item_id) VALUES (2,12);
+INSERT INTO building_detail(building_id, item_id) VALUES (2,18);
+INSERT INTO building_detail(building_id, item_id) VALUES (2,21);
+INSERT INTO building_detail(building_id, item_id) VALUES (3,1);
+INSERT INTO building_detail(building_id, item_id) VALUES (3,6);
+INSERT INTO building_detail(building_id, item_id) VALUES (3,11);
+INSERT INTO building_detail(building_id, item_id) VALUES (3,17);
+INSERT INTO building_detail(building_id, item_id) VALUES (3,23);
+INSERT INTO building_detail(building_id, item_id) VALUES (4,3);
+INSERT INTO building_detail(building_id, item_id) VALUES (4,6);
+INSERT INTO building_detail(building_id, item_id) VALUES (4,11);
+INSERT INTO building_detail(building_id, item_id) VALUES (4,19);
+INSERT INTO building_detail(building_id, item_id) VALUES (5,4);
+INSERT INTO building_detail(building_id, item_id) VALUES (5,8);
+INSERT INTO building_detail(building_id, item_id) VALUES (5,16);
+INSERT INTO building_detail(building_id, item_id) VALUES (5,18);
+INSERT INTO building_detail(building_id, item_id) VALUES (5,22);
+INSERT INTO building_detail(building_id, item_id) VALUES (6,3);
+INSERT INTO building_detail(building_id, item_id) VALUES (6,6);
+INSERT INTO building_detail(building_id, item_id) VALUES (6,13);
+INSERT INTO building_detail(building_id, item_id) VALUES (6,19);
+INSERT INTO building_detail(building_id, item_id) VALUES (6,20);
+INSERT INTO building_detail(building_id, item_id) VALUES (7,4);
+INSERT INTO building_detail(building_id, item_id) VALUES (7,6);
+INSERT INTO building_detail(building_id, item_id) VALUES (7,19);
+INSERT INTO building_detail(building_id, item_id) VALUES (7,23);
+
+
+INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(false, '2023-10-23', 7, 1, 4);
+INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(true, '2023-11-03', 1, 2, 6);
+INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(true, '2019-10-21', 15, 3, 6);
+INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(false, '2023-03-07', 18, 4, 4);
+INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(true, '2022-10-11', 3, 5, 1);
+INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(true, '2024-03-08', 10, 6, 2);
+INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(false, '2024-02-29', 14, 7, 3);
+

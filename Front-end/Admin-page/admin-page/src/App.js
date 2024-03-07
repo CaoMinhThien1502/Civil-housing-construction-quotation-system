@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/dashboard';
+import UncontrolledExample from './pages/blog/blog.js';
 import Team from "./pages/team";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
@@ -27,8 +28,17 @@ import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
 
 import Login from './pages/login/login';
-import Item from "./pages/item";
 
+import Item from './pages/item';
+import EditItem from './pages/item/editItem';
+import AddItem from './pages/item/addItem';
+import ItemType from './pages/itemType';
+import AddItemType from './pages/itemType/addItemType';
+import EditItemType from './pages/itemType/editItemType';
+import ItemTypeDetail from './pages/itemType/itemTypeDetail';
+
+import Detail from './pages/pricing/detail.js';
+import ProfilePage from './pages/profile/profile.js';
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
 // import Pie from "./pages/pie";
@@ -61,6 +71,9 @@ function App() {
       && location.pathname !== '/' 
       && location.pathname != '/home' 
       && location.pathname != '/price'
+      && location.pathname != '/blog'
+      && location.pathname != '/detail'
+      && location.pathname != '/profile'
       && (
         <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -87,6 +100,13 @@ function App() {
               <Route path="/form" element={<Form />} />
 
               <Route path="/item" element={<Item />} />
+              <Route path="/item/:id" element={<EditItem />} />
+              <Route path="/item/addItem" element={<AddItem />} />
+
+              <Route path="/itemType" element={<ItemType />} />
+              <Route path="/itemType/:id" element={<EditItemType />} />
+              <Route path="/itemType/addItemType" element={<AddItemType />} />
+              <Route path="/itemType/itemTypeDetail" element={<ItemTypeDetail />} />
               
               {/* 
               <Route path="/team" element={<Team />} />
@@ -107,10 +127,13 @@ function App() {
         </ThemeProvider>
       )}
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/price" element={<PricePage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/detail" element={<Detail/>} />
+        <Route path="/profile" element={<ProfilePage/>} />
       </Routes>
     </ColorModeContext.Provider>
   );
@@ -140,6 +163,15 @@ const PricePage = () => {
     </>
   );
 }
+
+const BlogPage = () => {
+  return (
+    <>
+      <UncontrolledExample/>
+    </>
+  );
+}
+
 
 export default App;
 

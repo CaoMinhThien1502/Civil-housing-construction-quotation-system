@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Item = () => {
     const [getItemList, setItemlList] = useState([]);
     useEffect(() => {
-        const fetchMaterialList = async () => {
+        const fetchItemList = async () => {
             try {
                 const response = await fetch('http://localhost:8080/building/item/list', {
                     method: 'GET',
@@ -27,7 +27,7 @@ const Item = () => {
             }
         };
 
-        fetchMaterialList();
+        fetchItemList();
     }, []); // Empty dependency array to fetch data only once on component mount
 
     console.log(getItemList);
@@ -55,6 +55,11 @@ const Item = () => {
         {
             field: "priceItem",
             headerName: "Price",
+            flex: 1,
+        },
+        {
+            field: "itemTypeName",
+            headerName: "Item Type",
             flex: 1,
         },
         {
@@ -88,7 +93,7 @@ const Item = () => {
 
     return (
         <Box m="20px">
-            <Header title="Material List" subtitle="Managing the Material List" />
+            <Header title="Item List" subtitle="Managing the Item List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -122,8 +127,8 @@ const Item = () => {
                 }}
             >
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/materialList/addMaterial")} color="secondary" variant="contained">
-                        Add Material
+                    <Button onClick={() => navigate("/item/addItem")} color="secondary" variant="contained">
+                        Add Item
                     </Button>
                 </Box>
                 <DataGrid

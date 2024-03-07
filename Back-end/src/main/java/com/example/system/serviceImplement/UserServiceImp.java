@@ -31,16 +31,16 @@ public class UserServiceImp implements UserService {
             List<UserDto> dtos = new ArrayList<>();
             for (User u: users
                  ) {
-                UserDto dto = new UserDto();
+                UserDto dto = getProfile(u.getEmail());
                 dto.setUserId(u.getUserId());
-                dto.setEmail(u.getEmail());
-                dto.setGender(u.isGender());
-                dto.setPhone(u.getPhone());
-                dto.setAddress(u.getAddress());
-                dto.setBirthday(u.getBirthday());
-                dto.setRole(u.getRole());
-                dto.setFullName(u.getName());
-                dto.setStatus(u.isStatus());
+//                dto.setEmail(u.getEmail());
+//                dto.setGender(u.isGender());
+//                dto.setPhone(u.getPhone());
+//                dto.setAddress(u.getAddress());
+//                dto.setBirthday(u.getBirthday());
+//                dto.setRole(u.getRole());
+//                dto.setFullName(u.getName());
+//                dto.setStatus(u.isStatus());
                 dtos.add(dto);
             }
             return dtos;
@@ -50,31 +50,29 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDto getProfile() {
-        UserDto profile = new UserDto();
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findByName(userDetails.getUsername());
-        profile.setAddress(user.getAddress());
-        profile.setBirthday(user.getBirthday());
-        profile.setUserId(user.getUserId());
-        profile.setFullName(user.getUsername());
-        profile.setEmail(user.getEmail());
-        profile.setGender(user.isGender());
-        profile.setPhone(user.getPhone());
-        profile.setRole(user.getRole());
-        profile.setStatus(user.isStatus());
-        return profile;
+    public UserDto getProfile(String email) {
+        try{
+            User user = userRepository.findByEmail(email).orElseThrow();
+            UserDto profile = new UserDto();
+            profile.setAddress(user.getAddress());
+            profile.setBirthday(user.getBirthday());
+            profile.setUserId(user.getUserId());
+            profile.setFullName(user.getUsername());
+            profile.setEmail(user.getEmail());
+            profile.setGender(user.isGender());
+            profile.setPhone(user.getPhone());
+            profile.setRole(user.getRole());
+            profile.setStatus(user.isStatus());
+            return profile;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override
-    public UserDto updateProfile(UserDto dto, HttpServletRequest request) {
+    public UserDto updateProfile(UserDto dto, String email) {
         try {
-            String accessTokenFromCookie = jwtService.extractAccessTokenFromCookie(request);
-            if(accessTokenFromCookie == null){
-                return null;
-            }
-            String userEmail = jwtService.extractUsername(accessTokenFromCookie);
-            User user = userRepository.findByEmail(userEmail).orElseThrow();
+            User user = userRepository.findByEmail(email).orElseThrow();
             user.setAddress(dto.getAddress());
             user.setGender(dto.isGender());
             user.setEmail(dto.getEmail());
@@ -82,12 +80,10 @@ public class UserServiceImp implements UserService {
             user.setPhone(dto.getPhone());
             user.setName(dto.getFullName());
             userRepository.save(user);
-            return getUserLoginFromJWT(request);
+            return getProfile(email);
         } catch (Exception e) {
             return null;
         }
-
-
     }
 
     @Override
