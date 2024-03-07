@@ -1,6 +1,6 @@
 package com.example.system.serviceImplement;
 
-import com.example.system.dto.buildingdto.ItemTypeDto;
+import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
 import com.example.system.repository.building.ItemRepository;

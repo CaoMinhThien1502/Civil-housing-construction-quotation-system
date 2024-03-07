@@ -1,5 +1,6 @@
 package com.example.system.dto.buildingdto;
 
+import com.example.system.dto.buildingdto.itemtypedto.ItemTypeFCDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

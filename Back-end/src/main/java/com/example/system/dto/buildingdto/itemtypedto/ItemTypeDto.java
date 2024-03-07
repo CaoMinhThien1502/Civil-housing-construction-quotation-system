@@ -1,18 +1,20 @@
-package com.example.system.dto.buildingdto;
+package com.example.system.dto.buildingdto.itemtypedto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemTypeFCDto {
+public class ItemTypeDto {
+    private  Long itemTypeId;
     private String itemTypeName;
-    private List<ItemDto> itemList;
+    private Set<Long> itemIds;
+    private boolean status;
 }
