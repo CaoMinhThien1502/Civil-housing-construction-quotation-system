@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/dashboard';
+import UncontrolledExample from './pages/blog/blog.js';
 import Team from "./pages/team";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
@@ -36,6 +37,8 @@ import AddItemType from './pages/itemType/addItemType';
 import EditItemType from './pages/itemType/editItemType';
 import ItemTypeDetail from './pages/itemType/itemTypeDetail';
 
+import Detail from './pages/pricing/detail.js';
+import ProfilePage from './pages/profile/profile.js';
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
 // import Pie from "./pages/pie";
@@ -68,6 +71,9 @@ function App() {
       && location.pathname !== '/' 
       && location.pathname != '/home' 
       && location.pathname != '/price'
+      && location.pathname != '/blog'
+      && location.pathname != '/detail'
+      && location.pathname != '/profile'
       && (
         <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -121,10 +127,13 @@ function App() {
         </ThemeProvider>
       )}
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/price" element={<PricePage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/detail" element={<Detail/>} />
+        <Route path="/profile" element={<ProfilePage/>} />
       </Routes>
     </ColorModeContext.Provider>
   );
@@ -154,6 +163,15 @@ const PricePage = () => {
     </>
   );
 }
+
+const BlogPage = () => {
+  return (
+    <>
+      <UncontrolledExample/>
+    </>
+  );
+}
+
 
 export default App;
 
