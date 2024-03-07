@@ -1,4 +1,4 @@
-package com.example.system.dto.buildingdto;
+package com.example.system.dto.buildingdto.itemdto;
 
 
 import lombok.AllArgsConstructor;
