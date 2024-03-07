@@ -45,9 +45,9 @@ public class RequestContractController {
         return ResponseEntity.ok(list);
     }
     @PostMapping("/request-contract/create")
-    public ResponseEntity<RequestContractDto> createRequestContract(@RequestBody BuildingDto bdto, @RequestParam Long comboId, HttpServletRequest request){
+    public ResponseEntity<RequestContractDto> createRequestContract(@RequestBody BuildingDto bdto, @RequestParam Long comboId, @RequestParam String email){
         //User auth = new User();
-        UserDto udto = userService.getUserLoginFromJWT(request);
+        UserDto udto = userService.getProfile(email);
         RequestContractDto dto = requestContractService.createRequestContract(bdto, comboId, udto.getUserId());
         return ResponseEntity.ok(dto);
     }
