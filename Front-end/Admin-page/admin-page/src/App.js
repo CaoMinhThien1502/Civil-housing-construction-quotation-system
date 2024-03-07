@@ -11,16 +11,25 @@ import Team from "./pages/team";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
 import Form from "./pages/form";
+
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
-import Combobuildingdetail from './pages/combobuilding/comboBuildingDetail';
+
+import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
+import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
+
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
+
+import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
+
 import Login from './pages/login/login';
+import Item from "./pages/item";
+
 import Detail from './pages/pricing/detail.js';
 import ProfilePage from './pages/profile/profile.js';
 // import Bar from "./pages/bar";
@@ -70,7 +79,8 @@ function App() {
 
               <Route path="/comboBuilding" element={<ComboBuilding />} />
               <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
-              <Route path="/comboBuilding/:id" element={<Combobuildingdetail />} />
+              <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
+              <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
               
               <Route path="/materialList" element={<MaterialList />} />
               <Route path="/materialList/addMaterial" element={<AddMaterial />} />
@@ -79,7 +89,10 @@ function App() {
               <Route path="/materialType" element={<MaterialType />} />
               <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
               <Route path="/materialType/:id" element={<EditMaterialType />} />
+              <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
               <Route path="/form" element={<Form />} />
+
+              <Route path="/item" element={<Item />} />
               
               {/* 
               <Route path="/team" element={<Team />} />
@@ -100,7 +113,7 @@ function App() {
         </ThemeProvider>
       )}
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/price" element={<PricePage />} />

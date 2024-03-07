@@ -6,16 +6,13 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-
-
-const ComboBuilding = () => {
-    const [getComboBuilding, setComboBuildings] = useState([]);
-    const [selectedRowIds, setSelectedRowIds] = useState([]);
+import { Link, useNavigate } from 'react-router-dom';
+const Item = () => {
+    const [getItemList, setItemlList] = useState([]);
     useEffect(() => {
-        const fetchComboBuildings = async () => {
+        const fetchMaterialList = async () => {
             try {
-                const response = await fetch('http://localhost:8080/combobuilding/combo-building/get', {
+                const response = await fetch('http://localhost:8080/building/item/list', {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -24,45 +21,39 @@ const ComboBuilding = () => {
                 });
 
                 const data = await response.json();
-                setComboBuildings(data);
+                setItemlList(data);
             } catch (error) {
-                console.error('Error fetching combo buildings:', error);
+                console.error('Error fetching items:', error);
             }
         };
 
-        fetchComboBuildings();
+        fetchMaterialList();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-    console.log(getComboBuilding);
+    console.log(getItemList);
 
     const navigate = useNavigate();
+    // const handleRowClick = (row) => {
+    //     navigate(`/combobuilding/${row.id}`); // Navigate to the desired URL
+    // };
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const columns = [
-        {
-            field: "comboBuildingId",
+        { 
+            field: "itemId", 
             headerName: "ID",
             headerAlign: "center",
             align: "center",
         },
         {
-            field: "comboBuildingName",
-            headerName: "Combo Building Name",
+            field: "itemName",
+            headerName: "Item Name",
             cellClassName: "name-column--cell",
             flex: 1,
         },
         {
-            field: "type",
-            headerName: "Type",
-            flex: 1,
-            renderCell: (params) => {
-                const { row: { type } } = params; // Extract the type value
-                return type === 0 ? "Xây nhà phần thô" : type === 1 ? "Xây nhà hoàn thiện" : "Xây dựng trọn gói";
-            },
-        },
-        {
-            field: "unitPrice",
+            field: "priceItem",
             headerName: "Price",
             flex: 1,
         },
@@ -84,8 +75,7 @@ const ComboBuilding = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Link
-                    to={`/comboBuilding/${row.comboBuildingId}`}
+                <Link                    to={`/item/${row.itemId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
@@ -94,28 +84,11 @@ const ComboBuilding = () => {
                 </Link>
             ),
         },
-        {
-            field: "detail",
-            headerName: "Detail",
-            headerAlign: "center",
-            align: "center",
-            flex: 1,
-            renderCell: ({ row }) => (
-                <Link
-                    to={`/comboBuilding/detail/${row.comboBuildingId}`}
-                    style={{ textDecoration: 'none' }}
-                >
-                    <Button color="primary" variant="contained">
-                        Detail
-                    </Button>
-                </Link>
-            ),
-        },
     ];
 
     return (
-        <Box m="20px" >
-            <Header title="Combo Building List" subtitle="Managing the Combo Building List" />
+        <Box m="20px">
+            <Header title="Material List" subtitle="Managing the Material List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -149,23 +122,19 @@ const ComboBuilding = () => {
                 }}
             >
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/comboBuilding/addComboBuilding")} color="secondary" variant="contained">
-                        Add Combo Building
+                    <Button onClick={() => navigate("/materialList/addMaterial")} color="secondary" variant="contained">
+                        Add Material
                     </Button>
                 </Box>
                 <DataGrid
-                    rows={getComboBuilding}
+                    rows={getItemList}
                     columns={columns}
-                    getRowId={(row) => row.comboBuildingId}
+                    getRowId={(row) => row.itemId}
                     components={{ Toolbar: GridToolbar }}
-                    onSelectionModelChange={(selectionModel) => {
-                        setSelectedRowIds(selectionModel);
-                    }}
-                    disableRowSelectionOnClick={false}
                 />
             </Box>
         </Box>
     );
 };
 
-export default ComboBuilding;
+export default Item;

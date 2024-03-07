@@ -1,6 +1,6 @@
 package com.example.system.serviceImplement;
 
-import com.example.system.dto.buildingdto.ItemTypeDto;
+import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
 import com.example.system.repository.building.ItemRepository;
@@ -27,6 +27,15 @@ public class ItemTypeServiceImp implements ItemTypeService {
     @Override
     public List<ItemType> findAll() {
         return itemTypeRepository.findAll();
+    }
+
+    @Override
+    public ItemType findById(Long id) {
+        ItemType it = itemTypeRepository.findById(id)
+                .orElseThrow(
+                        () -> new IllegalStateException("Item Type with id " + id + " does not exists"));
+
+        return it;
     }
 
     @Override

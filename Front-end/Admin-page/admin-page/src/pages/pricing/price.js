@@ -83,37 +83,7 @@
       return null;
     };
     // Hàm create contract 
-    const createContract = async () => {
-  const requestBody = {
-    area: Number(inputValue), // Đảm bảo rằng giá trị diện tích được chuyển sang số
-    itemIdList: Object.values(selectedItemIds).filter(Boolean), // Chuyển object sang array và loại bỏ giá trị falsy
-    comboType: 0, // Giữ nguyên giá trị mặc định
-    status: 0, // Giữ nguyên giá trị mặc định
-  };
-
-  try {
-    const response = await fetch(`http://localhost:8080/request-contract/request-contract/create?comboId=${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Contract created successfully:", data);
-      toast.success("Contract đã được tạo thành công!");
-    } else {
-      console.error("Failed to create contract. Server returned:", response.status, response.statusText);
-      toast.error("Không thể tạo contract. Vui lòng thử lại!");
-    }
-  } catch (error) {
-    console.error("Error creating contract:", error);
-    toast.error("Lỗi khi tạo contract. Vui lòng thử lại!");
-  }
-};
-
+    
     // Bổ sung hàm handleChange để xử lý việc thay đổi lựa chọn
     const handleChange = (typeName, selectedId, selectedName) => {
       setSelectedItemNames(prevNames => ({
