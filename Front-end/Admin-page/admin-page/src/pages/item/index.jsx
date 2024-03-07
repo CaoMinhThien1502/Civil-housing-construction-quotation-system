@@ -58,6 +58,11 @@ const Item = () => {
             flex: 1,
         },
         {
+            field: "itemTypeName",
+            headerName: "Item Type",
+            flex: 1,
+        },
+        {
             field: "status",
             headerName: "Status",
             headerAlign: "center",
