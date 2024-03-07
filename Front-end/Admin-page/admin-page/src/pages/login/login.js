@@ -29,18 +29,20 @@ const Login = () => {
         password: password,
       }, { withCredentials: true });
 
-      const token = jwtDecode(response.data.access_Token)
+
       
-      if (response.status === 200) {
+      if (response.status === 200) { 
+        const token = jwtDecode(response.data.access_Token)
+        localStorage.setItem('mail',token.sub)
         setStatus(200);
-        if (response.data.role === "CUSTOMER") {
+        if (response.data.role === "CUSTOMER") { 
           console.log (response.data.role);
           console.log("Hello Customer");
           //navigate("/home");
           <Header status={status} />
 
           navigate("/home");}
-        else {
+        else { 
           console.log("Hello Admin");
           navigate("/dashboard");
         }

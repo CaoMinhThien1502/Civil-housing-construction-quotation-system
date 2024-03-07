@@ -40,10 +40,7 @@ public class SecurityConfiguration {
     };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-
         http
-
                 .cors(c -> c
                         .configurationSource(request -> {
                             CorsConfiguration config = new CorsConfiguration();
@@ -74,9 +71,9 @@ public class SecurityConfiguration {
                                 .requestMatchers("/request-contract/**").hasRole(Role.CUSTOMER.name())
                                 .anyRequest().authenticated()
                 )
-/*                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
+                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
                                 .loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
-                ) // URL mặc định sau khi đăng nhập thành công*/
+                ) // URL mặc định sau khi đăng nhập thành công
                 .sessionManagement(sessionManagement ->
                         sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -84,7 +81,7 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout
                         .logoutUrl(LOGOUT_URL) // URL để xử lý quá trình đăng xuất
-/*                        .logoutSuccessUrl(LOGIN_URL) // URL mặc định sau khi đăng xuất thành công*/
+                        .logoutSuccessUrl(LOGIN_URL) // URL mặc định sau khi đăng xuất thành công*/
                         .invalidateHttpSession(true) // Hủy bỏ phiên làm việc của người dùng sau khi đăng xuất
                         .clearAuthentication(true)
                         .deleteCookies("access_token")
