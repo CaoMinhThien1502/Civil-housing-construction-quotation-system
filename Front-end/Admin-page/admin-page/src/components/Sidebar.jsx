@@ -46,6 +46,20 @@ const Sidebar = () => {
     const [isLoading, setIsLoading] = useState(false); // Optional state to indicate data fetching
 
     const userDataDemo = { "userId": 8, "fullName": "Admin", "password": "$2a$10$cC8eSPyEWIOi/COXCTJSquAJCSKhpHZJ9qvleS8iEgPDmpHLVrX0i", "email": "admin@gmail.com", "role": "ADMIN", "phone": "0000000000", "address": "Admin", "birthday": "1998-05-06", "gender": true, "status": true };
+    
+    const [userData, setUserData] = useState({});
+    const [error, setError] = useState(null);
+
+    // axios.interceptors.request.use((request) => {
+    //     console.log(request);
+    //     return request;
+    // });
+
+    // axios.interceptors.response.use((response) => {
+    //     console.log(response);
+    //     return response;
+    // });
+
 
     // const [userData, setUserData] = useState({});
     // useEffect(() => {
