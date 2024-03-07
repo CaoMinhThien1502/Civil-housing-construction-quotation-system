@@ -193,7 +193,7 @@ const Sidebar = () => {
                                     {userData.fullName}
                                 </Typography>
                                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                                    VP Fancy Admin
+                                {userData.role}
                                 </Typography>
                             </Box>
                         </Box>
