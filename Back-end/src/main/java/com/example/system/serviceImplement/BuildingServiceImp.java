@@ -158,7 +158,7 @@ public class BuildingServiceImp implements BuildingService {
                 List<ItemDto> itemDtoList = new ArrayList<>();
                 for (Item i : itemList)  {
                     if(i.isStatus() && i.getItemType().equals(it)) {
-                        itemDtoList.add(new ItemDto(i.getItemId(), i.getItemName(), i.getPriceItem()));
+                        itemDtoList.add(new ItemDto(i.getItemId(), i.getItemName(),i.getPriceItem(),i.isStatus(),i.getItemType().getItemTypeName()));
                     }
                 }
                 typeDtoList.add(new ItemTypeFCDto(it.getItemTypeName(), itemDtoList));
