@@ -28,6 +28,7 @@ const Login = () => {
       }, { withCredentials: true });
 
       const token = jwtDecode(response.data.access_Token)
+      localStorage.setItem('mail',token.sub)
       
       if (response.status === 200) {
         if (!response.data) {
