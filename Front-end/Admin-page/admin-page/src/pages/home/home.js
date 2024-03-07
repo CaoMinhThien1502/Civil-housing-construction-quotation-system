@@ -24,7 +24,7 @@ import team1 from "../../img/team/team-1.jpg";
 import team2 from "../../img/team/team-2.jpg";
 import team3 from "../../img/team/team-3.jpg";
 import team4 from "../../img/team/team-4.jpg";
-
+import Login from "../login/login";
 // Import CSS files (if using any)
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -36,7 +36,8 @@ import './TeamSection.css';
 import '../../styles/main/main.css';
 
 // Create a functional component for the header
-const Header = () => {
+const Header = ({ status }) => {
+  const linkText = status === 200 ? 'Profile' : 'Login';
   return (
     <header id="header" className="fixed-top d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between">
@@ -54,7 +55,7 @@ const Header = () => {
             <li><a className="nav-link scrollto" href="#Pricing">Pricing</a></li>
             {/* Add your dropdown menu here if needed */}
             <li><a className="nav-link scrollto" href="#Contact">Contact</a></li>
-            <li><a className="getstarted scrollto" href="./Login">Login</a></li>
+            <li><a className="getstarted scrollto" href={status === 200 ? "/profile" : "/login"}>{linkText}</a></li>
           </ul>
           <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>
