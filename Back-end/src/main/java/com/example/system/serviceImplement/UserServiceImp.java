@@ -1,6 +1,7 @@
 package com.example.system.serviceImplement;
 
 import com.example.system.dto.userdto.UserDto;
+import com.example.system.model.user.Role;
 import com.example.system.model.user.User;
 import com.example.system.repository.user.UserRepository;
 import com.example.system.security.JwtService;
@@ -13,12 +14,40 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
     private final JwtService jwtService;
+
+    @Override
+    public List<UserDto> getUserList() {
+        try{
+            List<User> users = userRepository.findAll();
+            List<UserDto> dtos = new ArrayList<>();
+            for (User u: users
+                 ) {
+                UserDto dto = new UserDto();
+                dto.setUserId(u.getUserId());
+                dto.setEmail(u.getEmail());
+                dto.setGender(u.isGender());
+                dto.setPhone(u.getPhone());
+                dto.setAddress(u.getAddress());
+                dto.setBirthday(u.getBirthday());
+                dto.setRole(u.getRole());
+                dto.setFullName(u.getName());
+                dto.setStatus(u.isStatus());
+                dtos.add(dto);
+            }
+            return dtos;
+        }catch (Exception e){
+            return null;
+        }
+    }
 
     @Override
     public UserDto getProfile() {
@@ -40,8 +69,12 @@ public class UserServiceImp implements UserService {
     @Override
     public UserDto updateProfile(UserDto dto, HttpServletRequest request) {
         try {
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User user = userRepository.findByName(userDetails.getUsername());
+            String accessTokenFromCookie = jwtService.extractAccessTokenFromCookie(request);
+            if(accessTokenFromCookie == null){
+                return null;
+            }
+            String userEmail = jwtService.extractUsername(accessTokenFromCookie);
+            User user = userRepository.findByEmail(userEmail).orElseThrow();
             user.setAddress(dto.getAddress());
             user.setGender(dto.isGender());
             user.setEmail(dto.getEmail());
@@ -55,6 +88,18 @@ public class UserServiceImp implements UserService {
         }
 
 
+    }
+
+    @Override
+    public UserDto updateRole(Long id, Role role) {
+        try{
+            User u = userRepository.findByUserId(id);
+            u.setRole(role);
+            UserDto dto = new UserDto(u.getUserId(), u.getName(),"", u.getEmail(), u.getRole(),u.getPhone(),u.getAddress(),u.getBirthday(),u.isGender(),u.isStatus());
+            return dto;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override

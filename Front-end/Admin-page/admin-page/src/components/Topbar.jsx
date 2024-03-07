@@ -8,11 +8,60 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from 'react-router-dom';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useState } from 'react';
+import axios from 'axios';
 
 const Topbar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+        
+    };
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        setAnchorEl(null);
+        // call api logout
+        try {
+            const response = await axios.post("http://localhost:8080/api/v1/auth/logout", {
+                email: email,
+                password: password,
+            }, { withCredentials: true });
+
+            console.log("Response status:", response.status);
+            console.log("Response data:", response.data);
+
+            if (response.status === 200) {
+                if (!response.data) {
+                    console.log("Đăng xuất thành công (không có dữ liệu)!");
+                } else {
+                    console.log("Đăng xuất thành công!");
+                }
+            } else {
+                setError(`Đăng xuất thất bại với mã trạng thái: ${response.status}`);
+            }
+        } catch (error) {
+            console.error("Lỗi trong quá trình đăng xuất:", error);
+        }
+
+        alert("Logged out successfully");
+        // Redirect to the login page after logout
+        navigate("/login");
+    };
 
     return (
         <Box display="flex" justifyContent="space-between" p={2}>
@@ -43,9 +92,26 @@ const Topbar = () => {
                 <IconButton>
                     <SettingsOutlinedIcon />
                 </IconButton>
-                <IconButton>
+                <IconButton
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                >
                     <PersonOutlinedIcon />
                 </IconButton>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                    }}
+                >
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
             </Box>
         </Box>
     );

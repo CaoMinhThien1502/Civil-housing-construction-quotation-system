@@ -1,21 +1,17 @@
 package com.example.system.controller;
 
 
-import com.example.system.dto.buildingdto.ItemTypeDto;
 import com.example.system.dto.userdto.UserDto;
-import com.example.system.model.user.User;
+import com.example.system.model.user.Role;
 import com.example.system.repository.user.UserRepository;
-import com.example.system.security.JwtService;
 import com.example.system.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,9 +23,9 @@ public class UserController {
     @Autowired
     UserService userService;
     @GetMapping("/list")
-    public ResponseEntity<List<User>> getUsers(){
-        List<User> users = userRepository.findAll();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<UserDto>> getUsers(){
+        List<UserDto> userDtos = userService.getUserList();
+        return ResponseEntity.ok(userDtos);
     }
 
     @GetMapping("/profile")
@@ -43,6 +39,12 @@ public class UserController {
     public ResponseEntity<UserDto> updateProfile(@RequestBody UserDto dto, HttpServletRequest request){
         UserDto profile = userService.updateProfile(dto, request);
         return ResponseEntity.ok(profile);
+    }
+
+    @PutMapping("/update-role")
+    public ResponseEntity<UserDto> updateRole(@RequestParam Long userId, @RequestParam Role role){
+        UserDto update = userService.updateRole(userId, role);
+        return ResponseEntity.ok(update);
     }
 
     @GetMapping("/userlogin")
