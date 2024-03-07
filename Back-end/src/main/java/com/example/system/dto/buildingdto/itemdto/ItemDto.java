@@ -1,4 +1,4 @@
-package com.example.system.dto.buildingdto;
+package com.example.system.dto.buildingdto.itemdto;
 
 
 import lombok.AllArgsConstructor;
@@ -13,4 +13,5 @@ import lombok.Setter;
 public class ItemDto {
     private Long itemId;
     private String itemName;
+    private double itemPrice;
 }

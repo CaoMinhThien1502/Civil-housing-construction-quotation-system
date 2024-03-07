@@ -1,12 +1,12 @@
-package com.example.system.dto.buildingdto;
+package com.example.system.dto.buildingdto.itemtypedto;
 
+import com.example.system.dto.buildingdto.itemdto.ItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
