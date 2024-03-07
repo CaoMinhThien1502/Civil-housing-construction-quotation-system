@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.web.reactive.function.client.WebCl
 import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class SystemApplication {
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		SpringApplication.run(SystemApplication.class, args);
 	}
 }
