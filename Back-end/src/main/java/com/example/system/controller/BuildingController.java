@@ -1,6 +1,5 @@
 package com.example.system.controller;
 
-
 import com.example.system.dto.buildingdto.*;
 import com.example.system.dto.buildingdto.itemdto.ItemUpdateDto;
 import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
@@ -69,7 +68,7 @@ public class BuildingController{
         List<Item> items = itemService.findALl();
         return ResponseEntity.ok(items);
     }
-    @GetMapping("/item/update-page")
+    @GetMapping("/item/id")
     public ResponseEntity<ItemUpdateDto> getItemById(@RequestParam Long itemid){
         ItemUpdateDto item = itemService.findItemUpdate(itemid);
         return ResponseEntity.ok(item);
