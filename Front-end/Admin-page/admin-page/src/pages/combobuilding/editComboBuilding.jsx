@@ -235,7 +235,7 @@ const EditComboBuilding = () => {
                                                         color="secondary"
                                                         checked={
                                                             // Check if materialId is already selected and included in the materialIds array
-                                                            formik.values.materialIdList.includes(option.materialId) ||
+                                                            formik.values.materialIdList.includes(option.materialId) &&
                                                             materialIdList.includes(option.materialId)
                                                         }
                                                         onChange={(event) => {

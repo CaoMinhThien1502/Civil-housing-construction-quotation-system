@@ -68,7 +68,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                                 .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                                 //Request contract
-                                .requestMatchers("/request-contract/**").permitAll()
+                                .requestMatchers("/request-contract/**").hasRole(Role.CUSTOMER.name())
                                 .anyRequest().authenticated()
                 )
 /*                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)

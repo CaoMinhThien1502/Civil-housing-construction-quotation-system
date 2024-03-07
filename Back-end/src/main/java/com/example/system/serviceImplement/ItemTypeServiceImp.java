@@ -43,6 +43,7 @@ public class ItemTypeServiceImp implements ItemTypeService {
         List<ItemTypeDto> list = new ArrayList<>();
         for (ItemType it: itemTypeRepository.findAll()) {
             ItemTypeDto dto = new ItemTypeDto();
+            dto.setItemTypeId(it.getItemTypeId());
             dto.setItemTypeName(it.getItemTypeName());
             Set<Long> itemIds = new HashSet<>();
             for (Item i: it.getItems()) {
