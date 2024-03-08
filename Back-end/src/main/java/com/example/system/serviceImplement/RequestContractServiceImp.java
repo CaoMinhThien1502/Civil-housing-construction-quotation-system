@@ -51,9 +51,9 @@ public class RequestContractServiceImp implements RequestContractService {
     }
 
     @Override
-    public List<RequestContractDto> findDtosByUserId(Long userid) {
+    public List<RequestContractDto> findDtosByEmail(String email) {
         try{
-            User u = userRepository.findByUserId(userid);
+            User u = userRepository.findByEmail(email).orElseThrow();
             List<RequestContract> requestContractList = requestContractRepository.findByUser(u);
             List<RequestContractDto> dtos = new ArrayList<>();
             for (RequestContract rq: requestContractList){

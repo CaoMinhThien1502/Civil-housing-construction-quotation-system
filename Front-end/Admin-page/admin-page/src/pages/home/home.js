@@ -48,7 +48,7 @@ const Header = ({ status }) => {
 
         <nav id="navbar" className="navbar">
           <ul>
-            <li><a className="nav-link scrollto active" href="#Hero">Home</a></li>
+            <li><a className="nav-link scrollto active" href="/home">Home</a></li>
             <li><a className="nav-link scrollto" href="#About">About</a></li>
             <li><a className="nav-link scrollto" href="#Services" >Services</a></li>
             <li><a className="nav-link scrollto" href="#Team">Team</a></li>
