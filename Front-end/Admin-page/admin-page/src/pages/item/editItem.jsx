@@ -25,7 +25,6 @@ const EditItem = () => {
     const {id} = useParams();
     const [getItemTypeId, setItemTypeID] = useState("");
 
-
     const [getItem, setItem] = useState({});
     useEffect(() => {
         const fetchItemById = async () => {
@@ -84,11 +83,12 @@ const EditItem = () => {
 
         validationSchema: userSchema,
     });
-//event of select item type
+
+    // event of select item type
     const [anchorElItemType, setAnchorElItemType] = useState(null); // State to manage dropdown menu
     const handleOpenItemType = (event) => {
         setAnchorElItemType(event.currentTarget); // Open dropdown on click
-      };
+    };
     const handleCloseItemType = () => {
         setAnchorElItemType(null); // Close dropdown on selection or outside click
     };
@@ -114,17 +114,18 @@ const EditItem = () => {
 
         fetchItemTypes(); 
     }, []); // Empty dependency array to fetch data only once on component mount
+
     const handleChangesItemType = (event) => {
         setItemTypeID(event.target.value);
         console.log(event.target.value);
     }
-//Event of status
-const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
+    //Event of status
+    const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
     const handleOpen = (event) => {
         setAnchorEl(event.currentTarget); // Open dropdown on click
-      };
+    };
     const handleClose = () => {
-    setAnchorEl(null); // Close dropdown on selection or outside click
+        setAnchorEl(null); // Close dropdown on selection or outside click
     };
 
     const handleChanges = (event) => {
@@ -160,10 +161,12 @@ const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
                             name="itemName"
                             error={!!touched.itemName && !!errors.itemName}
                             helperText={touched.itemName && errors.itemName}
-                            sx={{ gridColumn: "span 2" }}
+                            sx={{ gridColumn: "span 4" }}
                             />
                             <Box sx={{ gridColumn: "span 4" }}>
-                                <Typography variant="h6" gutterBottom>Item Type</Typography>
+                                <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4"}}>
+                                    Item Type
+                                </Typography>
                                 <Select
                                     labelId="item-type-label"
                                     id="item-type"
@@ -194,7 +197,7 @@ const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
                             name="priceItem"
                             error={!!touched.priceItem && !!errors.priceItem}
                             helperText={touched.priceItem && errors.priceItem}
-                            sx={{ gridColumn: "span 2"}}
+                            sx={{ gridColumn: "span 4"}}
                             />
                             <Typography sx={{ gridColumn: "span 4" }} variant="h6" gutterBottom>
                                 Previous Status: {formik.initialValues.status === "true" ? "Active" : "Inactive"}
