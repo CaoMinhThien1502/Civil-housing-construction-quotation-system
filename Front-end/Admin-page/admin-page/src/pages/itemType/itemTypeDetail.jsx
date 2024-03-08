@@ -10,7 +10,7 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const ItemTypeDetail = () => {
-    
+
 };
 
 export default ItemTypeDetail;
