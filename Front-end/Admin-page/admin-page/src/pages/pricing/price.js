@@ -5,10 +5,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
+import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./price.css";
-import image1 from "../../img/BaoGiaPTtietkiem-01.jpg";
 
 const ConstructionForm = () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -18,6 +17,13 @@ const ConstructionForm = () => {
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const [selectedItemNames, setSelectedItemNames] = useState({
+    Combo: "",
+    "Loại Nhà": "",
+    Hầm: "",
+    Tầng: "",
+    Mái: "",
+  });
+  const [selectedItemIds, setSelectedItemIds] = useState({
     Combo: "",
     "Loại Nhà": "",
     Hầm: "",
@@ -59,13 +65,17 @@ const ConstructionForm = () => {
       ...prevNames,
       [typeName]: selectedName,
     }));
+    setSelectedItemIds((prevIds) => ({
+      ...prevIds,
+      [typeName]: selectedId,
+    }));
 
     const selectedItem = swaggerData?.itemTypeList
       .find((itemType) => itemType.itemTypeName === typeName)
       .itemList.find((item) => item.itemId === selectedId);
 
     if (selectedItem) {
-      const itemPrice = selectedItem.itemPrice || 0;
+      const itemPrice = selectedItem.priceItem || 0;
       setSelectedItemPrices((prevPrices) => ({
         ...prevPrices,
         [typeName]: itemPrice,
@@ -75,8 +85,8 @@ const ConstructionForm = () => {
 
   useEffect(() => {
     let totalPrice = 0;
-    Object.values(selectedItemPrices).forEach((itemPrice) => {
-      totalPrice += itemPrice;
+    Object.values(selectedItemPrices).forEach((priceItem) => {
+      totalPrice += priceItem;
     });
 
     totalPrice =
@@ -88,9 +98,32 @@ const ConstructionForm = () => {
     setTotalPrice(totalPrice);
   }, [selectedItemPrices, selectedItemNames.Combo, inputValue]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setModalShow(true);
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/request-contract/request-contract/create?comboId=${selectedItemIds.Combo}&email=${localStorage.getItem('mail')}`,
+        {
+          area: inputValue,
+          itemIdList: Object.values(selectedItemIds).filter((itemId) => itemId !== ""),
+          comboId: selectedItemIds.Combo,
+          email: localStorage.getItem('mail'),
+          comboType: 0,
+          status: 0
+        },
+        { withCredentials: true }
+      );
+
+      setModalShow(true);
+      console.log("API Response:", response.data);
+
+      // Hiển thị toast thông báo thành công
+      toast.success("Yêu cầu của bạn đã được gửi thành công!");
+
+      // Redirect or show success message after successful API call
+    } catch (error) {
+      console.error("Error submitting request:", error);
+      // Handle error, show error message, etc.
+    }
   };
 
   const redirectToDetail = (id) => {
@@ -108,7 +141,7 @@ const ConstructionForm = () => {
           <HeadTitle />
         </div>
         {swaggerData && (
-          <form onSubmit={handleSubmit} className="row g-2">
+          <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="row g-2">
             <div className="col-md-6 mb-1">
               <label htmlFor="landArea" className="form-label">
                 Diện tích
@@ -196,6 +229,7 @@ const ConstructionForm = () => {
                   inputValue={inputValue}
                   totalPrice={totalPrice}
                   selectedItemPrices={selectedItemPrices}
+                  handleSubmit={handleSubmit}
                 />
               </>
             </div>
@@ -243,17 +277,17 @@ const NoteFooter = () => {
   );
 };
 
-const ConsultImg = () => {
-  return (
-    <div>
-      <img
-        src={image1}
-        alt="Consultation Image"
-        style={{ width: "100%", height: "auto" }}
-      />
-    </div>
-  );
-};
+// const ConsultImg = () => {
+//   return (
+//     <div>
+//       <img
+//         src={image1}
+//         alt="Consultation Image"
+//         style={{ width: "100%", height: "auto" }}
+//       />
+//     </div>
+//   );
+// };
 
 function MyVerticallyCenteredModal(props) {
   const {
@@ -262,8 +296,14 @@ function MyVerticallyCenteredModal(props) {
     inputValue,
     totalPrice,
     selectedItemPrices,
+    handleSubmit,
   } = props;
-
+  const handleRegister = () => {
+    // Gọi hàm handleSubmit ở đây
+    handleSubmit();
+    // Sau khi gọi hàm handleSubmit, bạn có thể thực hiện các hành động khác tại đây (ví dụ: đóng modal)
+    onHide();
+  };
   useEffect(() => {
     console.log("selectedItemNames:", selectedItemNames);
   }, [selectedItemNames]);
@@ -313,11 +353,10 @@ function MyVerticallyCenteredModal(props) {
         <p>TOTAL: {totalPrice || "N/A"}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Đăng ký</Button>
+        <Button onClick={handleRegister}>Đăng ký</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-export { ConstructionForm, ConsultImg, HeadTitle, NoteFooter };
-
+export { ConstructionForm, HeadTitle, NoteFooter };

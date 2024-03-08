@@ -13,7 +13,9 @@ import {
   MDBCheckbox
 } from 'mdb-react-ui-kit';
 import Header from '../../components/Header';
-
+// const jwt = require('jsonwebtoken');
+// Global variable to store the decoded token
+// let token = null;
 const Login = () => {
   const navigate = useNavigate(); // Đảm bảo sử dụng useNavigate trong functional component
   const [email, setEmail] = useState("");
@@ -29,7 +31,8 @@ const Login = () => {
         password: password,
       }, { withCredentials: true });
 
-      const token = jwtDecode(response.data.access_Token)
+       const token = jwtDecode(response.data.access_Token)
+       localStorage.setItem('mail',token.sub)
       
       if (response.status === 200) {
         setStatus(200);
@@ -103,3 +106,4 @@ const Login = () => {
 }
 
 export default Login;
+// Export the decoded token

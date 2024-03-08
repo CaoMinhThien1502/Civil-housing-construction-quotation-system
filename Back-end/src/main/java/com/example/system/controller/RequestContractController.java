@@ -40,8 +40,8 @@ public class RequestContractController {
     }
 
     @GetMapping("/request-contract/list/id")
-    public ResponseEntity<List<RequestContractDto>> getRequestContractsById(Long userid){
-        List<RequestContractDto> list = requestContractService.findDtosByUserId(userid);
+    public ResponseEntity<List<RequestContractDto>> getRequestContractsById(@RequestParam String email){
+        List<RequestContractDto> list = requestContractService.findDtosByEmail(email);
         return ResponseEntity.ok(list);
     }
     @PostMapping("/request-contract/create")
