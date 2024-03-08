@@ -105,8 +105,6 @@ const ConstructionForm = () => {
         {
           area: inputValue,
           itemIdList: Object.values(selectedItemIds).filter((itemId) => itemId !== ""),
-          comboId: selectedItemIds.Combo,
-          email: localStorage.getItem('mail'),
           comboType: 0,
           status: 0
         },
