@@ -11,11 +11,11 @@ import axios from 'axios';
 
 const ItemTypeDetail = () => {
     const {id} = useParams();
-    const [materialData, setMaterialData] = useState([]);
+    const [item, setItem] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:8080/combobuilding/material/getByMaterialType?materialTypeId=${id}`)
+        axios.get(`http://localhost:8080/building/item-type/id?typeId=${id}`)
             .then(response => {
-                setMaterialData(response.data);
+                setItem(response.data);
             })
             .catch(error => {
                 console.error('Error fetching material data:', error);
@@ -103,7 +103,7 @@ const ItemTypeDetail = () => {
                     <Typography variant="h3" gutterBottom>Materials Included Information: </Typography>
                 </Box>
                 <DataGrid
-                    rows={materialData} // Access the material list for each type
+                    // rows={materialData} // Access the material list for each type
                     columns={[
                         { field: "materialId", headerName: "Material ID", flex: 1 },
                         { field: "materialName", headerName: "Material Name", flex: 1 },
