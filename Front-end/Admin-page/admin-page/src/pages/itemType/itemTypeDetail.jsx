@@ -103,7 +103,7 @@ const ItemTypeDetail = () => {
                     <Typography variant="h3" gutterBottom>Materials Included Information: </Typography>
                 </Box>
                 <DataGrid
-                    rows={materialData} // Access the material list for each type
+                    // rows={materialData} // Access the material list for each type
                     columns={[
                         { field: "materialId", headerName: "Material ID", flex: 1 },
                         { field: "materialName", headerName: "Material Name", flex: 1 },

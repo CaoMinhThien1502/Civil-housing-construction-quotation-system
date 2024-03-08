@@ -35,8 +35,8 @@ const Topbar = () => {
     const handleLogout = async (e) => {
         e.preventDefault();
         setAnchorEl(null);
-        localStorage.removeItem('mail')
-      window.location.href = 'http://localhost:8080/api/v1/auth/logout'
+        localStorage.removeItem('mail');
+        window.location.href = 'http://localhost:8080/api/v1/auth/logout';
     };
 
     return (
