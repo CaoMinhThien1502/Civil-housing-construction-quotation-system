@@ -160,10 +160,13 @@ const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
                             name="itemName"
                             error={!!touched.itemName && !!errors.itemName}
                             helperText={touched.itemName && errors.itemName}
-                            sx={{ gridColumn: "span 2" }}
+                            sx={{ gridColumn: "span 4" }}
                             />
                             <Box sx={{ gridColumn: "span 4" }}>
-                                <Typography variant="h6" gutterBottom>Item Type</Typography>
+                                <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4"}}>
+                                    
+                                    Previous Type: {formik.initialValues.type === "0" ? "Xây nhà phần thô" : formik.initialValues.type === "1" ? "Xây nhà hoàn thiện" : "Xây dựng trọn gói"}
+                                </Typography>
                                 <Select
                                     labelId="item-type-label"
                                     id="item-type"
@@ -194,7 +197,7 @@ const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
                             name="priceItem"
                             error={!!touched.priceItem && !!errors.priceItem}
                             helperText={touched.priceItem && errors.priceItem}
-                            sx={{ gridColumn: "span 2"}}
+                            sx={{ gridColumn: "span 4"}}
                             />
                             <Typography sx={{ gridColumn: "span 4" }} variant="h6" gutterBottom>
                                 Previous Status: {formik.initialValues.status === "true" ? "Active" : "Inactive"}
