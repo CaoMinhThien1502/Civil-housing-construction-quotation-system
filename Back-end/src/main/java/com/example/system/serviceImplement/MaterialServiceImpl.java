@@ -68,9 +68,11 @@ public class MaterialServiceImpl implements MaterialService {
         try{
             Material updateMaterial = materialRepository.findById(materialId)
                     .orElseThrow(() -> new IllegalStateException("Material with id " + materialId + " does not exists"));
+            MaterialType newMaterialType = materialTypeRepository.findById(material.getMaterialTypeId()).orElseThrow();
             updateMaterial.setMaterialName(material.getMaterialName());
             updateMaterial.setUnitPrice(material.getUnitPrice());
             updateMaterial.setStatus(material.isStatus());
+            updateMaterial.setMaterialType(newMaterialType);
             materialRepository.save(updateMaterial);
             return true;
         }
