@@ -11,7 +11,7 @@ public interface RequestContractService {
     RequestContract getByBuilding(Building building);
     List<RequestContract> findAll();
     List<RequestContractDto> findAllDto();
-    List<RequestContractDto> findDtosByUserId(Long userid);
+    List<RequestContractDto> findDtosByEmail(String email);
     RequestContractDto findById(Long rcId);
     RequestContractDto getRequestContractDto(RequestContract rc);
     RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId);
