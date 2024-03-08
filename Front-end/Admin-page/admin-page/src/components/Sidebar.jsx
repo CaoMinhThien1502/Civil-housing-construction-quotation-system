@@ -44,10 +44,7 @@ const Sidebar = () => {
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
-    const [isLoading, setIsLoading] = useState(false); // Optional state to indicate data fetching
 
-    const userDataDemo = { "userId": 8, "fullName": "Admin", "password": "$2a$10$cC8eSPyEWIOi/COXCTJSquAJCSKhpHZJ9qvleS8iEgPDmpHLVrX0i", "email": "admin@gmail.com", "role": "ADMIN", "phone": "0000000000", "address": "Admin", "birthday": "1998-05-06", "gender": true, "status": true };
-    
     const [userData, setUserData] = useState({});
     
     useEffect(() => {
@@ -55,15 +52,13 @@ const Sidebar = () => {
         console.log(emailUser)
         axios.get(`http://localhost:8080/user/profile?email=${emailUser}`)
             .then(response => {
-                setUserData(response.data)
-
-
+                setUserData(response.data);
             })
             .catch(err => {
-                console.log(err)
+                console.log(err);
             })
+    }, []);
 
-    }, [])
     return (
         <Box
             sx={{
