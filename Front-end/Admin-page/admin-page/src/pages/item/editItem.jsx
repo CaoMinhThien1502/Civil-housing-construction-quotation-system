@@ -25,7 +25,6 @@ const EditItem = () => {
     const {id} = useParams();
     const [getItemTypeId, setItemTypeID] = useState("");
 
-
     const [getItem, setItem] = useState({});
     useEffect(() => {
         const fetchItemById = async () => {
@@ -84,11 +83,12 @@ const EditItem = () => {
 
         validationSchema: userSchema,
     });
-//event of select item type
+
+    // event of select item type
     const [anchorElItemType, setAnchorElItemType] = useState(null); // State to manage dropdown menu
     const handleOpenItemType = (event) => {
         setAnchorElItemType(event.currentTarget); // Open dropdown on click
-      };
+    };
     const handleCloseItemType = () => {
         setAnchorElItemType(null); // Close dropdown on selection or outside click
     };
@@ -114,17 +114,18 @@ const EditItem = () => {
 
         fetchItemTypes(); 
     }, []); // Empty dependency array to fetch data only once on component mount
+
     const handleChangesItemType = (event) => {
         setItemTypeID(event.target.value);
         console.log(event.target.value);
     }
-//Event of status
-const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
+    //Event of status
+    const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
     const handleOpen = (event) => {
         setAnchorEl(event.currentTarget); // Open dropdown on click
-      };
+    };
     const handleClose = () => {
-    setAnchorEl(null); // Close dropdown on selection or outside click
+        setAnchorEl(null); // Close dropdown on selection or outside click
     };
 
     const handleChanges = (event) => {
@@ -164,8 +165,7 @@ const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
                             />
                             <Box sx={{ gridColumn: "span 4" }}>
                                 <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4"}}>
-                                    
-                                    Previous Type: {formik.initialValues.type === "0" ? "Xây nhà phần thô" : formik.initialValues.type === "1" ? "Xây nhà hoàn thiện" : "Xây dựng trọn gói"}
+                                    Item Type
                                 </Typography>
                                 <Select
                                     labelId="item-type-label"
