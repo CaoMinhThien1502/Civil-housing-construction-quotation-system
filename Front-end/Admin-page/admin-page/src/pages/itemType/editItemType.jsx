@@ -147,12 +147,12 @@ const EditItemType = () => {
                         </Box>
                         
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <Button onClick={() => navigate("/materialType")} color="secondary" variant="contained">
+                            <Button onClick={() => navigate("/itemType")} color="secondary" variant="contained">
                                 Cancel
                             </Button>
                             <Box ml="10px"/>
                             <Button type="submit" color="secondary" variant="contained">
-                                Edit Material
+                                Edit Item Type
                             </Button>
                         </Box>
                         

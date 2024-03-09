@@ -74,7 +74,7 @@ const EditItem = () => {
     
                 // Handle successful (e.g., navigate to a different page, store user data)
                 window.alert("Item updated successfully!");
-                navigate('/item');
+                navigate('/itemList');
             } catch (error) {
                 console.error('Error during submit:', error);
                 // Handle submit errors (e.g., display an error message to the user)
@@ -119,7 +119,7 @@ const EditItem = () => {
         setItemTypeID(event.target.value);
         console.log(event.target.value);
     }
-    //Event of status
+    // Event of status
     const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
     const handleOpen = (event) => {
         setAnchorEl(event.currentTarget); // Open dropdown on click
@@ -163,9 +163,22 @@ const EditItem = () => {
                             helperText={touched.itemName && errors.itemName}
                             sx={{ gridColumn: "span 4" }}
                             />
+                            <TextField
+                            fullWidth
+                            variant="filled"
+                            type="number"
+                            label="Unit Price"
+                            onBlur={handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.priceItem}
+                            name="priceItem"
+                            error={!!touched.priceItem && !!errors.priceItem}
+                            helperText={touched.priceItem && errors.priceItem}
+                            sx={{ gridColumn: "span 4"}}
+                            />
                             <Box sx={{ gridColumn: "span 4" }}>
                                 <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4"}}>
-                                    Item Type
+                                    Item Type:
                                 </Typography>
                                 <Select
                                     labelId="item-type-label"
@@ -186,19 +199,7 @@ const EditItem = () => {
                                     ))}
                                 </Select>
                             </Box>
-                            <TextField
-                            fullWidth
-                            variant="filled"
-                            type="number"
-                            label="Unit Price"
-                            onBlur={handleBlur}
-                            onChange={formik.handleChange}
-                            value={formik.values.priceItem}
-                            name="priceItem"
-                            error={!!touched.priceItem && !!errors.priceItem}
-                            helperText={touched.priceItem && errors.priceItem}
-                            sx={{ gridColumn: "span 4"}}
-                            />
+                            
                             <Typography sx={{ gridColumn: "span 4" }} variant="h6" gutterBottom>
                                 Previous Status: {formik.initialValues.status === "true" ? "Active" : "Inactive"}
                             </Typography>
@@ -225,7 +226,7 @@ const EditItem = () => {
                         </Box>
                         
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <Button onClick={() => navigate("/item")} color="secondary" variant="contained">
+                            <Button onClick={() => navigate("/itemList")} color="secondary" variant="contained">
                                 Cancel
                             </Button>
                             <Box ml="10px"/>

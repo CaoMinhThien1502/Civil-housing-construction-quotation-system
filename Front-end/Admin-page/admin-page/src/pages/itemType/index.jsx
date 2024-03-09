@@ -100,7 +100,7 @@ const ItemType = () => {
 
     return (
         <Box m="20px">
-            <Header title="Item type List" subtitle="Managing the Item type List" />
+            <Header title="Item Type List" subtitle="Managing the Item Type List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"

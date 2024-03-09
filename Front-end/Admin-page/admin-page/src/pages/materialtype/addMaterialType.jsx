@@ -94,7 +94,7 @@ const AddMaterialType = () => {
                             </Button>
                             <Box ml="10px"/>
                             <Button type="submit" color="secondary" variant="contained">
-                                Create New Material
+                                Create New Material Type
                             </Button>
                         </Box>
                         
