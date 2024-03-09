@@ -26,7 +26,7 @@ const Login = () => {
       const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
         email: email,
         password: password,
-      }, { withCredentials: true });
+      }, { withCredentials: 'include' });
 
       // Lưu token nguyên bản vào localStorage
       localStorage.setItem('token', response.data.access_Token);
