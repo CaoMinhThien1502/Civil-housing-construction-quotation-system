@@ -216,7 +216,7 @@ const Sidebar = () => {
                         </Typography>
                         <Item
                             title="Item List"
-                            to="/item"
+                            to="/itemList"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}

@@ -11,7 +11,7 @@ const initialValues = {
     materialName: "",
     unitPrice: "",
     status: "",
-    materialTypeName: "",
+    materialTypeId: "",
 };
 
 const userSchema = yup.object().shape({
@@ -38,6 +38,7 @@ const EditMaterial = () => {
 
                 const data = await response.json();
                 setMaterial(data);
+                console.log(getMaterial);
             } catch (error) {
                 console.error('Error fetching materials:', error);
             }
@@ -52,7 +53,7 @@ const EditMaterial = () => {
             materialName: `${getMaterial.materialName}`,
             unitPrice: `${getMaterial.unitPrice}`,
             status: `${getMaterial.status}`,
-            materialTypeName: "",
+            materialTypeId: "",
         },
         enableReinitialize: true,
 
@@ -114,7 +115,7 @@ const EditMaterial = () => {
         setSecondAnchorEl(null);
     };
     const handleSecondChanges = (event) => {
-        formik.setFieldValue("type", event.target.value);
+        formik.setFieldValue("materialTypeId", event.target.value);
         console.log(event.target.value);
     };
 
@@ -175,13 +176,13 @@ const EditMaterial = () => {
                             sx={{ gridColumn: "span 2"}}
                             />
                             <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4" }}>
-                                Material Type
+                                Previous Material Type: {getMaterial.materialTypeName}
                             </Typography>
                         </Box>
                         <Box sx={{ gridColumn: "span 4" }}>
                             <Select
-                                labelId="combo-building-type-label"
-                                id="combo-building-type"
+                                labelId="material-type-label"
+                                id="material-type"
                                 defaultValue=""
                                 onChange={handleSecondChanges}
                                 error={!!touched.type && !!errors.type}

@@ -15,27 +15,26 @@ import Form from "./pages/form";
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
+import Item from './pages/itemlist/index.jsx';
+import ItemType from './pages/itemtype/index.jsx';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
+import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
+import AddItem from './pages/itemlist/addItem.jsx';
+import AddItemType from './pages/itemtype/addItemType.jsx';
 
 import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
+import EditItem from './pages/itemlist/editItem.jsx';
+import EditItemType from './pages/itemtype/editItemType.jsx';
 
 import Login from './pages/login/login';
-
-import Item from './pages/item';
-import EditItem from './pages/item/editItem';
-import AddItem from './pages/item/addItem';
-import ItemType from './pages/itemType';
-import AddItemType from './pages/itemType/addItemType';
-import EditItemType from './pages/itemType/editItemType';
-import ItemTypeDetail from './pages/itemType/itemTypeDetail';
 
 import Detail from './pages/pricing/detail.js';
 import ProfilePage from './pages/profile/profile.js';
@@ -97,17 +96,17 @@ function App() {
               <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
               <Route path="/materialType/:id" element={<EditMaterialType />} />
               <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
-              <Route path="/form" element={<Form />} />
 
-              <Route path="/item" element={<Item />} />
-              <Route path="/item/:id" element={<EditItem />} />
-              <Route path="/item/addItem" element={<AddItem />} />
+              <Route path="/itemList" element={<Item />} />
+              <Route path="/itemList/:id" element={<EditItem />} />
+              <Route path="/itemList/addItem" element={<AddItem />} />
 
               <Route path="/itemType" element={<ItemType />} />
               <Route path="/itemType/:id" element={<EditItemType />} />
               <Route path="/itemType/addItemType" element={<AddItemType />} />
-              <Route path="/itemType/itemTypeDetail" element={<ItemTypeDetail />} />
+              <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
               
+              <Route path="/form" element={<Form />} />
               {/* 
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
