@@ -59,7 +59,7 @@ const Item = () => {
         },
         {
             field: "itemTypeName",
-            headerName: "Item Type",
+            headerName: "Type",
             flex: 1,
         },
         {

@@ -217,7 +217,7 @@ const Sidebar = () => {
                         <Item
                             title="Item List"
                             to="/itemList"
-                            icon={<PeopleOutlinedIcon />}
+                            icon={<FormatListBulletedOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />

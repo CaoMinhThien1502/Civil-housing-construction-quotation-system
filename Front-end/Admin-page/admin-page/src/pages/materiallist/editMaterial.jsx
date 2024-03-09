@@ -11,6 +11,7 @@ const initialValues = {
     materialName: "",
     unitPrice: "",
     status: "",
+    unit: "",
     materialTypeId: "",
 };
 
@@ -53,6 +54,7 @@ const EditMaterial = () => {
             materialName: `${getMaterial.materialName}`,
             unitPrice: `${getMaterial.unitPrice}`,
             status: `${getMaterial.status}`,
+            unit: `${getMaterial.unit}`,
             materialTypeId: "",
         },
         enableReinitialize: true,
@@ -160,7 +162,7 @@ const EditMaterial = () => {
                             name="materialName"
                             error={!!touched.materialName && !!errors.materialName}
                             helperText={touched.materialName && errors.materialName}
-                            sx={{ gridColumn: "span 2" }}
+                            sx={{ gridColumn: "span 4" }}
                             />
                             <TextField
                             fullWidth
@@ -173,12 +175,26 @@ const EditMaterial = () => {
                             name="unitPrice"
                             error={!!touched.unitPrice && !!errors.unitPrice}
                             helperText={touched.unitPrice && errors.unitPrice}
-                            sx={{ gridColumn: "span 2"}}
+                            sx={{ gridColumn: "span 4"}}
+                            />
+                            <TextField
+                            fullWidth
+                            variant="filled"
+                            type="text"
+                            label="Unit"
+                            onBlur={handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.unit}
+                            name="unit"
+                            error={!!touched.unit && !!errors.unit}
+                            helperText={touched.unit && errors.unit}
+                            sx={{ gridColumn: "span 4"}}
                             />
                             <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4" }}>
                                 Previous Material Type: {getMaterial.materialTypeName}
                             </Typography>
                         </Box>
+                        
                         <Box sx={{ gridColumn: "span 4" }}>
                             <Select
                                 labelId="material-type-label"
@@ -201,6 +217,7 @@ const EditMaterial = () => {
                                 Previous Status: {formik.initialValues.status === "true" ? "Active" : "Inactive"}
                             </Typography>
                         </Box>
+
                         <Box sx={{ gridColumn: "span 4" }}>
                             <Select
                                 labelId="material-status-label"
