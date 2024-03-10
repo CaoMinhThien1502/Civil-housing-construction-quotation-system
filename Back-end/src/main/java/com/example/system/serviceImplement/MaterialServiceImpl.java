@@ -36,8 +36,12 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Material getById(Long materialId) {
-        return materialRepository.findByMaterialId(materialId);
+    public MaterialDto getById(Long materialId) {
+        Material material = materialRepository.findById(materialId).orElseThrow();
+        return new MaterialDto(material.getMaterialId(), material.getMaterialName(),
+                material.getUnitPrice(), material.getMaterialType().getMaterialTypeId(),
+                material.getMaterialType().getTypeName(), material.isStatus(), material.getUnit());
+
     }
 
     @Override
