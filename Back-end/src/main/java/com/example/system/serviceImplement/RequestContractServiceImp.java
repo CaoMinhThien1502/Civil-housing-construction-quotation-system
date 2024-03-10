@@ -1,8 +1,11 @@
 package com.example.system.serviceImplement;
 
+import com.example.system.dto.buildingdto.BuildingDetailDto;
 import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.requestcontractdto.RCDetailDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.building.Building;
+import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
@@ -67,9 +70,35 @@ public class RequestContractServiceImp implements RequestContractService {
     }
 
     @Override
-    public RequestContractDto findById(Long rcId) {
-        RequestContractDto dto = getRequestContractDto(requestContractRepository.findById(rcId).orElseThrow());
-        return dto;
+    public RCDetailDto findById(Long rcId) {
+        try{
+            RequestContract rc = requestContractRepository.findById(rcId).orElseThrow();
+            RCDetailDto detail = new RCDetailDto();
+            detail.setStatus(rc.isStatus());
+            detail.setRequestContractId(rc.getRequestContractId());
+            detail.setComboId(rc.getComboBuilding().getComboBuildingId());
+            detail.setComboName(rc.getComboBuilding().getComboBuildingName());
+            detail.setUserId(rc.getUser().getUserId());
+            detail.setUserName(rc.getUser().getName());
+
+            BuildingDetailDto bdto = new BuildingDetailDto();
+            bdto.setBuildingId(rc.getBuilding().getBuildingId());
+            bdto.setLandArea(rc.getBuilding().getArea());
+            bdto.setStatus(rc.getBuilding().getStatus());
+            bdto.setUserId(rc.getUser().getUserId());
+            List<String> itemNames = new ArrayList<>();
+            for (BuildingDetail bd: rc.getBuilding().getBuildingDetail()
+                 ) {
+                itemNames.add(bd.getItem().getItemName());
+            }
+            bdto.setItemNameList(itemNames);
+            detail.setBuildingDto(bdto);
+
+
+            return detail;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override

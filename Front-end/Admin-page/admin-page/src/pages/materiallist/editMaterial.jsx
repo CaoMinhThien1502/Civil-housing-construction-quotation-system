@@ -18,6 +18,7 @@ const initialValues = {
 const userSchema = yup.object().shape({
     materialName: yup.string().required("Material Name is required"),
     unitPrice: yup.number().required("Unit Price is required"),
+    unit: yup.string().required("Unit is required"),
 }); 
 
 const EditMaterial = () => {
@@ -55,7 +56,7 @@ const EditMaterial = () => {
             unitPrice: `${getMaterial.unitPrice}`,
             status: `${getMaterial.status}`,
             unit: `${getMaterial.unit}`,
-            materialTypeId: "",
+            materialTypeId: `${getMaterial.materialTypeId}`,
         },
         enableReinitialize: true,
 

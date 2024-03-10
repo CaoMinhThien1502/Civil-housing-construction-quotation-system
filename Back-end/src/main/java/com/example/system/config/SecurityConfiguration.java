@@ -74,9 +74,9 @@ public class SecurityConfiguration {
                                 .requestMatchers("/request-contract/**").hasRole(Role.CUSTOMER.name())
                                 .anyRequest().authenticated()
                 )
-/*                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
+                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
                                 .loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
-                ) // URL mặc định sau khi đăng nhập thành công*/
+                ) // URL mặc định sau khi đăng nhập thành công
                 .sessionManagement(sessionManagement ->
                         sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
