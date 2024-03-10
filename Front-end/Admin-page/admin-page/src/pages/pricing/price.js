@@ -8,6 +8,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { tokens } from "../../theme";
 
 const ConstructionForm = () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -100,29 +101,43 @@ const ConstructionForm = () => {
 
   const handleSubmit = async () => {
     try {
+      // Chuẩn bị dữ liệu cho request
+      const requestData = {
+        area: Number(inputValue), // Đảm bảo giá trị này là số
+        itemIdList: Object.values(selectedItemIds).filter((itemId) => itemId !== "").map(Number), // Loại bỏ ID trống và chuyển thành số
+        comboType: 0,
+        status: 0
+      };
+  
+      const comboId = selectedItemIds.Combo; // Đảm bảo comboId là một số
+      const email = localStorage.getItem('mail'); // Lấy email từ localStorage
+      const token = localStorage.getItem('token'); // Lấy token từ localStorage
+  
+      // Gửi request
       const response = await axios.post(
-        `http://localhost:8080/request-contract/request-contract/create?comboId=${selectedItemIds.Combo}&email=${localStorage.getItem('mail')}`,
+        `http://localhost:8080/request-contract/request-contract/create?comboId=${comboId}&email=${email}`,
+        requestData,
         {
-          area: inputValue,
-          itemIdList: Object.values(selectedItemIds).filter((itemId) => itemId !== ""),
-          comboType: 0,
-          status: 0
-        },
-        { withCredentials: true }
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}` // Sử dụng token lấy từ localStorage
+          },
+          withCredentials: true
+        }
       );
-
+  
+      // Xử lý khi request thành công
       setModalShow(true);
       console.log("API Response:", response.data);
-
-      // Hiển thị toast thông báo thành công
       toast.success("Yêu cầu của bạn đã được gửi thành công!");
-
-      // Redirect or show success message after successful API call
     } catch (error) {
+      // Xử lý khi có lỗi
       console.error("Error submitting request:", error);
-      // Handle error, show error message, etc.
+      toast.error("Có lỗi xảy ra khi gửi yêu cầu.");
     }
   };
+  
+  
 
   const redirectToDetail = (id) => {
     navigate(`/detail?id=${id}`);

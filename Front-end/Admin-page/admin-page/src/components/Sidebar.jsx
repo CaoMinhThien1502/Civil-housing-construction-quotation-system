@@ -59,7 +59,6 @@ const Sidebar = () => {
             })
     }, []);
 
-    console.log("userData from sidebar", userData.fullName);
     return (
         <Box
             sx={{
