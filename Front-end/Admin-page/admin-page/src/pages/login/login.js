@@ -26,26 +26,31 @@ const Login = () => {
       const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
         email: email,
         password: password,
-      }, { withCredentials: 'include' });
-
-      // Lưu token nguyên bản vào localStorage
-      localStorage.setItem('token', response.data.access_Token);
+      }, { withCredentials: true });
       
-      // Decode token để lấy thông tin người dùng, nếu cần
-      const decodedToken = jwtDecode(response.data.access_Token);
-      // Ví dụ: lưu email của người dùng từ token, nếu 'sub' chứa email
-      localStorage.setItem('mail', decodedToken.sub);
+      if (response.status === 200) { 
+        const token = jwtDecode(response.data.access_Token)
+        localStorage.setItem('mail',token.sub)
+        localStorage.setItem('role',response.data.role)
+        if (response.data.role === "CUSTOMER") { 
+          console.log("Hello Customer");
 
-      if (response.status === 200) {
-        if (response.data.role === "CUSTOMER") {
-          navigate("/home");
-        } else {
+          navigate("/home");}
+        else { 
+          console.log("Hello Admin");
           navigate("/dashboard");
         }
+      } else {
+        setError(`Đăng nhập thất bại với mã trạng thái: ${response.status}`);
       }
     } catch (error) {
       console.error("Lỗi trong quá trình đăng nhập:", error);
-      setError(error.response ? (error.response.data || "Unknown error") : "Đăng nhập thất bại. Vui lòng thử lại.");
+
+      if (error.response) {
+        setError(error.response.data || "Unknown error");
+      } else {
+        setError("Đăng nhập thất bại. Vui lòng thử lại.");
+      }
     }
   };
   
