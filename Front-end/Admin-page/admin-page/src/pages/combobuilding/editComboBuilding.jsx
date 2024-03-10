@@ -51,8 +51,6 @@ const EditComboBuilding = () => {
         fetchComboDataById();
     }, []);
 
-    console.log(comboData.comboBuildingName);
-
     const formik = useFormik({
         initialValues: {
             comboBuildingName: `${comboData.comboBuildingName}`,
@@ -249,6 +247,7 @@ const EditComboBuilding = () => {
                                                             
                                                             // update state
                                                             setMaterialIdList(updatedMaterialIdList);
+                                                            console.log(updatedMaterialIdList);
                                                         }}
                                                     />
                                                 }
