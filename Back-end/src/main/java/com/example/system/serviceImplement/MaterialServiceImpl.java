@@ -28,20 +28,18 @@ public class MaterialServiceImpl implements MaterialService {
             materialDto.setMaterialName(m.getMaterialName());
             materialDto.setUnitPrice(m.getUnitPrice());
             materialDto.setMaterialTypeName(m.getMaterialType().getTypeName());
-            materialDto.setUnit(m.getUnit());
             materialDto.setStatus(m.isStatus());
+            materialDto.setUnit(m.getUnit());
             materialDtos.add(materialDto);
         }
         return materialDtos;
     }
 
     @Override
-    public MaterialDto getById(Long materialId) {
-        Material material = materialRepository.findById(materialId).orElseThrow();
-        return new MaterialDto(material.getMaterialId(), material.getMaterialName(),
-                material.getUnitPrice(), material.getMaterialType().getMaterialTypeId(),
-                material.getMaterialType().getTypeName(), material.isStatus(), material.getUnit());
+    public Material getById(Long materialId) {
+        return materialRepository.findByMaterialId(materialId);
     }
+
     @Override
     public List<Material> getListMaterialByTypeId(Long materialTypeId) {
         return materialRepository.findAllByMaterialType(materialTypeId);

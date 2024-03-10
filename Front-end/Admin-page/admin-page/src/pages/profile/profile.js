@@ -41,13 +41,18 @@ const ProfilePage = () => {
     };
 
     const fetchContractList = async () => {
+      const email = localStorage.getItem('mail'); 
+      const token = localStorage.getItem('token'); 
       try {
-        const response = await fetch(`http://localhost:8080/request-contract/request-contract/list/id?email=${localStorage.getItem('mail')}`, {
+        const response = await fetch(`http://localhost:8080/request-contract/request-contract/list/id?email=${email}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-          }
+            'Authorization': `Bearer ${token}` // Sử dụng token lấy từ localStorage
+          },
+          credentials: 'include' // credentials được xài trong fetch , còn withCredentials được xài trong axioss
         });
+
         const contractList = await response.json();
         if (response.status === 200) {
           setContractData(contractList);
@@ -174,7 +179,7 @@ const ProfilePage = () => {
                       <td>{contract.comboId}</td>
                       <td>{contract.buildingDto ? contract.buildingDto.area : "-"}</td>
                       <td>
-                        <MDBBadge color='success' pill>
+                        <MDBBadge color={contract.status ? 'success' : 'danger'} pill>
                           {contract.status ? "Active" : "Inactive"}
                         </MDBBadge>
                       </td>
@@ -186,6 +191,7 @@ const ProfilePage = () => {
                     </tr>
                   ))}
                 </MDBTableBody>
+
               </MDBTable>
             </MDBCol>
           </MDBRow>
