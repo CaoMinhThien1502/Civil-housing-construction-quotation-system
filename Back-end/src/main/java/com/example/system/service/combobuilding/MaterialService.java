@@ -8,7 +8,7 @@ import java.util.List;
 public interface MaterialService {
     List<MaterialDto> getListMaterial();
 
-    Material getById(Long materialId);
+    MaterialDto getById(Long materialId);
     boolean createMaterial(Long materialTypeId, MaterialDto material);
 
     boolean updateMaterial(Long materialId, MaterialDto material);

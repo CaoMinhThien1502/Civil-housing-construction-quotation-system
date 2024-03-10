@@ -30,14 +30,19 @@ public class MaterialServiceImpl implements MaterialService {
             materialDto.setUnitPrice(m.getUnitPrice());
             materialDto.setMaterialTypeName(m.getMaterialType().getTypeName());
             materialDto.setStatus(m.isStatus());
+            materialDto.setUnit(m.getUnit());
             materialDtos.add(materialDto);
         }
         return materialDtos;
     }
 
     @Override
-    public Material getById(Long materialId) {
-        return materialRepository.findByMaterialId(materialId);
+    public MaterialDto getById(Long materialId) {
+        Material material = materialRepository.findById(materialId).orElseThrow();
+        return new MaterialDto(material.getMaterialId(), material.getMaterialName(),
+                material.getUnitPrice(), material.getMaterialType().getMaterialTypeId(),
+                material.getMaterialType().getTypeName(), material.isStatus(), material.getUnit());
+
     }
 
     @Override
@@ -71,6 +76,7 @@ public class MaterialServiceImpl implements MaterialService {
             MaterialType materialType = materialTypeRepository.findById(material.materialTypeId);
             Material updateMaterial = materialRepository.findById(materialId)
                     .orElseThrow(() -> new IllegalStateException("Material with id " + materialId + " does not exists"));
+            MaterialType newMaterialType = materialTypeRepository.findById(material.getMaterialTypeId()).orElseThrow();
             updateMaterial.setMaterialName(material.getMaterialName());
             updateMaterial.setUnitPrice(material.getUnitPrice());
             updateMaterial.setStatus(material.isStatus());
