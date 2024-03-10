@@ -1,15 +1,11 @@
 package com.example.system.controller;
 
-import com.example.system.dto.buildingdto.BuildingDetailDto;
 import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.requestcontractdto.RCDetailDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.dto.userdto.UserDto;
-import com.example.system.model.combo.Material;
-import com.example.system.model.requestcontract.RequestContract;
-import com.example.system.model.user.User;
 import com.example.system.service.requestContract.RequestContractService;
 import com.example.system.service.user.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +30,11 @@ public class RequestContractController {
     }
 
     @GetMapping("/request-contract/get/id")
-    public ResponseEntity<RequestContractDto> getRequestContractById(Long id){
-        RequestContractDto dto = requestContractService.findById(id);
+    public ResponseEntity<RCDetailDto> getRequestContractById(Long id){
+        RCDetailDto dto = requestContractService.findById(id);
         return ResponseEntity.ok(dto);
     }
+    
 
     @GetMapping("/request-contract/list/email")
     public ResponseEntity<List<RequestContractDto>> getRequestContractsByEmail(String email){
