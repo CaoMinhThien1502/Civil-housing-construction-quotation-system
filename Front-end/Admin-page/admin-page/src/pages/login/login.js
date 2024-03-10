@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Sửa chữa ở đây
 import { useNavigate } from 'react-router-dom';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import {
@@ -13,15 +13,12 @@ import {
   MDBCheckbox
 } from 'mdb-react-ui-kit';
 import Header from '../../components/Header';
-// const jwt = require('jsonwebtoken');
-// Global variable to store the decoded token
-// let token = null;
+
 const Login = () => {
-  const navigate = useNavigate(); // Đảm bảo sử dụng useNavigate trong functional component
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [status,setStatus] = useState(0);
 
   const login = async (e) => {
     e.preventDefault();

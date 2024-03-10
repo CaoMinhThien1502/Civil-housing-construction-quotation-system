@@ -36,8 +36,8 @@ import './TeamSection.css';
 import '../../styles/main/main.css';
 
 // Create a functional component for the header
-const Header = ({ status }) => {
-  const linkText = status === 200 ? 'Profile' : 'Login';
+const Header = () => {
+  const linkText = localStorage.token === null ? 'Profile' : 'Login';
   return (
     <header id="header" className="fixed-top d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between">
@@ -55,7 +55,7 @@ const Header = ({ status }) => {
             <li><a className="nav-link scrollto" href="#Pricing">Pricing</a></li>
             {/* Add your dropdown menu here if needed */}
             <li><a className="nav-link scrollto" href="#Contact">Contact</a></li>
-            <li><a className="getstarted scrollto" href={status === 200 ? "/profile" : "/login"}>{linkText}</a></li>
+            <li><a className="getstarted scrollto" href={localStorage.token === null ? "/profile" : "/login"}>{linkText}</a></li>
           </ul>
           <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>

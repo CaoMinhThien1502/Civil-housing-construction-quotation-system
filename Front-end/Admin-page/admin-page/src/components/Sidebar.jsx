@@ -26,7 +26,6 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    
     return (
         <MenuItem
             active={selected === title}
@@ -44,8 +43,9 @@ const Sidebar = () => {
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
+    const [isLoading, setIsLoading] = useState(false); // Optional state to indicate data fetching
 
-    const [userData, setUserData] = useState({});
+    const userDataDemo = { "userId": 8, "fullName": "Admin", "password": "$2a$10$cC8eSPyEWIOi/COXCTJSquAJCSKhpHZJ9qvleS8iEgPDmpHLVrX0i", "email": "admin@gmail.com", "role": "ADMIN", "phone": "0000000000", "address": "Admin", "birthday": "1998-05-06", "gender": true, "status": true };
     
     useEffect(() => {
         const emailUser = localStorage.getItem('mail');
@@ -125,10 +125,10 @@ const Sidebar = () => {
                                     fontWeight="bold"
                                     sx={{ m: "10px 0 0 0" }}
                                 >
-                                    {userData.fullName}
+                                    {userDataDemo.fullName}
                                 </Typography>
                                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                                    {userData.role}
+                                    VP Fancy Admin
                                 </Typography>
                             </Box>
                         </Box>
