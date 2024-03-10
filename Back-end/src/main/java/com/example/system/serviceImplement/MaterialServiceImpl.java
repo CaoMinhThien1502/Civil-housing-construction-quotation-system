@@ -57,6 +57,7 @@ public class MaterialServiceImpl implements MaterialService {
             newMaterial.setMaterialName(material.getMaterialName());
             newMaterial.setMaterialType(materialType);
             newMaterial.setUnitPrice(material.getUnitPrice());
+            newMaterial.setUnit(material.getUnit());
             newMaterial.setStatus(true);
             materialRepository.save(newMaterial);
             return true;
@@ -75,6 +76,7 @@ public class MaterialServiceImpl implements MaterialService {
             updateMaterial.setMaterialName(material.getMaterialName());
             updateMaterial.setUnitPrice(material.getUnitPrice());
             updateMaterial.setStatus(material.isStatus());
+            updateMaterial.setUnit(material.getUnit());
             updateMaterial.setMaterialType(newMaterialType);
             materialRepository.save(updateMaterial);
             return true;
