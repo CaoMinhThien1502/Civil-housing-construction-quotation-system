@@ -30,20 +30,19 @@ public class RequestContractController {
     }
 
     @GetMapping("/request-contract/get/id")
-    public ResponseEntity<RCDetailDto> getRequestContractById(Long id){
+    public ResponseEntity<RCDetailDto> getRequestContractById(@RequestParam Long id){
         RCDetailDto dto = requestContractService.findById(id);
         return ResponseEntity.ok(dto);
     }
     
 
     @GetMapping("/request-contract/list/email")
-    public ResponseEntity<List<RequestContractDto>> getRequestContractsByEmail(String email){
+    public ResponseEntity<List<RequestContractDto>> getRequestContractsByEmail(@RequestParam String email){
         List<RequestContractDto> list = requestContractService.findDtosByEmail(email);
         return ResponseEntity.ok(list);
     }
     @PostMapping("/request-contract/create")
     public ResponseEntity<RequestContractDto> createRequestContract(@RequestBody BuildingDto bdto, @RequestParam Long comboId, @RequestParam String email){
-        //User auth = new User();
         UserDto udto = userService.getProfile(email);
         RequestContractDto dto = requestContractService.createRequestContract(bdto, comboId, udto.getUserId());
         return ResponseEntity.ok(dto);
