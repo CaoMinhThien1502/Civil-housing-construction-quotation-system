@@ -246,6 +246,9 @@ const EditComboBuilding = () => {
                                                                 updatedMaterialIdList.splice(updatedMaterialIdList.indexOf(option.materialId), 1); // Remove ID if unchecked
                                                             }
                                                             formik.setFieldValue('materialIdList', updatedMaterialIdList); // Update formik state
+                                                            
+                                                            // update state
+                                                            setMaterialIdList(updatedMaterialIdList);
                                                         }}
                                                     />
                                                 }

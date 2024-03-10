@@ -73,7 +73,6 @@ public class MaterialServiceImpl implements MaterialService {
     @Override
     public boolean updateMaterial(Long materialId, MaterialDto material) {
         try{
-            MaterialType materialType = materialTypeRepository.findById(material.materialTypeId);
             Material updateMaterial = materialRepository.findById(materialId)
                     .orElseThrow(() -> new IllegalStateException("Material with id " + materialId + " does not exists"));
             MaterialType newMaterialType = materialTypeRepository.findById(material.getMaterialTypeId()).orElseThrow();
@@ -81,7 +80,7 @@ public class MaterialServiceImpl implements MaterialService {
             updateMaterial.setUnitPrice(material.getUnitPrice());
             updateMaterial.setStatus(material.isStatus());
             updateMaterial.setUnit(material.getUnit());
-            updateMaterial.setMaterialType(materialType);
+            updateMaterial.setMaterialType(newMaterialType);
             materialRepository.save(updateMaterial);
             return true;
         }
