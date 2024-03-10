@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Sửa chữa ở đây
 import { useNavigate } from 'react-router-dom';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import {
@@ -15,11 +15,10 @@ import {
 import Header from '../../components/Header';
 
 const Login = () => {
-  const navigate = useNavigate(); // Đảm bảo sử dụng useNavigate trong functional component
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [status,setStatus] = useState(0);
 
   const login = async (e) => {
     e.preventDefault();
@@ -27,36 +26,26 @@ const Login = () => {
       const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
         email: email,
         password: password,
-      }, { withCredentials: true });
+      }, { withCredentials: 'include' });
 
-
+      // Lưu token nguyên bản vào localStorage
+      localStorage.setItem('token', response.data.access_Token);
       
-      if (response.status === 200) { 
-        const token = jwtDecode(response.data.access_Token)
-        localStorage.setItem('mail',token.sub)
-        setStatus(200);
-        if (response.data.role === "CUSTOMER") { 
-          console.log (response.data.role);
-          console.log("Hello Customer");
-          //navigate("/home");
-          <Header status={status} />
+      // Decode token để lấy thông tin người dùng, nếu cần
+      const decodedToken = jwtDecode(response.data.access_Token);
+      // Ví dụ: lưu email của người dùng từ token, nếu 'sub' chứa email
+      localStorage.setItem('mail', decodedToken.sub);
 
-          navigate("/home");}
-        else { 
-          console.log("Hello Admin");
+      if (response.status === 200) {
+        if (response.data.role === "CUSTOMER") {
+          navigate("/home");
+        } else {
           navigate("/dashboard");
         }
-      } else {
-        setError(`Đăng nhập thất bại với mã trạng thái: ${response.status}`);
       }
     } catch (error) {
       console.error("Lỗi trong quá trình đăng nhập:", error);
-
-      if (error.response) {
-        setError(error.response.data || "Unknown error");
-      } else {
-        setError("Đăng nhập thất bại. Vui lòng thử lại.");
-      }
+      setError(error.response ? (error.response.data || "Unknown error") : "Đăng nhập thất bại. Vui lòng thử lại.");
     }
   };
   
@@ -105,3 +94,4 @@ const Login = () => {
 }
 
 export default Login;
+// Export the decoded token

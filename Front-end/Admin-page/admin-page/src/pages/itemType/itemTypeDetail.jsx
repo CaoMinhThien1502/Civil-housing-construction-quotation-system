@@ -11,22 +11,23 @@ import axios from 'axios';
 
 const ItemTypeDetail = () => {
     const {id} = useParams();
-    const [item, setItem] = useState([]);
-    useEffect(() => {
-        axios.get(`http://localhost:8080/building/item-type/id?typeId=${id}`)
-            .then(response => {
-                setItem(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching material data:', error);
-            });
-    }, [id]);
+    // const [itemData, setItemData] = useState([]);
+    // useEffect(() => {
+    //     axios.get(`http://localhost:8080/combobuilding/item/getByItemTypeId?itemTypeId=${id}`)
+    //         .then(response => {
+    //             setItemData(response.data);
+    //             console.log("Item Data:", response.data)
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching item data:', error);
+    //         });
+    // }, [id]);
 
-    const [getMaterialType, setMaterialType] = useState([]);
+    const [getItemType, setItemType] = useState([]);
     useEffect(() => {
-        const fetchMaterialTypeById = async () => {
+        const fetchItemTypeById = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/combobuilding/material-type/getbyid?materialTypeId=${id}`, {
+                const response = await fetch(`http://localhost:8080/building/item-type/id?typeId=${id}`, {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -35,14 +36,15 @@ const ItemTypeDetail = () => {
                 });
 
                 const data = await response.json();
-                setMaterialType(data);
+                setItemType(data);
             } catch (error) {
-                console.error('Error fetching materials:', error);
+                console.error('Error fetching item type:', error);
             }
         };
 
-        fetchMaterialTypeById();
+        fetchItemTypeById();
     }, []); // Empty dependency array to fetch data only once on component mount
+    const items = getItemType?.items || [];
 
     const navigate = useNavigate();
 
@@ -51,7 +53,7 @@ const ItemTypeDetail = () => {
 
     return (
         <Box m="20px" >
-            <Header title="Material Type Detail" subtitle="View the Material Type Detail" />
+            <Header title="Item Type Detail" subtitle="View the Item Type Detail" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -86,28 +88,28 @@ const ItemTypeDetail = () => {
             >
                 {/* display many materials detail info from api using map */}
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Material Type Detail Information</Typography>
+                    <Typography variant="h3" gutterBottom>Item Type Detail Information</Typography>
                     {/* display material type data by {id} */}
-                    <Typography variant="h5" gutterBottom>Material Type ID: {id}</Typography>
-                    <Typography variant="h5" gutterBottom>Material Type Name: {getMaterialType.typeName}</Typography>
-                    <Typography variant="h5" gutterBottom>Status: {getMaterialType.status === true ? "Active" : "Inactive"}</Typography>
+                    <Typography variant="h5" gutterBottom>Item Type ID: {id}</Typography>
+                    <Typography variant="h5" gutterBottom>Item Type Name: {getItemType.itemTypeName}</Typography>
+                    <Typography variant="h5" gutterBottom>Status: {getItemType.status === true ? "Active" : "Inactive"}</Typography>
                 </Box>
 
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/materialType")} color="secondary" variant="contained">
+                    <Button onClick={() => navigate("/itemType")} color="secondary" variant="contained">
                         Cancel
                     </Button>
                 </Box>
 
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Materials Included Information: </Typography>
+                    <Typography variant="h3" gutterBottom>Items Included Information: </Typography>
                 </Box>
                 <DataGrid
-                    rows={materialData} // Access the material list for each type
+                    rows={items}
                     columns={[
-                        { field: "materialId", headerName: "Material ID", flex: 1 },
-                        { field: "materialName", headerName: "Material Name", flex: 1 },
-                        { field: "unitPrice", headerName: "Unit Price", flex: 1 },
+                        { field: "itemId", headerName: "Item ID", flex: 1 },
+                        { field: "itemName", headerName: "Item Name", flex: 1 },
+                        { field: "priceItem", headerName: "Item Price", flex: 1 },
                         {
                             field: "status", headerName: "Status",
                             renderCell: (params) => {
@@ -115,9 +117,8 @@ const ItemTypeDetail = () => {
                                 return status === true ? "Active" : "Inactive";
                             },
                         },
-                        // Add other fields as needed
                     ]}
-                    getRowId={(row) => row.materialId}
+                    getRowId={(row) => row.itemId}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />

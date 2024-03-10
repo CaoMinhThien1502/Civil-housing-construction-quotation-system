@@ -59,7 +59,7 @@ const Item = () => {
         },
         {
             field: "itemTypeName",
-            headerName: "Item Type",
+            headerName: "Type",
             flex: 1,
         },
         {
@@ -80,7 +80,7 @@ const Item = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Link                    to={`/item/${row.itemId}`}
+                <Link                    to={`/itemList/${row.itemId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
@@ -127,7 +127,7 @@ const Item = () => {
                 }}
             >
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/item/addItem")} color="secondary" variant="contained">
+                    <Button onClick={() => navigate("/itemList/addItem")} color="secondary" variant="contained">
                         Add Item
                     </Button>
                 </Box>

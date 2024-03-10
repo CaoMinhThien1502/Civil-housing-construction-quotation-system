@@ -50,7 +50,7 @@ const AddItem = () => {
     
                 // Handle successful (e.g., navigate to a different page, store user data)
                 window.alert('Item added successfully');
-                navigate('/item');
+                navigate('/itemList');
             } catch (error) {
                 console.error('Error during submit:', error);
                 // Handle submit errors (e.g., display an error message to the user)
@@ -163,7 +163,7 @@ const AddItem = () => {
                             </Typography>
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <Button onClick={() => navigate("/item")} color="secondary" variant="contained">
+                            <Button onClick={() => navigate("/itemList")} color="secondary" variant="contained">
                                 Cancel
                             </Button>
                             <Box ml="10px"/>

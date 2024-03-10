@@ -26,7 +26,6 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    
     return (
         <MenuItem
             active={selected === title}
@@ -50,7 +49,7 @@ const Sidebar = () => {
     
     const [userData, setUserData] = useState({});
     const [error, setError] = useState(null);
-    
+
     // axios.interceptors.request.use((request) => {
     //     console.log(request);
     //     return request;
@@ -105,25 +104,7 @@ const Sidebar = () => {
     //         console.log("Error fetching user data:", error);
     //     }
     // }
-    useEffect(()=>{
-      
-    
-            const emailUser = localStorage.getItem('mail')
-            console.log(emailUser)
-           axios.get(`http://localhost:8080/user/profile?email=${emailUser}`)
-           .then(response=>{
-            setUserData(response.data)
-        
-   
-           })
-           .catch(err=>{
-            console.log(err)
-           })
-          
-       
 
-
-    },[])
     return (
         <Box
             sx={{
@@ -190,10 +171,10 @@ const Sidebar = () => {
                                     fontWeight="bold"
                                     sx={{ m: "10px 0 0 0" }}
                                 >
-                                    {userData.fullName}
+                                    {userDataDemo.fullName}
                                 </Typography>
                                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                                {userData.role}
+                                    VP Fancy Admin
                                 </Typography>
                             </Box>
                         </Box>
@@ -281,8 +262,8 @@ const Sidebar = () => {
                         </Typography>
                         <Item
                             title="Item List"
-                            to="/item"
-                            icon={<PeopleOutlinedIcon />}
+                            to="/itemList"
+                            icon={<FormatListBulletedOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
