@@ -35,9 +35,11 @@ import EditItem from './pages/itemlist/editItem.jsx';
 import EditItemType from './pages/itemtype/editItemType.jsx';
 
 import Login from './pages/login/login';
+import PrivateRoutes from './utils/PrivateRoutes.jsx';
 
 import Detail from './pages/pricing/detail.js';
 import ProfilePage from './pages/profile/profile.js';
+
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
 // import Pie from "./pages/pie";
@@ -81,45 +83,47 @@ function App() {
             <main className="content">
               <Topbar />
               <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
+                <Route element={<PrivateRoutes />} >
+                  <Route path="/dashboard" element={<Dashboard />} exact/>
 
-              <Route path="/comboBuilding" element={<ComboBuilding />} />
-              <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
-              <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
-              <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
-              
-              <Route path="/materialList" element={<MaterialList />} />
-              <Route path="/materialList/addMaterial" element={<AddMaterial />} />
-              <Route path="/materialList/:id" element={<EditMaterial />} />
+                  <Route path="/comboBuilding" element={<ComboBuilding />} />
+                  <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
+                  <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
+                  <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
+                  
+                  <Route path="/materialList" element={<MaterialList />} />
+                  <Route path="/materialList/addMaterial" element={<AddMaterial />} />
+                  <Route path="/materialList/:id" element={<EditMaterial />} />
 
-              <Route path="/materialType" element={<MaterialType />} />
-              <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
-              <Route path="/materialType/:id" element={<EditMaterialType />} />
-              <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
+                  <Route path="/materialType" element={<MaterialType />} />
+                  <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
+                  <Route path="/materialType/:id" element={<EditMaterialType />} />
+                  <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
 
-              <Route path="/itemList" element={<Item />} />
-              <Route path="/itemList/:id" element={<EditItem />} />
-              <Route path="/itemList/addItem" element={<AddItem />} />
+                  <Route path="/itemList" element={<Item />} />
+                  <Route path="/itemList/:id" element={<EditItem />} />
+                  <Route path="/itemList/addItem" element={<AddItem />} />
 
-              <Route path="/itemType" element={<ItemType />} />
-              <Route path="/itemType/:id" element={<EditItemType />} />
-              <Route path="/itemType/addItemType" element={<AddItemType />} />
-              <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
-              
-              <Route path="/form" element={<Form />} />
-              {/* 
-              <Route path="/team" element={<Team />} />
-              <Route path="/contacts" element={<Contacts />} />
-              <Route path="/invoices" element={<Invoices />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/materialtype" element={<MaterialType />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} /> */}
-              
+                  <Route path="/itemType" element={<ItemType />} />
+                  <Route path="/itemType/:id" element={<EditItemType />} />
+                  <Route path="/itemType/addItemType" element={<AddItemType />} />
+                  <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
+                  
+                  <Route path="/form" element={<Form />} />
+                  
+                  {/* 
+                  <Route path="/team" element={<Team />} />
+                  <Route path="/contacts" element={<Contacts />} />
+                  <Route path="/invoices" element={<Invoices />} />
+                  <Route path="/bar" element={<Bar />} />
+                  <Route path="/materialtype" element={<MaterialType />} />
+                  <Route path="/bar" element={<Bar />} />
+                  <Route path="/pie" element={<Pie />} />
+                  <Route path="/line" element={<Line />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path="/geography" element={<Geography />} /> */}
+                </Route>
               </Routes>
             </main>
           </div>
