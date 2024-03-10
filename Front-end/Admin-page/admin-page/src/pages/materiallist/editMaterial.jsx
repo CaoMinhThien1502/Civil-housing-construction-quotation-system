@@ -11,6 +11,8 @@ const initialValues = {
     materialName: "",
     unitPrice: "",
     status: "",
+    unit: "",
+    materialTypeId: "",
 };
 
 const userSchema = yup.object().shape({
@@ -37,6 +39,7 @@ const EditMaterial = () => {
 
                 const data = await response.json();
                 setMaterial(data);
+                console.log(getMaterial);
             } catch (error) {
                 console.error('Error fetching materials:', error);
             }
@@ -51,6 +54,8 @@ const EditMaterial = () => {
             materialName: `${getMaterial.materialName}`,
             unitPrice: `${getMaterial.unitPrice}`,
             status: `${getMaterial.status}`,
+            unit: `${getMaterial.unit}`,
+            materialTypeId: "",
         },
         enableReinitialize: true,
 
@@ -81,6 +86,40 @@ const EditMaterial = () => {
 
         validationSchema: userSchema,
     });
+
+    const [getMaterialTypes, setMaterialTypes] = useState([]);
+    useEffect(() => {
+        const fetchMaterialTypes = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/combobuilding/material-type/get', {
+                    method: 'GET',
+                    headers: {
+                        // 'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                setMaterialTypes(data);
+            } catch (error) {
+                console.error('Error fetching material types:', error);
+            }
+        };
+
+        fetchMaterialTypes(); 
+    }, []); // Empty dependency array to fetch data only once on component mount
+
+    const [secondAnchorEl, setSecondAnchorEl] = useState(null);
+    const handleSecondOpen = (event) => {
+        setSecondAnchorEl(event.currentTarget);
+    };
+    const handleSecondClose = () => {
+        setSecondAnchorEl(null);
+    };
+    const handleSecondChanges = (event) => {
+        formik.setFieldValue("materialTypeId", event.target.value);
+        console.log(event.target.value);
+    };
 
     const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
     const handleOpen = (event) => {
@@ -123,7 +162,7 @@ const EditMaterial = () => {
                             name="materialName"
                             error={!!touched.materialName && !!errors.materialName}
                             helperText={touched.materialName && errors.materialName}
-                            sx={{ gridColumn: "span 2" }}
+                            sx={{ gridColumn: "span 4" }}
                             />
                             <TextField
                             fullWidth
@@ -136,12 +175,49 @@ const EditMaterial = () => {
                             name="unitPrice"
                             error={!!touched.unitPrice && !!errors.unitPrice}
                             helperText={touched.unitPrice && errors.unitPrice}
-                            sx={{ gridColumn: "span 2"}}
+                            sx={{ gridColumn: "span 4"}}
                             />
+                            <TextField
+                            fullWidth
+                            variant="filled"
+                            type="text"
+                            label="Unit"
+                            onBlur={handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.unit}
+                            name="unit"
+                            error={!!touched.unit && !!errors.unit}
+                            helperText={touched.unit && errors.unit}
+                            sx={{ gridColumn: "span 4"}}
+                            />
+                            <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4" }}>
+                                Previous Material Type: {getMaterial.materialTypeName}
+                            </Typography>
+                        </Box>
+                        
+                        <Box sx={{ gridColumn: "span 4" }}>
+                            <Select
+                                labelId="material-type-label"
+                                id="material-type"
+                                defaultValue=""
+                                onChange={handleSecondChanges}
+                                error={!!touched.type && !!errors.type}
+                                open={Boolean(secondAnchorEl)}
+                                onClose={handleSecondClose}
+                                onOpen={handleSecondOpen}
+                                fullWidth={true}
+                            >
+                                {getMaterialTypes.map((materialType) => (
+                                    <MenuItem key={materialType.materialTypeId} value={materialType.materialTypeId}>
+                                        {materialType.typeName}
+                                    </MenuItem>
+                                ))}
+                            </Select>
                             <Typography sx={{ gridColumn: "span 4" }} variant="h6" gutterBottom>
                                 Previous Status: {formik.initialValues.status === "true" ? "Active" : "Inactive"}
                             </Typography>
                         </Box>
+
                         <Box sx={{ gridColumn: "span 4" }}>
                             <Select
                                 labelId="material-status-label"
