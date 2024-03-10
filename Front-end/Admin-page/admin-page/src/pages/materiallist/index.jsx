@@ -59,13 +59,13 @@ const Team = () => {
             flex: 1,
         },
         {
-            field: "materialTypeName",
-            headerName: "Type",
+            field: "unit",
+            headerName: "Unit",
             flex: 1,
         },
         {
-            field: "unit",
-            headerName: "Unit",
+            field: "materialTypeName",
+            headerName: "Type",
             flex: 1,
         },
         {
