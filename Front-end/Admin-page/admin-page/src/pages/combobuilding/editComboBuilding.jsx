@@ -51,8 +51,6 @@ const EditComboBuilding = () => {
         fetchComboDataById();
     }, []);
 
-    console.log(comboData.comboBuildingName);
-
     const formik = useFormik({
         initialValues: {
             comboBuildingName: `${comboData.comboBuildingName}`,
@@ -246,6 +244,10 @@ const EditComboBuilding = () => {
                                                                 updatedMaterialIdList.splice(updatedMaterialIdList.indexOf(option.materialId), 1); // Remove ID if unchecked
                                                             }
                                                             formik.setFieldValue('materialIdList', updatedMaterialIdList); // Update formik state
+                                                            
+                                                            // update state
+                                                            setMaterialIdList(updatedMaterialIdList);
+                                                            console.log(updatedMaterialIdList);
                                                         }}
                                                     />
                                                 }
