@@ -34,11 +34,10 @@ const Login = () => {
       if (response.status === 200) { 
         const token = jwtDecode(response.data.access_Token)
         localStorage.setItem('mail',token.sub)
+        localStorage.setItem('role',response.data.role)
         setStatus(200);
         if (response.data.role === "CUSTOMER") { 
-          console.log (response.data.role);
           console.log("Hello Customer");
-          //navigate("/home");
           <Header status={status} />
 
           navigate("/home");}

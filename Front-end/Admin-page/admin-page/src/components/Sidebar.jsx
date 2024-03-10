@@ -48,8 +48,8 @@ const Sidebar = () => {
     const [userData, setUserData] = useState({});
     
     useEffect(() => {
-        const emailUser = localStorage.getItem('mail')
-        console.log(emailUser)
+        const emailUser = localStorage.getItem('mail');
+        console.log(emailUser);
         axios.get(`http://localhost:8080/user/profile?email=${emailUser}`)
             .then(response => {
                 setUserData(response.data);
@@ -59,6 +59,7 @@ const Sidebar = () => {
             })
     }, []);
 
+    console.log("userData from sidebar", userData.fullName);
     return (
         <Box
             sx={{
@@ -228,7 +229,6 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
-                        {/* <button onClick={fetchUserData}>Get User Data</button> */}
                         {/* <Item
                             title="Profile Form"
                             to="/form"
