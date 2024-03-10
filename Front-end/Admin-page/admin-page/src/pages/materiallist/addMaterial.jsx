@@ -17,6 +17,7 @@ const initialValues = {
 const userSchema = yup.object().shape({
     materialName: yup.string().required("Material Name is required"),
     unitPrice: yup.string().required("Unit Price is required"),
+    unit: yup.string().required("Unit is required"),
 });
 
 const AddMaterial = () => {
