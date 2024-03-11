@@ -17,7 +17,7 @@ import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
 import Item from './pages/itemlist/index.jsx';
 import ItemType from './pages/itemtype/index.jsx';
-import RequestContract from './pages/requestcontract/index.jsx';
+import RequestContract from './pages/requestcontract';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
@@ -74,11 +74,11 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       {location.pathname !== '/login' 
       && location.pathname !== '/' 
-      && location.pathname != '/home' 
-      && location.pathname != '/price'
-      && location.pathname != '/blog'
-      && location.pathname != '/detail'
-      && location.pathname != '/profile'
+      && location.pathname !== '/home' 
+      && location.pathname !== '/price'
+      && location.pathname !== '/blog'
+      && location.pathname !== '/detail'
+      && location.pathname !== '/profile'
       && (
         <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -113,8 +113,8 @@ function App() {
                   <Route path="/itemType/addItemType" element={<AddItemType />} />
                   <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
 
-                  <Route path="/requestContract" element={<RequestContract />} />
-                  <Route path="/requestContractDetail" element={<RequestContractDetail />} />
+                  <Route path="/requestContractList" element={<RequestContract />} />
+                  <Route path="/requestContractList/:id" element={<RequestContractDetail />} />
                   
                   <Route path="/form" element={<Form />} />
                   

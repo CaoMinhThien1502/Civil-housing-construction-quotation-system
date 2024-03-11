@@ -14,6 +14,8 @@ public class RCDetailDto {
     private Long requestContractId;
     private Long userId;
     private String userName;
+    private String phone;
+    private String email;
     private Long comboId;
     private String comboName;
     private BuildingDetailDto buildingDto;
