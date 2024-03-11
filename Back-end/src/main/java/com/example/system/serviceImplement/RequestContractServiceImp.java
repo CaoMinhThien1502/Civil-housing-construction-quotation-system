@@ -44,11 +44,11 @@ public class RequestContractServiceImp implements RequestContractService {
     }
 
     @Override
-    public List<RequestContractDto> findAllDto() {
+    public List<RCDetailDto> findAllDto() {
         List<RequestContract> requestContractList = requestContractRepository.findAll();
-        List<RequestContractDto> dtos = new ArrayList<>();
+        List<RCDetailDto> dtos = new ArrayList<>();
         for (RequestContract rc: requestContractList) {
-            dtos.add(getRequestContractDto(rc));
+            dtos.add(findById(rc.getRequestContractId()));
         }
         return dtos;
     }
