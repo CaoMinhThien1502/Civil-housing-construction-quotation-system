@@ -24,8 +24,8 @@ public class RequestContractController {
     UserService userService;
 
     @GetMapping("/request-contract/list")
-    public ResponseEntity<List<RequestContractDto>> getRequestContracts(){
-        List<RequestContractDto> list = requestContractService.findAllDto();
+    public ResponseEntity<List<RCDetailDto>> getRequestContracts(){
+        List<RCDetailDto> list = requestContractService.findAllDto();
         return ResponseEntity.ok(list);
     }
 
