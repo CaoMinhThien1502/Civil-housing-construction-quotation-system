@@ -6,37 +6,42 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
 import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
+import ToastAfterShowPriceQuoation from "./toast";
+import './toast.css';
 
 const ConstructionForm = () => {
+  const isLoggedIn = !!localStorage.getItem('token');
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
   const [inputValue, setInputValue] = useState("");
   const [swaggerData, setSwaggerData] = useState(null);
   const [modalShow, setModalShow] = useState(false);
+  const [toastShow, setToastShow] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
   const [selectedItemNames, setSelectedItemNames] = useState({
     Combo: "",
     "Loại Nhà": "",
     Hầm: "",
     Tầng: "",
-    Mái: "",
+    Móng: "",
   });
   const [selectedItemIds, setSelectedItemIds] = useState({
     Combo: "",
     "Loại Nhà": "",
     Hầm: "",
     Tầng: "",
-    Mái: "",
+    Móng: "",
   });
   const [selectedItemPrices, setSelectedItemPrices] = useState({
     Combo: 0,
     "Loại Nhà": 0,
     Hầm: 0,
     Tầng: 0,
-    Mái: 0,
+    Móng: 0,
   });
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -71,16 +76,21 @@ const ConstructionForm = () => {
       [typeName]: selectedId,
     }));
 
-    const selectedItem = swaggerData?.itemTypeList
-      .find((itemType) => itemType.itemTypeName === typeName)
-      .itemList.find((item) => item.itemId === selectedId);
+    const selectedItemType = swaggerData?.itemTypeList.find(
+      (itemType) => itemType.itemTypeName === typeName
+    );
 
-    if (selectedItem) {
-      const itemPrice = selectedItem.priceItem || 0;
-      setSelectedItemPrices((prevPrices) => ({
-        ...prevPrices,
-        [typeName]: itemPrice,
-      }));
+    if (selectedItemType && selectedItemType.itemList) {
+      const selectedItem = selectedItemType.itemList.find(
+        (item) => item.itemId === selectedId
+      );
+      if (selectedItem) {
+        const itemPrice = selectedItem.priceItem || 0;
+        setSelectedItemPrices((prevPrices) => ({
+          ...prevPrices,
+          [typeName]: itemPrice,
+        }));
+      }
     }
   };
 
@@ -94,7 +104,7 @@ const ConstructionForm = () => {
       swaggerData?.comboList.find(
         (combo) => combo.comboBuildingName === selectedItemNames.Combo
       )?.comboPrice *
-        inputValue +
+      inputValue +
       totalPrice;
     setTotalPrice(totalPrice);
   }, [selectedItemPrices, selectedItemNames.Combo, inputValue]);
@@ -103,44 +113,57 @@ const ConstructionForm = () => {
     try {
       // Chuẩn bị dữ liệu cho request
       const requestData = {
-        area: Number(inputValue), // Đảm bảo giá trị này là số
-        itemIdList: Object.values(selectedItemIds).filter((itemId) => itemId !== "").map(Number), // Loại bỏ ID trống và chuyển thành số
+        area: Number(inputValue),
+        itemIdList: Object.values(selectedItemIds)
+          .filter((itemId) => itemId !== "")
+          .map(Number),
         comboType: 0,
-        status: 0
+        status: 0,
       };
-  
-      const comboId = selectedItemIds.Combo; // Đảm bảo comboId là một số
-      const email = localStorage.getItem('mail'); // Lấy email từ localStorage
-      const token = localStorage.getItem('token'); // Lấy token từ localStorage
-  
-      // Gửi request
+
+      const comboId = selectedItemIds.Combo;
+      const email = localStorage.getItem("mail");
+      const token = localStorage.getItem("token");
+      console.log("comboId: ", comboId);
+
       const response = await axios.post(
         `http://localhost:8080/request-contract/request-contract/create?comboId=${comboId}&email=${email}`,
         requestData,
         {
           headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}` // Sử dụng token lấy từ localStorage
+            Authorization: `Bearer ${token}`,
           },
-          withCredentials: true
+          withCredentials: true,
         }
       );
-  
-      // Xử lý khi request thành công
+
       setModalShow(true);
       console.log("API Response:", response.data);
-      toast.success("Yêu cầu của bạn đã được gửi thành công!");
+      if (response.status === 200) {
+        setModalShow(false);
+        setToastShow(true);
+        setIsRegistered(true);
+      }
     } catch (error) {
-      // Xử lý khi có lỗi
       console.error("Error submitting request:", error);
-      toast.error("Có lỗi xảy ra khi gửi yêu cầu.");
     }
   };
-  
-  
 
   const redirectToDetail = (id) => {
     navigate(`/detail?id=${id}`);
+  };
+
+  const handleRegister = () => {
+    handleSubmit();
+    setModalShow(false);
+  };
+  const handleShowPriceQuote = () => {
+    if (isLoggedIn) {
+      setModalShow(true);
+    } else {
+      alert("Bạn cần đăng nhập để xem báo giá.");
+    }
   };
 
   return (
@@ -154,7 +177,13 @@ const ConstructionForm = () => {
           <HeadTitle />
         </div>
         {swaggerData && (
-          <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="row g-2">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+            className="row g-2"
+          >
             <div className="col-md-6 mb-1">
               <label htmlFor="landArea" className="form-label">
                 Diện tích
@@ -179,22 +208,28 @@ const ConstructionForm = () => {
               <Form.Select
                 id="comboList.comboBuildingName"
                 onChange={(e) => {
-                  const selectedName =
-                    e.target.options[e.target.selectedIndex].text;
+                  const selectedId = e.target.value; // Giả sử giá trị của option chính là comboId
+                  const selectedName = e.target.options[e.target.selectedIndex].text;
                   setSelectedItemNames((prevNames) => ({
                     ...prevNames,
-                    Combo: selectedName || "",
+                    Combo: selectedName,
+                  }));
+                  setSelectedItemIds((prevIds) => ({
+                    ...prevIds,
+                    Combo: selectedId, // Đảm bảo rằng comboId được cập nhật
                   }));
                 }}
               >
                 {swaggerData.comboList.map((combo) => (
-                  <option key={combo.comboBuildingId}>
+                  <option key={combo.comboBuildingId} value={combo.comboBuildingId}>
                     {combo.comboBuildingName}
                   </option>
                 ))}
               </Form.Select>
+
+
             </div>
-            {["Loại Nhà", "Hầm", "Tầng", "Mái"].map((typeName, index) => (
+            {["Loại Nhà", "Hầm", "Tầng", "Móng"].map((typeName, index) => (
               <div key={typeName} className="col-md-6 mb-1">
                 <label
                   htmlFor={`itemType.${typeName}`}
@@ -211,19 +246,31 @@ const ConstructionForm = () => {
                     handleChange(typeName, selectedId, selectedName);
                   }}
                 >
-                  {swaggerData.itemTypeList
-                    .find((itemType) => itemType.itemTypeName === typeName)
-                    .itemList.map((item) => (
-                      <option key={item.itemId} value={item.itemId}>
-                        {item.itemName}
-                      </option>
-                    ))}
+                  {swaggerData && swaggerData.itemTypeList ? (
+                    swaggerData.itemTypeList
+                      .find((itemType) => {
+                        if (itemType.itemTypeName === typeName) {
+                          console.log("Found itemType:", itemType);
+                        }
+                        return itemType.itemTypeName === typeName;
+                      })
+                      ?.itemList.map((item) => {
+                        console.log("Mapping item:", item);
+                        return (
+                          <option key={item.itemId} value={item.itemId}>
+                            {item.itemName}
+                          </option>
+                        );
+                      })
+                  ) : (
+                    <option value="">Loading...</option>
+                  )}
                 </Form.Select>
               </div>
             ))}
             <div className="col-md-12 mb-3 d-flex justify-content-between align-items-center">
               <>
-                <Button variant="primary" onClick={() => setModalShow(true)}>
+                <Button variant="primary" onClick={() => handleShowPriceQuote()}>
                   Gửi Báo Giá
                 </Button>
                 <a
@@ -235,15 +282,21 @@ const ConstructionForm = () => {
                   Chi tiết{" "}
                   <i className="bi bi-arrow-bar-right"></i>
                 </a>
-                <MyVerticallyCenteredModal
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                  selectedItemNames={selectedItemNames}
-                  inputValue={inputValue}
-                  totalPrice={totalPrice}
-                  selectedItemPrices={selectedItemPrices}
-                  handleSubmit={handleSubmit}
+                {!isRegistered && (
+                  <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    selectedItemNames={selectedItemNames}
+                    inputValue={inputValue}
+                    totalPrice={totalPrice}
+                    handleRegister={handleRegister}
+                  />
+                )}
+                < ToastAfterShowPriceQuoation
+                  toastShow={toastShow}
+                  setToastShow={setToastShow}
                 />
+
               </>
             </div>
           </form>
@@ -290,41 +343,19 @@ const NoteFooter = () => {
   );
 };
 
-// const ConsultImg = () => {
-//   return (
-//     <div>
-//       <img
-//         src={image1}
-//         alt="Consultation Image"
-//         style={{ width: "100%", height: "auto" }}
-//       />
-//     </div>
-//   );
-// };
-
-function MyVerticallyCenteredModal(props) {
-  const {
-    onHide,
-    selectedItemNames,
-    inputValue,
-    totalPrice,
-    selectedItemPrices,
-    handleSubmit,
-  } = props;
-  const handleRegister = () => {
-    // Gọi hàm handleSubmit ở đây
-    handleSubmit();
-    // Sau khi gọi hàm handleSubmit, bạn có thể thực hiện các hành động khác tại đây (ví dụ: đóng modal)
-    onHide();
-  };
-  useEffect(() => {
-    console.log("selectedItemNames:", selectedItemNames);
-  }, [selectedItemNames]);
-
+function MyVerticallyCenteredModal({
+  show,
+  onHide,
+  selectedItemNames,
+  inputValue,
+  totalPrice,
+  handleRegister,
+}) {
   if (!selectedItemNames) {
     return (
       <Modal
-        {...props}
+        show={show}
+        onHide={onHide}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -338,7 +369,7 @@ function MyVerticallyCenteredModal(props) {
           <p>Không có dữ liệu để hiển thị.</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button>Liên hệ</Button>
+          <Button onClick={onHide}>Đóng</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -346,12 +377,13 @@ function MyVerticallyCenteredModal(props) {
 
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton onClick={onHide}>
+      <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Bảng Báo Giá
         </Modal.Title>
@@ -362,14 +394,15 @@ function MyVerticallyCenteredModal(props) {
         <p>Loại nhà: {selectedItemNames["Loại Nhà"] || "N/A"}</p>
         <p>Hầm : {selectedItemNames.Hầm || "N/A"}</p>
         <p>Tầng: {selectedItemNames.Tầng || "N/A"}</p>
-        <p>Mái: {selectedItemNames.Mái || "N/A"}</p>
+        <p>Móng: {selectedItemNames.Móng || "N/A"}</p>
         <p>TOTAL: {totalPrice || "N/A"}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={handleRegister}>Đăng ký</Button>
+        <Button onClick={onHide}>Đóng</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-export { ConstructionForm, HeadTitle, NoteFooter };
+export { ConstructionForm, HeadTitle, NoteFooter }; 

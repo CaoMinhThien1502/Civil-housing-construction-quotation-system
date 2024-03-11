@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode'; // Sửa chữa ở đây
+import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import {
@@ -28,15 +28,15 @@ const Login = () => {
         password: password,
       }, { withCredentials: true });
       
-      if (response.status === 200) { 
-        const token = jwtDecode(response.data.access_Token)
-        localStorage.setItem('mail',token.sub)
-        localStorage.setItem('role',response.data.role)
+      if (response.status === 200) {  
+        const token = jwtDecode(response.data.access_Token); // Make sure the key "access_Token" matches exactly with your server response
+        localStorage.setItem('token', response.data.access_Token); // Store the token as a string without JSON.stringify
+        localStorage.setItem('mail', token.sub); // Assuming token.sub contains the email
+        localStorage.setItem('role', response.data.role); // Store role as received
         if (response.data.role === "CUSTOMER") { 
           console.log("Hello Customer");
-
-          navigate("/home");}
-        else { 
+          navigate("/home");
+        } else { 
           console.log("Hello Admin");
           navigate("/dashboard");
         }
@@ -55,7 +55,6 @@ const Login = () => {
   };
   
   return (
-
     <MDBContainer fluid className="p-3 my-5">
       <MDBRow>
         <MDBCol col='10' md='6'>
@@ -94,9 +93,7 @@ const Login = () => {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-
   );
 }
 
 export default Login;
-// Export the decoded token
