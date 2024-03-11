@@ -11,7 +11,7 @@ import java.util.List;
 public interface RequestContractService {
     RequestContract getByBuilding(Building building);
     List<RequestContract> findAll();
-    List<RequestContractDto> findAllDto();
+    List<RCDetailDto> findAllDto();
     List<RequestContractDto> findDtosByEmail(String email);
     RCDetailDto findById(Long rcId);
     RequestContractDto getRequestContractDto(RequestContract rc);
