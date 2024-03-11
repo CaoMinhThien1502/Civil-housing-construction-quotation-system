@@ -22,6 +22,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
@@ -228,17 +229,31 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
-                         <Typography
+                        <Typography
                             variant="h6"
                             color={colors.grey[300]}
                             sx={{ m: "15px 0 5px 20px" }}
                         >
-                            Request contract
+                            Request Contract
                         </Typography>
                         <Item
-                            title="Request contract List"
+                            title="Request Contract List"
                             to="/requestContractList"
                             icon={<FormatListBulletedOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >
+                            User Management
+                        </Typography>
+                        <Item
+                            title="User List"
+                            to="/userList"
+                            icon={<PeopleOutlined />}
                             selected={selected}
                             setSelected={setSelected}
                         />

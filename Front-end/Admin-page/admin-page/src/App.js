@@ -15,14 +15,15 @@ import Form from "./pages/form";
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
-import Item from './pages/itemlist/index.jsx';
-import ItemType from './pages/itemtype/index.jsx';
+import Item from './pages/itemlist';
+import ItemType from './pages/itemtype';
 import RequestContract from './pages/requestcontract';
+import UserList from './pages/userlist';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
-import RequestContractDetail from './pages/requestcontract/requestcontractdetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -35,8 +36,7 @@ import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
 import EditItem from './pages/itemlist/editItem.jsx';
 import EditItemType from './pages/itemtype/editItemType.jsx';
-
-
+import EditUser from './pages/userlist/editUser.jsx';
 
 import Login from './pages/login/login';
 import PrivateRoutes from './utils/PrivateRoutes.jsx';
@@ -116,6 +116,9 @@ function App() {
                   <Route path="/requestContractList" element={<RequestContract />} />
                   <Route path="/requestContractList/:id" element={<RequestContractDetail />} />
                   
+                  <Route path="/userList" element={<UserList />} />
+                  <Route path="/userList/:id" element={<EditUser />} />
+
                   <Route path="/form" element={<Form />} />
                   
                   {/* 

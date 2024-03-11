@@ -6,88 +6,96 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const MaterialList = () => {
-    const [getMaterialList, setMaterialList] = useState([]);
+const UserList = () => {
+    const [getUserList, setUserList] = useState([]);
     useEffect(() => {
-        const fetchMaterialList = async () => {
+        const fetchUserList = async () => {
             try {
-                const response = await fetch('http://localhost:8080/combobuilding/material/get', {
+                const response = await fetch('http://localhost:8080/user/list', {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
                         'Content-Type': 'application/json',
                     },
                 });
-
+                
                 const data = await response.json();
-                setMaterialList(data);
+                setUserList(data);
             } catch (error) {
-                console.error('Error fetching materials:', error);
+                console.error('Error fetching users:', error);
             }
         };
 
-        fetchMaterialList();
+        fetchUserList();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-    console.log(getMaterialList);
-
     const navigate = useNavigate();
-    // const handleRowClick = (row) => {
-    //     navigate(`/combobuilding/${row.id}`); // Navigate to the desired URL
-    // };
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const columns = [
         { 
-            field: "materialId", 
+            field: "userId", 
             headerName: "ID",
             headerAlign: "center",
             align: "center",
         },
         {
-            field: "materialName",
-            headerName: "Material Name",
+            field: "fullName",
+            headerName: "Full Name",
             cellClassName: "name-column--cell",
-            flex: 1,
         },
         {
-            field: "unitPrice",
-            headerName: "Price",
-            flex: 1,
+            field: "email",
+            headerName: "Email",
+            flex: 1.2,
         },
         {
-            field: "unit",
-            headerName: "Unit",
-            flex: 1,
+            field: "role",
+            headerName: "Role",
         },
         {
-            field: "materialTypeName",
-            headerName: "Type",
-            flex: 1,
+            field: "phone",
+            headerName: "Phone",
+        },
+        {
+            field: "address",
+            headerName: "Address",
+            flex: 1.5,
+        },
+        {
+            field: "birthday",
+            headerName: "Birthday",
+        },
+        {
+            field: "gender",
+            headerName: "Gender",
+            headerAlign: "center",
+            align: "center",
+            renderCell: (params) => {
+                const { row: { gender } } = params; // Extract the type value
+                return gender === true ? "Male" : "Female";
+            },
         },
         {
             field: "status",
             headerName: "Status",
             headerAlign: "center",
             align: "center",
-            flex: 1,
             renderCell: (params) => {
                 const { row: { status } } = params; // Extract the type value
                 return status === true ? "Active" : "Inactive";
             },
         },
         {
-            field: "setting",
-            headerName: "Setting",
+            field: "editRole",
+            headerName: "Edit Role",
             headerAlign: "center",
             align: "center",
-            flex: 1,
             renderCell: ({ row }) => (
-                <Link
-                    to={`/materialList/${row.materialId}`}
+                <Link                    to={`/userList/${row.userId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
@@ -100,7 +108,7 @@ const MaterialList = () => {
 
     return (
         <Box m="20px">
-            <Header title="Material List" subtitle="Managing the Material List" />
+            <Header title="User List" subtitle="Managing the User List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -133,15 +141,10 @@ const MaterialList = () => {
                     },
                 }}
             >
-                <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/materialList/addMaterial")} color="secondary" variant="contained">
-                        Add Material
-                    </Button>
-                </Box>
                 <DataGrid
-                    rows={getMaterialList}
+                    rows={getUserList}
                     columns={columns}
-                    getRowId={(row) => row.materialId}
+                    getRowId={(row) => row.userId}
                     components={{ Toolbar: GridToolbar }}
                 />
             </Box>
@@ -149,4 +152,4 @@ const MaterialList = () => {
     );
 };
 
-export default MaterialList;
+export default UserList;
