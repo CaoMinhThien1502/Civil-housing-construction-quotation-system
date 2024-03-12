@@ -103,13 +103,18 @@ public class RequestContractServiceImp implements RequestContractService {
 
     @Override
     public RequestContractDto getRequestContractDto(RequestContract rc) {
-        RequestContractDto dto = new RequestContractDto();
-        dto.setRequestContractId(rc.getRequestContractId());
-        dto.setUserId(rc.getUser().getUserId());
-        dto.setComboId(rc.getComboBuilding().getComboBuildingId());
-        dto.setStatus(rc.isStatus());
-        dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
-        return dto;
+        try{
+            RequestContractDto dto = new RequestContractDto();
+            dto.setRequestContractId(rc.getRequestContractId());
+            dto.setUserId(rc.getUser().getUserId());
+            dto.setComboId(rc.getComboBuilding().getComboBuildingId());
+            dto.setComboName(rc.getComboBuilding().getComboBuildingName());
+            dto.setStatus(rc.isStatus());
+            dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
+            return dto;
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @Override
