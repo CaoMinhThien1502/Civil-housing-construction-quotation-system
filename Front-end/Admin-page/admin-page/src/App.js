@@ -114,7 +114,7 @@ function App() {
                   <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
 
                   <Route path="/requestContractList" element={<RequestContract />} />
-                  <Route path="/requestContractList/:id" element={<RequestContractDetail />} />
+                  <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
                   
                   <Route path="/userList" element={<UserList />} />
                   <Route path="/userList/:id" element={<EditUser />} />

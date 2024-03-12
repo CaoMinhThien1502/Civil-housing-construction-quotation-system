@@ -89,7 +89,7 @@ const RequestContract = () => {
             flex: 1,
             renderCell: ({ row }) => (
                 <Link
-                    to={`/requestContractList/${row.requestContractId}`}
+                    to={`/requestContractList/detail/${row.requestContractId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
