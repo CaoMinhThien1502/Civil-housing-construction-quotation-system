@@ -6,6 +6,7 @@ import com.example.system.dto.requestcontractdto.RCDetailDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
+import com.example.system.model.building.Item;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
@@ -121,7 +122,6 @@ public class RequestContractServiceImp implements RequestContractService {
     @Override
     public RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId) {
         try{
-
             RequestContract newData = new RequestContract();
             Building building = buildingService.createBuilding(dto, comboId);
             ComboBuilding combo = comboBuildingRepository.findByComboBuildingId(comboId);
@@ -131,6 +131,12 @@ public class RequestContractServiceImp implements RequestContractService {
             newData.setComboBuilding(combo);
             newData.setUser(user);
             newData.setStatus(false);
+            double total = newData.getBuilding().getArea()*newData.getComboBuilding().getUnitPrice();
+            for (BuildingDetail bd: newData.getBuilding().getBuildingDetail()
+                 ) {
+                total += bd.getItem().getPriceItem();
+            }
+            newData.setTotalPrice(total);
             requestContractRepository.save(newData);
             RequestContractDto newDto = new RequestContractDto();
             newDto.setBuildingDto(dto);
