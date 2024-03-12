@@ -172,7 +172,7 @@ const AddComboBuilding = () => {
                                     fullWidth={true}
                                 >
                                     {/* get menu item name from api above */}
-                                    {materialTypes.map((materialType) => (
+                                    {materialTypes.filter((materialType) => materialType.status === true).map((materialType) => (
                                         <MenuItem key={materialType.materialTypeId} value={materialType.materialTypeId}>
                                             {materialType.typeName}
                                         </MenuItem>
@@ -183,7 +183,7 @@ const AddComboBuilding = () => {
                                 <Typography variant="h6" gutterBottom>Material Included</Typography>
 
                                 <div>
-                                    {materialOptions.map((option) => (
+                                    {materialOptions.filter((option) => option.status === true).map((option) => (
                                         <div key={option.materialId}>
                                             <FormControlLabel
                                                 control={

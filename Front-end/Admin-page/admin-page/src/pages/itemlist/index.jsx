@@ -7,8 +7,9 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-const Item = () => {
-    const [getItemList, setItemlList] = useState([]);
+
+const ItemList = () => {
+    const [getItemList, setItemList] = useState([]);
     useEffect(() => {
         const fetchItemList = async () => {
             try {
@@ -21,7 +22,7 @@ const Item = () => {
                 });
 
                 const data = await response.json();
-                setItemlList(data);
+                setItemList(data);
             } catch (error) {
                 console.error('Error fetching items:', error);
             }
@@ -142,4 +143,4 @@ const Item = () => {
     );
 };
 
-export default Item;
+export default ItemList;
