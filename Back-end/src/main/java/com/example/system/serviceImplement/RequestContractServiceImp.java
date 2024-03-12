@@ -80,7 +80,8 @@ public class RequestContractServiceImp implements RequestContractService {
             detail.setComboName(rc.getComboBuilding().getComboBuildingName());
             detail.setUserId(rc.getUser().getUserId());
             detail.setUserName(rc.getUser().getName());
-
+            detail.setPhone(rc.getUser().getPhone());
+            detail.setEmail(rc.getUser().getEmail());
             BuildingDetailDto bdto = new BuildingDetailDto();
             bdto.setBuildingId(rc.getBuilding().getBuildingId());
             bdto.setLandArea(rc.getBuilding().getArea());

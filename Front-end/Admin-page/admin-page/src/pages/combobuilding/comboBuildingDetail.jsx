@@ -10,8 +10,8 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const ComboBuildingDetail = () => {
-    const {id} = useParams();
-    const [comboData, setComboData] = useState(null);
+    const {id} = useParams(); 
+    const [comboData, setComboData] = useState(null); 
     useEffect(() => {
         axios.get(`http://localhost:8080/combobuilding/combo/getbyid?comboBuildingId=${id}`)
             .then(response => {

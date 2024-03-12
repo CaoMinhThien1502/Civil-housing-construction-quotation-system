@@ -17,10 +17,12 @@ import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
 import Item from './pages/itemlist/index.jsx';
 import ItemType from './pages/itemtype/index.jsx';
+import RequestContract from './pages/requestcontract';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestcontractdetail.jsx';
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -33,6 +35,8 @@ import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
 import EditItem from './pages/itemlist/editItem.jsx';
 import EditItemType from './pages/itemtype/editItemType.jsx';
+
+
 
 import Login from './pages/login/login';
 import PrivateRoutes from './utils/PrivateRoutes.jsx';
@@ -70,11 +74,11 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       {location.pathname !== '/login' 
       && location.pathname !== '/' 
-      && location.pathname != '/home' 
-      && location.pathname != '/price'
-      && location.pathname != '/blog'
-      && location.pathname != '/detail'
-      && location.pathname != '/profile'
+      && location.pathname !== '/home' 
+      && location.pathname !== '/price'
+      && location.pathname !== '/blog'
+      && location.pathname !== '/detail'
+      && location.pathname !== '/profile'
       && (
         <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -108,6 +112,9 @@ function App() {
                   <Route path="/itemType/:id" element={<EditItemType />} />
                   <Route path="/itemType/addItemType" element={<AddItemType />} />
                   <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
+
+                  <Route path="/requestContractList" element={<RequestContract />} />
+                  <Route path="/requestContractList/:id" element={<RequestContractDetail />} />
                   
                   <Route path="/form" element={<Form />} />
                   
