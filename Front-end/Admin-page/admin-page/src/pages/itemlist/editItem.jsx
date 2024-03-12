@@ -192,7 +192,7 @@ const EditItem = () => {
                                     fullWidth={true}
                                 >
                                     {/* get menu item name from api above */}
-                                    {getItemTypes.map((itemType) => (
+                                    {getItemTypes.filter((itemType) => itemType.status === true).map((itemType) => (
                                         <MenuItem key={itemType.itemTypeId} value={itemType.itemTypeId}>
                                             {itemType.itemTypeName}
                                         </MenuItem>

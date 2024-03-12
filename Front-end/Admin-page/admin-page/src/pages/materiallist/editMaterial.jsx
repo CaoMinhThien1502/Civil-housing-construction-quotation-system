@@ -208,7 +208,7 @@ const EditMaterial = () => {
                                 onOpen={handleSecondOpen}
                                 fullWidth={true}
                             >
-                                {getMaterialTypes.map((materialType) => (
+                                {getMaterialTypes.filter((materialType) => materialType.status === true).map((materialType) => (
                                     <MenuItem key={materialType.materialTypeId} value={materialType.materialTypeId}>
                                         {materialType.typeName}
                                     </MenuItem>
