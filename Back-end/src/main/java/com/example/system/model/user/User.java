@@ -1,6 +1,8 @@
 package com.example.system.model.user;
 
 import com.example.system.model.blog.Blog;
+import com.example.system.model.building.BuildingDetail;
+import com.example.system.model.payment.Invoice;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.token.Token;
 import jakarta.persistence.*;
@@ -68,7 +70,8 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
+    @OneToMany(mappedBy = "user")
+    private Set<Invoice> invoices;
     @OneToMany(mappedBy = "user")
     private Set<Token> tokens;
     @OneToMany(mappedBy = "user")

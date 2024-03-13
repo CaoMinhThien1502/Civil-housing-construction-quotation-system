@@ -46,7 +46,6 @@ public class Invoice {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
-    @JoinColumn(name = "request_contract_id")
+    @OneToOne(mappedBy = "invoice")
     private RequestContract requestContract;
 }
