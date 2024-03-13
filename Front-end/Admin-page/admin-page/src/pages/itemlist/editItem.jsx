@@ -5,6 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     itemId: 0,
@@ -18,12 +20,32 @@ const userSchema = yup.object().shape({
     priceItem: yup.number().required("Unit Price is required"),
 }); 
 
-
 const EditItem = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     const {id} = useParams();
     const [getItemTypeId, setItemTypeID] = useState("");
+
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleCloseSuccess = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSuccess(false);
+        navigate('/itemList');
+    };
+
+    const [openError, setOpenError] = useState(false);
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenError(false);
+    };
 
     const [getItem, setItem] = useState({});
     useEffect(() => {
@@ -73,10 +95,11 @@ const EditItem = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert("Item updated successfully!");
-                navigate('/itemList');
+                setOpenSuccess(true);
+                // navigate('/itemList');
             } catch (error) {
                 console.error('Error during submit:', error);
+                setOpenError(true);
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
@@ -139,6 +162,7 @@ const EditItem = () => {
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
+            // validationSchema={userSchema}
             >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
@@ -156,7 +180,10 @@ const EditItem = () => {
                             type="text"
                             label="Item Name"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.itemName}
                             name="itemName"
                             error={!!touched.itemName && !!errors.itemName}
@@ -169,7 +196,10 @@ const EditItem = () => {
                             type="number"
                             label="Unit Price"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.priceItem}
                             name="priceItem"
                             error={!!touched.priceItem && !!errors.priceItem}
@@ -238,6 +268,26 @@ const EditItem = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={openSuccess} autoHideDuration={3000} onClose={handleCloseSuccess} >
+                <Alert
+                    onClose={handleCloseSuccess}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Item edited successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Item edited error!
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

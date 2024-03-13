@@ -29,8 +29,8 @@ public class PaymentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Invoice> createInvoice(@RequestBody InvoiceDto invoiceDto, @RequestParam Long rcId){
-        Invoice create = invoiceService.createInvoice(invoiceDto, rcId);
+    public ResponseEntity<Invoice> createInvoice(@RequestBody InvoiceDto invoiceDto, @RequestParam Long comboId, @RequestParam Double area, @RequestParam List<Long> itemIds, @RequestParam String email){
+        Invoice create = invoiceService.createInvoice(invoiceDto, comboId, area, itemIds, email);
         return ResponseEntity.ok(create);
     }
 }

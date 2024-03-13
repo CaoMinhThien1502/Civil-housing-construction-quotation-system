@@ -94,7 +94,8 @@ public class BuildingServiceImp implements BuildingService {
                 BuildingDetail newBD = buildingDetailService.createBuildingDetail(newBuilding,item);
                 buildingDetails.add(newBD);
             }
-            added.setBuildingDetail(buildingDetails);
+            added.setBuildingDetails(buildingDetails);
+            added = buildingRepository.saveAndFlush(added);
             return added;
         }catch (Exception e){
             return null;

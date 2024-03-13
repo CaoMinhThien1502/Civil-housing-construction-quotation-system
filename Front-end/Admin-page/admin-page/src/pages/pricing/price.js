@@ -4,6 +4,7 @@ import { Header } from "../home/home";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { Link } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
 import axios from "axios";
 import Col from 'react-bootstrap/Col';
@@ -11,6 +12,11 @@ import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 import ToastAfterShowPriceQuoation from "./toast";
 import './toast.css';
+//payment
+import {  HmacSHA256Hash, IpAddr, URL_API, URL_VNPay, command, commandPay, currCode, locale, locate, reciveURL, secretKey, tmnCode, txnRef, version } from '../payment/configpayment';
+import { HmacSHA256, HmacSHA512 } from 'crypto-js';
+import CryptoJS from "crypto-js";
+
 
 const ConstructionForm = () => {
   const isLoggedIn = !!localStorage.getItem('token');
@@ -109,6 +115,36 @@ const ConstructionForm = () => {
     setTotalPrice(totalPrice);
   }, [selectedItemPrices, selectedItemNames.Combo, inputValue]);
 
+  //payment
+  function parseDate(){
+    var today = new Date();
+    today.setHours(today.getHours() + 7);
+    today = today.toISOString();
+    today = today.replaceAll('-','');
+    today = today.replaceAll(":",'');
+    today = today.replaceAll("T",'');
+    let split = today.split(".");
+    today = split[0];
+    return today;
+  }
+
+  let amount = 'vnp_Amount='+'20000000';
+  let command = '&vnp_Command='+commandPay;
+  let createDate = '&vnp_CreateDate='+parseDate();
+  let curCode = '&vnp_CurrCode='+currCode;
+  let ipAdd = '&vnp_IpAddr=' + IpAddr;
+  let local = '&vnp_Locale=' + locale;
+  let orderInfor = '&vnp_OrderInfo=' + 'Coc+de+yeu+cau+hop+dong';
+  let orderType = '&vnp_OrderType=' + 'BaoGia';
+  let returnUrl = '&vnp_ReturnUrl=' + reciveURL
+  let tmn = '&vnp_TmnCode=' + tmnCode;
+  let ref = '&vnp_TxnRef=' + txnRef;
+  let vpnVersion = '&vnp_Version='+version;
+  let plainText = amount+command+createDate+curCode+ipAdd+local+orderInfor+orderType
+  +returnUrl+tmn+ref+vpnVersion;
+  let sercureHash = HmacSHA512(plainText,secretKey).toString();
+  var vnPayURLRequest = URL_VNPay+plainText+"&vnp_SecureHash="+sercureHash
+  console.log("hi"+vnPayURLRequest)
   const handleSubmit = async () => {
     try {
       // Chuẩn bị dữ liệu cho request
@@ -125,6 +161,9 @@ const ConstructionForm = () => {
       const email = localStorage.getItem("mail");
       const token = localStorage.getItem("token");
       console.log("comboId: ", comboId);
+
+      
+
 
       const response = await axios.post(
         `http://localhost:8080/request-contract/request-contract/create?comboId=${comboId}&email=${email}`,
@@ -290,6 +329,7 @@ const ConstructionForm = () => {
                     inputValue={inputValue}
                     totalPrice={totalPrice}
                     handleRegister={handleRegister}
+                    vnPayURLRequest={vnPayURLRequest}
                   />
                 )}
                 < ToastAfterShowPriceQuoation
@@ -350,6 +390,7 @@ function MyVerticallyCenteredModal({
   inputValue,
   totalPrice,
   handleRegister,
+  vnPayURLRequest,
 }) {
   if (!selectedItemNames) {
     return (
@@ -400,6 +441,7 @@ function MyVerticallyCenteredModal({
       <Modal.Footer>
         <Button onClick={handleRegister}>Đăng ký</Button>
         <Button onClick={onHide}>Đóng</Button>
+        <Link to ={vnPayURLRequest} target="_blank" >hi</Link>
       </Modal.Footer>
     </Modal>
   );
