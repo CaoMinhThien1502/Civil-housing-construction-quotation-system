@@ -1,5 +1,6 @@
-import { Box, Typography, useTheme, Button } from "@mui/material";
+import { Box, Typography, useTheme, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Grid } from "@mui/material";
 import { tokens } from "../../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -65,14 +66,43 @@ const ComboBuildingDetail = () => {
             >
                 {/* display the combo building detail info from api */}
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Combo Detail Information</Typography>
-                    <Typography variant="h5" gutterBottom>Combo Building ID: {comboData?.comboBuildingId}</Typography>
-                    <Typography variant="h5" gutterBottom>Combo Building Name: {comboData?.comboBuildingName}</Typography>
-                    <Typography variant="h5" gutterBottom>Combo Building Status: {comboData?.status === true ? "Active" : "Inactive"}</Typography>
-                    <Typography variant="h5" gutterBottom>Combo Building Type: {comboData?.type === 0 ? "Xây nhà phần thô" : comboData?.type === 1 ? "Xây nhà hoàn thiện" : "Xây dựng trọn gói"}</Typography>
-                    <Typography variant="h5" gutterBottom>Combo Building Price: {comboData?.unitPrice}</Typography>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
+                        Combo Detail Information
+                    </Typography>
                 </Box>
-                
+                <TableContainer>
+                    <Table>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac"  }}>ID:</TableCell>
+                                <TableCell sx={{ fontSize: 15}}>{comboData?.comboBuildingId}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Name:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{comboData?.comboBuildingName}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{comboData?.status === true ? "Active" : "Inactive"}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Type:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>
+                                    {comboData?.type === 0
+                                        ? "Xây nhà phần thô"
+                                        : comboData?.type === 1
+                                            ? "Xây nhà hoàn thiện"
+                                            : "Xây dựng trọn gói"}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Price:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{comboData?.unitPrice}</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
                 <Box display="flex" justifyContent="end" mt="20px">
                     <Button onClick={() => navigate("/comboBuilding")} color="secondary" variant="contained">
                         Cancel
@@ -80,11 +110,11 @@ const ComboBuildingDetail = () => {
                 </Box>
 
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Combo Material Information</Typography>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>Combo Material Information</Typography>
                 </Box>
                 {comboData?.materialTypeOfComboDto.map((materialType) => (
                     <Box key={materialType.materialTypeId} sx={{ gridColumn: "span 4" }}>
-                        <Typography variant="h5" gutterBottom>Material Type Name: {materialType.materialTypeDto.typeName}</Typography>
+                        <Typography variant="h5" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>Material Type Name: {materialType.materialTypeDto.typeName}</Typography>
                         <DataGrid
                             rows={materialType.materialList} // Access the material list for each type
                             columns={[

@@ -78,6 +78,8 @@ const Sidebar = () => {
                 "& .pro-menu-item.active": {
                     color: "#6870fa !important",
                 },
+
+                height: "120%",
             }}
         >
             <ProSidebar collapsed={isCollapsed}>
@@ -151,13 +153,15 @@ const Sidebar = () => {
                             setSelected={setSelected}
                         />
 
-                        <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                            Combo Building
-                        </Typography>
+                        {!isCollapsed && (
+                            <Typography
+                                variant="h6"
+                                color={colors.grey[300]}
+                                sx={{ m: "15px 0 5px 20px" }}
+                            >
+                                Combo Building
+                            </Typography>
+                        )}
                         {/* <Item
                             title="Manage Team"
                             to="/team"
@@ -187,13 +191,15 @@ const Sidebar = () => {
                             setSelected={setSelected}
                         /> */}
 
-                        <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                            Material
-                        </Typography>
+                        {!isCollapsed && (
+                            <Typography
+                                variant="h6"
+                                color={colors.grey[300]}
+                                sx={{ m: "15px 0 5px 20px" }}
+                            >
+                                Material
+                            </Typography>
+                        )}
                         <Item
                             title="Material List"
                             to="/materialList"
@@ -208,13 +214,15 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
-                        <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                            Item In Constructor
-                        </Typography>
+                        {!isCollapsed && (
+                            <Typography
+                                variant="h6"
+                                color={colors.grey[300]}
+                                sx={{ m: "15px 0 5px 20px" }}
+                            >
+                                Item In Constructor
+                            </Typography>
+                        )}
                         <Item
                             title="Item List"
                             to="/itemList"
@@ -229,13 +237,15 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
-                        <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                            Request Contract
-                        </Typography>
+                        {!isCollapsed && (
+                            <Typography
+                                variant="h6"
+                                color={colors.grey[300]}
+                                sx={{ m: "15px 0 5px 20px" }}
+                            >
+                                Request Contract
+                            </Typography>
+                        )}
                         <Item
                             title="Request Contract List"
                             to="/requestContractList"
@@ -243,13 +253,15 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
-                        <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                            User Management
-                        </Typography>
+                        {!isCollapsed && (
+                            <Typography
+                                variant="h6"
+                                color={colors.grey[300]}
+                                sx={{ m: "15px 0 5px 20px" }}
+                            >
+                                User Management
+                            </Typography>
+                        )}
                         <Item
                             title="User List"
                             to="/userList"

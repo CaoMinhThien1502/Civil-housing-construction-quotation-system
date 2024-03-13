@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 import ToastAfterShowPriceQuoation from "./toast";
-import './toast.css';
+// import './toast.css';
 
 const ConstructionForm = () => {
   const isLoggedIn = !!localStorage.getItem('token');
