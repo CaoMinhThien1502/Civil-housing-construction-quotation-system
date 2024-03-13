@@ -25,10 +25,10 @@ public class DashBoardServiceImp implements DashBoardService {
     public DashboardDto getNumbers() {
         try{
             DashboardDto dashboardDto = new DashboardDto();
-            dashboardDto.setItemCount(itemRepository.findAll().size());
-            dashboardDto.setMaterialCount(materialRepository.findAll().size());
-            dashboardDto.setRequestContractCount(requestContractRepository.findAll().size());
-            dashboardDto.setUserCount(userRepository.findAll().size());
+            dashboardDto.setItemCount(Long.valueOf(itemRepository.findAll().size()));
+            dashboardDto.setMaterialCount(Long.valueOf(materialRepository.findAll().size()));
+            dashboardDto.setRequestContractCount(Long.valueOf(requestContractRepository.findAll().size()));
+            dashboardDto.setUserCount(Long.valueOf(userRepository.findAll().size()));
             return dashboardDto;
         }catch (Exception e){
             return null;

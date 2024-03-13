@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class InvoiceDto {
     private Long invoiceId;
-    private Double amount;
+    private String amount;
     private String bankCode;
     private String bankTranNo;
     private String cardType;
