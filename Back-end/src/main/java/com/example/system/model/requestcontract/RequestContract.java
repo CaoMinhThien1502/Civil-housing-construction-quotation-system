@@ -25,7 +25,7 @@ public class RequestContract {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date requestDate;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private double totalPrice;
     @ManyToOne
     @JoinColumn(name = "combo_building_id")
