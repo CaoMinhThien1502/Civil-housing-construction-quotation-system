@@ -3,11 +3,14 @@ package com.example.system.model.payment;
 
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -20,7 +23,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long invoiceId;
     @Column(nullable = false)
-    private String amount;
+    private Double amount;
     @Column(nullable = false)
     private String bankCode;
     @Column(nullable = false)
@@ -30,7 +33,7 @@ public class Invoice {
     @Column(nullable = false)
     private String orderInfo;
     @Column(nullable = false)
-    private String payDate;
+    private Date payDate;
     @Column(nullable = false)
     private String responseCode;
     @Column(nullable = false)
@@ -45,6 +48,7 @@ public class Invoice {
     private String secureHash;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
     @OneToOne(mappedBy = "invoice")
     private RequestContract requestContract;
