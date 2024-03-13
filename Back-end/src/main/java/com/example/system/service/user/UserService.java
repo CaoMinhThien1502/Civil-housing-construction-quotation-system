@@ -11,6 +11,6 @@ public interface UserService {
     List<UserDto> getUserList();
     UserDto getProfile(String email);
     UserDto updateProfile(UserDto dto, String email);
-    UserDto updateRole(Long id, Role role);
+    UserDto updateRole(Long id, String role);
     UserDto getUserLoginFromJWT(HttpServletRequest request);
 }
