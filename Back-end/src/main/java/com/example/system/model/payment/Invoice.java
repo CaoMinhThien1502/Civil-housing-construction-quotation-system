@@ -20,7 +20,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long invoiceId;
     @Column(nullable = false)
-    private Double amount;
+    private String amount;
     @Column(nullable = false)
     private String bankCode;
     @Column(nullable = false)
@@ -30,7 +30,7 @@ public class Invoice {
     @Column(nullable = false)
     private String orderInfo;
     @Column(nullable = false)
-    private Long payDate;
+    private String payDate;
     @Column(nullable = false)
     private String responseCode;
     @Column(nullable = false)

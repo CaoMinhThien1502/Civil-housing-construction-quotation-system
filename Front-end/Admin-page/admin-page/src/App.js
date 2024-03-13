@@ -16,14 +16,14 @@ import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
 import Item from './pages/itemlist';
-import ItemType from './pages/itemtype';
+import ItemType from './pages/itemtype/index.jsx';
 import RequestContract from './pages/requestcontract';
 import UserList from './pages/userlist';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
-import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+//import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -43,6 +43,8 @@ import PrivateRoutes from './utils/PrivateRoutes.jsx';
 import axios from 'axios';
 import Detail from './pages/pricing/detail.js';
 import ProfilePage from './pages/profile/profile.js';
+
+import Success from './pages/payment/success.js'
 
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
@@ -105,6 +107,7 @@ function App() {
         && location.pathname !== '/'
         && location.pathname !== '/home'
         && location.pathname !== '/price'
+        && location.pathname != '/success'
         && location.pathname !== '/blog'
         && location.pathname !== '/detail'
         && location.pathname !== '/profile'
@@ -143,7 +146,7 @@ function App() {
                     <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
 
                   <Route path="/requestContractList" element={<RequestContract />} />
-                  <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
+          {/*        <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />*/}
                   
                   <Route path="/userList" element={<UserList />} />
                   <Route path="/userList/:id" element={<EditUser />} />
@@ -182,6 +185,8 @@ function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/profile" element={<ProfilePage />} />
+
+        <Route path="/success" element={<Success />} />
       </Routes>
     </ColorModeContext.Provider>
   );
