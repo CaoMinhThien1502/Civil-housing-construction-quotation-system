@@ -19,29 +19,6 @@ const EditUser = () => {
     const navigate = useNavigate();
     
     const {id} = useParams();
-    const [getUserList, setUserList] = useState([]);
-    useEffect(() => {
-        const fetchUserList = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/user/list', {
-                    method: 'GET',
-                    headers: {
-                        // 'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                const data = await response.json();
-                setUserList(data);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-
-        fetchUserList();
-
-    }, []); // Empty dependency array to fetch data only once on component mount
-
     const formik = useFormik({
         initialValues: {
             // role: `${userData.role}`,
@@ -148,7 +125,6 @@ const EditUser = () => {
                                 Edit User Role
                             </Button>
                         </Box>
-                        
                     </form>
                 )}
             </Formik>

@@ -34,8 +34,15 @@ const RequestContract = () => {
     const handleConfirmRequest = async (requestContractId) => {
         try {
             await axios.post(`http://localhost:8080/request-contract/request-contract/comfirm?requestContractId=${requestContractId}`);
-            // Điều hướng lại trang sau khi xác nhận thành công
-            navigate("/requestContractList");
+
+            // display alert includes ok and cancel option
+            const result = window.confirm("Are you sure you want to confirm this request?");
+            if (result) {
+                window.alert("Confirm request successfully!");
+                // Điều hướng lại trang sau khi xác nhận thành công
+                // reload the current page
+                window.location.reload();
+            }
         } catch (error) {
             console.error('Error confirming request contract:', error);
         }
@@ -57,6 +64,11 @@ const RequestContract = () => {
         {
             field: "comboName",
             headerName: "Combo selected",
+            flex: 1,
+        },
+        {
+            field: "totalPrice",
+            headerName: "Price",
             flex: 1,
         },
         {

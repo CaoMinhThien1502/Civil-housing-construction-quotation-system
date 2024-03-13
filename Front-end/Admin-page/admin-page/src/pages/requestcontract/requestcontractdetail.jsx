@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme, Button } from "@mui/material";
+import { Box, Typography, useTheme, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -11,22 +11,21 @@ import axios from 'axios';
 
 const RequestContractDetail = () => {
     const {id} = useParams(); 
-    const [requesContractData, setRequesContractData] = useState(null); 
+    const [requestContractData, setRequestContractData] = useState(null); 
     useEffect(() => {
         axios.get(`http://localhost:8080/request-contract/request-contract/get/id?id=${id}`)
             .then(response => {
-                setRequesContractData(response.data);
+                setRequestContractData(response.data);
             })
             .catch(error => {
                 console.error('Error fetching combo data:', error);
             });
     }, [id]);
-    console.log(requesContractData);
+    console.log(requestContractData);
 
     const navigate = useNavigate();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-
 
     return (
         <Box m="20px" >
@@ -65,40 +64,85 @@ const RequestContractDetail = () => {
             >
                 {/* display the Request Contract detail info from api */}
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Combo Detail Information</Typography>
-                    <Typography variant="h5" gutterBottom>ID: {requesContractData?.requestContractId}</Typography>
-                    <Typography variant="h5" gutterBottom>Creator: {requesContractData?.userName}</Typography>
-                    <Typography variant="h5" gutterBottom>Phone: {requesContractData?.phone}</Typography>
-                    <Typography variant="h5" gutterBottom>Email: {requesContractData?.email}</Typography>
-                    <Typography variant="h5" gutterBottom>Combo selected: {requesContractData?.comboName}</Typography>
-                    <Typography variant="h5" gutterBottom>Status: {requesContractData?.status === true ? "Active" : "Inactive"}</Typography>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
+                        Combo Detail Information
+                    </Typography>
                 </Box>
-
-                <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Building Information</Typography>
-                    <Typography variant="h5" gutterBottom>ID: {requesContractData?.buildingDto.buildingId}</Typography>
-                    <Typography variant="h5" gutterBottom>Area: {requesContractData?.buildingDto.landArea}</Typography>
-                    <Typography variant="h5" gutterBottom>Structure of Building: 
-                    {requesContractData?.buildingDto.itemNameList[0]}, 
-                    {requesContractData?.buildingDto.itemNameList[1]}, 
-                    {requesContractData?.buildingDto.itemNameList[2]}, 
-                    {requesContractData?.buildingDto.itemNameList[3]}, 
-                    {requesContractData?.buildingDto.itemNameList[4]}</Typography>
-                    <Typography variant="h5" gutterBottom>Status: 
-                    {requesContractData?.buildingDto.status === -1 ? "Mẫu": requesContractData?.buildingDto.status === 0 ? "Hủy" : requesContractData?.buildingDto.status === 1 ? "Đang thi công" : "Đã xong"}</Typography>
-                </Box>
-
+                <TableContainer>
+                    <Table>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>ID:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.requestContractId}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Creator:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.userName}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Phone:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.phone}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Email:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.email}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Combo selected:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.comboName}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Price:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.totalPrice}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.status === true ? "Active" : "Inactive"}</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 <Box display="flex" justifyContent="end" mt="20px">
                     <Button onClick={() => navigate("/requestContractList")} color="secondary" variant="contained">
                         Cancel
                     </Button>
                 </Box>
+                <Box sx={{ gridColumn: "span 4" }}>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
+                        Building Information
+                    </Typography>
+                </Box>
+                <TableContainer>
+                    <Table>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>ID:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDto.buildingId}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Area:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDto.landArea}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Structure of Building:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>
+                                    {requestContractData?.buildingDto.itemNameList[0]},
+                                    {requestContractData?.buildingDto.itemNameList[1]},
+                                    {requestContractData?.buildingDto.itemNameList[2]},
+                                    {requestContractData?.buildingDto.itemNameList[3]},
+                                    {requestContractData?.buildingDto.itemNameList[4]}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDto.status === -1 ? "Mẫu": requestContractData?.buildingDto.status === 0 ? "Hủy" : requestContractData?.buildingDto.status === 1 ? "Đang thi công" : "Đã xong"}</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Box>
         </Box>
     );
-
-
-
 };
 
 export default RequestContractDetail;

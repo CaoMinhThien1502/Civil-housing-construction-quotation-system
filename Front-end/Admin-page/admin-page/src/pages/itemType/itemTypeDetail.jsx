@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme, Button } from "@mui/material";
+import { Box, Typography, useTheme, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -88,12 +88,28 @@ const ItemTypeDetail = () => {
             >
                 {/* display many materials detail info from api using map */}
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Item Type Detail Information</Typography>
-                    {/* display material type data by {id} */}
-                    <Typography variant="h5" gutterBottom>Item Type ID: {id}</Typography>
-                    <Typography variant="h5" gutterBottom>Item Type Name: {getItemType.itemTypeName}</Typography>
-                    <Typography variant="h5" gutterBottom>Status: {getItemType.status === true ? "Active" : "Inactive"}</Typography>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
+                        Item Type Detail Information
+                    </Typography>
                 </Box>
+                <TableContainer>
+                    <Table>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>ID:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.itemTypeId}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Name:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.itemTypeName}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.status === true ? "Active" : "Inactive"}</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
 
                 <Box display="flex" justifyContent="end" mt="20px">
                     <Button onClick={() => navigate("/itemType")} color="secondary" variant="contained">
