@@ -24,7 +24,7 @@ import team1 from "../../img/team/team-1.jpg";
 import team2 from "../../img/team/team-2.jpg";
 import team3 from "../../img/team/team-3.jpg";
 import team4 from "../../img/team/team-4.jpg";
-
+import Login from "../login/login";
 // Import CSS files (if using any)
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -37,6 +37,15 @@ import '../../styles/main/main.css';
 
 // Create a functional component for the header
 const Header = () => {
+  const isLoggedIn = !!localStorage.getItem('token');
+  const userName = localStorage.getItem('mail');
+
+  const handleLogout = () => {
+    localStorage.removeItem('mail');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    window.location.href = '/login';
+  };
   return (
     <header id="header" className="fixed-top d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between">
@@ -47,14 +56,20 @@ const Header = () => {
 
         <nav id="navbar" className="navbar">
           <ul>
-            <li><a className="nav-link scrollto active" href="#Hero">Home</a></li>
+            <li><a className="nav-link scrollto active" href="/home">Home</a></li>
             <li><a className="nav-link scrollto" href="#About">About</a></li>
             <li><a className="nav-link scrollto" href="#Services" >Services</a></li>
             <li><a className="nav-link scrollto" href="#Team">Team</a></li>
             <li><a className="nav-link scrollto" href="#Pricing">Pricing</a></li>
             {/* Add your dropdown menu here if needed */}
-            <li><a className="nav-link scrollto" href="#Contact">Contact</a></li>
-            <li><a className="getstarted scrollto" href="./Login">Login</a></li>
+            {isLoggedIn ? (
+              <>
+                <li><a className="getstarted">{userName}</a></li>
+                <li><a className="getstarted scrollto" onClick={handleLogout} href="#">Logout</a></li>
+              </>
+            ) : (
+              <li><a className="getstarted scrollto" href="/login">Login</a></li>
+            )}
           </ul>
           <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>

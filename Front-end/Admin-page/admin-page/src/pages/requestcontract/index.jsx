@@ -1,61 +1,74 @@
 import { Box, Typography, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
+import axios from 'axios';
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-const Item = () => {
-    const [getItemList, setItemlList] = useState([]);
+
+const RequestContract = () => {
+    const [getRequestContract, setRequestContract] = useState([]);
+    //const {id} = useParams();
+    const navigate = useNavigate();
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+
     useEffect(() => {
-        const fetchMaterialList = async () => {
+        const fetchRequestContractList = async () => {
             try {
-                const response = await fetch('http://localhost:8080/building/item/list', {
-                    method: 'GET',
+                const response = await axios.get('http://localhost:8080/request-contract/request-contract/list', {
                     headers: {
-                        // 'Access-Control-Allow-Origin': '*',
                         'Content-Type': 'application/json',
                     },
                 });
-
-                const data = await response.json();
-                setItemlList(data);
+                setRequestContract(response.data);
             } catch (error) {
-                console.error('Error fetching items:', error);
+                console.error('Error fetching request contract:', error);
             }
         };
+        fetchRequestContractList();
+    }, []);
+    const handleConfirmRequest = async (requestContractId) => {
+        try {
+            await axios.post(`http://localhost:8080/request-contract/request-contract/comfirm?requestContractId=${requestContractId}`);
+            // Điều hướng lại trang sau khi xác nhận thành công
+            navigate("/requestContractList");
+        } catch (error) {
+            console.error('Error confirming request contract:', error);
+        }
+    };
 
-        fetchMaterialList();
-    }, []); // Empty dependency array to fetch data only once on component mount
-
-    console.log(getItemList);
-
-    const navigate = useNavigate();
-    // const handleRowClick = (row) => {
-    //     navigate(`/combobuilding/${row.id}`); // Navigate to the desired URL
-    // };
-
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
     const columns = [
         { 
-            field: "itemId", 
+            field: "requestContractId", 
             headerName: "ID",
             headerAlign: "center",
             align: "center",
         },
         {
-            field: "itemName",
-            headerName: "Item Name",
+            field: "userName",
+            headerName: "Creator",
             cellClassName: "name-column--cell",
             flex: 1,
         },
         {
-            field: "priceItem",
-            headerName: "Price",
+            field: "comboName",
+            headerName: "Combo selected",
             flex: 1,
+        },
+        {
+            field: "buildingDto.status",
+            headerName: "Type of building",
+            headerAlign: "center",
+            align: "center",
+            flex: 1,
+            renderCell: (params) => {
+                const buildingStatus = params.row.buildingDto.status;
+                return buildingStatus === -1 ? "Mẫu" : buildingStatus === 0 ? "Hủy" : buildingStatus === 1 ? "Đang thi công" : "Đã xong";
+            },
         },
         {
             field: "status",
@@ -64,7 +77,7 @@ const Item = () => {
             align: "center",
             flex: 1,
             renderCell: (params) => {
-                const { row: { status } } = params; // Extract the type value
+                const { row: { status } } = params;
                 return status === true ? "Active" : "Inactive";
             },
         },
@@ -75,20 +88,37 @@ const Item = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Link                    to={`/item/${row.itemId}`}
+                <Link
+                    to={`/requestContractList/detail/${row.requestContractId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
-                        Edit
+                        Detail
                     </Button>
                 </Link>
+            ),
+        },
+        {
+            field: "confirm",
+            headerName: "Confirm",
+            headerAlign: "center",
+            align: "center",
+            flex: 1,
+            renderCell: ({ row }) => (
+                <Button 
+                    color="primary" 
+                    variant="contained" 
+                    onClick={() => handleConfirmRequest(row.requestContractId)}
+                >
+                    Confirm request
+                </Button>
             ),
         },
     ];
 
     return (
         <Box m="20px">
-            <Header title="Material List" subtitle="Managing the Material List" />
+            <Header title="Request Contract List" subtitle="Managing the Request Contract List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -121,15 +151,10 @@ const Item = () => {
                     },
                 }}
             >
-                <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/materialList/addMaterial")} color="secondary" variant="contained">
-                        Add Material
-                    </Button>
-                </Box>
                 <DataGrid
-                    rows={getItemList}
+                    rows={getRequestContract}
                     columns={columns}
-                    getRowId={(row) => row.itemId}
+                    getRowId={(row) => row.requestContractId}
                     components={{ Toolbar: GridToolbar }}
                 />
             </Box>
@@ -137,4 +162,4 @@ const Item = () => {
     );
 };
 
-export default Item;
+export default RequestContract;

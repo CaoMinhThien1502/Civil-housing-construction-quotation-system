@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/dashboard';
+import UncontrolledExample from './pages/blog/blog.js';
 import Team from "./pages/team";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
@@ -14,20 +15,34 @@ import Form from "./pages/form";
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
+import Item from './pages/itemlist';
+import ItemType from './pages/itemtype';
+import RequestContract from './pages/requestcontract';
+import UserList from './pages/userlist';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
+import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
+import AddItem from './pages/itemlist/addItem.jsx';
+import AddItemType from './pages/itemtype/addItemType.jsx';
 
 import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
+import EditItem from './pages/itemlist/editItem.jsx';
+import EditItemType from './pages/itemtype/editItemType.jsx';
+import EditUser from './pages/userlist/editUser.jsx';
 
 import Login from './pages/login/login';
-import Item from "./pages/item";
+import PrivateRoutes from './utils/PrivateRoutes.jsx';
+
+import Detail from './pages/pricing/detail.js';
+import ProfilePage from './pages/profile/profile.js';
 
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
@@ -59,8 +74,11 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       {location.pathname !== '/login' 
       && location.pathname !== '/' 
-      && location.pathname != '/home' 
-      && location.pathname != '/price'
+      && location.pathname !== '/home' 
+      && location.pathname !== '/price'
+      && location.pathname !== '/blog'
+      && location.pathname !== '/detail'
+      && location.pathname !== '/profile'
       && (
         <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -69,48 +87,66 @@ function App() {
             <main className="content">
               <Topbar />
               <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
+                <Route element={<PrivateRoutes />} >
+                  <Route path="/dashboard" element={<Dashboard />} exact/>
 
-              <Route path="/comboBuilding" element={<ComboBuilding />} />
-              <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
-              <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
-              <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
-              
-              <Route path="/materialList" element={<MaterialList />} />
-              <Route path="/materialList/addMaterial" element={<AddMaterial />} />
-              <Route path="/materialList/:id" element={<EditMaterial />} />
+                  <Route path="/comboBuilding" element={<ComboBuilding />} />
+                  <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
+                  <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
+                  <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
+                  
+                  <Route path="/materialList" element={<MaterialList />} />
+                  <Route path="/materialList/addMaterial" element={<AddMaterial />} />
+                  <Route path="/materialList/:id" element={<EditMaterial />} />
 
-              <Route path="/materialType" element={<MaterialType />} />
-              <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
-              <Route path="/materialType/:id" element={<EditMaterialType />} />
-              <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
-              <Route path="/form" element={<Form />} />
+                  <Route path="/materialType" element={<MaterialType />} />
+                  <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
+                  <Route path="/materialType/:id" element={<EditMaterialType />} />
+                  <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
 
-              <Route path="/item" element={<Item />} />
-              
-              {/* 
-              <Route path="/team" element={<Team />} />
-              <Route path="/contacts" element={<Contacts />} />
-              <Route path="/invoices" element={<Invoices />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/materialtype" element={<MaterialType />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} /> */}
-              
+                  <Route path="/itemList" element={<Item />} />
+                  <Route path="/itemList/:id" element={<EditItem />} />
+                  <Route path="/itemList/addItem" element={<AddItem />} />
+
+                  <Route path="/itemType" element={<ItemType />} />
+                  <Route path="/itemType/:id" element={<EditItemType />} />
+                  <Route path="/itemType/addItemType" element={<AddItemType />} />
+                  <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
+
+                  <Route path="/requestContractList" element={<RequestContract />} />
+                  <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
+                  
+                  <Route path="/userList" element={<UserList />} />
+                  <Route path="/userList/:id" element={<EditUser />} />
+
+                  <Route path="/form" element={<Form />} />
+                  
+                  {/* 
+                  <Route path="/team" element={<Team />} />
+                  <Route path="/contacts" element={<Contacts />} />
+                  <Route path="/invoices" element={<Invoices />} />
+                  <Route path="/bar" element={<Bar />} />
+                  <Route path="/materialtype" element={<MaterialType />} />
+                  <Route path="/bar" element={<Bar />} />
+                  <Route path="/pie" element={<Pie />} />
+                  <Route path="/line" element={<Line />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path="/geography" element={<Geography />} /> */}
+                </Route>
               </Routes>
             </main>
           </div>
         </ThemeProvider>
       )}
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/price" element={<PricePage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/detail" element={<Detail/>} />
+        <Route path="/profile" element={<ProfilePage/>} />
       </Routes>
     </ColorModeContext.Provider>
   );
@@ -140,6 +176,15 @@ const PricePage = () => {
     </>
   );
 }
+
+const BlogPage = () => {
+  return (
+    <>
+      <UncontrolledExample/>
+    </>
+  );
+}
+
 
 export default App;
 

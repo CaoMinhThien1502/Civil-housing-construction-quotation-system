@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import {
@@ -11,9 +12,10 @@ import {
   MDBInput,
   MDBCheckbox
 } from 'mdb-react-ui-kit';
+import Header from '../../components/Header';
 
 const Login = () => {
-  const navigate = useNavigate(); // Đảm bảo sử dụng useNavigate trong functional component
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -25,17 +27,17 @@ const Login = () => {
         email: email,
         password: password,
       }, { withCredentials: true });
-
-      console.log("Response status:", response.status);
-      console.log("Response data:", response.data);
-
-      if (response.status === 200) {
-        if (!response.data) {
-          console.log("Đăng nhập thành công (không có dữ liệu)!");
-          //navigate("/home");
-          navigate("/dashboard");
-        } else {
-          console.log("Đăng nhập thành công!");
+      
+      if (response.status === 200) {  
+        const token = jwtDecode(response.data.access_Token); // Make sure the key "access_Token" matches exactly with your server response
+        localStorage.setItem('token', response.data.access_Token); // Store the token as a string without JSON.stringify
+        localStorage.setItem('mail', token.sub); // Assuming token.sub contains the email
+        localStorage.setItem('role', response.data.role); // Store role as received
+        if (response.data.role === "CUSTOMER") { 
+          console.log("Hello Customer");
+          navigate("/home");
+        } else { 
+          console.log("Hello Admin");
           navigate("/dashboard");
         }
       } else {
@@ -51,9 +53,8 @@ const Login = () => {
       }
     }
   };
-
+  
   return (
-
     <MDBContainer fluid className="p-3 my-5">
       <MDBRow>
         <MDBCol col='10' md='6'>
@@ -92,7 +93,6 @@ const Login = () => {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-
   );
 }
 

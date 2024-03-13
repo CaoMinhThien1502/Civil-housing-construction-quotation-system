@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const initialValues = {
-    materialTypeID: 0,
     typeName: "",
     status: 1,
 };
@@ -22,7 +21,6 @@ const AddMaterialType = () => {
     
     const formik = useFormik({
         initialValues: {
-            materialTypeID: 0,
             typeName: "",
             status: 1,
         },
@@ -96,7 +94,7 @@ const AddMaterialType = () => {
                             </Button>
                             <Box ml="10px"/>
                             <Button type="submit" color="secondary" variant="contained">
-                                Create New Material
+                                Create New Material Type
                             </Button>
                         </Box>
                         

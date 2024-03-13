@@ -158,14 +158,14 @@ public class BuildingServiceImp implements BuildingService {
                 List<ItemDto> itemDtoList = new ArrayList<>();
                 for (Item i : itemList)  {
                     if(i.isStatus() && i.getItemType().equals(it)) {
-                        itemDtoList.add(new ItemDto(i.getItemId(), i.getItemName()));
+                        itemDtoList.add(new ItemDto(i.getItemId(), i.getItemName(),i.getPriceItem(),i.isStatus(),i.getItemType().getItemTypeName()));
                     }
                 }
                 typeDtoList.add(new ItemTypeFCDto(it.getItemTypeName(), itemDtoList));
             }
             for (ComboBuilding combo : comboList){
                 if(combo.getType() == comboType){
-                    cfcList.add(new ComboFormConsultantDto(combo.getComboBuildingId(), combo.getComboBuildingName()));
+                    cfcList.add(new ComboFormConsultantDto(combo.getComboBuildingId(), combo.getComboBuildingName(), combo.getUnitPrice()));
                 }
             }
             FormConsultanDto dataForm = new FormConsultanDto(cfcList,typeDtoList);

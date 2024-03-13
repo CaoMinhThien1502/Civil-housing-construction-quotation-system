@@ -1,8 +1,12 @@
 package com.example.system.serviceImplement;
 
+import com.example.system.dto.buildingdto.BuildingDetailDto;
 import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.requestcontractdto.RCDetailDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.building.Building;
+import com.example.system.model.building.BuildingDetail;
+import com.example.system.model.building.Item;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
@@ -41,19 +45,19 @@ public class RequestContractServiceImp implements RequestContractService {
     }
 
     @Override
-    public List<RequestContractDto> findAllDto() {
+    public List<RCDetailDto> findAllDto() {
         List<RequestContract> requestContractList = requestContractRepository.findAll();
-        List<RequestContractDto> dtos = new ArrayList<>();
+        List<RCDetailDto> dtos = new ArrayList<>();
         for (RequestContract rc: requestContractList) {
-            dtos.add(getRequestContractDto(rc));
+            dtos.add(findById(rc.getRequestContractId()));
         }
         return dtos;
     }
 
     @Override
-    public List<RequestContractDto> findDtosByUserId(Long userid) {
+    public List<RequestContractDto> findDtosByEmail(String email) {
         try{
-            User u = userRepository.findByUserId(userid);
+            User u = userRepository.findByEmail(email).orElseThrow();
             List<RequestContract> requestContractList = requestContractRepository.findByUser(u);
             List<RequestContractDto> dtos = new ArrayList<>();
             for (RequestContract rq: requestContractList){
@@ -67,26 +71,57 @@ public class RequestContractServiceImp implements RequestContractService {
     }
 
     @Override
-    public RequestContractDto findById(Long rcId) {
-        RequestContractDto dto = getRequestContractDto(requestContractRepository.findById(rcId).orElseThrow());
-        return dto;
+    public RCDetailDto findById(Long rcId) {
+        try{
+            RequestContract rc = requestContractRepository.findById(rcId).orElseThrow();
+            RCDetailDto detail = new RCDetailDto();
+            detail.setStatus(rc.isStatus());
+            detail.setRequestContractId(rc.getRequestContractId());
+            detail.setComboId(rc.getComboBuilding().getComboBuildingId());
+            detail.setComboName(rc.getComboBuilding().getComboBuildingName());
+            detail.setUserId(rc.getUser().getUserId());
+            detail.setUserName(rc.getUser().getName());
+            detail.setPhone(rc.getUser().getPhone());
+            detail.setEmail(rc.getUser().getEmail());
+            BuildingDetailDto bdto = new BuildingDetailDto();
+            bdto.setBuildingId(rc.getBuilding().getBuildingId());
+            bdto.setLandArea(rc.getBuilding().getArea());
+            bdto.setStatus(rc.getBuilding().getStatus());
+            bdto.setUserId(rc.getUser().getUserId());
+            List<String> itemNames = new ArrayList<>();
+            for (BuildingDetail bd: rc.getBuilding().getBuildingDetail()
+                 ) {
+                itemNames.add(bd.getItem().getItemName());
+            }
+            bdto.setItemNameList(itemNames);
+            detail.setBuildingDto(bdto);
+
+
+            return detail;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override
     public RequestContractDto getRequestContractDto(RequestContract rc) {
-        RequestContractDto dto = new RequestContractDto();
-        dto.setRequestContractId(rc.getRequestContractId());
-        dto.setUserId(rc.getUser().getUserId());
-        dto.setComboId(rc.getComboBuilding().getComboBuildingId());
-        dto.setStatus(rc.isStatus());
-        dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
-        return dto;
+        try{
+            RequestContractDto dto = new RequestContractDto();
+            dto.setRequestContractId(rc.getRequestContractId());
+            dto.setUserId(rc.getUser().getUserId());
+            dto.setComboId(rc.getComboBuilding().getComboBuildingId());
+            dto.setComboName(rc.getComboBuilding().getComboBuildingName());
+            dto.setStatus(rc.isStatus());
+            dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
+            return dto;
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @Override
     public RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId) {
         try{
-
             RequestContract newData = new RequestContract();
             Building building = buildingService.createBuilding(dto, comboId);
             ComboBuilding combo = comboBuildingRepository.findByComboBuildingId(comboId);
@@ -96,6 +131,12 @@ public class RequestContractServiceImp implements RequestContractService {
             newData.setComboBuilding(combo);
             newData.setUser(user);
             newData.setStatus(false);
+            double total = newData.getBuilding().getArea()*newData.getComboBuilding().getUnitPrice();
+            for (BuildingDetail bd: newData.getBuilding().getBuildingDetail()
+                 ) {
+                total += bd.getItem().getPriceItem();
+            }
+            newData.setTotalPrice(total);
             requestContractRepository.save(newData);
             RequestContractDto newDto = new RequestContractDto();
             newDto.setBuildingDto(dto);

@@ -1,6 +1,7 @@
 package com.example.system.controller;
 
 import com.example.system.dto.buildingdto.*;
+import com.example.system.dto.buildingdto.itemdto.ItemDto;
 import com.example.system.dto.buildingdto.itemdto.ItemUpdateDto;
 import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
 import com.example.system.model.building.Item;
@@ -64,8 +65,8 @@ public class BuildingController{
 
     //ItemController
     @GetMapping("/item/list")
-    public ResponseEntity<List<Item>> getItems(){
-        List<Item> items = itemService.findALl();
+    public ResponseEntity<List<ItemDto>> getItems(){
+        List<ItemDto> items = itemService.findALl();
         return ResponseEntity.ok(items);
     }
     @GetMapping("/item/id")

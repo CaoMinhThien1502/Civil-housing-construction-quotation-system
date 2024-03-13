@@ -5,6 +5,7 @@ import com.example.system.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,8 +29,9 @@ public class SecurityConfiguration {
     private final LogoutHandler logoutHandler;
 
     public static final String LOGOUT_URL = "/api/v1/auth/logout";
-
+    public static final String LOGIN_URL = "http://localhost:3000/login";
     public static final String[] ENDPOINTS_WHITELIST = {
+            "http://localhost:3000/login",
             "/logout",
             "/swagger-ui/**",
             "/swagger-resources/*",
@@ -42,7 +44,8 @@ public class SecurityConfiguration {
 
 
         http
-                .cors(c ->c
+
+                .cors(c -> c
                         .configurationSource(request -> {
                             CorsConfiguration config = new CorsConfiguration();
                             config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
@@ -50,26 +53,34 @@ public class SecurityConfiguration {
                             config.setAllowedHeaders(Arrays.asList("*"));
                             config.setAllowCredentials(true);
                             return config;
-                        }) )
+                        }))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
-                                authorizeRequests
-
-                                        .requestMatchers("/api/v1/auth/**","/swagger-ui/**","/swagger-resources/*",
-                                                "/v3/api-docs/**").permitAll()
-/*                                        .requestMatchers("").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
-                                        .requestMatchers(LOGIN_URL).permitAll()*/
-
-                                        .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
-                                        .requestMatchers(
-                                                "/building/**",
-                                                "/combobuilding/**",
-                                                "/request-contract/**",
-                                                "/user/**"
-                                        ).permitAll()
-
-                                        .anyRequest().authenticated()
+                        authorizeRequests
+                                .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/auth/refresh-token").permitAll()
+                                //User
+                                .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/user/profile/update").hasRole(Role.CUSTOMER.name())
+                                .requestMatchers(HttpMethod.PUT, "/user/update-role").hasRole(Role.ADMIN.name())
+                                //Combo building
+                                .requestMatchers(HttpMethod.GET, "/combobuilding/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                                .requestMatchers(HttpMethod.PUT, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                                //Building
+                                .requestMatchers(HttpMethod.GET, "/building/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
+                                .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                                //Request contrat
+                                .requestMatchers("/request-contract/**").permitAll()
+//                                .requestMatchers(HttpMethod.GET,"/request-contract/**").permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
+//                                .requestMatchers(HttpMethod.PUT, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+//                                .anyRequest().authenticated()
                 )
+                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
+                        .loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
+                ) // URL mặc định sau khi đăng nhập thành công
                 .sessionManagement(sessionManagement ->
                         sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

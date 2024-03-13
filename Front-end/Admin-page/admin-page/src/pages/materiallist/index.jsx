@@ -8,7 +8,7 @@ import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const Team = () => {
+const MaterialList = () => {
     const [getMaterialList, setMaterialList] = useState([]);
     useEffect(() => {
         const fetchMaterialList = async () => {
@@ -56,6 +56,16 @@ const Team = () => {
         {
             field: "unitPrice",
             headerName: "Price",
+            flex: 1,
+        },
+        {
+            field: "unit",
+            headerName: "Unit",
+            flex: 1,
+        },
+        {
+            field: "materialTypeName",
+            headerName: "Type",
             flex: 1,
         },
         {
@@ -139,4 +149,4 @@ const Team = () => {
     );
 };
 
-export default Team;
+export default MaterialList;

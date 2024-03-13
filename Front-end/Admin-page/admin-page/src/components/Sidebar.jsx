@@ -22,10 +22,12 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    
     return (
         <MenuItem
             active={selected === title}
@@ -43,53 +45,20 @@ const Sidebar = () => {
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
-    const [isLoading, setIsLoading] = useState(false); // Optional state to indicate data fetching
 
-    const userDataDemo = { "userId": 8, "fullName": "Admin", "password": "$2a$10$cC8eSPyEWIOi/COXCTJSquAJCSKhpHZJ9qvleS8iEgPDmpHLVrX0i", "email": "admin@gmail.com", "role": "ADMIN", "phone": "0000000000", "address": "Admin", "birthday": "1998-05-06", "gender": true, "status": true };
-
-    // const [userData, setUserData] = useState({});
-    // useEffect(() => {
-    //     const fetchUserData = async () => {
-    //         setIsLoading(true); // Set loading state to indicate data is being fetched
-
-    //         try {
-    //             const response = await axios.get('http://localhost:8080/user/userlogin');
-
-    //             if (response.status !== 200) {
-    //                 throw new Error(`API request failed with status ${response.status}`);
-    //             }
-
-    //             setUserData(response.data);
-    //             console.log('User data:', response.data); // Log the response data
-    //         } catch (error) {
-    //             console.error('Error fetching user data:', error);
-    //             // Handle errors gracefully
-    //             setUserData({ error: error.message }); // Set error state for displaying
-    //         } finally {
-    //             setIsLoading(false); // Set loading state to false after fetching completes (optional)
-    //         }
-    //     };
-
-    //     fetchUserData();
-    // }, []); // Empty dependency array for one-time fetch on mount
-
-    // const [error, setError] = useState(null);
-    // const fetchUserData = async () => {
-    //     try {
-    //         const response = await axios.get('http://localhost:8080/user/userlogin');
-
-    //         console.log("Response status:", response.status);
-    //         console.log("Response data:", response.data);
-
-    //         if (response.status === 200) {
-    //             console.log("get user data successfully!");
-    //         } else {
-    //             setError(`get user data failed with status: ${response.status}`);
-    //         }
-    //     } catch (error) {
-    //         console.log("Error fetching user data:", error);
-    //     }
-    // }
+    const [userData, setUserData] = useState({});
+    
+    useEffect(() => {
+        const emailUser = localStorage.getItem('mail');
+        console.log(emailUser);
+        axios.get(`http://localhost:8080/user/profile?email=${emailUser}`)
+            .then(response => {
+                setUserData(response.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, []);
 
     return (
         <Box
@@ -141,7 +110,7 @@ const Sidebar = () => {
 
                     {!isCollapsed && (
                         <Box mb="25px">
-                            <Box display="flex" justifyContent="center" alignItems="center">
+                            {/* <Box display="flex" justifyContent="center" alignItems="center">
                                 <img
                                     alt="profile-user"
                                     width="100px"
@@ -149,7 +118,7 @@ const Sidebar = () => {
                                     src={`../../assets/user.png`}
                                     style={{ cursor: "pointer", borderRadius: "50%" }}
                                 />
-                            </Box>
+                            </Box> */}
                             <Box textAlign="center">
                                 <Typography
                                     variant="h2"
@@ -157,10 +126,10 @@ const Sidebar = () => {
                                     fontWeight="bold"
                                     sx={{ m: "10px 0 0 0" }}
                                 >
-                                    {userDataDemo.fullName}
+                                    {userData.fullName}
                                 </Typography>
                                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                                    VP Fancy Admin
+                                    {userData.role}
                                 </Typography>
                             </Box>
                         </Box>
@@ -248,8 +217,8 @@ const Sidebar = () => {
                         </Typography>
                         <Item
                             title="Item List"
-                            to="/item"
-                            icon={<PeopleOutlinedIcon />}
+                            to="/itemList"
+                            icon={<FormatListBulletedOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
@@ -260,7 +229,34 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
-                        {/* <button onClick={fetchUserData}>Get User Data</button> */}
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >
+                            Request Contract
+                        </Typography>
+                        <Item
+                            title="Request Contract List"
+                            to="/requestContractList"
+                            icon={<FormatListBulletedOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >
+                            User Management
+                        </Typography>
+                        <Item
+                            title="User List"
+                            to="/userList"
+                            icon={<PeopleOutlined />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
                         {/* <Item
                             title="Profile Form"
                             to="/form"

@@ -11,11 +11,13 @@ const initialValues = {
     materialName: "",
     unitPrice: "",
     status: 1,
+    unit: "",
 };
 
 const userSchema = yup.object().shape({
     materialName: yup.string().required("Material Name is required"),
     unitPrice: yup.string().required("Unit Price is required"),
+    unit: yup.string().required("Unit is required"),
 });
 
 const AddMaterial = () => {
@@ -29,6 +31,7 @@ const AddMaterial = () => {
             materialName: "",
             unitPrice: "",
             status: 1,
+            unit: "",
         },
 
         onSubmit: async (values) => {
@@ -125,11 +128,12 @@ const AddMaterial = () => {
                                     fullWidth={true}
                                 >
                                     {/* get menu item name from api above */}
-                                    {materialTypes.map((materialType) => (
+                                    {materialTypes.filter((materialType) => materialType.status === true).map((materialType) => (
                                         <MenuItem key={materialType.materialTypeId} value={materialType.materialTypeId}>
                                             {materialType.typeName}
                                         </MenuItem>
                                     ))}
+
                                 </Select>
                             </Box>
                             <TextField
@@ -157,6 +161,19 @@ const AddMaterial = () => {
                             error={!!touched.unitPrice && !!errors.unitPrice}
                             helperText={touched.unitPrice && errors.unitPrice}
                             sx={{ gridColumn: "span 2"}}
+                            />
+                            <TextField
+                            fullWidth
+                            variant="filled"
+                            type="text"
+                            label="Unit"
+                            onBlur={handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.unit}
+                            name="unit"
+                            error={!!touched.unit && !!errors.unit}
+                            helperText={touched.unit && errors.unit}
+                            sx={{ gridColumn: "span 4"}}
                             />
                             <Typography sx={{ gridColumn: "span 4"}} variant="h6" gutterBottom>
                                 Status: Active  

@@ -35,32 +35,10 @@ const Topbar = () => {
     const handleLogout = async (e) => {
         e.preventDefault();
         setAnchorEl(null);
-        // call api logout
-        try {
-            const response = await axios.post("http://localhost:8080/api/v1/auth/logout", {
-                email: email,
-                password: password,
-            }, { withCredentials: true });
-
-            console.log("Response status:", response.status);
-            console.log("Response data:", response.data);
-
-            if (response.status === 200) {
-                if (!response.data) {
-                    console.log("Đăng xuất thành công (không có dữ liệu)!");
-                } else {
-                    console.log("Đăng xuất thành công!");
-                }
-            } else {
-                setError(`Đăng xuất thất bại với mã trạng thái: ${response.status}`);
-            }
-        } catch (error) {
-            console.error("Lỗi trong quá trình đăng xuất:", error);
-        }
-
-        alert("Logged out successfully");
-        // Redirect to the login page after logout
-        navigate("/login");
+        localStorage.removeItem('mail');
+        localStorage.removeItem('role');
+        localStorage.removeItem('token'); 
+        window.location.href = 'http://localhost:8080/api/v1/auth/logout';
     };
 
     return (
@@ -71,11 +49,12 @@ const Topbar = () => {
                 backgroundColor={colors.primary[400]}
                 borderRadius="3px"
             >
-                <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-                <IconButton type="button" sx={{ p: 1 }}>
+                {/* <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" /> */}
+                {/* <IconButton type="button" sx={{ p: 1 }}>
                     <SearchIcon />
-                </IconButton>
+                </IconButton> */}
             </Box>
+            
 
             {/* ICONS */}
             <Box display="flex">
@@ -111,6 +90,7 @@ const Topbar = () => {
                     }}
                 >
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    
                 </Menu>
             </Box>
         </Box>

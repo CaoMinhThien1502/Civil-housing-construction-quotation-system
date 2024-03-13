@@ -9,9 +9,8 @@ import java.util.List;
 
 public interface UserService {
     List<UserDto> getUserList();
-    UserDto getProfile();
-    UserDto updateProfile(UserDto dto, HttpServletRequest request);
-
-    UserDto updateRole(Long id, Role role);
+    UserDto getProfile(String email);
+    UserDto updateProfile(UserDto dto, String email);
+    UserDto updateRole(Long id, String role);
     UserDto getUserLoginFromJWT(HttpServletRequest request);
 }

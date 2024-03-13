@@ -153,7 +153,7 @@ const EditMaterialType = () => {
                             </Button>
                             <Box ml="10px"/>
                             <Button type="submit" color="secondary" variant="contained">
-                                Edit Material
+                                Edit Material Type
                             </Button>
                         </Box>
                         
