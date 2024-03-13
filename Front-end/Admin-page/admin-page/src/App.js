@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
@@ -66,39 +66,38 @@ import {
   ConstructionForm,
   ConsultImg
 } from './pages/pricing/price.js';
+import { HistoryToggleOffRounded, NorthEastOutlined, OneK, Sailing, ViewHeadline } from '@mui/icons-material';
+import { keyboard } from '@testing-library/user-event/dist/keyboard/index.js';
+// import { dc } from '@fullcalendar/core/internal-common.js';
+
 
 function App() {
   const [theme, colorMode] = useMode();
   const location = useLocation();
-  // let tokenTime = localStorage.getItem('tokenTime')
-  // useEffect(() => {
+  let tokenTime = localStorage.getItem('tokenTime')
+  const navigate = useNavigate()
 
-  //   if (tokenTime) {
-  //     const currenTime = Math.floor(Date.now() / 1000)
-  //     if (currenTime > tokenTime) {
-
-
-  //       const confirm = window.confirm("Bạn muốn tiếp tục không")
-  //       if (!confirm) {
-  //         localStorage.removeItem('mail');
-  //         localStorage.removeItem('role');
-  //         localStorage.removeItem('tokenTime');
-       
-  //       }
-  //         else{
-  //           const refreshToken = async (){
-
-  //           }
-  //        const response =   axios.post('http://localhost:8080/api/v1/auth/refresh-token')
-  //        const token = jwtDecode(response.data.access_Token)
-        
-  //        localStorage.setItem('tokenTime',token.exp)
-  //        localStorage.setItem('mail',token.sub)
-  //        localStorage.setItem('role',response.data.role)
-  //         }
-  //     }
-  //   }
-  // }, [])
+  useEffect(() => {
+    const checkTokenTime = () => {
+      if (tokenTime) {
+        const currentTime = Math.floor(Date.now() / 1000);
+        if (currentTime > tokenTime) {
+          localStorage.removeItem('mail');
+          localStorage.removeItem('role');
+          localStorage.removeItem('tokenTime'); 
+          localStorage.removeItem('token'); 
+          window.location.href = 'http://localhost:8080/api/v1/auth/logout';
+        }
+      }
+    };
+  
+    checkTokenTime(); // Kiểm tra ngay khi component được mount
+  
+    const interval = setInterval(checkTokenTime, 600000); // Kiểm tra mỗi 1 phút (hoặc tần suất mong muốn)
+  
+    return () => clearInterval(interval); // Clear interval khi component bị unmount
+  }, [tokenTime]); // Dependency array chỉ chứa tokenTime
+  
   return (
     <ColorModeContext.Provider value={colorMode}>
       {location.pathname !== '/login'

@@ -37,14 +37,12 @@ public class SecurityConfiguration {
             "/swagger-resources/*",
             "/v3/api-docs/**",
             "/api/v1/auth/**",
+            "/confirm-register/**"
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-
         http
-
                 .cors(c -> c
                         .configurationSource(request -> {
                             CorsConfiguration config = new CorsConfiguration();
@@ -58,7 +56,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/v1/auth/refresh-token").permitAll()
+                                .requestMatchers(HttpMethod.POST, "api/v1/auth/refresh-token").permitAll()
                                 //User
                                 .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/user/profile/update").hasRole(Role.CUSTOMER.name())
@@ -73,11 +71,11 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                                 .requestMatchers("/building/form-consultant/list").permitAll()
                                 //Request contrat
-                                .requestMatchers("/request-contract/**").permitAll()
-//                                .requestMatchers(HttpMethod.GET,"/request-contract/**").permitAll()
-//                                .requestMatchers(HttpMethod.POST, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
-//                                .requestMatchers(HttpMethod.PUT, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
-//                                .anyRequest().authenticated()
+                                //.requestMatchers("/request-contract/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/request-contract/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
+                                .requestMatchers(HttpMethod.PUT, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                                .anyRequest().authenticated()
                 )
                 .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
                         .loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
