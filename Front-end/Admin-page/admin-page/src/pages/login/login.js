@@ -30,6 +30,8 @@ const Login = () => {
       
       if (response.status === 200) { 
         const token = jwtDecode(response.data.access_Token)
+        
+        localStorage.setItem('tokenTime',token.exp)
         localStorage.setItem('mail',token.sub)
         localStorage.setItem('role',response.data.role)
         if (response.data.role === "CUSTOMER") { 

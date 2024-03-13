@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { ColorModeContext, useMode } from './theme';
@@ -40,7 +40,7 @@ import EditItemType from './pages/itemtype/editItemType.jsx';
 
 import Login from './pages/login/login';
 import PrivateRoutes from './utils/PrivateRoutes.jsx';
-
+import axios from 'axios';
 import Detail from './pages/pricing/detail.js';
 import ProfilePage from './pages/profile/profile.js';
 
@@ -50,7 +50,7 @@ import ProfilePage from './pages/profile/profile.js';
 // import FAQ from "./pages/faq";
 // import Geography from "./pages/geography";
 // import Calendar from "./pages/calendar/calendar";
-
+import {jwtDecode} from 'jwt-decode'; // Sửa chữa ở đây
 import {
   Header,
   HeroSection,
@@ -62,63 +62,92 @@ import {
   Footer,
   BackToTopButton
 } from './pages/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
-import  {
-  ConstructionForm, 
+import {
+  ConstructionForm,
   ConsultImg
 } from './pages/pricing/price.js';
 
 function App() {
   const [theme, colorMode] = useMode();
   const location = useLocation();
+  // let tokenTime = localStorage.getItem('tokenTime')
+  // useEffect(() => {
+
+  //   if (tokenTime) {
+  //     const currenTime = Math.floor(Date.now() / 1000)
+  //     if (currenTime > tokenTime) {
+
+
+  //       const confirm = window.confirm("Bạn muốn tiếp tục không")
+  //       if (!confirm) {
+  //         localStorage.removeItem('mail');
+  //         localStorage.removeItem('role');
+  //         localStorage.removeItem('tokenTime');
+       
+  //       }
+  //         else{
+  //           const refreshToken = async (){
+
+  //           }
+  //        const response =   axios.post('http://localhost:8080/api/v1/auth/refresh-token')
+  //        const token = jwtDecode(response.data.access_Token)
+        
+  //        localStorage.setItem('tokenTime',token.exp)
+  //        localStorage.setItem('mail',token.sub)
+  //        localStorage.setItem('role',response.data.role)
+  //         }
+  //     }
+  //   }
+  // }, [])
   return (
     <ColorModeContext.Provider value={colorMode}>
-      {location.pathname !== '/login' 
-      && location.pathname !== '/' 
-      && location.pathname !== '/home' 
-      && location.pathname !== '/price'
-      && location.pathname !== '/blog'
-      && location.pathname !== '/detail'
-      && location.pathname !== '/profile'
-      && (
-        <ThemeProvider theme={theme}>
-        <CssBaseline />
-          <div className="app">
-            <Sidebar />
-            <main className="content">
-              <Topbar />
-              <Routes>
-                <Route element={<PrivateRoutes />} >
-                  <Route path="/dashboard" element={<Dashboard />} exact/>
+      {location.pathname !== '/login'
+        && location.pathname !== '/'
+        && location.pathname !== '/home'
+        && location.pathname !== '/price'
+        && location.pathname !== '/blog'
+        && location.pathname !== '/detail'
+        && location.pathname !== '/profile'
+        && (
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <div className="app">
+              <Sidebar />
+              <main className="content">
+                <Topbar />
+                <Routes>
+                  <Route element={<PrivateRoutes />} >
+                    <Route path="/dashboard" element={<Dashboard />} exact />
 
-                  <Route path="/comboBuilding" element={<ComboBuilding />} />
-                  <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
-                  <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
-                  <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
-                  
-                  <Route path="/materialList" element={<MaterialList />} />
-                  <Route path="/materialList/addMaterial" element={<AddMaterial />} />
-                  <Route path="/materialList/:id" element={<EditMaterial />} />
+                    <Route path="/comboBuilding" element={<ComboBuilding />} />
+                    <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
+                    <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
+                    <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
 
-                  <Route path="/materialType" element={<MaterialType />} />
-                  <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
-                  <Route path="/materialType/:id" element={<EditMaterialType />} />
-                  <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
+                    <Route path="/materialList" element={<MaterialList />} />
+                    <Route path="/materialList/addMaterial" element={<AddMaterial />} />
+                    <Route path="/materialList/:id" element={<EditMaterial />} />
 
-                  <Route path="/itemList" element={<Item />} />
-                  <Route path="/itemList/:id" element={<EditItem />} />
-                  <Route path="/itemList/addItem" element={<AddItem />} />
+                    <Route path="/materialType" element={<MaterialType />} />
+                    <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
+                    <Route path="/materialType/:id" element={<EditMaterialType />} />
+                    <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
 
-                  <Route path="/itemType" element={<ItemType />} />
-                  <Route path="/itemType/:id" element={<EditItemType />} />
-                  <Route path="/itemType/addItemType" element={<AddItemType />} />
-                  <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
+                    <Route path="/itemList" element={<Item />} />
+                    <Route path="/itemList/:id" element={<EditItem />} />
+                    <Route path="/itemList/addItem" element={<AddItem />} />
 
-                  <Route path="/requestContractList" element={<RequestContract />} />
-                  <Route path="/requestContractList/:id" element={<RequestContractDetail />} />
-                  
-                  <Route path="/form" element={<Form />} />
-                  
-                  {/* 
+                    <Route path="/itemType" element={<ItemType />} />
+                    <Route path="/itemType/:id" element={<EditItemType />} />
+                    <Route path="/itemType/addItemType" element={<AddItemType />} />
+                    <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
+
+                    <Route path="/requestContractList" element={<RequestContract />} />
+                    <Route path="/requestContractList/:id" element={<RequestContractDetail />} />
+
+                    <Route path="/form" element={<Form />} />
+
+                    {/* 
                   <Route path="/team" element={<Team />} />
                   <Route path="/contacts" element={<Contacts />} />
                   <Route path="/invoices" element={<Invoices />} />
@@ -130,20 +159,20 @@ function App() {
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/calendar" element={<Calendar />} />
                   <Route path="/geography" element={<Geography />} /> */}
-                </Route>
-              </Routes>
-            </main>
-          </div>
-        </ThemeProvider>
-      )}
+                  </Route>
+                </Routes>
+              </main>
+            </div>
+          </ThemeProvider>
+        )}
       <Routes>
-        <Route path="/" element={<HomePage/>} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/price" element={<PricePage />} />
         <Route path="/blog" element={<BlogPage />} />
-        <Route path="/detail" element={<Detail/>} />
-        <Route path="/profile" element={<ProfilePage/>} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </ColorModeContext.Provider>
   );
@@ -152,7 +181,7 @@ function App() {
 const HomePage = () => {
   return (
     <>
-      <Header /> 
+      <Header />
       <HeroSection />
       <AboutUsSection />
       <PersonIn4 />
@@ -168,7 +197,7 @@ const HomePage = () => {
 const PricePage = () => {
   return (
     <>
-      <ConstructionForm/>
+      <ConstructionForm />
       {/* <ConsultImg/> */}
     </>
   );
@@ -177,7 +206,7 @@ const PricePage = () => {
 const BlogPage = () => {
   return (
     <>
-      <UncontrolledExample/>
+      <UncontrolledExample />
     </>
   );
 }
