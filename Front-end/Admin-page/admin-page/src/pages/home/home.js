@@ -2,7 +2,7 @@
 import "./personIn4.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import React, { useEffect } from 'react';
+import React, { useRef,useEffect, useReducer, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import UncontrolledExample from "../blog/blog";
@@ -34,6 +34,9 @@ import 'glightbox/dist/css/glightbox.min.css';
 import 'remixicon/fonts/remixicon.css';
 import './TeamSection.css';
 import '../../styles/main/main.css';
+// Import Emaijs library
+import emailjs from 'emailjs-com';
+
 
 // Create a functional component for the header
 const Header = () => {
@@ -61,10 +64,8 @@ const Header = () => {
             <li><a className="nav-link scrollto" href="#Services" >Services</a></li>
             <li><a className="nav-link scrollto" href="#Team">Team</a></li>
             <li><a className="nav-link scrollto" href="#Pricing">Pricing</a></li>
-            {/* Add your dropdown menu here if needed */}
             {isLoggedIn ? (
               <>
-                <li><a className="getstarted">{userName}</a></li>
                 <li><a className="getstarted scrollto" onClick={handleLogout} href="#">Logout</a></li>
               </>
             ) : (
@@ -88,7 +89,7 @@ const HeroSection = () => {
   }, []);
   return (
     <>
-      <section id="hero" className="d-flex align-items-center">
+      <section id="hero" className="d-flex align-items-center" >
         <div className="container">
           <div className="row">
             <div className="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
@@ -385,7 +386,6 @@ const PricingSection = () => {
               </div>
             </div>
           </div>
-
           {/* End pricing option */}
         </div>
       </div>
@@ -393,6 +393,33 @@ const PricingSection = () => {
   );
 };
 const ContactSection = () => {
+  const [userName,setUserName] = useState('');
+  const [userEmail,setUserEmail] = useState('');
+  const [userSubject,setUserSubject] = useState('');
+  const [userMessage,setUserMessage] = useState('');
+  const SendEmail = (e) => {
+    e.preventDefault();
+    const templateParams = {
+      to_name: 'Admin',
+      from_name: userName,
+      subject: userSubject,
+      message: userMessage
+    };
+    const serviceId = 'service_10tro6i';
+    const templateId = 'template_3ekxqnm';
+    const publicKey = 'ynz7Ls9XImf893bMG';
+    emailjs.send(serviceId,templateId,templateParams,publicKey) 
+    .then(function(response) {
+      alert("Success");
+      console.log('Email sent:', response);
+        setUserName('');
+        setUserEmail('');
+        setUserSubject('');
+        setUserMessage('');
+    }, function(error) {
+      console.error('Email could not be sent:', error);
+    });
+  }
   return (
     <section id="contact" className="contact">
       <div className="container">
@@ -431,23 +458,47 @@ const ContactSection = () => {
           <div className="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
             <form action="forms/contact.php" method="post" role="form" className="php-email-form">
               <div className="form-group">
-                <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required />
+                <input type="text"
+                      name="name"
+                      className="form-control" 
+                      value={userName} 
+                      placeholder="Your Name" 
+                      onChange={(e) => setUserName(e.target.value)}
+                      required />
               </div>
               <div className="form-group">
-                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required />
+                <input type="email" 
+                       className="form-control" 
+                       name="email" 
+                       value={userEmail} 
+                       placeholder="Your Email" 
+                       onChange={(e) => setUserEmail(e.target.value)}
+                       required />
               </div>
               <div className="form-group">
-                <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required />
+                <input type="text" 
+                        className="form-control" 
+                        name="subject" 
+                        value={userSubject} 
+                        placeholder="Subject"
+                        onChange={(e) => setUserSubject(e.target.value)} 
+                        required />
               </div>
               <div className="form-group">
-                <textarea className="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                <textarea className="form-control" 
+                          name="message" 
+                          rows="5" 
+                          value={userMessage}
+                          placeholder="Message" 
+                          onChange={(e) => setUserMessage(e.target.value)}
+                          required></textarea>
               </div>
               <div className="my-3">
                 <div className="loading">Loading</div>
                 <div className="error-message"></div>
                 <div className="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div className="text-center"><button type="submit">Send Message</button></div>
+              <div className="text-center"><button type="submit" onClick={SendEmail}>Send Message</button></div>
             </form>
           </div>
         </div>
