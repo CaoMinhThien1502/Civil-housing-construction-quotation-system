@@ -37,7 +37,7 @@ const Topbar = () => {
         setAnchorEl(null);
         localStorage.removeItem('mail');
         localStorage.removeItem('role');
-        localStorage.removeItem('token');
+        localStorage.removeItem('token'); 
         window.location.href = 'http://localhost:8080/api/v1/auth/logout';
     };
 
@@ -90,6 +90,7 @@ const Topbar = () => {
                     }}
                 >
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    
                 </Menu>
             </Box>
         </Box>

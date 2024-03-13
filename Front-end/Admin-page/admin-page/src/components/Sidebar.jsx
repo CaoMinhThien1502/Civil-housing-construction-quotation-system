@@ -22,6 +22,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
@@ -109,7 +110,7 @@ const Sidebar = () => {
 
                     {!isCollapsed && (
                         <Box mb="25px">
-                            <Box display="flex" justifyContent="center" alignItems="center">
+                            {/* <Box display="flex" justifyContent="center" alignItems="center">
                                 <img
                                     alt="profile-user"
                                     width="100px"
@@ -117,7 +118,7 @@ const Sidebar = () => {
                                     src={`../../assets/user.png`}
                                     style={{ cursor: "pointer", borderRadius: "50%" }}
                                 />
-                            </Box>
+                            </Box> */}
                             <Box textAlign="center">
                                 <Typography
                                     variant="h2"
@@ -225,6 +226,34 @@ const Sidebar = () => {
                             title="Item Type"
                             to="/itemType"
                             icon={<ReceiptOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >
+                            Request Contract
+                        </Typography>
+                        <Item
+                            title="Request Contract List"
+                            to="/requestContractList"
+                            icon={<FormatListBulletedOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >
+                            User Management
+                        </Typography>
+                        <Item
+                            title="User List"
+                            to="/userList"
+                            icon={<PeopleOutlined />}
                             selected={selected}
                             setSelected={setSelected}
                         />
