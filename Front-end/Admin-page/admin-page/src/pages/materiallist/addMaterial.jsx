@@ -5,6 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     materialID: 0,
@@ -24,7 +26,18 @@ const AddMaterial = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     const [materialTypeId, setMaterialTypeId] = useState("");
-    
+
+    const [open, setOpen] = useState(false);
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        navigate('/materialList');
+    };
+
     const formik = useFormik({
         initialValues: {
             materialID: 0,
@@ -52,8 +65,8 @@ const AddMaterial = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Material added successfully');
-                navigate('/materialList');
+                setOpen(true);
+                // navigate('/materialList');
             } catch (error) {
                 console.error('Error during submit:', error);
                 // Handle submit errors (e.g., display an error message to the user)
@@ -192,6 +205,16 @@ const AddMaterial = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseSnackbar} >
+                <Alert
+                    onClose={handleCloseSnackbar}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Material added successfully!
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

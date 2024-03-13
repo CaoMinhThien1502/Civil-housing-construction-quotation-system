@@ -5,6 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     materialTypeID: 0,
@@ -20,6 +22,17 @@ const EditMaterialType = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     const {id} = useParams();
+
+    const [open, setOpen] = useState(false);
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        navigate('/materialType');
+    };
 
     const [getMaterialType, setMaterialType] = useState({});
     useEffect(() => {
@@ -68,8 +81,8 @@ const EditMaterialType = () => {
                 }
                 
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Material Type updated successfully');
-                navigate('/materialType');
+                setOpen(true);
+                // navigate('/materialType');
             } catch (error) {
                 console.error('Error during submit:', error);
                 // Handle submit errors (e.g., display an error message to the user)
@@ -160,6 +173,16 @@ const EditMaterialType = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseSnackbar} >
+                <Alert
+                    onClose={handleCloseSnackbar}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Material Type edited successfully!
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

@@ -5,6 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     itemId: 0,
@@ -23,6 +25,17 @@ const AddItem = () => {
     const navigate = useNavigate();
     const [getItemTypeId, setItemTypeID] = useState("");
     
+    const [open, setOpen] = useState(false);
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        navigate('/itemList');
+    };
+
     const formik = useFormik({
         initialValues: {
             itemId: 0,
@@ -49,8 +62,8 @@ const AddItem = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Item added successfully');
-                navigate('/itemList');
+                setOpen(true);
+                // navigate('/itemList');
             } catch (error) {
                 console.error('Error during submit:', error);
                 // Handle submit errors (e.g., display an error message to the user)
@@ -175,6 +188,16 @@ const AddItem = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseSnackbar} >
+                <Alert
+                    onClose={handleCloseSnackbar}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Item added successfully!
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

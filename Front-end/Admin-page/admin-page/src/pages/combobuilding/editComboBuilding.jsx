@@ -5,7 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     comboBuildingName: "",
@@ -23,6 +24,17 @@ const EditComboBuilding = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     
+    const [open, setOpen] = useState(false);
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        navigate('/comboBuilding');
+    };
+
     const {id} = useParams();
     const [comboData, setComboData] = useState({});
     const [materialIdList, setMaterialIdList] = useState([]);
@@ -81,8 +93,8 @@ const EditComboBuilding = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Combo Building edited successfully');
-                navigate('/comboBuilding');
+                setOpen(true);
+                // navigate('/comboBuilding');
             } catch (error) {
                 console.error('Error during submit:', error);
                 // Handle submit errors (e.g., display an error message to the user)
@@ -330,6 +342,16 @@ const EditComboBuilding = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseSnackbar} >
+                <Alert
+                    onClose={handleCloseSnackbar}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Combo Building edited successfully!
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

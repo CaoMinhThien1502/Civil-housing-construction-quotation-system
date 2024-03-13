@@ -5,6 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     comboBuildingName: "",
@@ -22,6 +24,17 @@ const AddComboBuilding = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     
+    const [open, setOpen] = useState(false);
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        navigate('/comboBuilding');
+    };
+
     const formik = useFormik({
         initialValues: {
             comboBuildingName: "",
@@ -51,8 +64,8 @@ const AddComboBuilding = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Combo Building added successfully');
-                navigate('/comboBuilding');
+                setOpen(true);
+                // navigate('/comboBuilding');
             } catch (error) {
                 console.error('Error during submit:', error);
                 // Handle submit errors (e.g., display an error message to the user)
@@ -258,6 +271,16 @@ const AddComboBuilding = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseSnackbar} >
+                <Alert
+                    onClose={handleCloseSnackbar}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Combo Building added successfully!
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }
