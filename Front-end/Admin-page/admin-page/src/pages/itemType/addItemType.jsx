@@ -14,7 +14,6 @@ const initialValues = {
 };
 
 const userSchema = yup.object().shape({
-    // itemTypeName: yup.string().required(() => { setOpenError(true) }),
     itemTypeName: yup.string().required("Item Type Name is required"),
 });
 
@@ -52,10 +51,6 @@ const AddItemType = () => {
         validationSchema: userSchema,
 
         onSubmit: async (values) => {
-            if (values.itemTypeName === "") {
-                setOpenError(true);
-                return;
-            }
             console.log("Values in onSubmit:", values);
             try {
                 const response = await fetch(`http://localhost:8080/building/item-type/create`, {

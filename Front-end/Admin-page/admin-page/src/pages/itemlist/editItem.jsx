@@ -20,7 +20,6 @@ const userSchema = yup.object().shape({
     priceItem: yup.number().required("Unit Price is required"),
 }); 
 
-
 const EditItem = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
@@ -36,6 +35,16 @@ const EditItem = () => {
 
         setOpenSuccess(false);
         navigate('/itemList');
+    };
+
+    const [openError, setOpenError] = useState(false);
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenError(false);
     };
 
     const [getItem, setItem] = useState({});
@@ -90,6 +99,7 @@ const EditItem = () => {
                 // navigate('/itemList');
             } catch (error) {
                 console.error('Error during submit:', error);
+                setOpenError(true);
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
@@ -152,6 +162,7 @@ const EditItem = () => {
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
+            // validationSchema={userSchema}
             >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
@@ -169,7 +180,10 @@ const EditItem = () => {
                             type="text"
                             label="Item Name"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.itemName}
                             name="itemName"
                             error={!!touched.itemName && !!errors.itemName}
@@ -182,7 +196,10 @@ const EditItem = () => {
                             type="number"
                             label="Unit Price"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.priceItem}
                             name="priceItem"
                             error={!!touched.priceItem && !!errors.priceItem}
@@ -259,6 +276,16 @@ const EditItem = () => {
                     sx={{ fontSize: 15 }}
                 >
                     Item edited successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Item edited error!
                 </Alert>
             </Snackbar>
         </Box>

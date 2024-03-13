@@ -16,7 +16,7 @@ const initialValues = {
 };
 
 const userSchema = yup.object().shape({
-    priceItem: yup.string().required("Item Name is required"),
+    itemName: yup.string().required("Item Name is required"),
     priceItem: yup.string().required("Unit Price is required"),
 });
 
@@ -34,6 +34,16 @@ const AddItem = () => {
 
         setOpenSuccess(false);
         navigate('/itemList');
+    };
+
+    const [openError, setOpenError] = useState(false);
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenError(false);
     };
 
     const formik = useFormik({
@@ -66,6 +76,7 @@ const AddItem = () => {
                 // navigate('/itemList');
             } catch (error) {
                 console.error('Error during submit:', error);
+                setOpenError(true);
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
@@ -113,6 +124,7 @@ const AddItem = () => {
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
+            validationSchema={userSchema}
             >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
@@ -149,9 +161,12 @@ const AddItem = () => {
                             fullWidth
                             variant="filled"
                             type="text"
-                            label="item Name"
+                            label="Item Name"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.itemName}
                             name="itemName"
                             error={!!touched.itemName && !!errors.itemName}
@@ -164,7 +179,10 @@ const AddItem = () => {
                             type="number"
                             label="Unit Price"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.priceItem}
                             name="priceItem"
                             error={!!touched.priceItem && !!errors.priceItem}
@@ -196,6 +214,16 @@ const AddItem = () => {
                     sx={{ fontSize: 15 }}
                 >
                     Item added successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Item added error!
                 </Alert>
             </Snackbar>
         </Box>

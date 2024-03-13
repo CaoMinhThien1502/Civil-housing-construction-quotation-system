@@ -34,6 +34,16 @@ const EditItemType = () => {
         navigate('/itemType');
     };
 
+    const [openError, setOpenError] = useState(false);
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenError(false);
+    };
+
     const [getItemType, setItemType] = useState({});
     useEffect(() => {
         const fetchMaterialTypeById = async () => {
@@ -84,6 +94,7 @@ const EditItemType = () => {
                 // navigate('/itemType');
             } catch (error) {
                 console.error('Error during submit:', error);
+                setOpenError(true);
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
@@ -110,6 +121,7 @@ const EditItemType = () => {
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
+            // validationSchema={userSchema}
             >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
@@ -127,7 +139,10 @@ const EditItemType = () => {
                             type="text"
                             label="Item Type Name"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.itemTypeName}
                             name="itemTypeName"
                             error={!!touched.itemTypeName && !!errors.itemTypeName}
@@ -180,6 +195,16 @@ const EditItemType = () => {
                     sx={{ fontSize: 15 }}
                 >
                     Item Type edited successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Item Type edited error!
                 </Alert>
             </Snackbar>
         </Box>

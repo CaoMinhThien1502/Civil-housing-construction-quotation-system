@@ -38,6 +38,16 @@ const AddMaterial = () => {
         navigate('/materialList');
     };
 
+    const [openError, setOpenError] = useState(false);
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenError(false);
+    };
+
     const formik = useFormik({
         initialValues: {
             materialID: 0,
@@ -69,6 +79,7 @@ const AddMaterial = () => {
                 // navigate('/materialList');
             } catch (error) {
                 console.error('Error during submit:', error);
+                setOpenError(true);
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
@@ -116,6 +127,7 @@ const AddMaterial = () => {
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
+            validationSchema={userSchema}
             >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
@@ -155,7 +167,10 @@ const AddMaterial = () => {
                             type="text"
                             label="Material Name"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.materialName}
                             name="materialName"
                             error={!!touched.materialName && !!errors.materialName}
@@ -168,7 +183,10 @@ const AddMaterial = () => {
                             type="number"
                             label="Unit Price"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.unitPrice}
                             name="unitPrice"
                             error={!!touched.unitPrice && !!errors.unitPrice}
@@ -181,7 +199,10 @@ const AddMaterial = () => {
                             type="text"
                             label="Unit"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.unit}
                             name="unit"
                             error={!!touched.unit && !!errors.unit}
@@ -213,6 +234,16 @@ const AddMaterial = () => {
                     sx={{ fontSize: 15 }}
                 >
                     Material added successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Material added error!
                 </Alert>
             </Snackbar>
         </Box>
