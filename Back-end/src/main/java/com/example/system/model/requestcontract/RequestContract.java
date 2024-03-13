@@ -27,7 +27,7 @@ public class RequestContract {
     @Temporal(TemporalType.DATE)
     private Date requestDate;
     @Column(nullable = true)
-    private double totalPrice;
+    private Double totalPrice;
     @ManyToOne
     @JoinColumn(name = "combo_building_id")
     @JsonIgnore

@@ -31,6 +31,7 @@ const Login = () => {
       if (response.status === 200) {  
         const token = jwtDecode(response.data.access_Token); // Make sure the key "access_Token" matches exactly with your server response
         localStorage.setItem('token', response.data.access_Token); // Store the token as a string without JSON.stringify
+        localStorage.setItem('tokenTime',token.exp)
         localStorage.setItem('mail', token.sub); // Assuming token.sub contains the email
         localStorage.setItem('role', response.data.role); // Store role as received
         if (response.data.role === "CUSTOMER") { 

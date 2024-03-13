@@ -78,6 +78,7 @@ const RequestContractDetail = () => {
                     <Typography variant="h3" gutterBottom>Building Information</Typography>
                     <Typography variant="h5" gutterBottom>ID: {requesContractData?.buildingDto.buildingId}</Typography>
                     <Typography variant="h5" gutterBottom>Area: {requesContractData?.buildingDto.landArea}</Typography>
+                    <Typography variant="h5" gutterBottom>Price: {requesContractData?.totalPrice}</Typography>
                     <Typography variant="h5" gutterBottom>Structure of Building: 
                     {requesContractData?.buildingDto.itemNameList[0]}, 
                     {requesContractData?.buildingDto.itemNameList[1]}, 
