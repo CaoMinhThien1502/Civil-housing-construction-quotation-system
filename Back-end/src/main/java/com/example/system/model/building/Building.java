@@ -23,7 +23,7 @@ public class Building {
     private Double area;
     private int status; //-1: mẫu /  0: hủy /  1: đang thi công /  2 : đã xong
     @OneToMany(mappedBy = "building")
-    private Set<BuildingDetail> buildingDetail;
+    private Set<BuildingDetail> buildingDetails;
     @OneToMany(mappedBy = "building")
     private Set<RequestContract> requestContracts;
 }
