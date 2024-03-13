@@ -6,6 +6,7 @@ import com.example.system.dto.requestcontractdto.RCDetailDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
+import com.example.system.model.building.Item;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
@@ -104,19 +105,23 @@ public class RequestContractServiceImp implements RequestContractService {
 
     @Override
     public RequestContractDto getRequestContractDto(RequestContract rc) {
-        RequestContractDto dto = new RequestContractDto();
-        dto.setRequestContractId(rc.getRequestContractId());
-        dto.setUserId(rc.getUser().getUserId());
-        dto.setComboId(rc.getComboBuilding().getComboBuildingId());
-        dto.setStatus(rc.isStatus());
-        dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
-        return dto;
+        try{
+            RequestContractDto dto = new RequestContractDto();
+            dto.setRequestContractId(rc.getRequestContractId());
+            dto.setUserId(rc.getUser().getUserId());
+            dto.setComboId(rc.getComboBuilding().getComboBuildingId());
+            dto.setComboName(rc.getComboBuilding().getComboBuildingName());
+            dto.setStatus(rc.isStatus());
+            dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
+            return dto;
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @Override
     public RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId) {
         try{
-
             RequestContract newData = new RequestContract();
             Building building = buildingService.createBuilding(dto, comboId);
             ComboBuilding combo = comboBuildingRepository.findByComboBuildingId(comboId);
@@ -126,6 +131,12 @@ public class RequestContractServiceImp implements RequestContractService {
             newData.setComboBuilding(combo);
             newData.setUser(user);
             newData.setStatus(false);
+            double total = newData.getBuilding().getArea()*newData.getComboBuilding().getUnitPrice();
+            for (BuildingDetail bd: newData.getBuilding().getBuildingDetail()
+                 ) {
+                total += bd.getItem().getPriceItem();
+            }
+            newData.setTotalPrice(total);
             requestContractRepository.save(newData);
             RequestContractDto newDto = new RequestContractDto();
             newDto.setBuildingDto(dto);
