@@ -92,6 +92,10 @@ const RequestContractDetail = () => {
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.comboName}</TableCell>
                             </TableRow>
                             <TableRow>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Price:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.totalPrice}</TableCell>
+                            </TableRow>
+                            <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.status === true ? "Active" : "Inactive"}</TableCell>
                             </TableRow>

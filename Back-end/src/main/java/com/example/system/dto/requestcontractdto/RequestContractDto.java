@@ -15,6 +15,7 @@ public class RequestContractDto {
     private Long requestContractId;
     private Long userId;
     private Long comboId;
+    private String comboName;
     private BuildingDto buildingDto;
     private boolean status;
 

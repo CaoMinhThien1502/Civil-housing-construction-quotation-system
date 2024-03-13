@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping("/update-role")
-    public ResponseEntity<UserDto> updateRole(@RequestParam Long userId, @RequestParam Role role){
+    public ResponseEntity<UserDto> updateRole(@RequestParam Long userId, @RequestParam String role){
         UserDto update = userService.updateRole(userId, role);
         return ResponseEntity.ok(update);
     }

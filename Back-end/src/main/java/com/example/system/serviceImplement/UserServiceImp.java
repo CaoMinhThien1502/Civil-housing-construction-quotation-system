@@ -33,14 +33,6 @@ public class UserServiceImp implements UserService {
                  ) {
                 UserDto dto = getProfile(u.getEmail());
                 dto.setUserId(u.getUserId());
-//                dto.setEmail(u.getEmail());
-//                dto.setGender(u.isGender());
-//                dto.setPhone(u.getPhone());
-//                dto.setAddress(u.getAddress());
-//                dto.setBirthday(u.getBirthday());
-//                dto.setRole(u.getRole());
-//                dto.setFullName(u.getName());
-//                dto.setStatus(u.isStatus());
                 dtos.add(dto);
             }
             return dtos;
@@ -87,12 +79,18 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDto updateRole(Long id, Role role) {
-        try{
+    public UserDto updateRole(Long id, String role) {
+        try {
             User u = userRepository.findByUserId(id);
-            u.setRole(role);
+            Role roleChange = null;
+            try {
+                roleChange = Role.valueOf(role.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Chuỗi không phù hợp với Role.");
+            }
+            u.setRole(roleChange);
             userRepository.save(u);
-            UserDto dto = new UserDto(u.getUserId(), u.getName(),"", u.getEmail(), u.getRole(),u.getPhone(),u.getAddress(),u.getBirthday(),u.isGender(),u.isStatus());
+            UserDto dto = getProfile(u.getEmail());
             return dto;
         }catch (Exception e){
             return null;
