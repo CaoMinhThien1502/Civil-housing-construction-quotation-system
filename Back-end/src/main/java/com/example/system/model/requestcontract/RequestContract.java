@@ -2,6 +2,7 @@ package com.example.system.model.requestcontract;
 
 import com.example.system.model.building.Building;
 import com.example.system.model.combo.ComboBuilding;
+import com.example.system.model.payment.Invoice;
 import com.example.system.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -39,4 +40,7 @@ public class RequestContract {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "invoice_id", referencedColumnName = "invoiceId")
+    private Invoice invoice;
 }
