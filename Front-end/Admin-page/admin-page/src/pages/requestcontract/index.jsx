@@ -8,6 +8,8 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const RequestContract = () => {
     const [getRequestContract, setRequestContract] = useState([]);
@@ -15,6 +17,17 @@ const RequestContract = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleCloseSuccess = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSuccess(false);
+        window.location.reload();
+    };
 
     useEffect(() => {
         const fetchRequestContractList = async () => {
@@ -33,15 +46,12 @@ const RequestContract = () => {
     }, []);
     const handleConfirmRequest = async (requestContractId) => {
         try {
-            await axios.post(`http://localhost:8080/request-contract/request-contract/comfirm?requestContractId=${requestContractId}`);
-
-            // display alert includes ok and cancel option
+            // display dialog includes ok and cancel option
+            console.log(requestContractId);
             const result = window.confirm("Are you sure you want to confirm this request?");
             if (result) {
-                window.alert("Confirm request successfully!");
-                // Điều hướng lại trang sau khi xác nhận thành công
-                // reload the current page
-                window.location.reload();
+                await axios.post(`http://localhost:8080/request-contract/request-contract/comfirm?requestContractId=${requestContractId}`);
+                setOpenSuccess(true);
             }
         } catch (error) {
             console.error('Error confirming request contract:', error);
@@ -170,6 +180,16 @@ const RequestContract = () => {
                     components={{ Toolbar: GridToolbar }}
                 />
             </Box>
+            <Snackbar open={openSuccess} autoHideDuration={3000} onClose={handleCloseSuccess} >
+                <Alert
+                    onClose={handleCloseSuccess}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Confirm Request successfully!
+                </Alert>
+            </Snackbar>
         </Box>
     );
 };
