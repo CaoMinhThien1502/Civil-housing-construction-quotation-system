@@ -79,7 +79,7 @@ const Sidebar = () => {
                     color: "#6870fa !important",
                 },
 
-                height: "120%",
+                height: "280%",
             }}
         >
             <ProSidebar collapsed={isCollapsed}>
@@ -138,13 +138,6 @@ const Sidebar = () => {
                     )}
 
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-                        <Item
-                            title="Home Page"
-                            to="/home"
-                            icon={<HomeOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
                         <Item
                             title="Dashboard"
                             to="/dashboard"

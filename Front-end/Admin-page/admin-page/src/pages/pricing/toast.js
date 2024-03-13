@@ -3,11 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
-<<<<<<< HEAD
-// import './toast.css';
-=======
-//import './toast.css';
->>>>>>> 328d48fd26428cb0551c1f45f801c4b2abf71868
+import './toast.css';
 
 function ToastAfterShowPriceQuoation({toastShow,setToastShow}) {
   return (
