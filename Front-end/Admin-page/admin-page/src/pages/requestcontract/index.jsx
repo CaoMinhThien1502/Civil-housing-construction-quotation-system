@@ -60,6 +60,11 @@ const RequestContract = () => {
             flex: 1,
         },
         {
+            field: "totalPrice",
+            headerName: "Price",
+            flex: 1,
+        },
+        {
             field: "buildingDto.status",
             headerName: "Type of building",
             headerAlign: "center",

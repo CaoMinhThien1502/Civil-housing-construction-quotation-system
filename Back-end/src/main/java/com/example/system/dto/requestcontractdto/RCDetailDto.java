@@ -16,6 +16,7 @@ public class RCDetailDto {
     private String userName;
     private String phone;
     private String email;
+    private Double totalPrice;
     private Long comboId;
     private String comboName;
     private BuildingDetailDto buildingDto;
