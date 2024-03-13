@@ -37,7 +37,15 @@ import '../../styles/main/main.css';
 
 // Create a functional component for the header
 const Header = () => {
-  const linkText = localStorage.token === null ? 'Profile' : 'Login';
+  const isLoggedIn = !!localStorage.getItem('token');
+  const userName = localStorage.getItem('mail');
+
+  const handleLogout = () => {
+    localStorage.removeItem('mail');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    window.location.href = '/login';
+  };
   return (
     <header id="header" className="fixed-top d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between">
@@ -54,8 +62,14 @@ const Header = () => {
             <li><a className="nav-link scrollto" href="#Team">Team</a></li>
             <li><a className="nav-link scrollto" href="#Pricing">Pricing</a></li>
             {/* Add your dropdown menu here if needed */}
-            <li><a className="nav-link scrollto" href="#Contact">Contact</a></li>
-            <li><a className="getstarted scrollto" href={localStorage.token === null ? "/profile" : "/login"}>{linkText}</a></li>
+            {isLoggedIn ? (
+              <>
+                <li><a className="getstarted">{userName}</a></li>
+                <li><a className="getstarted scrollto" onClick={handleLogout} href="#">Logout</a></li>
+              </>
+            ) : (
+              <li><a className="getstarted scrollto" href="/login">Login</a></li>
+            )}
           </ul>
           <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>
