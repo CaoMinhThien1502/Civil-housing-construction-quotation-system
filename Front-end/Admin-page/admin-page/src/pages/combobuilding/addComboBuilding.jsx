@@ -24,14 +24,14 @@ const AddComboBuilding = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     
-    const [open, setOpen] = useState(false);
+    const [openSuccess, setOpenSuccess] = useState(false);
 
-    const handleCloseSnackbar = (event, reason) => {
+    const handleCloseSuccess = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
 
-        setOpen(false);
+        setOpenSuccess(false);
         navigate('/comboBuilding');
     };
 
@@ -64,7 +64,7 @@ const AddComboBuilding = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                setOpen(true);
+                setOpenSuccess(true);
                 // navigate('/comboBuilding');
             } catch (error) {
                 console.error('Error during submit:', error);
@@ -271,9 +271,9 @@ const AddComboBuilding = () => {
                     </form>
                 )}
             </Formik>
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseSnackbar} >
+            <Snackbar open={openSuccess} autoHideDuration={3000} onClose={handleCloseSuccess} >
                 <Alert
-                    onClose={handleCloseSnackbar}
+                    onClose={handleCloseSuccess}
                     severity="success"
                     // variant="outlined"
                     sx={{ fontSize: 15 }}

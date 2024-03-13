@@ -107,10 +107,9 @@ const AddItemType = () => {
                             type="text"
                             label="Item Type Name"
                             onBlur={handleBlur}
-                            // onChange={formik.handleChange}
                             onChange={(event) => {
-                                handleChange(event);
-                                formik.handleChange(event);
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
                             }}
                             value={formik.values.itemTypeName}
                             name="itemTypeName"
