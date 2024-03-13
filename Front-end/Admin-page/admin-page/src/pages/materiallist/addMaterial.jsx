@@ -128,11 +128,12 @@ const AddMaterial = () => {
                                     fullWidth={true}
                                 >
                                     {/* get menu item name from api above */}
-                                    {materialTypes.map((materialType) => (
+                                    {materialTypes.filter((materialType) => materialType.status === true).map((materialType) => (
                                         <MenuItem key={materialType.materialTypeId} value={materialType.materialTypeId}>
                                             {materialType.typeName}
                                         </MenuItem>
                                     ))}
+
                                 </Select>
                             </Box>
                             <TextField

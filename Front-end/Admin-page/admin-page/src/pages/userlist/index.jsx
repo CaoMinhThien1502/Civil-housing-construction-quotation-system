@@ -1,7 +1,6 @@
 import { Box, Typography, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import axios from 'axios';
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
@@ -9,65 +8,75 @@ import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const RequestContract = () => {
-    const [getRequestContract, setRequestContract] = useState([]);
-    //const {id} = useParams();
-    const navigate = useNavigate();
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-
+const UserList = () => {
+    const [getUserList, setUserList] = useState([]);
     useEffect(() => {
-        const fetchRequestContractList = async () => {
+        const fetchUserList = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/request-contract/request-contract/list', {
+                const response = await fetch('http://localhost:8080/user/list', {
+                    method: 'GET',
                     headers: {
+                        // 'Access-Control-Allow-Origin': '*',
                         'Content-Type': 'application/json',
                     },
                 });
-                setRequestContract(response.data);
+                
+                const data = await response.json();
+                setUserList(data);
             } catch (error) {
-                console.error('Error fetching request contract:', error);
+                console.error('Error fetching users:', error);
             }
         };
-        fetchRequestContractList();
-    }, []);
-    const handleConfirmRequest = async (requestContractId) => {
-        try {
-            await axios.post(`http://localhost:8080/request-contract/request-contract/comfirm?requestContractId=${requestContractId}`);
-            // Điều hướng lại trang sau khi xác nhận thành công
-            navigate("/requestContractList");
-        } catch (error) {
-            console.error('Error confirming request contract:', error);
-        }
-    };
 
+        fetchUserList();
+    }, []); // Empty dependency array to fetch data only once on component mount
+
+    const navigate = useNavigate();
+
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
     const columns = [
         { 
-            field: "requestContractId", 
+            field: "userId", 
             headerName: "ID",
             headerAlign: "center",
             align: "center",
         },
         {
-            field: "userName",
-            headerName: "Creator",
+            field: "fullName",
+            headerName: "Full Name",
             cellClassName: "name-column--cell",
-            flex: 1,
         },
         {
-            field: "comboName",
-            headerName: "Combo selected",
-            flex: 1,
+            field: "email",
+            headerName: "Email",
+            flex: 1.2,
         },
         {
-            field: "buildingDto.status",
-            headerName: "Type of building",
+            field: "role",
+            headerName: "Role",
+        },
+        {
+            field: "phone",
+            headerName: "Phone",
+        },
+        {
+            field: "address",
+            headerName: "Address",
+            flex: 1.5,
+        },
+        {
+            field: "birthday",
+            headerName: "Birthday",
+        },
+        {
+            field: "gender",
+            headerName: "Gender",
             headerAlign: "center",
             align: "center",
-            flex: 1,
             renderCell: (params) => {
-                const buildingStatus = params.row.buildingDto.status;
-                return buildingStatus === -1 ? "Mẫu" : buildingStatus === 0 ? "Hủy" : buildingStatus === 1 ? "Đang thi công" : "Đã xong";
+                const { row: { gender } } = params; // Extract the type value
+                return gender === true ? "Male" : "Female";
             },
         },
         {
@@ -75,50 +84,31 @@ const RequestContract = () => {
             headerName: "Status",
             headerAlign: "center",
             align: "center",
-            flex: 1,
             renderCell: (params) => {
-                const { row: { status } } = params;
+                const { row: { status } } = params; // Extract the type value
                 return status === true ? "Active" : "Inactive";
             },
         },
         {
-            field: "setting",
-            headerName: "Setting",
+            field: "editRole",
+            headerName: "Edit Role",
             headerAlign: "center",
             align: "center",
-            flex: 1,
             renderCell: ({ row }) => (
-                <Link
-                    to={`/requestContractList/detail/${row.requestContractId}`}
+                <Link                    to={`/userList/${row.userId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
-                        Detail
+                        Edit
                     </Button>
                 </Link>
-            ),
-        },
-        {
-            field: "confirm",
-            headerName: "Confirm",
-            headerAlign: "center",
-            align: "center",
-            flex: 1,
-            renderCell: ({ row }) => (
-                <Button 
-                    color="primary" 
-                    variant="contained" 
-                    onClick={() => handleConfirmRequest(row.requestContractId)}
-                >
-                    Confirm request
-                </Button>
             ),
         },
     ];
 
     return (
         <Box m="20px">
-            <Header title="Request Contract List" subtitle="Managing the Request Contract List" />
+            <Header title="User List" subtitle="Managing the User List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -152,9 +142,9 @@ const RequestContract = () => {
                 }}
             >
                 <DataGrid
-                    rows={getRequestContract}
+                    rows={getUserList}
                     columns={columns}
-                    getRowId={(row) => row.requestContractId}
+                    getRowId={(row) => row.userId}
                     components={{ Toolbar: GridToolbar }}
                 />
             </Box>
@@ -162,4 +152,4 @@ const RequestContract = () => {
     );
 };
 
-export default RequestContract;
+export default UserList;
