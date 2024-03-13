@@ -17,7 +17,7 @@ public class InvoiceDto {
     private String bankTranNo;
     private String cardType;
     private String orderInfo;
-    private Long payDate;
+    private String payDate;
     private String responseCode;
     private String tmnCode;
     private String transactionNo;
