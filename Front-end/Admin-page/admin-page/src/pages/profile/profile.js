@@ -29,9 +29,9 @@ const ProfilePage = () => {
       try {
         const response = await fetch(`http://localhost:8080/user/profile?email=${localStorage.getItem('mail')}`, {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          }
+            headers: {
+              "Content-Type": "application/json",
+            }
         });
         const data = await response.json();
         if (response.status === 200) {
@@ -106,7 +106,7 @@ const ProfilePage = () => {
     setSelectedContractId(null);
     setShowDetailModal(false); // Đóng modal khi đóng
   };
-
+  console.log(contractData)
   return (
     <>
       <section style={{ backgroundColor: '#eee' }}>
@@ -154,7 +154,7 @@ const ProfilePage = () => {
                       <MDBCardText>Full Name</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
-                      <MDBCardText className="text-muted">{userData?.fullName || "Full Name"}</MDBCardText>
+                      <MDBCardText className="text-muted">{userData?.fullName  || "Full Name"}</MDBCardText>
                     </MDBCol>
                   </MDBRow>
                   <hr />
@@ -212,7 +212,8 @@ const ProfilePage = () => {
                   </tr>
                 </MDBTableHead>
                 <MDBTableBody>
-                  {contractData.map((contract, index) => (
+                   
+                  {contractData.length !== 0 ? contractData.map((contract, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
                       <td>{contract.comboId}</td>
@@ -228,7 +229,8 @@ const ProfilePage = () => {
                         </MDBBtn>
                       </td>
                     </tr>
-                  ))}
+                  ))
+                :<><tr><td colSpan={5} style={{textAlign: 'center'}}>Empty List</td></tr></>}
                 </MDBTableBody>
               </MDBTable>
             </MDBCol>
