@@ -1,0 +1,10 @@
+.toast-position {
+    position: fixed;
+    top: 20px; /* Điều chỉnh khoảng cách từ trên xuống */
+    right: 20px; /* Điều chỉnh khoảng cách từ phải sang trái */
+    z-index: 9999; /* Đảm bảo nằm trên các phần tử khác */
+  }
+.toast {
+    color: blue;
+}
+  

@@ -15,10 +15,14 @@ import {
   MDBBreadcrumb,
   MDBBreadcrumbItem,
 } from 'mdb-react-ui-kit';
+import DetailProfile from './detailprofile';
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
   const [contractData, setContractData] = useState([]);
+  const [selectedContractId, setSelectedContractId] = useState(null);
+  const [showDetailModal, setShowDetailModal] = useState(false); // State cho việc hiển thị modal
+  const [contractDetail, setContractDetail] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -41,18 +45,22 @@ const ProfilePage = () => {
     };
 
     const fetchContractList = async () => {
-      const email = localStorage.getItem('mail'); 
-      const token = localStorage.getItem('token'); 
+      const email = localStorage.getItem('mail');
+      const token = localStorage.getItem('token');
       try {
-        const response = await fetch(`http://localhost:8080/request-contract/request-contract/list/id?email=${email}`, {
+        const response = await fetch(`http://localhost:8080/request-contract/request-contract/list/email?email=${email}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}` // Sử dụng token lấy từ localStorage
+            'Authorization': `Bearer ${token}`
           },
-          credentials: 'include' // credentials được xài trong fetch , còn withCredentials được xài trong axioss
+          credentials: 'include'
         });
-
+        if (response.status === 302) {
+          // Xử lý redirect
+          const redirectUrl = response.headers.get('Location');
+          window.location.href = redirectUrl;
+        }
         const contractList = await response.json();
         if (response.status === 200) {
           setContractData(contractList);
@@ -67,6 +75,37 @@ const ProfilePage = () => {
     fetchUserData();
     fetchContractList();
   }, []);
+
+  const handleShowDetail = async (contractId) => {
+    setSelectedContractId(contractId);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:8080/request-contract/request-contract/get/id?id=${contractId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        credentials: 'include'
+      });
+
+      const contractDetailData = await response.json();
+      if (response.status === 200) {
+        setContractDetail(contractDetailData);
+        setShowDetailModal(true); // Hiển thị modal khi có dữ liệu contractDetail
+      } else {
+        console.log("Get contract detail failed with status:", response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching contract detail:", error);
+    }
+  };
+
+  const handleCloseDetail = () => {
+    setContractDetail(null);
+    setSelectedContractId(null);
+    setShowDetailModal(false); // Đóng modal khi đóng
+  };
 
   return (
     <>
@@ -184,19 +223,24 @@ const ProfilePage = () => {
                         </MDBBadge>
                       </td>
                       <td>
-                        <MDBBtn color='link' rounded size='sm'>
-                          Detail
+                        <MDBBtn color='link' rounded size='sm' onClick={() => handleShowDetail(contract.requestContractId)}>
+                          Detail 
                         </MDBBtn>
                       </td>
                     </tr>
                   ))}
                 </MDBTableBody>
-
               </MDBTable>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
       </section>
+      {/* Modal Detail */}
+      <DetailProfile
+        contractDetail={contractDetail}
+        handleCloseDetail={handleCloseDetail}
+        show={showDetailModal} // Truyền prop show cho modal
+      />
     </>
   );
 };
