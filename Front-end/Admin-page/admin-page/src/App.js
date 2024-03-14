@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
@@ -16,14 +16,15 @@ import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
 import Item from './pages/itemlist';
-import ItemType from './pages/itemtype';
+import ItemType from './pages/itemtype/index.jsx';
 import RequestContract from './pages/requestcontract';
 import UserList from './pages/userlist';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
-// import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -43,6 +44,8 @@ import PrivateRoutes from './utils/PrivateRoutes.jsx';
 import axios from 'axios';
 import Detail from './pages/pricing/detail.js';
 import ProfilePage from './pages/profile/profile.js';
+
+import Success from './pages/payment/success.js'
 
 // import Bar from "./pages/bar";
 // import Line from "./pages/line";
@@ -66,45 +69,45 @@ import {
   ConstructionForm,
   ConsultImg
 } from './pages/pricing/price.js';
+import { HistoryToggleOffRounded, NorthEastOutlined, OneK, Sailing, ViewHeadline } from '@mui/icons-material';
+import { keyboard } from '@testing-library/user-event/dist/keyboard/index.js';
+// import { dc } from '@fullcalendar/core/internal-common.js';
+
 
 function App() {
   const [theme, colorMode] = useMode();
   const location = useLocation();
-  // let tokenTime = localStorage.getItem('tokenTime')
-  // useEffect(() => {
+  let tokenTime = localStorage.getItem('tokenTime')
+  const navigate = useNavigate()
 
-  //   if (tokenTime) {
-  //     const currenTime = Math.floor(Date.now() / 1000)
-  //     if (currenTime > tokenTime) {
-
-
-  //       const confirm = window.confirm("Bạn muốn tiếp tục không")
-  //       if (!confirm) {
-  //         localStorage.removeItem('mail');
-  //         localStorage.removeItem('role');
-  //         localStorage.removeItem('tokenTime');
-       
-  //       }
-  //         else{
-  //           const refreshToken = async (){
-
-  //           }
-  //        const response =   axios.post('http://localhost:8080/api/v1/auth/refresh-token')
-  //        const token = jwtDecode(response.data.access_Token)
-        
-  //        localStorage.setItem('tokenTime',token.exp)
-  //        localStorage.setItem('mail',token.sub)
-  //        localStorage.setItem('role',response.data.role)
-  //         }
-  //     }
-  //   }
-  // }, [])
+  useEffect(() => {
+    const checkTokenTime = () => {
+      if (tokenTime) {
+        const currentTime = Math.floor(Date.now() / 1000);
+        if (currentTime > tokenTime) {
+          localStorage.removeItem('mail');
+          localStorage.removeItem('role');
+          localStorage.removeItem('tokenTime'); 
+          localStorage.removeItem('token'); 
+          window.location.href = 'http://localhost:8080/api/v1/auth/logout';
+        }
+      }
+    };
+  
+    checkTokenTime(); // Kiểm tra ngay khi component được mount
+  
+    const interval = setInterval(checkTokenTime, 600000); // Kiểm tra mỗi 1 phút (hoặc tần suất mong muốn)
+  
+    return () => clearInterval(interval); // Clear interval khi component bị unmount
+  }, [tokenTime]); // Dependency array chỉ chứa tokenTime
+  
   return (
     <ColorModeContext.Provider value={colorMode}>
       {location.pathname !== '/login'
         && location.pathname !== '/'
         && location.pathname !== '/home'
         && location.pathname !== '/price'
+        && location.pathname != '/success'
         && location.pathname !== '/blog'
         && location.pathname !== '/detail'
         && location.pathname !== '/profile'
@@ -143,7 +146,8 @@ function App() {
                     <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
 
                   <Route path="/requestContractList" element={<RequestContract />} />
-                  {/* <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} /> */}
+                  <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
+
                   
                   <Route path="/userList" element={<UserList />} />
                   <Route path="/userList/:id" element={<EditUser />} />
@@ -182,6 +186,8 @@ function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/profile" element={<ProfilePage />} />
+
+        <Route path="/success" element={<Success />} />
       </Routes>
     </ColorModeContext.Provider>
   );
