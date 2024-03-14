@@ -145,56 +145,52 @@ const ConstructionForm = () => {
   let sercureHash = HmacSHA512(plainText,secretKey).toString();
   var vnPayURLRequest = URL_VNPay+plainText+"&vnp_SecureHash="+sercureHash
   console.log("hi"+vnPayURLRequest)
-  const handleSubmit = async () => {
-    try {
-      // Chuẩn bị dữ liệu cho request
-      const requestData = {
-        area: Number(inputValue),
-        itemIdList: Object.values(selectedItemIds)
-          .filter((itemId) => itemId !== "")
-          .map(Number),
-        comboType: 0,
-        status: 0,
-      };
+  // const handleSubmit = async () => {
+  //   try {
+  //     // Chuẩn bị dữ liệu cho request
+  //     const requestData = {
+  //       area: Number(inputValue),
+  //       itemIdList: Object.values(selectedItemIds)
+  //         .filter((itemId) => itemId !== "")
+  //         .map(Number),
+  //       comboType: 0,
+  //       status: 0,
+  //     };
 
-      const comboId = selectedItemIds.Combo;
-      const email = localStorage.getItem("mail");
-      const token = localStorage.getItem("token");
-      console.log("comboId: ", comboId);
+  //     const comboId = selectedItemIds.Combo;
+  //     const email = localStorage.getItem("mail");
+  //     const token = localStorage.getItem("token");
+  //     console.log("comboId: ", comboId);
+  //     const response = await axios.post(
+  //       `http://localhost:8080/request-contract/request-contract/create?comboId=${comboId}&email=${email}`,
+  //       requestData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         withCredentials: true,
+  //       }
+  //     );
 
-      
-
-
-      const response = await axios.post(
-        `http://localhost:8080/request-contract/request-contract/create?comboId=${comboId}&email=${email}`,
-        requestData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
-
-      setModalShow(true);
-      console.log("API Response:", response.data);
-      if (response.status === 200) {
-        setModalShow(false);
-        setToastShow(true);
-        setIsRegistered(true);
-      }
-    } catch (error) {
-      console.error("Error submitting request:", error);
-    }
-  };
+  //     setModalShow(true);
+  //     console.log("API Response:", response.data);
+  //     if (response.status === 200) {
+  //       setModalShow(false);
+  //       setToastShow(true);
+  //       setIsRegistered(true);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting request:", error);
+  //   }
+  // };
 
   const redirectToDetail = (id) => {
     navigate(`/detail?id=${id}`);
   };
 
   const handleRegister = () => {
-    handleSubmit();
+    // handleSubmit();
     setModalShow(false);
   };
   const handleShowPriceQuote = () => {
@@ -219,7 +215,7 @@ const ConstructionForm = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              handleSubmit();
+              // handleSubmit();
             }}
             className="row g-2"
           >
@@ -439,9 +435,9 @@ function MyVerticallyCenteredModal({
         <p>TOTAL: {totalPrice || "N/A"}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleRegister}>Đăng ký</Button>
+        <Link to ={vnPayURLRequest}> <Button>Đăng ký</Button> </Link>
         <Button onClick={onHide}>Đóng</Button>
-        <Link to ={vnPayURLRequest} target="_blank" >hi</Link>
+        
       </Modal.Footer>
     </Modal>
   );
