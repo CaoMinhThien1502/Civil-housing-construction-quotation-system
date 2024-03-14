@@ -2,7 +2,7 @@
 import "./personIn4.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import React, { useRef,useEffect, useReducer, useState } from 'react';
+import React, {useEffect, useReducer, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import UncontrolledExample from "../blog/blog";
@@ -42,11 +42,11 @@ import emailjs from 'emailjs-com';
 const Header = () => {
   const isLoggedIn = !!localStorage.getItem('token');
   const userName = localStorage.getItem('mail');
-
   const handleLogout = () => {
     localStorage.removeItem('mail');
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('username');
     window.location.href = '/login';
   };
   return (
@@ -66,13 +66,14 @@ const Header = () => {
             <li><a className="nav-link scrollto" href="#Pricing">Pricing</a></li>
             {isLoggedIn ? (
               <>
+                <li><a className="nav-link scrollto" href="/profile">Profile</a></li>
+                
                 <li><a className="getstarted scrollto" onClick={handleLogout} href="#">Logout</a></li>
               </>
             ) : (
               <li><a className="getstarted scrollto" href="/login">Login</a></li>
             )}
           </ul>
-          <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>
       </div>
     </header>
@@ -94,7 +95,7 @@ const HeroSection = () => {
           <div className="row">
             <div className="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
               <h1 data-aos="fade-up">QUOTATION SYSTEM FOR CIVIL HOUSING CONSTRUCTION</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400">We are a team of talented designers making websites with Bootstrap</h2>
+              <h2 data-aos="fade-up" data-aos-delay="400">10 years of experience in the construction industry</h2>
               <div data-aos="fade-up" data-aos-delay="800">
                 <a href="#about" className="btn-get-started scrollto">Get Started</a>
               </div>

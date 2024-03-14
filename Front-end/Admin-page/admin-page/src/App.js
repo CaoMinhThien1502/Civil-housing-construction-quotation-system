@@ -23,7 +23,8 @@ import UserList from './pages/userlist';
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
-//import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -145,7 +146,8 @@ function App() {
                     <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
 
                   <Route path="/requestContractList" element={<RequestContract />} />
-          {/*        <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />*/}
+                  <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
+
                   
                   <Route path="/userList" element={<UserList />} />
                   <Route path="/userList/:id" element={<EditUser />} />
