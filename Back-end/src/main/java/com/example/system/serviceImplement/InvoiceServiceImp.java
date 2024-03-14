@@ -62,10 +62,10 @@ public class InvoiceServiceImp implements InvoiceService {
             RequestContract rq = requestContractRepository.findById(rcDto.getRequestContractId()).orElseThrow();
             invoice.setRequestContract(rq);
             invoice.setUser(user);
-            invoice = invoiceRepository.save(invoice);
-            rq.setInvoice(invoice);
+            Invoice newInvoice = invoiceRepository.save(invoice);
+            rq.setInvoice(newInvoice);
             requestContractRepository.save(rq);
-            return invoice;
+            return newInvoice;
         }catch (Exception e){
             return null;
         }
