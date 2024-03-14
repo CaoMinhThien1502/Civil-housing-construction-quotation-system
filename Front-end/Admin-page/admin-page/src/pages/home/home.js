@@ -47,7 +47,8 @@ const Header = () => {
     localStorage.removeItem('mail');
     localStorage.removeItem('token');
     localStorage.removeItem('role');
-    window.location.href = '/login';
+    localStorage.removeItem('tokenTime'); 
+    window.location.href = 'http://localhost:8080/api/v1/auth/logout';
   };
   return (
     <header id="header" className="fixed-top d-flex align-items-center">
