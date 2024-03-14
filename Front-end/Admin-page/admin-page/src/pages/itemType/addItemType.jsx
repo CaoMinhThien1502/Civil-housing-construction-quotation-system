@@ -48,8 +48,6 @@ const AddItemType = () => {
             status: 1,
         },
 
-        validationSchema: userSchema,
-
         onSubmit: async (values) => {
             console.log("Values in onSubmit:", values);
             try {
@@ -76,6 +74,8 @@ const AddItemType = () => {
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
+
+        validationSchema: userSchema,
     });
     
     return (
