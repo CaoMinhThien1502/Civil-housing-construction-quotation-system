@@ -129,7 +129,7 @@ const RequestContractDetail = () => {
                                     {requestContractData?.buildingDto.itemNameList[0]},
                                     {requestContractData?.buildingDto.itemNameList[1]},
                                     {requestContractData?.buildingDto.itemNameList[2]},
-                                    {requestContractData?.buildingDto.itemNameList[3]},
+                                    {requestContractData?.buildingDto.itemNameList[3]}
                                     {requestContractData?.buildingDto.itemNameList[4]}
                                 </TableCell>
                             </TableRow>
