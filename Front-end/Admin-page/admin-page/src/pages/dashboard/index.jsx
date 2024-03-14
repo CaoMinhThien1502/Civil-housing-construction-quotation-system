@@ -50,7 +50,10 @@ const Dashboard = () => {
                 });
 
                 const data = await response.json();
-                setRequestContract(data);
+                // Sort data by requestDate in descending order (most recent first)
+                const sortedData = data.sort((a, b) => new Date(b.requestDate) - new Date(a.requestDate));
+
+                setRequestContract(sortedData);
             } catch (error) {
                 console.error('Error fetching request contract:', error);
             }
@@ -59,7 +62,9 @@ const Dashboard = () => {
         fetchRequestContract();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-
+    const extraCost = getTotalData.request_contract_count * (200000 * 5 / 100);
+    const totalRevenue = getTotalData.request_contract_count * 200000 + extraCost;
+    
     return (
         <Box m="20px">
             {/* HEADER */}
@@ -226,9 +231,9 @@ const Dashboard = () => {
                             Recent Contracts
                         </Typography>
                     </Box>
-                    {mockTransactions.map((transaction, i) => (
+                    {getRequestContract.map((transaction, i) => (
                         <Box
-                            key={`${transaction.txId}-${i}`}
+                            key={`${transaction.requestContractId}-${i}`}
                             display="flex"
                             justifyContent="space-between"
                             alignItems="center"
@@ -239,21 +244,22 @@ const Dashboard = () => {
                                 <Typography
                                     color={colors.greenAccent[500]}
                                     variant="h5"
-                                    fontWeight="600"
+                                    fontWeight="500"
+                                    width={200}
                                 >
-                                    {transaction.txId}
+                                    {transaction.comboName}
                                 </Typography>
                                 <Typography color={colors.grey[100]}>
-                                    {transaction.user}
+                                    {transaction.userName}
                                 </Typography>
                             </Box>
-                            <Box color={colors.grey[100]}>{transaction.date}</Box>
+                            <Box color={colors.grey[100]} >{transaction.requestDate}</Box>
                             <Box
                                 backgroundColor={colors.greenAccent[500]}
                                 p="5px 10px"
                                 borderRadius="4px"
                             >
-                                ${transaction.cost}
+                                {(transaction.totalPrice)?.toLocaleString('vi', {style : 'currency', currency : 'VND'})}
                             </Box>
                         </Box>
                     ))}
@@ -281,9 +287,9 @@ const Dashboard = () => {
                             color={colors.greenAccent[500]}
                             sx={{ mt: "15px" }}
                         >
-                            $48,352 revenue generated
+                            {totalRevenue.toLocaleString('vi', {style : 'currency', currency : 'VND'})} revenue generated
                         </Typography>
-                        <Typography>Includes extra misc expenditures and costs</Typography>
+                        <Typography>Includes {extraCost.toLocaleString('vi', {style : 'currency', currency : 'VND'})} extra misc expenditures and costs</Typography>
                     </Box>
                 </Box>
                 <Box
