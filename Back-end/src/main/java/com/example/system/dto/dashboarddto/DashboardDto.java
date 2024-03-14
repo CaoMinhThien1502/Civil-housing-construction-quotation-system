@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,4 +22,5 @@ public class DashboardDto {
     private Long requestContractCount;
     @JsonProperty("user_count")
     private Long userCount;
+    private List<NumOfItemChoice> listItemChoice;
 }
