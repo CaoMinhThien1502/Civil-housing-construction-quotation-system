@@ -23,7 +23,7 @@ import UserList from './pages/userlist';
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
-import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestcontractdetail.jsx';
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -86,39 +86,39 @@ function App() {
         if (currentTime > tokenTime) {
           localStorage.removeItem('mail');
           localStorage.removeItem('role');
-          localStorage.removeItem('tokenTime'); 
-          localStorage.removeItem('token'); 
+          localStorage.removeItem('tokenTime');
+          localStorage.removeItem('token');
           window.location.href = 'http://localhost:8080/api/v1/auth/logout';
         }
       }
     };
-  
+
     checkTokenTime(); // Kiểm tra ngay khi component được mount
-  
+
     const interval = setInterval(checkTokenTime, 600000); // Kiểm tra mỗi 1 phút (hoặc tần suất mong muốn)
-  
+
     return () => clearInterval(interval); // Clear interval khi component bị unmount
   }, [tokenTime]); // Dependency array chỉ chứa tokenTime
-  
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       {location.pathname !== '/login'
-        && location.pathname !== '/'
-        && location.pathname !== '/home'
-        && location.pathname !== '/price'
-        && location.pathname != '/success'
-        && location.pathname !== '/blog'
-        && location.pathname !== '/detail'
-        && location.pathname !== '/profile'
-        && (
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <div className="app">
-              <Sidebar />
-              <main className="content">
-                <Topbar />
-                <Routes>
-                  <Route element={<PrivateRoutes />} >
+      && location.pathname !== '/'
+      && location.pathname !== '/home'
+      && location.pathname !== '/price'
+      && location.pathname !== '/success'
+      && location.pathname !== '/blog'
+      && location.pathname !== '/detail'
+      && location.pathname !== '/profile'
+      && (
+        <ThemeProvider theme={theme}>
+        <CssBaseline />
+          <div className="app">
+            <Sidebar />
+            <main className="content">
+              <Topbar />
+              <Routes>
+              <Route element={<PrivateRoutes />} >
                     <Route path="/dashboard" element={<Dashboard />} exact />
 
                     <Route path="/comboBuilding" element={<ComboBuilding />} />

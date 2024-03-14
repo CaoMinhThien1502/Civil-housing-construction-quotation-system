@@ -24,6 +24,7 @@ import team1 from "../../img/team/team-1.jpg";
 import team2 from "../../img/team/team-2.jpg";
 import team3 from "../../img/team/team-3.jpg";
 import team4 from "../../img/team/team-4.jpg";
+import logo from "../../img/homepage/logoSystem.jpg";
 import Login from "../login/login";
 // Import CSS files (if using any)
 import 'aos/dist/aos.css';
@@ -53,27 +54,28 @@ const Header = () => {
     <header id="header" className="fixed-top d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between">
         <div className="logo">
-          <h1><a href="index.html">Vesperr</a></h1>
-          <a href="index.html"><img src={appleIcon} alt="" className="img-fluid" /></a>
+          {/* <h1><a href="/home">CHCQS</a></h1> */}
+          <a href="/home"><img  src={logo} alt="" width="50px" height="200px"/></a>
         </div>
 
         <nav id="navbar" className="navbar">
           <ul>
-            <li><a className="nav-link scrollto active" href="/home">Home</a></li>
-            <li><a className="nav-link scrollto" href="#About">About</a></li>
-            <li><a className="nav-link scrollto" href="#Services" >Services</a></li>
-            <li><a className="nav-link scrollto" href="#Team">Team</a></li>
-            <li><a className="nav-link scrollto" href="#Pricing">Pricing</a></li>
+            <li><a className="nav-link scrollto active" href="/home#">Home</a></li>
+            <li><a className="nav-link scrollto" href="/home#about">About</a></li>
+            <li><a className="nav-link scrollto" href="/home#blog" >Blogs</a></li>
+            <li><a className="nav-link scrollto" href="/home#pricing">Pricing</a></li>
+            <li><a className="nav-link scrollto" href="/home#contact">Contact us</a></li>
             {isLoggedIn ? (
               <>
                 <li><a className="nav-link scrollto" href="/profile">Profile</a></li>
-                
+
                 <li><a className="getstarted scrollto" onClick={handleLogout} href="#">Logout</a></li>
               </>
             ) : (
               <li><a className="getstarted scrollto" href="/login">Login</a></li>
             )}
           </ul>
+          <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>
       </div>
     </header>
@@ -95,7 +97,7 @@ const HeroSection = () => {
           <div className="row">
             <div className="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
               <h1 data-aos="fade-up">QUOTATION SYSTEM FOR CIVIL HOUSING CONSTRUCTION</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400">10 years of experience in the construction industry</h2>
+              <h2 data-aos="fade-up" data-aos-delay="400">We can give you our services, so feel free to get more informations from us</h2>
               <div data-aos="fade-up" data-aos-delay="800">
                 <a href="#about" className="btn-get-started scrollto">Get Started</a>
               </div>
@@ -120,7 +122,7 @@ const AboutUsSection = () => {
         <div className="row content">
           <div className="col-lg-6" data-aos="fade-up" data-aos-delay="150">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Buildings what are appearing everywhere, so don't be shy in finding one for you.
             </p>
             <ul>
               <li><i className="ri-check-double-line"></i> .................................................</li>
@@ -130,9 +132,9 @@ const AboutUsSection = () => {
           </div>
           <div className="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat nisi rerum pariatur voluptates perspiciatis repellendus accusantium eaque, id cumque porro, quisquam minima, vitae tempore ipsa cum unde modi natus at!
+              We are the team who spent all day for you to get your own building with full supports. Our informations will be stay here, feel free to know more. If you want to find more detail of buildings, click "Learn More" now!!!
             </p>
-            <a href="#" className="btn-learn-more">Learn More</a>
+            <a href="#blog" className="btn-learn-more">Learn More</a>
           </div>
         </div>
       </div>
@@ -148,8 +150,8 @@ const PersonIn4 = () => {
             <div><img src={team2} className="service-icon"/>
               <span><i className="fa fa-globe"></i></span>
             </div>
-            <button className="title-btn">A1</button>
-            <p className="description">Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui quaerat fugit quas veniam perferendis repudiandae sequi, dolore quisquam illum.</p>
+            <button className="title-btn">Ms. Louren</button>
+            <p className="description">Our CEO with many great ideas. She knows how to build a new building with the cheapest cost.</p>
           </div>
         </div>
         <div className="col-md-3 col-sm-6">
@@ -157,8 +159,8 @@ const PersonIn4 = () => {
             <div> <img src={team1} className="service-icon"/>
               <span><i className="fa fa-rocket"></i></span>
             </div>
-            <button className="title-btn">A2</button>
-            <p className="description">Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui quaerat fugit quas veniam perferendis repudiandae sequi, dolore quisquam illum.</p>
+            <button className="title-btn">Mr. Donk</button>
+            <p className="description">The man uses leading skills to lead us in getting our target. The fastest way to be success is together.</p>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
@@ -166,8 +168,8 @@ const PersonIn4 = () => {
             <div> <img src={team3} className="service-icon"/>
               <span><i class="fa fa-rocket"></i></span>
             </div>
-            <button class="title-btn">A3</button>
-            <p class="description">Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui quaerat fugit quas veniam perferendis repudiandae sequi, dolore quisquam illum.</p>
+            <button class="title-btn">Mr. Peter</button>
+            <p class="description">The master in building area, who knows what is better for your building. Helping you in choosing the best suited.</p>
           </div>
         </div>
         <div className="col-md-3 col-sm-6">
@@ -175,8 +177,8 @@ const PersonIn4 = () => {
             <div> <img src={team4} className="service-icon"/>
               <span><i className="fa fa-rocket"></i></span>
             </div>
-            <button className="title-btn">A4</button>
-            <p class="description">Lorem ipsum dolor sit amet conse ctetur adipisicing elit. Qui quaerat fugit quas veniam perferendis repudiandae sequi, dolore quisquam illum.</p>
+            <button className="title-btn">Ms. Anna</button>
+            <p class="description">The evaluator and analyst of construction projects, she can make the best building in the budget.</p>
           </div>
         </div>
       </div>
@@ -202,11 +204,11 @@ const TeamSection = () => {
   //     </div>
   //   </div>
   // </div>
-    <section id="team" className="team section-bg">
+    <section id="blog" className="team section-bg">
       <div className="container">
         <div className="section-title" data-aos="fade-up">
           <h2>Blog</h2>
-          <p>Các công trình tiêu biểu từng thi công/ chưa css</p>
+          <p>Finished Buildings</p>
         </div>
         <div className="row">
           {/* Repeat this block for each team member */}
@@ -223,12 +225,12 @@ const TeamSection = () => {
               </div>
               <div className="member-info">
               <ul className="icon-list">
-                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
-                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
                 </ul>
                 {/* <button className="button-51" type="button">Đọc ngay</button> */}
-                <Link to="/blog" className="button-51">Đọc ngay</Link>
+                <Link to="/blog" className="button-51">Read now</Link>
               </div>
             </div>
           </div>
@@ -245,11 +247,11 @@ const TeamSection = () => {
               </div>
               <div className="member-info">
               <ul className="icon-list">
-                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
-                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
-                <Link to="/blog" className="button-51">Đọc ngay</Link>
+                <Link to="/blog" className="button-51">Read now</Link>
               </div>
             </div>
           </div>
@@ -266,11 +268,11 @@ const TeamSection = () => {
               </div>
               <div className="member-info">
               <ul className="icon-list">
-                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
-                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
-                <Link to="/blog" className="button-51">Đọc ngay</Link>
+                <Link to="/blog" className="button-51">Read now</Link>
               </div>
             </div>
           </div>
@@ -287,11 +289,11 @@ const TeamSection = () => {
               </div>
               <div className="member-info">
               <ul className="icon-list">
-                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Diện tích : 100m²</span> </li>
-                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Phòng ngủ : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Chi phí: 1 tỷ</span></li>
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
+                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
-                <Link to="/blog" className="button-51">Đọc ngay</Link>
+                <Link to="/blog" className="button-51">Read now</Link>
               </div>
             </div>
           </div>
@@ -314,20 +316,20 @@ const PricingSection = () => {
       <div className="container">
         <div className="section-title">
           <h2>Pricing</h2>
-          <p>Sit sint consectetur velit nemo qui impedit suscipit alias ea</p>
+          <p>Let make your optional builds by your choice</p>
         </div>
         <div className="row">
           {/* Repeat this block for each pricing option */}
           <div className="col-lg-4 col-md-6">
             <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
-              <h3>Thi công thô</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
+              <h3>Rough Construction</h3>
+              <h4><sup>+</sup>3<span> Combos</span></h4>
               <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li className="na">Pharetra massa</li>
-                <li className="na">Massa ultricies mi</li>
+                <li>Count price</li>
+                <li>With rough combo building</li>
+                <li>Feel free to choose</li>
+                <li className="na">Finishing combo</li>
+                <li className="na">Package combo</li>
               </ul>
               <div className="btn-wrap">
               <button
@@ -336,21 +338,21 @@ const PricingSection = () => {
                 onClick={() => redirectToPrice(0)}
                 className="btn-buy"
               >
-              Tham Khảo
+              Count
               </button>
               </div>
             </div>
           </div>
           <div className="col-lg-4 col-md-6">
             <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
-              <h3>Thi công hoàn thiện</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
+              <h3>Construction and finishing</h3>
+              <h4><sup>+</sup>3<span> Combos</span></h4>
               <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li className="na">Pharetra massa</li>
-                <li className="na">Massa ultricies mi</li>
+                <li>Count price</li>
+                <li>With finishing combo building</li>
+                <li>Feel free to choose</li>
+                <li className="na">Rough combo</li>
+                <li className="na">Package combo</li>
               </ul>
               <div className="btn-wrap">
               <button
@@ -359,21 +361,21 @@ const PricingSection = () => {
                 onClick={() => redirectToPrice(1)}
                 className="btn-buy"
               >
-              Tham Khảo
+              Count
               </button>
               </div>
             </div>
           </div>
           <div className="col-lg-4 col-md-6">
             <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
-              <h3>Thi công trọn gói</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
+              <h3>Package construction</h3>
+              <h4><sup>+</sup>4<span> Combos</span></h4>
               <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li className="na">Pharetra massa</li>
-                <li className="na">Massa ultricies mi</li>
+                <li>Count price</li>
+                <li>With finishing combo building</li>
+                <li>Feel free to choose</li>
+                <li className="na">Rough combo</li>
+                <li className="na">Finishing combo</li>
               </ul>
               <div className="btn-wrap">
               <button
@@ -382,7 +384,7 @@ const PricingSection = () => {
                 onClick={() => redirectToPrice(2)}
                 className="btn-buy"
               >
-              Tham Khảo
+              Count
               </button>
               </div>
             </div>

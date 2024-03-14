@@ -15,6 +15,11 @@ import {
   MDBBreadcrumb,
   MDBBreadcrumbItem,
 } from 'mdb-react-ui-kit';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+
+import { MDBIcon } from "mdbreact";
 import DetailProfile from './detailprofile';
 
 const ProfilePage = () => {
@@ -29,9 +34,9 @@ const ProfilePage = () => {
       try {
         const response = await fetch(`http://localhost:8080/user/profile?email=${localStorage.getItem('mail')}`, {
           method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            }
+          headers: {
+            "Content-Type": "application/json",
+          }
         });
         const data = await response.json();
         if (response.status === 200) {
@@ -116,12 +121,9 @@ const ProfilePage = () => {
             <MDBCol>
               <MDBBreadcrumb className="bg-light rounded-3 p-3 mb-4">
                 <MDBBreadcrumbItem>
-                  <a href='#'>Home</a>
+                  <a href='/home'>Home</a>
                 </MDBBreadcrumbItem>
-                <MDBBreadcrumbItem>
-                  <a href="#">User</a>
-                </MDBBreadcrumbItem>
-                <MDBBreadcrumbItem active>User Profile</MDBBreadcrumbItem>
+                <MDBBreadcrumbItem active>My Profile</MDBBreadcrumbItem>
               </MDBBreadcrumb>
             </MDBCol>
           </MDBRow>
@@ -131,17 +133,16 @@ const ProfilePage = () => {
               <MDBCard className="mb-4">
                 <MDBCardBody className="text-center">
                   <MDBCardImage
-                    src={userData?.avatar || "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}
+                    src={userData?.gender? "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp":"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4.webp"}
                     alt="avatar"
                     className="rounded-circle"
                     style={{ width: '150px' }}
                     fluid
                   />
-                  <p className="text-muted mb-1">{userData?.fullName || "Role"}</p>
+                  <p className="text-muted mb-1">{userData?.fullName || "Name"}</p>
                   <p className="text-muted mb-4">{userData?.address || "Address"}</p>
                   <div className="d-flex justify-content-center mb-2">
-                    <MDBBtn>Follow</MDBBtn>
-                    <MDBBtn outline className="ms-1">Message</MDBBtn>
+                    <MDBBtn outline rounded className="ms-1"><a href='/profile/update'>Edit profile</a></MDBBtn>
                   </div>
                 </MDBCardBody>
               </MDBCard>
@@ -151,10 +152,10 @@ const ProfilePage = () => {
                 <MDBCardBody>
                   <MDBRow>
                     <MDBCol sm="3">
-                      <MDBCardText>Full Name</MDBCardText>
+                      <MDBCardText>Name</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
-                      <MDBCardText className="text-muted">{userData?.fullName  || "Full Name"}</MDBCardText>
+                      <MDBCardText className="text-muted">{userData?.fullName || "Name"}</MDBCardText>
                     </MDBCol>
                   </MDBRow>
                   <hr />
@@ -190,7 +191,16 @@ const ProfilePage = () => {
                       <MDBCardText>Gender</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
-                      <MDBCardText className="text-muted">{userData?.gender ? "Female" : "Male"}</MDBCardText>
+                      <MDBCardText className="text-muted">{userData?.gender ? "Male" : "Female"}</MDBCardText>
+                    </MDBCol>
+                  </MDBRow>
+                  <hr />
+                  <MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>Address</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      <MDBCardText className="text-muted">{userData?.address || "Address"}</MDBCardText>
                     </MDBCol>
                   </MDBRow>
                 </MDBCardBody>
@@ -204,29 +214,26 @@ const ProfilePage = () => {
               <MDBTable align='middle'>
                 <MDBTableHead>
                   <tr>
-                    <th scope='col'>No</th>
-                    <th scope='col'>ComboId</th>
-                    <th scope='col'>Area</th>
-                    <th scope='col'>Status</th>
-                    <th scope='col'>Action</th>
+                    <th scope='col' style={{textAlign: 'center'}}>No</th>
+                    <th style={{textAlign: 'center'}} scope='col'>Combo Name</th>
+                    <th style={{textAlign: 'center'}} scope='col'>Area</th>
+                    <th style={{textAlign: 'center'}} scope='col'>Status</th>
+                    <th style={{textAlign: 'center'}} scope='col'>Action</th>
                   </tr>
                 </MDBTableHead>
                 <MDBTableBody>
-                   
-                  {contractData.length !== 0 ? contractData.map((contract, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{contract.comboId}</td>
-                      <td>{contract.buildingDto ? contract.buildingDto.area : "-"}</td>
-                      <td>
-                        <MDBBadge color={contract.status ? 'success' : 'danger'} pill>
-                          {contract.status ? "Active" : "Inactive"}
-                        </MDBBadge>
+                {contractData.length !== 0 ? contractData.map((contract, index) => (
+                    <tr key={index} >
+                      <td style={{textAlign: 'center'}}>{index + 1}</td>
+                      <td style={{textAlign: 'center'}}>{contract.comboName}</td>
+                      <td style={{textAlign: 'center'}}>{contract.buildingDto ? contract.buildingDto.area : "-"}</td>
+                      <td style={{textAlign: 'center'}}>
+                        <MDBBtn color={contract.status ? 'success' : 'danger'} size='sm'>{contract.status ? "Confirmed" : "Processing"}</MDBBtn>
                       </td>
-                      <td>
-                        <MDBBtn color='link' rounded size='sm' onClick={() => handleShowDetail(contract.requestContractId)}>
-                          Detail 
-                        </MDBBtn>
+                      <td style={{textAlign: 'center'}}>
+                        <button type="button" class="btn btn-outline-success btn-floating" onClick={() => handleShowDetail(contract.requestContractId)} data-mdb-ripple-init data-mdb-ripple-color="dark">
+                          <MDBIcon fas icon='star' />
+                        </button>
                       </td>
                     </tr>
                   ))
