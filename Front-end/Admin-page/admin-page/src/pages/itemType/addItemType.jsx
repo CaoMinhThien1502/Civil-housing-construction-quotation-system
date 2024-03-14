@@ -5,6 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     itemTypeName: "",
@@ -19,11 +21,34 @@ const AddItemType = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleCloseSuccess = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSuccess(false);
+        navigate('/itemType');
+    };
+
+    const [openError, setOpenError] = useState(false);
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenError(false);
+    };
+
     const formik = useFormik({
         initialValues: {
             itemTypeName: "",
             status: 1,
         },
+
+        validationSchema: userSchema,
 
         onSubmit: async (values) => {
             console.log("Values in onSubmit:", values);
@@ -43,15 +68,14 @@ const AddItemType = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Item Type added successfully');
-                navigate('/itemType');
+                setOpenSuccess(true);
+                // navigate('/itemType');
             } catch (error) {
                 console.error('Error during submit:', error);
+                setOpenError(true);
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
-
-        validationSchema: userSchema,
     });
     
     return (
@@ -60,6 +84,7 @@ const AddItemType = () => {
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
+            validationSchema={userSchema}
             >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
@@ -77,7 +102,10 @@ const AddItemType = () => {
                             type="text"
                             label="Item Type Name"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.itemTypeName}
                             name="itemTypeName"
                             error={!!touched.itemTypeName && !!errors.itemTypeName}
@@ -101,6 +129,26 @@ const AddItemType = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={openSuccess} autoHideDuration={3000} onClose={handleCloseSuccess} >
+                <Alert
+                    onClose={handleCloseSuccess}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Item Type added successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Item Type added error!
+                </Alert>
+            </Snackbar>
         </Box>
     )
     

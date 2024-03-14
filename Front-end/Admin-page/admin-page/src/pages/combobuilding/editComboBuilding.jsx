@@ -5,7 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     comboBuildingName: "",
@@ -23,6 +24,27 @@ const EditComboBuilding = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleCloseSuccess = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSuccess(false);
+        navigate('/comboBuilding');
+    };
+
+    const [openError, setOpenError] = useState(false);
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenError(false);
+    };
+
     const {id} = useParams();
     const [comboData, setComboData] = useState({});
     const [materialIdList, setMaterialIdList] = useState([]);
@@ -81,10 +103,11 @@ const EditComboBuilding = () => {
                 }
     
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Combo Building edited successfully');
-                navigate('/comboBuilding');
+                setOpenSuccess(true);
+                // navigate('/comboBuilding');
             } catch (error) {
                 console.error('Error during submit:', error);
+                setOpenError(true);
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
@@ -188,6 +211,7 @@ const EditComboBuilding = () => {
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
+            // validationSchema={userSchema}
             >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
@@ -263,7 +287,10 @@ const EditComboBuilding = () => {
                             type="text"
                             label="Combo Building Name"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.comboBuildingName}
                             name="comboBuildingName"
                             error={!!touched.comboBuildingName && !!errors.comboBuildingName}
@@ -330,6 +357,26 @@ const EditComboBuilding = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={openSuccess} autoHideDuration={3000} onClose={handleCloseSuccess} >
+                <Alert
+                    onClose={handleCloseSuccess}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Combo Building edited successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Combo Building edited error!
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

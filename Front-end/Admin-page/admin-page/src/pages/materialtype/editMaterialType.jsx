@@ -5,6 +5,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const initialValues = {
     materialTypeID: 0,
@@ -20,6 +22,27 @@ const EditMaterialType = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     const {id} = useParams();
+
+    const [openSuccess, setOpenSuccess] = useState(false);
+
+    const handleCloseSuccess = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSuccess(false);
+        navigate('/materialType');
+    };
+
+    const [openError, setOpenError] = useState(false);
+
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenError(false);
+    };
 
     const [getMaterialType, setMaterialType] = useState({});
     useEffect(() => {
@@ -68,10 +91,11 @@ const EditMaterialType = () => {
                 }
                 
                 // Handle successful (e.g., navigate to a different page, store user data)
-                window.alert('Material Type updated successfully');
-                navigate('/materialType');
+                setOpenSuccess(true);
+                // navigate('/materialType');
             } catch (error) {
                 console.error('Error during submit:', error);
+                setOpenError(true);
                 // Handle submit errors (e.g., display an error message to the user)
             }
         },
@@ -98,6 +122,7 @@ const EditMaterialType = () => {
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
+            // validationSchema={userSchema}
             >
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
@@ -115,7 +140,10 @@ const EditMaterialType = () => {
                             type="text"
                             label="Material Type Name"
                             onBlur={handleBlur}
-                            onChange={formik.handleChange}
+                            onChange={(event) => {
+                                handleChange(event); // handleChange for validation userSchema
+                                formik.handleChange(event); // handleChange for formik
+                            }}
                             value={formik.values.typeName}
                             name="typeName"
                             error={!!touched.typeName && !!errors.typeName}
@@ -160,6 +188,26 @@ const EditMaterialType = () => {
                     </form>
                 )}
             </Formik>
+            <Snackbar open={openSuccess} autoHideDuration={3000} onClose={handleCloseSuccess} >
+                <Alert
+                    onClose={handleCloseSuccess}
+                    severity="success"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Material Type edited successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    // variant="outlined"
+                    sx={{ fontSize: 15 }}
+                >
+                    Material Type edited error!
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }

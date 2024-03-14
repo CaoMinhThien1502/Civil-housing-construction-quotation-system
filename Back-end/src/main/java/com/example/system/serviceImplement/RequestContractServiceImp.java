@@ -76,6 +76,7 @@ public class RequestContractServiceImp implements RequestContractService {
             RequestContract rc = requestContractRepository.findById(rcId).orElseThrow();
             RCDetailDto detail = new RCDetailDto();
             detail.setStatus(rc.isStatus());
+            detail.setRequestDate(rc.getRequestDate());
             detail.setRequestContractId(rc.getRequestContractId());
             detail.setComboId(rc.getComboBuilding().getComboBuildingId());
             detail.setComboName(rc.getComboBuilding().getComboBuildingName());
@@ -90,7 +91,7 @@ public class RequestContractServiceImp implements RequestContractService {
             bdto.setStatus(rc.getBuilding().getStatus());
             bdto.setUserId(rc.getUser().getUserId());
             List<String> itemNames = new ArrayList<>();
-            for (BuildingDetail bd: rc.getBuilding().getBuildingDetail()
+            for (BuildingDetail bd: rc.getBuilding().getBuildingDetails()
                  ) {
                 itemNames.add(bd.getItem().getItemName());
             }
@@ -133,12 +134,12 @@ public class RequestContractServiceImp implements RequestContractService {
             newData.setUser(user);
             newData.setStatus(false);
             double total = newData.getBuilding().getArea()*newData.getComboBuilding().getUnitPrice();
-            for (BuildingDetail bd: newData.getBuilding().getBuildingDetail()
+            for (BuildingDetail bd: newData.getBuilding().getBuildingDetails()
                  ) {
                 total += bd.getItem().getPriceItem();
             }
             newData.setTotalPrice(total);
-            requestContractRepository.save(newData);
+            newData = requestContractRepository.save(newData);
             RequestContractDto newDto = new RequestContractDto();
             newDto.setBuildingDto(dto);
             newDto.setUserId(newData.getUser().getUserId());
