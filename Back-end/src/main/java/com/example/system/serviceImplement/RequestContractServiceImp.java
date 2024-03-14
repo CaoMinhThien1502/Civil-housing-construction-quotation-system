@@ -76,6 +76,7 @@ public class RequestContractServiceImp implements RequestContractService {
             RequestContract rc = requestContractRepository.findById(rcId).orElseThrow();
             RCDetailDto detail = new RCDetailDto();
             detail.setStatus(rc.isStatus());
+            detail.setRequestDate(rc.getRequestDate());
             detail.setRequestContractId(rc.getRequestContractId());
             detail.setComboId(rc.getComboBuilding().getComboBuildingId());
             detail.setComboName(rc.getComboBuilding().getComboBuildingName());
