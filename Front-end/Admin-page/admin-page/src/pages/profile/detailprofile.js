@@ -36,14 +36,14 @@ const DetailProfile = ({ contractDetail, handleCloseDetail, show }) => {
               <td>{contractDetail?.buildingDto?.landArea+"m²" || "-"}</td>
             </tr>
             <tr>
-              <td>ITEM LIST</td>
+              {/* <td>ITEM LIST</td>
               <td>
                 <ul>
                   {contractDetail?.buildingDto?.itemNameList.map((item, index) => (
                     <li key={index}>{item}</li>
                     ))}
                 </ul>
-              </td>
+              </td> */}
             </tr>
             <tr>
               <td>STATUS</td>

@@ -58,11 +58,11 @@ function Thanks({itemIdList}) {
             withCredentials: true
           }
         );
-        if (vnp_TransactionStatus === "00") {
+        
         setTimeout(() => {
           navigate('/home');
-        },5000);
-      } 
+        },1000);
+         
     } catch (error) {
     console.error("Error sending invoice:", error);
   }
@@ -71,7 +71,6 @@ function Thanks({itemIdList}) {
 return (
   <>
     <p>Thank you for your purchase!</p>
-    <p>ComboId : {itemIdList}</p>
   </>
 );
 }
