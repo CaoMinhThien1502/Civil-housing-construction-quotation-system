@@ -146,10 +146,6 @@ function App() {
 
                   <Route path="/requestContractList" element={<RequestContract />} />
                   <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
-<<<<<<< HEAD
-=======
-
->>>>>>> ae40ef0aa462da4bfe58eafd1f92b0f0ae8c13fd
                   
                   <Route path="/userList" element={<UserList />} />
                   <Route path="/userList/:id" element={<EditUser />} />
