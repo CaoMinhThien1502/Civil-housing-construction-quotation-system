@@ -29,7 +29,7 @@ public class Invoice {
     @Column(nullable = false)
     private String bankTranNo;
     @Column(nullable = false)
-    private String cardType;
+    private String cardType;    
     @Column(nullable = false)
     private String orderInfo;
     @Column(nullable = false)

@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FormConsultanDto {
+    private Long userId;
     private List<ComboFormConsultantDto> comboList;
     private List<ItemTypeFCDto> itemTypeList;
 }

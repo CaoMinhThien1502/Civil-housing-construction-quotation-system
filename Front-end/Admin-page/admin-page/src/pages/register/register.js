@@ -81,9 +81,10 @@ function Register() {
 
       if (response.status === 200) {
         alert("You need to confirm your email");
+        <span class="loader"></span>
         setTimeout(() => {
           navigate('/home'); // Sau 5 giây chuyển hướng đến trang /home
-        }, 5000);
+        }, 10000);
       }
     } catch (error) {
       if (error.response.status === 400 && error.response.data.message === "Email already exists") {

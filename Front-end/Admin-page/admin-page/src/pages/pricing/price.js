@@ -16,6 +16,8 @@ import './toast.css';
 import {  HmacSHA256Hash, IpAddr, URL_API, URL_VNPay, command, commandPay, currCode, locale, locate, reciveURL, secretKey, tmnCode, txnRef, version } from '../payment/configpayment';
 import { HmacSHA256, HmacSHA512 } from 'crypto-js';
 import CryptoJS from "crypto-js";
+import Thanks from "../payment/success";
+import { element } from "prop-types";
 
 
 const ConstructionForm = () => {
@@ -55,7 +57,7 @@ const ConstructionForm = () => {
     const fetchDataComboFromSwagger = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/building/form-consultant/list?typeCombo=${id}`,
+          `http://localhost:8080/building/form-consultant/list?typeCombo=${id}&email=${localStorage.getItem('mail')}`,  
           {
             method: "GET",
             headers: {
@@ -127,16 +129,26 @@ const ConstructionForm = () => {
     today = split[0];
     return today;
   }
-
+  const area = Number(inputValue);
+    const itemIdList = [
+      selectedItemIds.Hầm,
+      selectedItemIds["Loại Nhà"],
+      selectedItemIds.Móng,
+      selectedItemIds.Tầng
+    ];
+    const comboId = selectedItemIds.Combo;
+    const email = localStorage.getItem('mail');
+    // Component Thanks
   let amount = 'vnp_Amount='+'20000000';
   let command = '&vnp_Command='+commandPay;
   let createDate = '&vnp_CreateDate='+parseDate();
   let curCode = '&vnp_CurrCode='+currCode;
   let ipAdd = '&vnp_IpAddr=' + IpAddr;
   let local = '&vnp_Locale=' + locale;
-  let orderInfor = '&vnp_OrderInfo=' + 'Coc+de+yeu+cau+hop+dong';
+  let orderInfor = '&vnp_OrderInfo='+ comboId + '+' + area + '+' + swaggerData?.userId; 
+                  //  itemIdList.forEach((element) => {orderInfor +=  '+' + element});
   let orderType = '&vnp_OrderType=' + 'BaoGia';
-  let returnUrl = '&vnp_ReturnUrl=' + reciveURL
+  let returnUrl = '&vnp_ReturnUrl=' + reciveURL;
   let tmn = '&vnp_TmnCode=' + tmnCode;
   let ref = '&vnp_TxnRef=' + txnRef;
   let vpnVersion = '&vnp_Version='+version;
@@ -145,45 +157,24 @@ const ConstructionForm = () => {
   let sercureHash = HmacSHA512(plainText,secretKey).toString();
   var vnPayURLRequest = URL_VNPay+plainText+"&vnp_SecureHash="+sercureHash
   console.log("hi"+vnPayURLRequest)
-  // const handleSubmit = async () => {
-  //   try {
-  //     // Chuẩn bị dữ liệu cho request
-  //     const requestData = {
-  //       area: Number(inputValue),
-  //       itemIdList: Object.values(selectedItemIds)
-  //         .filter((itemId) => itemId !== "")
-  //         .map(Number),
-  //       comboType: 0,
-  //       status: 0,
-  //     };
+  // handleSubmit
+  const handleSubmit = async () => {
+    const area = Number(inputValue);
+    const itemIdList = [
+      selectedItemIds.Hầm,
+      selectedItemIds["Loại Nhà"],
+      selectedItemIds.Móng,
+      selectedItemIds.Tầng
+    ];
+    const comboId = selectedItemIds.Combo;
+    const email = localStorage.getItem('mail');
 
-  //     const comboId = selectedItemIds.Combo;
-  //     const email = localStorage.getItem("mail");
-  //     const token = localStorage.getItem("token");
-  //     console.log("comboId: ", comboId);
-  //     const response = await axios.post(
-  //       `http://localhost:8080/request-contract/request-contract/create?comboId=${comboId}&email=${email}`,
-  //       requestData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         withCredentials: true,
-  //       }
-  //     );
+    // orderInfo add
+    orderInfor += comboId + ',' + area + ',' + email + ',' + itemIdList;
+    window.location.href = vnPayURLRequest;
+  }
 
-  //     setModalShow(true);
-  //     console.log("API Response:", response.data);
-  //     if (response.status === 200) {
-  //       setModalShow(false);
-  //       setToastShow(true);
-  //       setIsRegistered(true);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error submitting request:", error);
-  //   }
-  // };
+
 
   const redirectToDetail = (id) => {
     navigate(`/detail?id=${id}`);
@@ -215,7 +206,7 @@ const ConstructionForm = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              // handleSubmit();
+              handleSubmit();
             }}
             className="row g-2"
           >
@@ -326,6 +317,7 @@ const ConstructionForm = () => {
                     totalPrice={totalPrice}
                     handleRegister={handleRegister}
                     vnPayURLRequest={vnPayURLRequest}
+                    handleSubmit={handleSubmit}
                   />
                 )}
                 < ToastAfterShowPriceQuoation
@@ -387,6 +379,7 @@ function MyVerticallyCenteredModal({
   totalPrice,
   handleRegister,
   vnPayURLRequest,
+  handleSubmit,
 }) {
   if (!selectedItemNames) {
     return (
@@ -435,7 +428,7 @@ function MyVerticallyCenteredModal({
         <p>TOTAL: {totalPrice || "N/A"}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Link to ={vnPayURLRequest}> <Button>Đăng ký</Button> </Link>
+         <Button onClick={handleSubmit}>Đăng ký</Button> 
         <Button onClick={onHide}>Đóng</Button>
         
       </Modal.Footer>

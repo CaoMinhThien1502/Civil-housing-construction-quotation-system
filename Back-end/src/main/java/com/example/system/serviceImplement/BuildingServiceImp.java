@@ -9,12 +9,14 @@ import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
 import com.example.system.model.combo.ComboBuilding;
+import com.example.system.model.user.User;
 import com.example.system.repository.building.BuildingDetailRepository;
 import com.example.system.repository.building.BuildingRepository;
 import com.example.system.repository.building.ItemRepository;
 import com.example.system.repository.building.ItemTypeRepository;
 import com.example.system.repository.combo.ComboBuildingRepository;
 import com.example.system.repository.requestcontract.RequestContractRepository;
+import com.example.system.repository.user.UserRepository;
 import com.example.system.service.building.BuildingDetailService;
 import com.example.system.service.building.BuildingService;
 import com.example.system.service.building.ItemService;
@@ -33,6 +35,8 @@ public class BuildingServiceImp implements BuildingService {
 
     @Autowired
     ComboBuildingRepository comboRepository;
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     BuildingRepository buildingRepository;
     @Autowired
@@ -147,7 +151,7 @@ public class BuildingServiceImp implements BuildingService {
     }
 
     @Override
-    public FormConsultanDto getDataFormConsultant(int comboType) {
+    public FormConsultanDto getDataFormConsultant(int comboType, String email) {
         try{
             List<ComboBuilding> comboList = comboRepository.findAll();
             List<Item> itemList = itemRepository.findAll();
@@ -169,7 +173,8 @@ public class BuildingServiceImp implements BuildingService {
                     cfcList.add(new ComboFormConsultantDto(combo.getComboBuildingId(), combo.getComboBuildingName(), combo.getUnitPrice()));
                 }
             }
-            FormConsultanDto dataForm = new FormConsultanDto(cfcList,typeDtoList);
+            User u = userRepository.findByEmail(email).orElseThrow();
+            FormConsultanDto dataForm = new FormConsultanDto(u.getUserId(),cfcList,typeDtoList);
             return dataForm;
         }catch (Exception e){
             return null;
