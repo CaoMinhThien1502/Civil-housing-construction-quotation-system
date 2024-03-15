@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { element } from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
+import './loader.css'
 
 function Thanks({itemIdList}) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -17,63 +17,78 @@ function Thanks({itemIdList}) {
   const vnp_TransactionStatus = urlParams.get("vnp_TransactionStatus");
   const vnp_TxnRef = urlParams.get("vnp_TxnRef");
   const vnp_SecureHash = urlParams.get("vnp_SecureHash");
-  // split Order Info
-  const requestDetail = vnp_OrderInfo.split(' ');
-  const navigate = useNavigate();
-  const item = requestDetail[3];
+
+  const [invoiceSent, setInvoiceSent] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
   useEffect(() => {
     handleInvoice();
-  }, [itemIdList]);
+  }, []);
 
   const handleInvoice = async () => {
     try {
-      const list=[]; 
-      requestDetail.slice(3).map((number) => {
-        list.push(number); });
-        const postData = {
-          invoiceId: 0, // Còn thiếu
-          amount: vnp_Amount,
-          bankCode: vnp_BankCode,
-          bankTranNo: vnp_BankTranNo,
-          cardType: vnp_CardType,
-          orderInfo: vnp_OrderInfo,
-          payDate: vnp_PayDate,
-          responseCode: vnp_ResponseCode,
-          tmnCode: vnp_TmnCode,
-          transactionNo: vnp_TransactionNo,
-          transactionStatus: vnp_TransactionStatus,
-          txnRef: vnp_TxnRef,
-          secureHash: vnp_SecureHash,
-          itemList : list
-        };
-        const token = localStorage.getItem('token');
-        const response = await axios.post(
-          `http://localhost:8080/payment/create?comboId=${requestDetail[0]}&area=${requestDetail[1]}&userid=${requestDetail[2]}`,
-          postData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`,
-            },
-            withCredentials: true
-          }
-        );
-        if (vnp_TransactionStatus === "00") {
-        setTimeout(() => {
-          navigate('/home');
-        },5000);
-      } 
-    } catch (error) {
-    console.error("Error sending invoice:", error);
-  }
-};
+      if (!vnp_OrderInfo) {
+        console.error("vnp_OrderInfo is missing.");
+        return;
+      }
 
-return (
-  <>
-    <p>Thank you for your purchase!</p>
-    <p>ComboId : {itemIdList}</p>
-  </>
-);
+      const requestDetail = vnp_OrderInfo.split(' ');
+
+      const [comboId, area, userId, ...items] = requestDetail;
+      
+      const postData = {
+        invoiceId: 0, // Invoice ID is missing, you may need to provide this
+        amount: vnp_Amount,
+        bankCode: vnp_BankCode,
+        bankTranNo: vnp_BankTranNo,
+        cardType: vnp_CardType,
+        orderInfo: vnp_OrderInfo,
+        payDate: vnp_PayDate,
+        responseCode: vnp_ResponseCode,
+        tmnCode: vnp_TmnCode,
+        transactionNo: vnp_TransactionNo,
+        transactionStatus: vnp_TransactionStatus,
+        txnRef: vnp_TxnRef,
+        secureHash: vnp_SecureHash,
+        itemList: items,
+      };
+
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `http://localhost:8080/payment/create?comboId=${comboId}&area=${area}&userid=${userId}`,
+        postData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      setInvoiceSent(true);
+      
+    } catch (error) {
+      console.error("Error sending invoice:", error);
+    }
+  };
+
+  if (redirect) {
+    return <redirect to="/home" />;
+  }
+
+  return (
+    <>
+    <div className="page-render" style={{ alignItems: 'center', textAlign: 'center' }}>
+      <p style={{ fontSize: '50px' }}>Thank you for your purchase!</p>
+      <br />
+      <span className="loader"></span>
+      <div class="back-button">
+    <a href="/home" class="label">Back Home</a>
+    </div>
+    </div>
+    </>
+  );
 }
 
 export default Thanks;
