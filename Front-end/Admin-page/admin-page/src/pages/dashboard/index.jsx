@@ -214,7 +214,7 @@ const Dashboard = () => {
                     </Box>
                 </Box> */}
                 <Box
-                    gridColumn="span 4"
+                    gridColumn="span 8"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
                     overflow="auto"
@@ -293,16 +293,18 @@ const Dashboard = () => {
                     </Box>
                 </Box>
                 <Box
-                    gridColumn="span 4"
+                    gridColumn="span 12"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
+                    overflow="auto"
+                    mb="30px"
                 >
                     <Typography
                         variant="h5"
                         fontWeight="600"
                         sx={{ padding: "30px 30px 0 30px" }}
                     >
-                        Sales Quantity
+                        Item Sales Quantity
                     </Typography>
                     <Box height="250px" mt="-20px">
                         <BarChart isDashboard={true} />

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,4 +26,5 @@ public class InvoiceDto {
     private String transactionStatus;
     private String txnRef;
     private String secureHash;
+    private List<Long> itemList;
 }

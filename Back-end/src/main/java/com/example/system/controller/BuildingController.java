@@ -117,8 +117,8 @@ public class BuildingController{
 
     //Form input controller
     @GetMapping("/form-consultant/list")
-    public ResponseEntity<FormConsultanDto> getFormConsultant(@RequestParam int typeCombo) {
-        FormConsultanDto dataForm = buildingService.getDataFormConsultant(typeCombo);
+    public ResponseEntity<FormConsultanDto> getFormConsultant(@RequestParam int typeCombo, @RequestParam String email) {
+        FormConsultanDto dataForm = buildingService.getDataFormConsultant(typeCombo, email);
         return ResponseEntity.ok(dataForm);
     }
 
