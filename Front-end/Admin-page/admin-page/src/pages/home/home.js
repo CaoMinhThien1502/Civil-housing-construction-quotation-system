@@ -307,7 +307,7 @@ const TeamSection = () => {
 const PricingSection = () => {
     const navigate = useNavigate();
   
-    const redirectToPrice = (id) => {
+    const redirectToPrice = (id,userName) => {
       // Navigate to /price with the id parameter
       navigate(`/price?id=${id}`);
     };

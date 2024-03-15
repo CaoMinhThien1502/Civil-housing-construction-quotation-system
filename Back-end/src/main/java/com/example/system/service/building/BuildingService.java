@@ -23,7 +23,7 @@ public interface BuildingService {
 
     List<BuildingDetailDto> findAllBD();
 
-    FormConsultanDto getDataFormConsultant(int comboType);
+    FormConsultanDto getDataFormConsultant(int comboType, String email);
 
     BuildingPriceDto getBuildingPrice(BuildingDto bd, Long comboId);
 }

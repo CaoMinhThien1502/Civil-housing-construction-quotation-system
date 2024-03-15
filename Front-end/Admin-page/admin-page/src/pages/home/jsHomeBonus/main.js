@@ -34,7 +34,7 @@ const HomeJs = () => {
       el.addEventListener('scroll', listener)
     }
 
-    let navbarlinks = select('#navbar .scrollto', true)
+    let navbarlinks = select('#navbar.scrollto', true)
 
     const navbarlinksActive = () => {
       let position = window.scrollY + 200

@@ -36,7 +36,7 @@ public class InvoiceServiceImp implements InvoiceService {
     }
 
     @Override
-    public Invoice createInvoice(InvoiceDto rqBody, Long comboId, Double area, List<Long> itemIds, String email) {
+    public Invoice createInvoice(InvoiceDto rqBody, Long comboId, Double area, Long userid) {
         try{
             Invoice invoice = new Invoice();
             Double amount = Double.valueOf(rqBody.getAmount());
@@ -54,16 +54,16 @@ public class InvoiceServiceImp implements InvoiceService {
             invoice.setTransactionStatus(rqBody.getTransactionStatus());
             invoice.setTxnRef(rqBody.getTxnRef());
             invoice.setSecureHash(rqBody.getSecureHash());
-            User user = userRepository.findByEmail(email).orElseThrow();
+            User user = userRepository.findById(userid).orElseThrow();
             BuildingDto bDto = new BuildingDto();
             bDto.setArea(area);
-            bDto.setItemIdList(itemIds);
+            bDto.setItemIdList(rqBody.getItemList());
             RequestContractDto rcDto = requestContractService.createRequestContract(bDto,comboId,user.getUserId());
             RequestContract rq = requestContractRepository.findById(rcDto.getRequestContractId()).orElseThrow();
             invoice.setRequestContract(rq);
             invoice.setUser(user);
             Invoice newInvoice = invoiceRepository.save(invoice);
-            rq.setInvoice(newInvoice);
+            rq.setInvoice(invoice);
             requestContractRepository.save(rq);
             return newInvoice;
         }catch (Exception e){
