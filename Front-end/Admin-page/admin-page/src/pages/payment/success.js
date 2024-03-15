@@ -84,7 +84,7 @@ function Thanks({itemIdList}) {
       <br />
       <span className="loader"></span>
       <div class="back-button">
-    <a href="/home" class="label">Back Home</a>
+    <a href="/home" class="label">Back Home </a>
     </div>
     </div>
     </>
