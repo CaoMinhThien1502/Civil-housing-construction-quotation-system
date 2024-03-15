@@ -145,7 +145,7 @@ const ConstructionForm = () => {
   let curCode = '&vnp_CurrCode='+currCode;
   let ipAdd = '&vnp_IpAddr=' + IpAddr;
   let local = '&vnp_Locale=' + locale;
-  let orderInfor = '&vnp_OrderInfo='+ comboId + '+' + area + '+' + swaggerData?.userId; 
+  let orderInfor = '&vnp_OrderInfo='+ comboId + '+' + area + '+' + selectedItemIds.Hầm + '+'+ selectedItemIds["Loại Nhà"] + '+' + selectedItemIds.Móng + '+'+ selectedItemIds.Tầng; 
                   //  itemIdList.forEach((element) => {orderInfor +=  '+' + element});
   let orderType = '&vnp_OrderType=' + 'BaoGia';
   let returnUrl = '&vnp_ReturnUrl=' + reciveURL;

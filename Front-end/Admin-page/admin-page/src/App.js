@@ -11,7 +11,7 @@ import Team from "./pages/team";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
 import Form from "./pages/form";
-
+import Register from './pages/register/register.js';
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
@@ -110,6 +110,7 @@ function App() {
       && location.pathname !== '/blog'
       && location.pathname !== '/detail'
       && location.pathname !== '/profile'
+      && location.pathname !== '/register'
       && (
         <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -184,7 +185,7 @@ function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/profile" element={<ProfilePage />} />
-
+        <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
       </Routes>
     </ColorModeContext.Provider>
