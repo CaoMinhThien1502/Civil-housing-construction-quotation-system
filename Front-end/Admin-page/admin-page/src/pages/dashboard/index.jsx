@@ -2,28 +2,76 @@ import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+import { useEffect, useState } from "react";
+import { PersonAdd, RequestQuote, Roofing, ViewInAr } from "@mui/icons-material";
 
 const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
+    const [getTotalData, setTotalData] = useState({});
+    useEffect(() => {
+        const fetchTotalData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/dashboard/numbers', {
+                    method: 'GET',
+                    headers: {
+                        // 'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                setTotalData(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchTotalData();
+    }, []); // Empty dependency array to fetch data only once on component mount
+    
+    const [getRequestContract, setRequestContract] = useState([]);
+    useEffect(() => {
+        const fetchRequestContract = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/request-contract/request-contract/list', {
+                    method: 'GET',
+                    headers: {
+                        // 'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                // Sort data by requestDate in descending order (most recent first)
+                const sortedData = data.sort((a, b) => new Date(b.requestDate) - new Date(a.requestDate));
+
+                setRequestContract(sortedData);
+            } catch (error) {
+                console.error('Error fetching request contract:', error);
+            }
+        };
+
+        fetchRequestContract();
+    }, []); // Empty dependency array to fetch data only once on component mount
+
+    const extraCost = getTotalData.request_contract_count * (200000 * 5 / 100);
+    const totalRevenue = getTotalData.request_contract_count * 200000 + extraCost;
+    
     return (
         <Box m="20px">
             {/* HEADER */}
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
 
-                <Box>
+                {/* <Box>
                     <Button
                         sx={{
                             backgroundColor: colors.blueAccent[700],
@@ -36,7 +84,7 @@ const Dashboard = () => {
                         <DownloadOutlinedIcon sx={{ mr: "10px" }} />
                         Download Reports
                     </Button>
-                </Box>
+                </Box> */}
             </Box>
 
             {/* GRID & CHARTS */}
@@ -55,13 +103,13 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title="12,361"
-                        subtitle="Emails Sent"
+                        title={getTotalData.material_count}
+                        subtitle="Total Materials"
                         progress="0.75"
                         increase="+14%"
                         icon={
-                            <EmailIcon
-                                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                            <ViewInAr
+                                sx={{ color: colors.greenAccent[600], fontSize: "30px" }}
                             />
                         }
                     />
@@ -74,13 +122,13 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title="431,225"
-                        subtitle="Sales Obtained"
+                        title={getTotalData.item_count}
+                        subtitle="Total Items"
                         progress="0.50"
                         increase="+21%"
                         icon={
-                            <PointOfSaleIcon
-                                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                            <Roofing
+                                sx={{ color: colors.greenAccent[600], fontSize: "30px" }}
                             />
                         }
                     />
@@ -93,13 +141,13 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title="32,441"
-                        subtitle="New Clients"
+                        title={getTotalData.request_contract_count}
+                        subtitle="Contracts Requested"
                         progress="0.30"
                         increase="+5%"
                         icon={
-                            <PersonAddIcon
-                                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                            <RequestQuote
+                                sx={{ color: colors.greenAccent[600], fontSize: "30px" }}
                             />
                         }
                     />
@@ -112,20 +160,20 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title="1,325,134"
-                        subtitle="Traffic Received"
+                        title={getTotalData.user_count}
+                        subtitle="Users Registered"
                         progress="0.80"
                         increase="+43%"
                         icon={
-                            <TrafficIcon
-                                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                            <PersonAdd
+                                sx={{ color: colors.greenAccent[600], fontSize: "30px" }}
                             />
                         }
                     />
                 </Box>
 
                 {/* ROW 2 */}
-                <Box
+                {/* <Box
                     gridColumn="span 8"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
@@ -164,9 +212,9 @@ const Dashboard = () => {
                     <Box height="250px" m="-20px 0 0 0">
                         <LineChart isDashboard={true} />
                     </Box>
-                </Box>
+                </Box> */}
                 <Box
-                    gridColumn="span 4"
+                    gridColumn="span 8"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
                     overflow="auto"
@@ -180,12 +228,12 @@ const Dashboard = () => {
                         p="15px"
                     >
                         <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                            Recent Transactions
+                            Recent Contracts
                         </Typography>
                     </Box>
-                    {mockTransactions.map((transaction, i) => (
+                    {getRequestContract.map((transaction, i) => (
                         <Box
-                            key={`${transaction.txId}-${i}`}
+                            key={`${transaction.requestContractId}-${i}`}
                             display="flex"
                             justifyContent="space-between"
                             alignItems="center"
@@ -196,28 +244,29 @@ const Dashboard = () => {
                                 <Typography
                                     color={colors.greenAccent[500]}
                                     variant="h5"
-                                    fontWeight="600"
+                                    fontWeight="500"
+                                    width={200}
                                 >
-                                    {transaction.txId}
+                                    {transaction.comboName}
                                 </Typography>
                                 <Typography color={colors.grey[100]}>
-                                    {transaction.user}
+                                    {transaction.userName}
                                 </Typography>
                             </Box>
-                            <Box color={colors.grey[100]}>{transaction.date}</Box>
+                            <Box color={colors.grey[100]} >{transaction.requestDate}</Box>
                             <Box
                                 backgroundColor={colors.greenAccent[500]}
                                 p="5px 10px"
                                 borderRadius="4px"
                             >
-                                ${transaction.cost}
+                                {(transaction.totalPrice)?.toLocaleString('vi', {style : 'currency', currency : 'VND'})}
                             </Box>
                         </Box>
                     ))}
                 </Box>
 
                 {/* ROW 3 */}
-                {/* <Box
+                <Box
                     gridColumn="span 4"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
@@ -238,28 +287,30 @@ const Dashboard = () => {
                             color={colors.greenAccent[500]}
                             sx={{ mt: "15px" }}
                         >
-                            $48,352 revenue generated
+                            {totalRevenue.toLocaleString('vi', {style : 'currency', currency : 'VND'})} revenue generated
                         </Typography>
-                        <Typography>Includes extra misc expenditures and costs</Typography>
+                        <Typography>Includes {extraCost.toLocaleString('vi', {style : 'currency', currency : 'VND'})} extra misc expenditures and costs</Typography>
                     </Box>
                 </Box>
                 <Box
-                    gridColumn="span 4"
+                    gridColumn="span 12"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
+                    overflow="auto"
+                    mb="30px"
                 >
                     <Typography
                         variant="h5"
                         fontWeight="600"
                         sx={{ padding: "30px 30px 0 30px" }}
                     >
-                        Sales Quantity
+                        Item Sales Quantity
                     </Typography>
                     <Box height="250px" mt="-20px">
                         <BarChart isDashboard={true} />
                     </Box>
                 </Box>
-                <Box
+                {/* <Box
                     gridColumn="span 4"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
