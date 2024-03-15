@@ -1200,11 +1200,11 @@ INSERT INTO building_detail(building_id, item_id) VALUES (7,19);
 INSERT INTO building_detail(building_id, item_id) VALUES (7,23);
 
 
-INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(false, '2023-10-23', 7, 1, 4);
-INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(true, '2023-11-03', 1, 2, 6);
-INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(true, '2019-10-21', 15, 3, 6);
-INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(false, '2023-03-07', 18, 4, 4);
-INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(true, '2022-10-11', 3, 5, 1);
-INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(true, '2024-03-08', 10, 6, 2);
-INSERT INTO request_contract(status, request_date, combo_building_id, building_id, user_id ) VALUES(false, '2024-02-29', 14, 7, 3);
+INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(false, '2023-10-23', 1500000000, 7, 1, 4);
+INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(true, '2023-11-03', 2500000000, 1, 2, 6);
+INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(true, '2019-10-21', 1750000000, 15, 3, 6);
+INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(false, '2023-03-07', 1450000000, 18, 4, 4);
+INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(true, '2022-10-11', 120000000, 3, 5, 1);
+INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(true, '2024-03-08', 950000000, 10, 6, 2);
+INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(false, '2024-02-29', 310000000 , 14, 7, 3);
 
