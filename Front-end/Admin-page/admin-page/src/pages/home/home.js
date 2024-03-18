@@ -163,13 +163,13 @@ const PersonIn4 = () => {
             <p className="description">The man uses leading skills to lead us in getting our target. The fastest way to be success is together.</p>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="serviceBox ">
+        <div className="col-md-3 col-sm-6">
+          <div className="serviceBox ">
             <div> <img src={team3} className="service-icon"/>
-              <span><i class="fa fa-rocket"></i></span>
+              <span><i className="fa fa-rocket"></i></span>
             </div>
-            <button class="title-btn">Mr. Peter</button>
-            <p class="description">The master in building area, who knows what is better for your building. Helping you in choosing the best suited.</p>
+            <button className="title-btn">Mr. Peter</button>
+            <p className="description">The master in building area, who knows what is better for your building. Helping you in choosing the best suited.</p>
           </div>
         </div>
         <div className="col-md-3 col-sm-6">
@@ -178,7 +178,7 @@ const PersonIn4 = () => {
               <span><i className="fa fa-rocket"></i></span>
             </div>
             <button className="title-btn">Ms. Anna</button>
-            <p class="description">The evaluator and analyst of construction projects, she can make the best building in the budget.</p>
+            <p className="description">The evaluator and analyst of construction projects, she can make the best building in the budget.</p>
           </div>
         </div>
       </div>
@@ -227,7 +227,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
                 </ul>
                 {/* <button className="button-51" type="button">Đọc ngay</button> */}
                 <Link to="/blog" className="button-51">Read now</Link>
@@ -249,7 +249,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>
@@ -270,7 +270,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>
@@ -291,7 +291,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>

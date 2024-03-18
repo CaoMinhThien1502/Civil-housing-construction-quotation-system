@@ -17,6 +17,7 @@ public class BuildingDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buildingDetailId;
+
     @ManyToOne
     @JoinColumn(name = "building_id")
     @JsonIgnore
