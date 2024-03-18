@@ -20,7 +20,9 @@ public class MaterialType {
     private Long materialTypeId;
     @Column(nullable = false, columnDefinition = "varchar(50)", unique = true)
     private String typeName;
+    private boolean status;
+
     @OneToMany(mappedBy = "materialType")
     Set<Material> materials;
-    private boolean status;
+
 }

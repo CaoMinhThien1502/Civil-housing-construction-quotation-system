@@ -26,6 +26,7 @@ public class ComboBuilding {
     private Long unitPrice;
     @Column(nullable = false)
     private int type; // 0: xây nhà phần thô - 1: xây nhà hoàn thiện - 2: xây dựng trọn gói
+
     @OneToMany(mappedBy = "comboBuilding")
     @JsonIgnore
     Set<ComboDetail> comboDetails;
