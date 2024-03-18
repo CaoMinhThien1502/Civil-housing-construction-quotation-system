@@ -17,6 +17,9 @@ public class ComboDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long comboDetailId;
+    @Column(nullable = true)
+    private Integer quantity;
+
     @ManyToOne()
     @JoinColumn(name = "material_id")
     @JsonIgnore

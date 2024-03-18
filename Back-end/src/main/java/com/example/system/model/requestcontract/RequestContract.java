@@ -22,12 +22,17 @@ public class RequestContract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long requestContractId;
-    private boolean status; //false: đang xử lý // true: đã xử lý
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date requestDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date timeoutDate; //qua time này sẽ xóa request
     @Column(nullable = true)
     private Double totalPrice;
+    @Column(nullable = false)
+    private boolean status; //false: đang xử lý // true: đã xử lý
+
     @ManyToOne
     @JoinColumn(name = "combo_building_id")
     @JsonIgnore

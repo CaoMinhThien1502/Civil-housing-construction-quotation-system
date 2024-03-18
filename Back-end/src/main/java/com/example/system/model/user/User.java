@@ -32,44 +32,35 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-
     @Column(nullable = false, columnDefinition = "varchar(50)")
     @NotBlank(message = "Name cannot be blank")
     private String name;
-
     @Column(nullable = false, columnDefinition = "varchar(50)")
     @NotBlank(message = "Email cannot be blank")
     @Pattern(regexp = "^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "The email must consist @")
     private String email;
-
     @Column(nullable = false, columnDefinition = "varchar(100)")
     @NotBlank(message = "Password cannot be blank")
     private String password;
-
     @Column(nullable = false, columnDefinition = "varchar(20)")
-
     @NotBlank(message = "Phone cannot be blank")
     @Pattern(regexp = "0[0-9]{9}", message = "The phone number must consist of 10 numbers and start with 0")
     private String phone;
-
     @Column(nullable = false, columnDefinition = "varchar(50)")
     @NotBlank(message = "Address cannot be blank")
     private String address;
-
     @Column(nullable = false)
     @NotNull(message = "Invalid status format (True - False)")
     private boolean status;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private LocalDate birthday;
-
     @Column(nullable = false)
     @NotNull(message = "Invalid status format (True - False)") // 1:Nam - 0:Nu
     private boolean gender;
-
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @OneToMany(mappedBy = "user")
     private Set<Invoice> invoices;
     @OneToMany(mappedBy = "user")

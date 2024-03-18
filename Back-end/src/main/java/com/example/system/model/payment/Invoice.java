@@ -46,6 +46,7 @@ public class Invoice {
     private String txnRef;
     @Column(nullable = false, columnDefinition = "varchar(200)")
     private String secureHash;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
