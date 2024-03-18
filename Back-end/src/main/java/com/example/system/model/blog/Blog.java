@@ -33,6 +33,7 @@ public class Blog {
     private String imgPath;
     @Column(nullable = false, columnDefinition = "varchar(200)")
     private int blogType; // 1: Cẩm Nang Xây Dựng // 2: Thiết Kế Kiến Trúc
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore

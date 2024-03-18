@@ -168,13 +168,13 @@ const PersonIn4 = () => {
             <p className="description">The man uses leading skills to lead us in getting our target. The fastest way to be success is together.</p>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="serviceBox ">
+        <div className="col-md-3 col-sm-6">
+          <div className="serviceBox ">
             <div> <img src={team3} className="service-icon"/>
-              <span><i class="fa fa-rocket"></i></span>
+              <span><i className="fa fa-rocket"></i></span>
             </div>
-            <button class="title-btn">Mr. Peter</button>
-            <p class="description">The master in building area, who knows what is better for your building. Helping you in choosing the best suited.</p>
+            <button className="title-btn">Mr. Peter</button>
+            <p className="description">The master in building area, who knows what is better for your building. Helping you in choosing the best suited.</p>
           </div>
         </div>
         <div className="col-md-3 col-sm-6">
@@ -183,7 +183,7 @@ const PersonIn4 = () => {
               <span><i className="fa fa-rocket"></i></span>
             </div>
             <button className="title-btn">Ms. Anna</button>
-            <p class="description">The evaluator and analyst of construction projects, she can make the best building in the budget.</p>
+            <p className="description">The evaluator and analyst of construction projects, she can make the best building in the budget.</p>
           </div>
         </div>
       </div>
@@ -212,7 +212,7 @@ const TeamSection = () => {
     <section id="blog" className="team section-bg">
       <div className="container">
         <div className="section-title" data-aos="fade-up">
-          <h2>Blog</h2>
+          <h2>Sample Building</h2>
           <p>Finished Buildings</p>
         </div>
         <div className="row">
@@ -232,7 +232,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
                 </ul>
                 {/* <button className="button-51" type="button">Đọc ngay</button> */}
                 <Link to="/blog" className="button-51">Read now</Link>
@@ -254,7 +254,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>
@@ -275,7 +275,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>
@@ -296,7 +296,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>
@@ -484,7 +484,7 @@ const ContactSection = () => {
         <div className="row">
           <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div className="contact-about">
-              <h3>Vesperr</h3>
+              <h3>CHCQ System</h3>
               <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
               <div className="social-links">
                 <a href="#" className="twitter"><i className="bi bi-twitter"></i></a>
@@ -498,15 +498,15 @@ const ContactSection = () => {
             <div className="info">
               <div>
                 <i className="ri-map-pin-line"></i>
-                <p>A108 Adam Street<br />New York, NY 535022</p>
+                <p>FPT University<br />Thu Duc City, Ho Chi Minh City</p>
               </div>
               <div>
                 <i className="ri-mail-send-line"></i>
-                <p>info@example.com</p>
+                <p>civilhousingsystem@gmail.com</p>
               </div>
               <div>
                 <i className="ri-phone-line"></i>
-                <p>+1 5589 55488 55s</p>
+                <p>+84 355 004 120</p>
               </div>
             </div>
           </div>
@@ -572,7 +572,7 @@ const Footer = () => {
           </div>
           <div className="col-lg-6">
             <nav className="footer-links text-lg-right text-center pt-2 pt-lg-0">
-              <a href="#intro" className="scrollto">Home</a>
+              <a href="#" className="scrollto">Home</a>
               <a href="#about" className="scrollto">About</a>
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Use</a>

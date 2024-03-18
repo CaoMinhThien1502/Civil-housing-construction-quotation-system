@@ -83,7 +83,6 @@ const Login = () => {
           </div>
 
           <MDBBtn className="mb-4 w-100" size="lg" style={{ backgroundColor: '#3b5998' }} href='/register'>
-            <MDBIcon fab icon="facebook-f" className="mx-2" />
             Sign Up
           </MDBBtn>
         </MDBCol>

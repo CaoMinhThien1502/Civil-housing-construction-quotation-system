@@ -67,10 +67,10 @@ public class SecurityConfiguration {
                                         .requestMatchers(HttpMethod.PUT, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                                         //Building
                                         .requestMatchers(HttpMethod.GET, "/building/**").permitAll()
-                                        .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
-                                        .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
-                                        .requestMatchers("/building/form-consultant/list").permitAll()
-                                        //Request contrat
+//                                        .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
+//                                        .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                                        .requestMatchers("/building/form-consultant/**").permitAll()
+                                        //Request contract
                                         .requestMatchers("/request-contract/**").permitAll()
 //                                .requestMatchers(HttpMethod.GET,"/request-contract/**").permitAll()
 //                                .requestMatchers(HttpMethod.POST, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
