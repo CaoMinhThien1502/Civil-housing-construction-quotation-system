@@ -10,5 +10,5 @@ public interface InvoiceService {
 
     List<Invoice> findAll();
 
-    Invoice createInvoice(InvoiceDto rqBody, Long comboId, Double area, List<Long> itemId, String email);
+    Invoice createInvoice(InvoiceDto rqBody, Long comboId, Double area, Long userid);
 }

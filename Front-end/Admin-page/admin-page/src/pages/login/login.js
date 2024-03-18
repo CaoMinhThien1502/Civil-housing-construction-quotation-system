@@ -82,14 +82,8 @@ const Login = () => {
             <p className="text-center fw-bold mx-3 mb-0">OR</p>
           </div>
 
-          <MDBBtn className="mb-4 w-100" size="lg" style={{ backgroundColor: '#3b5998' }}>
-            <MDBIcon fab icon="facebook-f" className="mx-2" />
-            Continue with Facebook
-          </MDBBtn>
-
-          <MDBBtn className="mb-4 w-100" size="lg" style={{ backgroundColor: '#55acee' }}>
-            <MDBIcon fab icon="twitter" className="mx-2" />
-            Continue with Twitter
+          <MDBBtn className="mb-4 w-100" size="lg" style={{ backgroundColor: '#3b5998' }} href='/register'>
+            Sign Up
           </MDBBtn>
         </MDBCol>
       </MDBRow>
