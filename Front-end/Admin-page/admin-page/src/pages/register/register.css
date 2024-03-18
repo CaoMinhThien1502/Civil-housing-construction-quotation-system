@@ -8,7 +8,7 @@
     min-height: 100vh;
   }
   
-  .content {
+  .content1 {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Chia đều thành 2 cột */
     gap: 2px;
@@ -23,7 +23,7 @@
     object-fit: cover;
   }
   
-  .form {
+  .form1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -35,7 +35,7 @@
     max-width: 350px;
   }
   
-  .title {
+  .title1 {
     font-size: 28px;
     font-weight: 600;
     letter-spacing: -1px;
@@ -46,19 +46,19 @@
     color: #00bfff;
   }
   
-  .title::before {
+  .title1::before {
     width: 18px;
     height: 18px;
   }
   
-  .title::after {
+  .title1::after {
     width: 18px;
     height: 18px;
     animation: pulse 1s linear infinite;
   }
   
-  .title::before,
-  .title::after {
+  .title1::before,
+  .title1::after {
     position: absolute;
     content: "";
     height: 16px;
@@ -86,17 +86,17 @@
     color: #00bfff;
   }
   
-  .flex {
+  .flex1 {
     display: flex;
     width: 100%;
     gap: 6px;
   }
   
-  .form label {
+  .form1 label {
     position: relative;
   }
   
-  .form label .input {
+  .form1 label .input {
     background-color: #333;
     color: #fff;
     width: 100%;
@@ -106,7 +106,7 @@
     border-radius: 10px;
   }
   
-  .form label .input + span {
+  .form1 label .input + span {
     color: rgba(255, 255, 255, 0.5);
     position: absolute;
     left: 10px;
@@ -116,24 +116,24 @@
     transition: 0.3s ease;
   }
   
-  .form label .input:placeholder-shown + span {
+  .form1 label .input:placeholder-shown + span {
     top: 12.5px;
     font-size: 0.9em;
   }
   
-  .form label .input:focus + span,
-  .form label .input:valid + span {
+  .form1 label .input:focus + span,
+  .form1 label .input:valid + span {
     color: #00bfff;
     top: 0px;
     font-size: 0.7em;
     font-weight: 600;
   }
   
-  .input {
+  .input1 {
     font-size: medium;
   }
   
-  .submit {
+  .submit1 {
     border: none;
     outline: none;
     padding: 10px;
@@ -144,7 +144,7 @@
     background-color: #00bfff;
   }
   
-  .submit:hover {
+  .submit1:hover {
     background-color: #00bfff96;
   }
   

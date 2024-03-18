@@ -79,6 +79,7 @@ public class SecurityConfiguration {
                                         .requestMatchers("/payment/**").permitAll()
                                         //Dashboard
                                         .requestMatchers("/dashboard/**").permitAll()
+                                        .requestMatchers("/blog/**").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
