@@ -1,5 +1,6 @@
 // Import necessary React modules
 import "./personIn4.css";
+import "./blogs.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import React, {useEffect, useReducer, useState } from 'react';
@@ -37,7 +38,8 @@ import './TeamSection.css';
 import '../../styles/main/main.css';
 // Import Emaijs library
 import emailjs from 'emailjs-com';
-
+//blog real ne
+import axios from 'axios';
 
 // Create a functional component for the header
 const Header = () => {
@@ -48,7 +50,8 @@ const Header = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('username');
-    window.location.href = '/login';
+    localStorage.removeItem('tokenTime'); 
+    window.location.href = 'http://localhost:8080/api/v1/auth/logout';
   };
   return (
     <header id="header" className="fixed-top d-flex align-items-center">
@@ -62,9 +65,11 @@ const Header = () => {
           <ul>
             <li><a className="nav-link scrollto active" href="/home#">Home</a></li>
             <li><a className="nav-link scrollto" href="/home#about">About</a></li>
-            <li><a className="nav-link scrollto" href="/home#blog" >Blogs</a></li>
+            <li><a className="nav-link scrollto" href="/home#blog" >Sample Building</a></li>
             <li><a className="nav-link scrollto" href="/home#pricing">Pricing</a></li>
             <li><a className="nav-link scrollto" href="/home#contact">Contact us</a></li>
+            <li><a className="nav-link scrollto" href="/home#blogreal">Blogs</a></li>
+        
             {isLoggedIn ? (
               <>
                 <li><a className="nav-link scrollto" href="/profile">Profile</a></li>
@@ -303,6 +308,53 @@ const TeamSection = () => {
     </section>
   );
 };
+// blog real ----------------------------------------------------------------------------
+const BlogReal = () => {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/blog/list');
+        setBlogs(response.data); // Giả sử API trả về một mảng các bài blog
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+        // Xử lý lỗi tại đây nếu cần thiết
+      }
+    };
+
+    fetchBlogs();
+  }, []); // Tham số thứ hai là mảng rỗng để useEffect chỉ chạy một lần sau khi component được mount
+  return (
+    <section id="blogreal" className="team section-bg">
+      <div className="container">
+        <div className="section-title aos-init aos-animate" data-aos="fade-up">
+          <h2>Blogs</h2>
+        </div>
+        <div className="row blog-row">
+          {blogs.map(blog => (
+            <div key={blog.blogId} className="col-lg-3 col-md-6">
+            <Link to={`/blogDetail/${blog.blogId}`} className="blog-link">
+              <div className="member aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                <div className="member-inner d-flex flex-column">
+                  <div className="member-info flex-grow-1">
+                    <p className="blog-name">{blog.blogName}</p>
+                    <p>{blog.blogType}</p>
+                  </div>
+                  <div className="member-img">
+                    <img src={blog.imgPath} alt="Blog Image" className="img-fluid blog-img" />
+                  </div>
+                </div>
+              </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+ 
 
 const PricingSection = () => {
     const navigate = useNavigate();
@@ -532,6 +584,7 @@ const Footer = () => {
   );
 };
 
+
 const BackToTopButton = () => {
   return (
     <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>
@@ -540,4 +593,4 @@ const BackToTopButton = () => {
 
 
 // Export the component for use in other parts of your React application
-export { Header, HeroSection, AboutUsSection,PersonIn4, TeamSection, PricingSection, ContactSection, Footer, BackToTopButton  };
+export { Header, HeroSection, AboutUsSection,PersonIn4, TeamSection, PricingSection, ContactSection, Footer, BackToTopButton, BlogReal  };

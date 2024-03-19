@@ -38,7 +38,8 @@ const Topbar = () => {
        await localStorage.removeItem('mail');
        await localStorage.removeItem('role');
        await localStorage.removeItem('tokenTime'); 
-        window.location.href = 'http://localhost:8080/api/v1/auth/logout';
+       await localStorage.removeItem('token');
+         window.location.href = 'http://localhost:8080/api/v1/auth/logout';
     };
 
     return (

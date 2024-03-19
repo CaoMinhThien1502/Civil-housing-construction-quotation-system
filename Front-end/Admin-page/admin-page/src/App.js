@@ -19,17 +19,22 @@ import Item from './pages/itemlist';
 import ItemType from './pages/itemtype/index.jsx';
 import RequestContract from './pages/requestcontract';
 import UserList from './pages/userlist';
+import Blog from './pages/blogmanager';
+import BlogDetail from './pages/blogmanager/blogDetail.jsx'
+
+
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
-import RequestContractDetail from './pages/requestcontract/requestcontractdetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
 import AddItem from './pages/itemlist/addItem.jsx';
 import AddItemType from './pages/itemtype/addItemType.jsx';
+import AddBlog from './pages/blogmanager/addBlog.jsx';
 
 import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
@@ -62,7 +67,8 @@ import {
   PricingSection,
   ContactSection,
   Footer,
-  BackToTopButton
+  BackToTopButton,
+  BlogReal
 } from './pages/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
 import {
   ConstructionForm,
@@ -93,6 +99,7 @@ function App() {
       }
     };
 
+    
     checkTokenTime(); // Kiểm tra ngay khi component được mount
 
     const interval = setInterval(checkTokenTime, 600000); // Kiểm tra mỗi 1 phút (hoặc tần suất mong muốn)
@@ -101,6 +108,7 @@ function App() {
   }, [tokenTime]); // Dependency array chỉ chứa tokenTime
 
   return (
+    <>
     <ColorModeContext.Provider value={colorMode}>
       {location.pathname !== '/login'
       && location.pathname !== '/'
@@ -111,15 +119,19 @@ function App() {
       && location.pathname !== '/detail'
       && location.pathname !== '/profile'
       && location.pathname !== '/register'
+      && !location.pathname.includes('/blogDetail') 
+      //&& location.pathname !== '/blogreal'
       && (
         <ThemeProvider theme={theme}>
         <CssBaseline />
           <div className="app">
-            <Sidebar />
+          <Sidebar />
             <main className="content">
               <Topbar />
               <Routes>
+           
               <Route element={<PrivateRoutes />} >
+
                     <Route path="/dashboard" element={<Dashboard />} exact />
 
                     <Route path="/comboBuilding" element={<ComboBuilding />} />
@@ -147,6 +159,9 @@ function App() {
 
                   <Route path="/requestContractList" element={<RequestContract />} />
                   <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
+
+                  <Route path="/blogList" element={<Blog />} />
+                  <Route path="/blogList/addBlog" element={<AddBlog />} />
                   
                   <Route path="/userList" element={<UserList />} />
                   <Route path="/userList/:id" element={<EditUser />} />
@@ -171,13 +186,14 @@ function App() {
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/calendar" element={<Calendar />} />
                   <Route path="/geography" element={<Geography />} /> */}
+           
                   </Route>
                 </Routes>
               </main>
             </div>
           </ThemeProvider>
         )}
-      <Routes>
+      <Routes> 
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
@@ -187,8 +203,11 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
+        <Route path='/blogDetail/:id' element={<BlogDetail/>}/> 
       </Routes>
     </ColorModeContext.Provider>
+  
+      </>
   );
 }
 
@@ -200,6 +219,7 @@ const HomePage = () => {
       <AboutUsSection />
       <PersonIn4 />
       <TeamSection />
+      <BlogReal/>
       <PricingSection />
       <ContactSection />
       <Footer />
@@ -226,6 +246,7 @@ const BlogPage = () => {
 }
 
 
+    
 export default App;
 
 // pls don't change anything related to logical code
