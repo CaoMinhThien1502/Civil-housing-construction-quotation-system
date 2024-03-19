@@ -65,10 +65,10 @@ const Header = () => {
           <ul>
             <li><a className="nav-link scrollto active" href="/home#">Home</a></li>
             <li><a className="nav-link scrollto" href="/home#about">About</a></li>
-            <li><a className="nav-link scrollto" href="/home#blog" >Blogs</a></li>
+            <li><a className="nav-link scrollto" href="/home#blog" >Sample Building</a></li>
             <li><a className="nav-link scrollto" href="/home#pricing">Pricing</a></li>
             <li><a className="nav-link scrollto" href="/home#contact">Contact us</a></li>
-            <li><a className="nav-link scrollto" href="/home#blogreal">Blog real</a></li>
+            <li><a className="nav-link scrollto" href="/home#blogreal">Blogs</a></li>
         
             {isLoggedIn ? (
               <>

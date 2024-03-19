@@ -119,7 +119,7 @@ function App() {
       && location.pathname !== '/detail'
       && location.pathname !== '/profile'
       && location.pathname !== '/register'
-      && !location.pathname.includes('/blogDetail')
+      && !location.pathname.includes('/blogDetail') 
       //&& location.pathname !== '/blogreal'
       && (
         <ThemeProvider theme={theme}>
