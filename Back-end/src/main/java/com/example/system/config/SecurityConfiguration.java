@@ -1,5 +1,6 @@
 package com.example.system.config;
 
+import com.example.system.model.user.Permission;
 import com.example.system.model.user.Role;
 import com.example.system.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -39,9 +40,15 @@ public class SecurityConfiguration {
                     config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
                     config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT", "PATCH", "HEAD", "OPTIONS"));
                     config.setAllowedHeaders(Arrays.asList("*"));
+                    config.addExposedHeader("Content-Type, Authorization");
+                    config.addExposedHeader("Access-Control-Allow-Origin, Access-Control-Allow-Credentials");
                     config.setAllowCredentials(true);
                     return config;
-                })).csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(authorizeRequests -> authorizeRequests.requestMatchers(ENDPOINTS_WHITELIST).permitAll()
+                }));
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                         //User
                         .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/user/profile/update").hasRole(Role.CUSTOMER.name())
@@ -53,8 +60,11 @@ public class SecurityConfiguration {
                         //Dashboard
                         .requestMatchers("/dashboard/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         //Blog
+                        //.requestMatchers("/blog/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/blog/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/blog/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+//                        .requestMatchers(HttpMethod.POST, "/blog/**").hasAnyAuthority(Permission.ADMIN_FULLACCESS.name(), Permission.MANAGER_FULLACCSESS.name())
+//                        .requestMatchers(HttpMethod.PUT, "/blog/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         /// ----------------------Cường chơi dưới này, đừng đụng trên của t nha
                         //Building
                         .requestMatchers(HttpMethod.GET, "/building/**").permitAll()
@@ -70,8 +80,13 @@ public class SecurityConfiguration {
                         .requestMatchers("/payment/**").permitAll().anyRequest().authenticated()).formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
                         .loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
                 ) // URL mặc định sau khi đăng nhập thành công
-                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).logout(logout -> logout.logoutUrl(LOGOUT_URL) // URL để xử lý quá trình đăng xuất
-/*                        .logoutSuccessUrl(LOGIN_URL) // URL mặc định sau khi đăng xuất thành công*/.invalidateHttpSession(true) // Hủy bỏ phiên làm việc của người dùng sau khi đăng xuất
+                .sessionManagement(sessionManagement -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout(logout -> logout.logoutUrl(LOGOUT_URL) // URL để xử lý quá trình đăng xuất
+/*                        .logoutSuccessUrl(LOGIN_URL) // URL mặc định sau khi đăng xuất thành công*/
+                        .invalidateHttpSession(true) // Hủy bỏ phiên làm việc của người dùng sau khi đăng xuất
                         .clearAuthentication(true).deleteCookies("access_token").deleteCookies("refresh_token").addLogoutHandler(logoutHandler))// Xóa thông tin xác thực của người dùng sau khi đăng xuất
         ;
         return http.build();
