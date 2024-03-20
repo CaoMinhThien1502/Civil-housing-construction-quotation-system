@@ -45,4 +45,9 @@ public class BlogServiceImp implements BlogService {
             return false;
         }
     }
+
+    @Override
+    public List<Blog> getListBlogByType(int blogType) {
+        return blogRepository.findAllBlogByType(blogType);
+    }
 }
