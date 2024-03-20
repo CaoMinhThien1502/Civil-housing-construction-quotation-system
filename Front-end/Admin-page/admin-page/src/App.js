@@ -27,7 +27,7 @@ import BlogDetail from './pages/blogmanager/blogDetail.jsx'
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
-import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestcontractdetail.jsx';
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
