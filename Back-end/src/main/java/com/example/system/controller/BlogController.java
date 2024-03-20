@@ -14,17 +14,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BlogController {
     private final BlogService blogService;
-    @GetMapping("list")
+    @GetMapping("/list")
     public ResponseEntity<List<Blog>> getListBlog(){
         List<Blog> blogList = blogService.getListBlog();
         return ResponseEntity.ok(blogList);
+    }
+    @GetMapping("/list/type")
+    public ResponseEntity<List<Blog>> getListBlogByType(@RequestParam int blogType){
+        List<Blog> blogListByType = blogService.getListBlogByType(blogType);
+        return ResponseEntity.ok(blogListByType);
     }
     @GetMapping("/getById")
     public ResponseEntity<Blog> getBlogById(@RequestParam Long id){
         Blog blog = blogService.getBlogById(id);
         return ResponseEntity.ok(blog);
     }
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResponseEntity<Boolean> createBlog(@RequestBody BlogDto blog){
         boolean createBlog = blogService.createBlog(blog);
         return ResponseEntity.ok(createBlog);

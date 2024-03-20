@@ -1,9 +1,10 @@
+import React, { useState, useEffect } from 'react';
 import { Box, Button, Typography, Select, MenuItem } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Alert } from "@mui/material";
 import { Formik } from "formik";
+import Header from "../../components/Header";
 import * as yup from "yup";
-import React, { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios';
 
@@ -18,12 +19,22 @@ const AddBlog = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [userEmail, setUserEmail] = useState(localStorage.getItem("mail") || "");
-
+  
   useEffect(() => {
+    // Lấy giá trị của user từ localStorage
+    const user = localStorage.getItem("mail");
+    
+    // Kiểm tra xem giá trị của user có tồn tại không và in ra console
+    if(user) {
+      console.log("User found:", user);
+    } else {
+      console.log("User not found in localStorage");
+    }
+  
     // Cập nhật giá trị của userEmail mỗi khi localStorage thay đổi
-    setUserEmail(localStorage.getItem("mail") || "");
+    setUserEmail(user || "");
   }, [localStorage.getItem("mail")]);
-
+  
   const initialValues = {
     blogName: "",
     blogContent: "",
@@ -35,7 +46,18 @@ const AddBlog = () => {
   const handleSubmit = async (values) => {
     try {
       setSubmitting(true);
-      const response = await axios.post('http://localhost:8080/blog/create', values);
+  
+      const response = await axios.post(
+        'http://localhost:8080/blog/create',
+        values,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true, // Bật tính năng gửi credentials
+        }
+      );
+  
       console.log(response); // Log response từ backend
       console.log(values); 
       setSubmitting(false);
@@ -45,6 +67,7 @@ const AddBlog = () => {
       setSubmitting(false);
     }
   };
+  
 
   const secondDropdownItems = [
     { value: 1, label: "Cẩm Nang Xây Dựng" },
@@ -69,6 +92,7 @@ const AddBlog = () => {
 
   return (
     <Box>
+       <Header title="Add Blog" subtitle="Create a New BLog" />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
