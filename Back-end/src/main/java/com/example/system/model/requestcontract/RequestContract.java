@@ -33,6 +33,14 @@ public class RequestContract {
     @Column(nullable = false)
     private boolean status; //false: đang xử lý // true: đã xử lý
 
+    @Column(nullable = true)
+    private String placeMeet;
+//    @Column(nullable = true)
+//    private String dateMeet;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateMeet; //qua time này sẽ xóa request
+
     @ManyToOne
     @JoinColumn(name = "combo_building_id")
     @JsonIgnore
