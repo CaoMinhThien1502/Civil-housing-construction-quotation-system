@@ -22,6 +22,10 @@ public class RCDetailDto {
     private Double totalPrice;
     private Long comboId;
     private String comboName;
+
+    private String placeMeet;
+    private Date dateMeet;
+
     private BuildingDetailDto buildingDto;
     private boolean status;
 }

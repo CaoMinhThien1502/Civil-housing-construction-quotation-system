@@ -246,6 +246,13 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
+                        {/* <Item
+                            title="Building List"
+                            to="/building"
+                            icon={<FormatListBulletedOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        /> */}
                         {!isCollapsed && (
                             <Typography
                                 variant="h6"

@@ -18,6 +18,7 @@ const validationSchema = yup.object().shape({
 const AddBlog = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false); 
   const [userEmail, setUserEmail] = useState(localStorage.getItem("mail") || "");
   
   useEffect(() => {
@@ -46,7 +47,6 @@ const AddBlog = () => {
   const handleSubmit = async (values) => {
     try {
       setSubmitting(true);
-  
       const response = await axios.post(
         'http://localhost:8080/blog/create',
         values,
@@ -54,13 +54,13 @@ const AddBlog = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          withCredentials: true, // Bật tính năng gửi credentials
+          withCredentials: true,
         }
       );
-  
-      console.log(response); // Log response từ backend
-      console.log(values); 
+      console.log(response);
+      console.log(values);
       setSubmitting(false);
+      setSubmitSuccess(true); // Cập nhật state để hiển thị thông báo thành công
     } catch (error) {
       console.error('Error creating blog:', error);
       setSubmitError("Error creating blog");
@@ -93,6 +93,12 @@ const AddBlog = () => {
   return (
     <Box>
        <Header title="Add Blog" subtitle="Create a New BLog" />
+        {/* Phần xử lý hiển thị thông báo thành công */}
+      {submitSuccess && (
+        <Alert severity="success" onClose={() => setSubmitSuccess(false)}>
+          Blog created successfully!
+        </Alert>
+      )}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -170,5 +176,6 @@ const AddBlog = () => {
     </Box>
   );
 };
+
 
 export default AddBlog;
