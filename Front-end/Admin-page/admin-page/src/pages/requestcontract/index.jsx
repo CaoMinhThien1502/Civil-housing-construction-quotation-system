@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme, Button } from "@mui/material";
+import { Box, Typography, useTheme, Button, TextField } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import axios from 'axios';
@@ -154,7 +154,7 @@ const RequestContract = () => {
             headerName: "Date Meet",
             flex: 1,
             renderCell: (params) => (
-                <input
+                <TextField
                     type="text"
                     value={rowData.find(row => row.requestContractId === params.row.requestContractId)?.dateMeet || ''}
                     onChange={(event) => handleDateMeetInputChange(event, params.row.requestContractId)}
@@ -166,7 +166,7 @@ const RequestContract = () => {
             headerName: "Place",
             flex: 1,
             renderCell: (params) => (
-                <input
+                <TextField
                     type="text"
                     value={rowData.find(row => row.requestContractId === params.row.requestContractId)?.placeMeet || ''}
                     onChange={(event) => handlePlaceInputChange(event, params.row.requestContractId)}
