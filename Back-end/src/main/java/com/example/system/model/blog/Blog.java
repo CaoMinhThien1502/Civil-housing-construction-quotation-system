@@ -1,6 +1,7 @@
 package com.example.system.model.blog;
 
 import com.example.system.model.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,16 +24,18 @@ public class Blog {
     private Long blogId;
     @Column(nullable = false, columnDefinition = "varchar(200)")
     private String blogName;
-    @Column(nullable = false, columnDefinition = "varchar(10000)")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String blogContent;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date createDay;
-    @Column(columnDefinition = "varchar(500)")
+    private LocalDate createDay;
+    @Column(length = Integer.MAX_VALUE)
     private String imgPath;
     @Column(nullable = false, columnDefinition = "varchar(200)")
     private int blogType; // 1: Cẩm Nang Xây Dựng // 2: Thiết Kế Kiến Trúc
+
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 }

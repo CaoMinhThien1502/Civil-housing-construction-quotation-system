@@ -6,7 +6,6 @@ import com.example.system.dto.requestcontractdto.RCDetailDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
-import com.example.system.model.building.Item;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
@@ -85,6 +84,8 @@ public class RequestContractServiceImp implements RequestContractService {
             detail.setPhone(rc.getUser().getPhone());
             detail.setEmail(rc.getUser().getEmail());
             detail.setTotalPrice(rc.getTotalPrice());
+            detail.setDateMeet(rc.getDateMeet());
+            detail.setPlaceMeet(rc.getPlaceMeet());
             BuildingDetailDto bdto = new BuildingDetailDto();
             bdto.setBuildingId(rc.getBuilding().getBuildingId());
             bdto.setLandArea(rc.getBuilding().getArea());
@@ -113,6 +114,8 @@ public class RequestContractServiceImp implements RequestContractService {
             dto.setUserId(rc.getUser().getUserId());
             dto.setComboId(rc.getComboBuilding().getComboBuildingId());
             dto.setComboName(rc.getComboBuilding().getComboBuildingName());
+            dto.setDateMeet(rc.getDateMeet());
+            dto.setPlaceMeet(rc.getPlaceMeet());
             dto.setStatus(rc.isStatus());
             dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
             return dto;
@@ -153,11 +156,13 @@ public class RequestContractServiceImp implements RequestContractService {
     }
 
     @Override
-    public RequestContractDto confirmRequestContract(Long rcId) {
+    public RequestContractDto confirmRequestContract(Long rcId, Date dateMeet, String placeMeet) {
         RequestContract updaRequestContract = requestContractRepository.findById(rcId)
                 .orElseThrow(
                         () -> new IllegalStateException("Request contract with id " + rcId + " does not exists"));
         updaRequestContract.setStatus(true);
+        updaRequestContract.setDateMeet(dateMeet);
+        updaRequestContract.setPlaceMeet(placeMeet);
         requestContractRepository.save(updaRequestContract);
         return getRequestContractDto(updaRequestContract);
     }

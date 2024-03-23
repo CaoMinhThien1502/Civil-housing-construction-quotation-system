@@ -23,6 +23,10 @@ public interface BuildingService {
 
     List<BuildingDetailDto> findAllBD();
 
+    Building startBuilding(Long buildingID);
+    Building finishBuilding(Long buildingID);
+    Building checkBuilding(Long buildingID);
+
     FormConsultanDto getDataFormConsultant(int comboType, String email);
 
     BuildingPriceDto getBuildingPrice(BuildingDto bd, Long comboId);

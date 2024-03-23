@@ -4,6 +4,7 @@ import com.example.system.dto.buildingdto.*;
 import com.example.system.dto.buildingdto.itemdto.ItemDto;
 import com.example.system.dto.buildingdto.itemdto.ItemUpdateDto;
 import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
+import com.example.system.model.building.Building;
 import com.example.system.model.building.Item;
 import com.example.system.model.building.ItemType;
 import com.example.system.service.building.BuildingDetailService;
@@ -93,6 +94,25 @@ public class BuildingController{
     }
 
     //Building Controller
+
+    @PostMapping("/building/start-date")
+    public ResponseEntity<Building> startBuilding(@RequestParam Long buildingID){
+        Building startDate = buildingService.startBuilding(buildingID);
+        return ResponseEntity.ok(startDate);
+    }
+
+    @PostMapping("/building/finish-date")
+    public ResponseEntity<Building> finishBuilding(@RequestParam Long buildingID){
+        Building finishDate = buildingService.finishBuilding(buildingID);
+        return ResponseEntity.ok(finishDate);
+    }
+
+    @PostMapping("/building/check-date")
+    public ResponseEntity<Building> checkBuilding(@RequestParam Long buildingID){
+        Building checkDate = buildingService.checkBuilding(buildingID);
+        return ResponseEntity.ok(checkDate);
+    }
+
     @GetMapping("/building/list")
     public ResponseEntity<List<BuildingDto>> getBuildings(){
         List<BuildingDto> buildings = buildingService.findBuildingDtos();

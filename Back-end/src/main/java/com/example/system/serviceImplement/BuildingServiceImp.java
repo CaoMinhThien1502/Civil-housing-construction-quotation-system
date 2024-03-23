@@ -24,10 +24,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -148,6 +146,63 @@ public class BuildingServiceImp implements BuildingService {
             buildingDetailDtos.add(buildingDetailDto);
         }
         return buildingDetailDtos;
+    }
+    @Override
+    public Building startBuilding(Long buildingID){
+        try{
+//            if(building != null && building.getStatus() == -1){
+//                    building.setStatus(1);
+//                    building.setStartDate(new Date());
+//                    return building;
+//            }else{
+//                return null;
+//            }
+            Building building = buildingRepository.findByBuildingId(buildingID);
+            if(building != null && building.getStatus() == -1) {
+                building.setStatus(1);
+//            building.setStartDate(new Date());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedDate = sdf.format(new Date());
+                building.setStartDate(sdf.parse(formattedDate));
+                return buildingRepository.save(building);
+            }else {
+                throw new IllegalStateException("Wrong!!");
+            }
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public Building finishBuilding(Long buildingID){
+        try{
+            Building building = buildingRepository.findByBuildingId(buildingID);
+            if(building != null && building.getStatus() == 1) {
+                building.setStatus(2);
+//            building.setStartDate(new Date());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedDate = sdf.format(new Date());
+                building.setFinishDate(sdf.parse(formattedDate));
+                return buildingRepository.save(building);
+            }else {
+                throw new IllegalStateException("Wrong!!");
+            }
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public Building checkBuilding(Long buildingID) {
+        try{
+            Building building = buildingRepository.findByBuildingId(buildingID);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = sdf.format(new Date());
+            building.setCheckDate(sdf.parse(formattedDate));
+            return buildingRepository.save(building);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override

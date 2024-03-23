@@ -6,6 +6,7 @@ import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.requestcontract.RequestContract;
 
+import java.util.Date;
 import java.util.List;
 
 public interface RequestContractService {
@@ -16,6 +17,6 @@ public interface RequestContractService {
     RCDetailDto findById(Long rcId);
     RequestContractDto getRequestContractDto(RequestContract rc);
     RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId);
-    RequestContractDto confirmRequestContract(Long rcId);
+    RequestContractDto confirmRequestContract(Long rcId, Date dateMeet, String placeMeet);
     RequestContract updateRequestContract(RequestContract requestContract);
 }

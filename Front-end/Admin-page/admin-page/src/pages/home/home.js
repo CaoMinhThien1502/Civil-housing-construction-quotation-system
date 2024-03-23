@@ -1,5 +1,6 @@
 // Import necessary React modules
 import "./personIn4.css";
+import "./blogs.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import React, {useEffect, useReducer, useState } from 'react';
@@ -37,7 +38,8 @@ import './TeamSection.css';
 import '../../styles/main/main.css';
 // Import Emaijs library
 import emailjs from 'emailjs-com';
-
+//blog real ne
+import axios from 'axios';
 
 // Create a functional component for the header
 const Header = () => {
@@ -48,7 +50,8 @@ const Header = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('username');
-    window.location.href = '/login';
+    localStorage.removeItem('tokenTime'); 
+    window.location.href = 'http://localhost:8080/api/v1/auth/logout';
   };
   return (
     <header id="header" className="fixed-top d-flex align-items-center">
@@ -62,9 +65,11 @@ const Header = () => {
           <ul>
             <li><a className="nav-link scrollto active" href="/home#">Home</a></li>
             <li><a className="nav-link scrollto" href="/home#about">About</a></li>
-            <li><a className="nav-link scrollto" href="/home#blog" >Blogs</a></li>
+            <li><a className="nav-link scrollto" href="/home#blog" >Sample Building</a></li>
             <li><a className="nav-link scrollto" href="/home#pricing">Pricing</a></li>
             <li><a className="nav-link scrollto" href="/home#contact">Contact us</a></li>
+            <li><a className="nav-link scrollto" href="/home#blogreal">Blogs</a></li>
+        
             {isLoggedIn ? (
               <>
                 <li><a className="nav-link scrollto" href="/profile">Profile</a></li>
@@ -163,13 +168,13 @@ const PersonIn4 = () => {
             <p className="description">The man uses leading skills to lead us in getting our target. The fastest way to be success is together.</p>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="serviceBox ">
+        <div className="col-md-3 col-sm-6">
+          <div className="serviceBox ">
             <div> <img src={team3} className="service-icon"/>
-              <span><i class="fa fa-rocket"></i></span>
+              <span><i className="fa fa-rocket"></i></span>
             </div>
-            <button class="title-btn">Mr. Peter</button>
-            <p class="description">The master in building area, who knows what is better for your building. Helping you in choosing the best suited.</p>
+            <button className="title-btn">Mr. Peter</button>
+            <p className="description">The master in building area, who knows what is better for your building. Helping you in choosing the best suited.</p>
           </div>
         </div>
         <div className="col-md-3 col-sm-6">
@@ -178,7 +183,7 @@ const PersonIn4 = () => {
               <span><i className="fa fa-rocket"></i></span>
             </div>
             <button className="title-btn">Ms. Anna</button>
-            <p class="description">The evaluator and analyst of construction projects, she can make the best building in the budget.</p>
+            <p className="description">The evaluator and analyst of construction projects, she can make the best building in the budget.</p>
           </div>
         </div>
       </div>
@@ -227,7 +232,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
                 </ul>
                 {/* <button className="button-51" type="button">Đọc ngay</button> */}
                 <Link to="/blog" className="button-51">Read now</Link>
@@ -249,7 +254,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>
@@ -270,7 +275,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>
@@ -291,7 +296,7 @@ const TeamSection = () => {
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i class="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
                 <Link to="/blog" className="button-51">Read now</Link>
               </div>
@@ -303,6 +308,60 @@ const TeamSection = () => {
     </section>
   );
 };
+// blog real ----------------------------------------------------------------------------
+const BlogReal = () => {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/blog/list');
+        setBlogs(response.data); // Giả sử API trả về một mảng các bài blog
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+        // Xử lý lỗi tại đây nếu cần thiết
+      }
+    };
+
+    fetchBlogs();
+  }, []); // Tham số thứ hai là mảng rỗng để useEffect chỉ chạy một lần sau khi component được mount
+  return (
+    <section id="blogreal" className="team section-bg">
+      <div className="container">
+        <div className="section-title aos-init aos-animate" data-aos="fade-up">
+          <h2>Blogs</h2>
+        </div>
+        <div className="row blog-row">
+          {blogs.map(blog => (
+            <div key={blog.blogId} className="col-lg-3 col-md-6">
+            <Link to={`/blogDetail/${blog.blogId}`} className="blog-link">
+              <div className="member aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                <div className="member-inner d-flex flex-column">
+                  <div className="member-info flex-grow-1">
+                    <p className="blog-name">{blog.blogName}</p>
+                  </div>
+                  <div className="member-img">
+                    <img src={blog.imgPath} alt="Blog Image" className="img-fluid blog-img" />
+                  </div>
+
+                  <div className="member-info flex-grow-1">
+                  <p style={{ color: blog.blogType === 1 ? 'red' : 'inherit' }}>
+  {blog.blogType === 1 ? 'Cẩm nang xây dựng' : 'Thiết kế kiến trúc'}
+</p>
+                    <p className="blog-name">{blog.createDay}</p>
+                  </div>
+
+                </div>
+              </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+ 
 
 const PricingSection = () => {
     const navigate = useNavigate();
@@ -532,6 +591,7 @@ const Footer = () => {
   );
 };
 
+
 const BackToTopButton = () => {
   return (
     <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>
@@ -540,4 +600,4 @@ const BackToTopButton = () => {
 
 
 // Export the component for use in other parts of your React application
-export { Header, HeroSection, AboutUsSection,PersonIn4, TeamSection, PricingSection, ContactSection, Footer, BackToTopButton  };
+export { Header, HeroSection, AboutUsSection,PersonIn4, TeamSection, PricingSection, ContactSection, Footer, BackToTopButton, BlogReal  };
