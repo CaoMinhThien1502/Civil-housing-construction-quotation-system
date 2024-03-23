@@ -207,7 +207,7 @@ const TeamSection = () => {
     <section id="blog" className="team section-bg">
       <div className="container">
         <div className="section-title" data-aos="fade-up">
-          <h2>Blog</h2>
+          <h2>Sample Building</h2>
           <p>Finished Buildings</p>
         </div>
         <div className="row">
@@ -432,7 +432,7 @@ const ContactSection = () => {
         <div className="row">
           <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div className="contact-about">
-              <h3>Vesperr</h3>
+              <h3>CHCQ System</h3>
               <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
               <div className="social-links">
                 <a href="#" className="twitter"><i className="bi bi-twitter"></i></a>
@@ -446,15 +446,15 @@ const ContactSection = () => {
             <div className="info">
               <div>
                 <i className="ri-map-pin-line"></i>
-                <p>A108 Adam Street<br />New York, NY 535022</p>
+                <p>FPT University<br />Thu Duc City, Ho Chi Minh City</p>
               </div>
               <div>
                 <i className="ri-mail-send-line"></i>
-                <p>info@example.com</p>
+                <p>civilhousingsystem@gmail.com</p>
               </div>
               <div>
                 <i className="ri-phone-line"></i>
-                <p>+1 5589 55488 55s</p>
+                <p>+84 355 004 120</p>
               </div>
             </div>
           </div>
@@ -520,7 +520,7 @@ const Footer = () => {
           </div>
           <div className="col-lg-6">
             <nav className="footer-links text-lg-right text-center pt-2 pt-lg-0">
-              <a href="#intro" className="scrollto">Home</a>
+              <a href="#" className="scrollto">Home</a>
               <a href="#about" className="scrollto">About</a>
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Use</a>

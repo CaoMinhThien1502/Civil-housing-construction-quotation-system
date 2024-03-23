@@ -97,13 +97,13 @@ function Register() {
 
   return (
     <div className="container-register">
-      <div className="content">
+      <div className="content1">
         <img src={Anh1} alt="register" />
-        <form className="form" onSubmit={handleSubmit}>
-          <p className="title">Register</p>
+        <form className="form1" onSubmit={handleSubmit}>
+          <p className="title1">Register</p>
           <label>
             <input
-              className="input"
+              className="input1"
               type="text"
               placeholder=""
               value={fullName}
@@ -114,7 +114,7 @@ function Register() {
           </label>
           <label>
             <input
-              className="input"
+              className="input1"
               type="email"
               placeholder=""
               value={email}
@@ -126,7 +126,7 @@ function Register() {
           </label>
           <label>
             <input
-              className="input"
+              className="input1"
               type="password"
               placeholder=""
               value={password}
@@ -137,7 +137,7 @@ function Register() {
           </label>
           <label>
             <input
-              className="input"
+              className="input1"
               type="password"
               placeholder=""
               value={confirmPassword}
@@ -149,7 +149,7 @@ function Register() {
           </label>
           <label>
             <input
-              className="input"
+              className="input1"
               type="text"
               placeholder=""
               value={address}
@@ -160,7 +160,7 @@ function Register() {
           </label>
           <label>
             <input
-              className="input"
+              className="input1"
               type="tel"
               pattern="0[0-9]{9}"
               placeholder=""
@@ -170,10 +170,10 @@ function Register() {
             />
             <span>Phone</span>
           </label>
-          <div className="flex">
+          <div className="flex1">
             <label>
               <input
-                className="input"
+                className="input1"
                 type="date"
                 style={{ width: '170px' }}
                 placeholder=""
@@ -208,7 +208,7 @@ function Register() {
               Female
             </label>
           </div>
-          <button className="submit">Submit</button>
+          <button className="submit1">Submit</button>
           <p className="signin">
             Already have an account? <a href="/login">Sign in</a>
           </p>

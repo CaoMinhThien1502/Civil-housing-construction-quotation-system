@@ -1207,3 +1207,4 @@ INSERT INTO request_contract(status, request_date, total_price, combo_building_i
 INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(true, '2022-10-11', 120000000, 3, 5, 1);
 INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(true, '2024-03-08', 950000000, 10, 6, 2);
 INSERT INTO request_contract(status, request_date, total_price, combo_building_id, building_id, user_id ) VALUES(false, '2024-02-29', 310000000 , 14, 7, 3);
+
