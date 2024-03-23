@@ -339,11 +339,18 @@ const BlogReal = () => {
                 <div className="member-inner d-flex flex-column">
                   <div className="member-info flex-grow-1">
                     <p className="blog-name">{blog.blogName}</p>
-                    <p>{blog.blogType}</p>
                   </div>
                   <div className="member-img">
                     <img src={blog.imgPath} alt="Blog Image" className="img-fluid blog-img" />
                   </div>
+
+                  <div className="member-info flex-grow-1">
+                  <p style={{ color: blog.blogType === 1 ? 'red' : 'inherit' }}>
+  {blog.blogType === 1 ? 'Cẩm nang xây dựng' : 'Thiết kế kiến trúc'}
+</p>
+                    <p className="blog-name">{blog.createDay}</p>
+                  </div>
+
                 </div>
               </div>
               </Link>

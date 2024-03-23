@@ -102,11 +102,6 @@ const RequestContractDetail = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/requestContractList")} color="secondary" variant="contained">
-                        Cancel
-                    </Button>
-                </Box>
                 <Box sx={{ gridColumn: "span 4" }}>
                     <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
                         Building Information
@@ -140,6 +135,11 @@ const RequestContractDetail = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Box display="flex" justifyContent="end" mt="20px">
+                    <Button onClick={() => navigate("/requestContractList")} color="secondary" variant="contained">
+                        Cancel
+                    </Button>
+                </Box>
             </Box>
         </Box>
     );

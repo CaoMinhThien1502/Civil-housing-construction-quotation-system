@@ -11,4 +11,6 @@ public interface BlogService {
     Blog getBlogById(Long id);
 
     boolean createBlog(BlogDto blog);
+
+    List<Blog> getListBlogByType(int blogType);
 }

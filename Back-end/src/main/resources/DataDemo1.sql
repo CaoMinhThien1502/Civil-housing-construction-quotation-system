@@ -526,7 +526,8 @@ INSERT INTO building_detail(building_id, item_id) VALUES (12,19);
 INSERT INTO building_detail(building_id, item_id) VALUES (12,23);
 
 
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(false, 200, '2023-10-23', '2023-10-30', 7, 1, 4);
+
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet ) VALUES(false, 200, '2023-10-23', '2023-10-30', 7, 1, 4, '2024-05-12');
 INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 300, '2023-11-03', '2023-11-10', 1, 2, 6);
 INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 300, '2023-11-11', '2023-11-18', 15, 3, 6);
 INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 300, '2021-10-05', '2021-10-12', 11, 4, 4);
