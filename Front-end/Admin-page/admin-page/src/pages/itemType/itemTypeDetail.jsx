@@ -125,7 +125,12 @@ const ItemTypeDetail = () => {
                     columns={[
                         { field: "itemId", headerName: "Item ID", flex: 1 },
                         { field: "itemName", headerName: "Item Name", flex: 1 },
-                        { field: "priceItem", headerName: "Item Price", flex: 1 },
+                        { field: "priceItem", headerName: "Item Price", flex: 1,
+                            renderCell: (params) => {
+                                const { row: { priceItem } } = params; // Extract the type value
+                                return priceItem.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+                            },
+                        },
                         {
                             field: "status", headerName: "Status",
                             renderCell: (params) => {

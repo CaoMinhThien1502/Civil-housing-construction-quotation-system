@@ -97,7 +97,7 @@ const ComboBuildingDetail = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Price:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{comboData?.unitPrice}</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{comboData?.unitPrice?.toLocaleString('vi', {style : 'currency', currency : 'VND'})}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -120,7 +120,12 @@ const ComboBuildingDetail = () => {
                             columns={[
                                 { field: "materialId", headerName: "Material ID", flex: 1 },
                                 { field: "materialName", headerName: "Material Name", flex: 1 },
-                                { field: "unitPrice", headerName: "Unit Price", flex: 1 },
+                                { field: "unitPrice", headerName: "Unit Price", flex: 1, 
+                                    renderCell: (params) => {
+                                        const { value } = params;
+                                        return value?.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+                                    }
+                                },
                                 { field: "status", headerName: "Status", 
                                 renderCell: (params) => {
                                         const { row: { status } } = params; // Extract the type value

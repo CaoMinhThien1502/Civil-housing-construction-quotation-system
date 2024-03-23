@@ -57,6 +57,10 @@ const ItemList = () => {
             field: "priceItem",
             headerName: "Price",
             flex: 1,
+            renderCell: (params) => {
+                const { value } = params;
+                return value?.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+            },
         },
         {
             field: "itemTypeName",

@@ -109,7 +109,7 @@ const RequestContract = () => {
             field: "userName",
             headerName: "Creator",
             cellClassName: "name-column--cell",
-            flex: 1,
+            flex: 0.8,
         },
         {
             field: "comboName",
@@ -119,14 +119,18 @@ const RequestContract = () => {
         {
             field: "totalPrice",
             headerName: "Price",
-            flex: 1,
+            flex: 0.5,
+            renderCell: (params) => {
+                const { value } = params; // Use `value` directly for clarity (optional)
+                return value.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+            },
         },
         {
             field: "buildingDto.status",
             headerName: "Type",
             headerAlign: "center",
             align: "center",
-            flex: 1,
+            flex: 0.8,
             renderCell: (params) => {
                 const buildingStatus = params.row.buildingDto.status;
                 return buildingStatus === -1 ? "Mẫu" : buildingStatus === 0 ? "Hủy" : buildingStatus === 1 ? "Đang thi công" : "Đã xong";
@@ -150,6 +154,11 @@ const RequestContract = () => {
             },
         },
         {
+            field: "requestDate",
+            headerName: "Request Date",
+            flex: 0.8,
+        },
+        {
             field: "dateMeet",
             headerName: "Date Meet",
             flex: 1,
@@ -164,7 +173,7 @@ const RequestContract = () => {
         {
             field: "place",
             headerName: "Place",
-            flex: 1,
+            flex: 1.5,
             renderCell: (params) => (
                 <TextField
                     type="text"
@@ -178,7 +187,7 @@ const RequestContract = () => {
             headerName: "Setting",
             headerAlign: "center",
             align: "center",
-            flex: 1,
+            flex: 0.8,
             renderCell: ({ row }) => (
                 <Link
                     to={`/requestContractList/detail/${row.requestContractId}`}
@@ -195,7 +204,7 @@ const RequestContract = () => {
             headerName: "Confirm",
             headerAlign: "center",
             align: "center",
-            flex: 1,
+            flex: 1.2,
             renderCell: ({ row }) => (
                 row.status ? (
                     <Typography variant="body2" color="textSecondary">
