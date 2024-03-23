@@ -105,7 +105,7 @@ const ItemTypeDetail = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: getItemType?.status === true ? "lightGreen" : "orangeRed" }}>{getItemType?.status === true ? "Active" : "Inactive"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

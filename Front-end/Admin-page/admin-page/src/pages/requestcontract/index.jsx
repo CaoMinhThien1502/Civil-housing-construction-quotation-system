@@ -37,8 +37,8 @@ const RequestContract = () => {
                         'Content-Type': 'application/json',
                     },
                 });
-                console.log(response);
-                setRequestContract(response.data);
+                console.log(response.data);
+                setRequestContract(response.data.sort((a, b) => new Date(b.requestDate) - new Date(a.requestDate)));
                 setRowData(response.data.map(row => ({
                     ...row,
                     placeMeet: row.placeMeet || '',
@@ -139,8 +139,14 @@ const RequestContract = () => {
             align: "center",
             flex: 1,
             renderCell: (params) => {
-                const { row: { status } } = params;
-                return status === true ? "Active" : "Inactive";
+                const { value: status } = params; // Use `value` directly for clarity (optional)
+
+                const color = status === true ? 'lightGreen' : 'orange'; // Concise conditional color assignment
+                const text = status === true ? 'Confirmed' : 'Pending'; // Maintain separate text variable
+
+                return (
+                    <Typography style={{ color }}>{text}</Typography>
+                );
             },
         },
         {

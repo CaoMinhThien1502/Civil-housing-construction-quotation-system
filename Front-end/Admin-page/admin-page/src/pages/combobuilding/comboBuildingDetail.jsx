@@ -83,7 +83,7 @@ const ComboBuildingDetail = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{comboData?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: comboData?.status === true ? "lightGreen" : "orangeRed" }}>{comboData?.status === true ? "Active" : "Inactive"}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Type:</TableCell>

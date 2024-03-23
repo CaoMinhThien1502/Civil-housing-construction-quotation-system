@@ -104,7 +104,7 @@ const MaterialTypeDetail = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{getMaterialType?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: getMaterialType?.status === true ? "lightGreen" : "orangeRed" }}>{getMaterialType?.status === true ? "Active" : "Inactive"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
