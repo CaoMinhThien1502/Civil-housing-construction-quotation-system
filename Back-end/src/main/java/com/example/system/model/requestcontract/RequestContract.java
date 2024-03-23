@@ -2,6 +2,7 @@ package com.example.system.model.requestcontract;
 
 import com.example.system.model.building.Building;
 import com.example.system.model.combo.ComboBuilding;
+import com.example.system.model.combo.CustomDetail;
 import com.example.system.model.payment.Invoice;
 import com.example.system.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,6 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -33,6 +36,14 @@ public class RequestContract {
     @Column(nullable = false)
     private boolean status; //false: đang xử lý // true: đã xử lý
 
+    @Column(nullable = true)
+    private String placeMeet;
+//    @Column(nullable = true)
+//    private String dateMeet;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateMeet; //qua time này sẽ xóa request
+
     @ManyToOne
     @JoinColumn(name = "combo_building_id")
     @JsonIgnore
@@ -48,4 +59,7 @@ public class RequestContract {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "invoice_id", referencedColumnName = "invoiceId")
     private Invoice invoice;
+    @OneToMany(mappedBy = "requestContract")
+    @JsonIgnore
+    List<CustomDetail> customDetails;
 }

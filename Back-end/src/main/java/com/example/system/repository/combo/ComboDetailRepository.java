@@ -3,6 +3,7 @@ package com.example.system.repository.combo;
 import com.example.system.dto.combodto.ComboResponseDto;
 import com.example.system.model.combo.ComboBuilding;
 import com.example.system.model.combo.ComboDetail;
+import com.example.system.model.combo.MaterialType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,6 @@ public interface ComboDetailRepository extends JpaRepository<ComboDetail, Long> 
 
     @Query("SELECT cd FROM ComboDetail cd WHERE cd.comboBuilding.comboBuildingId = :comboBuildingId")
     List<ComboDetail> findAllByComboBuildingId(@Param("comboBuildingId")Long comboBuildingId);
+
+    ComboDetail findComboDetailByComboBuildingAndMaterial_MaterialType(ComboBuilding comboBuilding, MaterialType materialType);
 }

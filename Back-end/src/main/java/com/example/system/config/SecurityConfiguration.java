@@ -56,6 +56,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/blog/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/blog/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         /// ----------------------Cường chơi dưới này, đừng đụng trên của t nha
+                        //Custom combo building
+                        .requestMatchers(HttpMethod.GET, "/custom-combo/**").permitAll()
+
                         //Building
                         .requestMatchers(HttpMethod.GET, "/building/**").permitAll()
 //                                        .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
@@ -67,7 +70,8 @@ public class SecurityConfiguration {
 //                                .requestMatchers(HttpMethod.POST, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
 //                                .requestMatchers(HttpMethod.PUT, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         //Payment
-                        .requestMatchers("/payment/**").permitAll().anyRequest().authenticated()).formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
+                        .requestMatchers("/payment/**").permitAll().anyRequest().authenticated())
+                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
                         .loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
                 ) // URL mặc định sau khi đăng nhập thành công
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).logout(logout -> logout.logoutUrl(LOGOUT_URL) // URL để xử lý quá trình đăng xuất
