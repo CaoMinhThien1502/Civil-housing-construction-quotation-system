@@ -448,13 +448,14 @@ INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobath
 INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (170, null, null, true, 1, 1, 1, '2024-02-23', 1, 6);
 
 -- request contract
-INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2022-03-11', true, '2022-03-08', false, '2022-03-14', 130000000, 1, 2, 1, 'Nha ban');
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ( null, true, '2022-03-08', false, '2022-03-14', 130000000, 1, 2, 1, null);
 INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2023-12-28', true, '2023-12-25', true, '2024-01-01', 100000000, 2, 3, 2, 'Nha toi');
 INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2023-06-04', true, '2023-06-01', true, '2023-06-08', 1000002000, 3, 9, 2, 'Chua 2 tang');
-INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2024-03-25', false, '2024-03-22', false, '2024-03-28', 19900000000, 4, 2, 4, 'Nha cau');
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES (null, false, '2024-03-22', false, '2024-03-28', 19900000000, 4, 2, 4, null);
 INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2022-07-09', true, '2022-07-06', true, '2022-07-13', 1200000000, 5, 4, 5, 'Nha to');
 INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2023-08-31', true, '2023-08-28', true, '2023-09-04', 3300000000, 6, 6, 3, 'Nha chung ta');
 INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2024-02-20', true, '2024-02-16', true, '2024-02-23', 1040000000, 7, 7, 6, 'Nha minh');
+
 
 
 -- invoice
@@ -465,3 +466,4 @@ INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran
 INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 5, '2022-07-06 15:45:40.000000', 5, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',5);
 INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 6, '2023-08-28 17:50:58.000000', 3, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',6);
 INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 7, '2024-02-16 17:51:11.000000', 6, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',7);
+

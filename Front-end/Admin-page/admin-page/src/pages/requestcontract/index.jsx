@@ -126,13 +126,13 @@ const RequestContract = () => {
             },
         },
         {
-            field: "buildingDto.status",
+            field: "buildingDetail.status",
             headerName: "Type",
             headerAlign: "center",
             align: "center",
             flex: 0.8,
             renderCell: (params) => {
-                const buildingStatus = params.row.buildingDto.status;
+                const buildingStatus = params.row.buildingDetail.status;
                 return buildingStatus === -1 ? "Mẫu" : buildingStatus === 0 ? "Hủy" : buildingStatus === 1 ? "Đang thi công" : "Đã xong";
             },
         },
@@ -164,7 +164,7 @@ const RequestContract = () => {
             flex: 1,
             renderCell: (params) => (
                 <TextField
-                    type="text"
+                    type="date"
                     value={rowData.find(row => row.requestContractId === params.row.requestContractId)?.dateMeet || ''}
                     onChange={(event) => handleDateMeetInputChange(event, params.row.requestContractId)}
                 />

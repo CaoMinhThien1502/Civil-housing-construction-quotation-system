@@ -67,9 +67,11 @@ public class AuthenticationService {
         saveUserToken(saveUser, jwtToken);
         //String link = "http://localhost:3000/login?active=register&token=" + jwtToken;
         String link = "http://localhost:8080/confirm-register?token=" + jwtToken;
+        String subject = "Confirm your email";
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getFullname(), link)
+                buildEmail(request.getFullname(), link),
+                subject
         );
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)

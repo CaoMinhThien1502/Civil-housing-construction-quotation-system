@@ -122,8 +122,8 @@ const Dashboard = () => {
                     justifyContent="center"
                 >
                     <StatBox
-                        title={getTotalData.item_count}
-                        subtitle="Total Items"
+                        title={getTotalData.building_count}
+                        subtitle="Total Building"
                         progress="0.50"
                         increase="+21%"
                         icon={
