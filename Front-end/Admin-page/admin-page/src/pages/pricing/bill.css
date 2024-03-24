@@ -1,0 +1,28 @@
+.invoice-container {
+    margin-left: 1000px;
+} 
+.btn-checkout { 
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 140px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 12px 12px 12px;
+    color: #fff;
+    background-color:#1d9ab9 ;
+    height: 44px;
+    margin-bottom: 2px;
+}
+.btn-checkout:hover{
+    background-color: #1d9ab9;
+}
