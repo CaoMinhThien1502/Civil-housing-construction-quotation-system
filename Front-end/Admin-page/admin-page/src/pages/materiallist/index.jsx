@@ -57,6 +57,10 @@ const MaterialList = () => {
             field: "unitPrice",
             headerName: "Price",
             flex: 1,
+            renderCell: (params) => {
+                const { value } = params;
+                return value?.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+            },
         },
         {
             field: "unit",
@@ -75,8 +79,14 @@ const MaterialList = () => {
             align: "center",
             flex: 1,
             renderCell: (params) => {
-                const { row: { status } } = params; // Extract the type value
-                return status === true ? "Active" : "Inactive";
+                const { value: status } = params; // Use `value` directly for clarity (optional)
+
+                const color = status === true ? 'lightGreen' : 'orangeRed'; // Concise conditional color assignment
+                const text = status === true ? 'Active' : 'Inactive'; // Maintain separate text variable
+
+                return (
+                    <Typography style={{ color }}>{text}</Typography>
+                );
             },
         },
         {

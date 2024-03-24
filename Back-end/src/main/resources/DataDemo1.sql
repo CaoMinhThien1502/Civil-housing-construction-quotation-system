@@ -1,4 +1,4 @@
---user
+-- user
 INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (false,'2001-11-01','11 Ben Nghe','admin123@gmail.com','admin1','admin123','admin','0938472726',1);
 INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
@@ -67,7 +67,7 @@ INSERT INTO material_type(type_name, status) VALUES ('Dây Điện, Dây Cáp',1
 INSERT INTO material_type(type_name, status) VALUES ('Ống Nước',1);
 INSERT INTO material_type(type_name, status) VALUES ('Tôn',1);
 INSERT INTO material_type(type_name, status) VALUES ('Ngói',1);
---material
+-- material
 INSERT INTO material(material_name,material_type_id,unit_price,img_path, unit, status) VALUES ('Sắt Thép Hòa Phát Ø6, Ø8 ',1, 11000,'Sắt Thép Hòa Phát 3','kg',1);
 INSERT INTO material(material_name,material_type_id,unit_price,img_path, unit, status) VALUES ('Sắt Thép Hòa Phát Ø10 ',1, 77995,'Sắt Thép Hòa Phát', 'cây',1);
 INSERT INTO material(material_name,material_type_id,unit_price,img_path, unit, status) VALUES ('Sắt Thép Hòa Phát Ø12 ',1, 110323,'Sắt Thép Hòa Phát', 'cây',1);

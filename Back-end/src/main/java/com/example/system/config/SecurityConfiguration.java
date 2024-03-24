@@ -58,7 +58,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         .requestMatchers(HttpMethod.PUT, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         //Dashboard
-                        .requestMatchers("/dashboard/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                        .requestMatchers("/dashboard/**").permitAll()
                         //Blog
                         //.requestMatchers("/blog/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/blog/**").permitAll()

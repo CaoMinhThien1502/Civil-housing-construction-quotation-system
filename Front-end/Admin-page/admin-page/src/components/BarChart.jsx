@@ -34,7 +34,7 @@ const BarChart = ({ isDashboard = false }) => {
         fetchTotalData();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-    console.log(getTotalData);
+    // console.log(getTotalData);
 
     // const halfLength = Math.ceil(getTotalData.length / 2);
     // const firstHalf = getTotalData.map((item) => item.itemName).slice(0, halfLength);
