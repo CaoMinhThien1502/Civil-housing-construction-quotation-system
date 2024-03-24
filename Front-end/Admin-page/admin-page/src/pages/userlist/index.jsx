@@ -55,6 +55,26 @@ const UserList = () => {
         {
             field: "role",
             headerName: "Role",
+            renderCell: (params) => {
+                const { value: role } = params; // Use `value` directly for clarity (optional)
+
+                let color;
+                switch (role) {
+                    case 'ADMIN':
+                        color = 'lightBlue';
+                        break;
+                    case 'MANAGER':
+                        color = 'orange';
+                        break;
+                    case 'CUSTOMER':
+                        color = 'lightGreen';
+                        break;
+                    default:
+                        color = 'gray'; // Default color for unknown roles
+                }
+
+                return <Typography style={{ color }}>{role}</Typography>;
+            },
         },
         {
             field: "phone",
@@ -85,8 +105,14 @@ const UserList = () => {
             headerAlign: "center",
             align: "center",
             renderCell: (params) => {
-                const { row: { status } } = params; // Extract the type value
-                return status === true ? "Active" : "Inactive";
+                const { value: status } = params; // Use `value` directly for clarity (optional)
+
+                const color = status === true ? 'lightGreen' : 'orangeRed'; // Concise conditional color assignment
+                const text = status === true ? 'Active' : 'Inactive'; // Maintain separate text variable
+
+                return (
+                    <Typography style={{ color }}>{text}</Typography>
+                );
             },
         },
         {

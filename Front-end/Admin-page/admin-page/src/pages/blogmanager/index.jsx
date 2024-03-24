@@ -115,7 +115,7 @@ const Blog = () => {
 
     return (
         <Box m="20px" >
-            <Header title="Combo Building List" subtitle="Managing the Combo Building List" />
+            <Header title="Blog List" subtitle="Managing the Blog List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"

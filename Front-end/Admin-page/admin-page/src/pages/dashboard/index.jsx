@@ -62,8 +62,8 @@ const Dashboard = () => {
         fetchRequestContract();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-    const extraCost = getTotalData.request_contract_count * (200000 * 5 / 100);
-    const totalRevenue = getTotalData.request_contract_count * 200000 + extraCost;
+    // const extraCost = getTotalData.request_contract_count * (200000 * 5 / 100);
+    // const totalRevenue = getTotalData.request_contract_count * 200000 + extraCost;
     
     return (
         <Box m="20px">
@@ -214,7 +214,7 @@ const Dashboard = () => {
                     </Box>
                 </Box> */}
                 <Box
-                    gridColumn="span 8"
+                    gridColumn="span 12"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
                     overflow="auto"
@@ -266,7 +266,7 @@ const Dashboard = () => {
                 </Box>
 
                 {/* ROW 3 */}
-                <Box
+                {/* <Box
                     gridColumn="span 4"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
@@ -291,7 +291,7 @@ const Dashboard = () => {
                         </Typography>
                         <Typography>Includes {extraCost.toLocaleString('vi', {style : 'currency', currency : 'VND'})} extra misc expenditures and costs</Typography>
                     </Box>
-                </Box>
+                </Box> */}
                 <Box
                     gridColumn="span 12"
                     gridRow="span 2"
