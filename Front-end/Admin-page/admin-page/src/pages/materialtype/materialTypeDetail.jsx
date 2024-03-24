@@ -104,7 +104,7 @@ const MaterialTypeDetail = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{getMaterialType?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: getMaterialType?.status === true ? "lightGreen" : "orangeRed" }}>{getMaterialType?.status === true ? "Active" : "Inactive"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -124,7 +124,12 @@ const MaterialTypeDetail = () => {
                     columns={[
                         { field: "materialId", headerName: "Material ID", flex: 1 },
                         { field: "materialName", headerName: "Material Name", flex: 1 },
-                        { field: "unitPrice", headerName: "Unit Price", flex: 1 },
+                        { field: "unitPrice", headerName: "Unit Price", flex: 1,
+                            renderCell: (params) => {
+                                const { row: { unitPrice } } = params; // Extract the type value
+                                return unitPrice.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+                            },
+                        },
                         {
                             field: "status", headerName: "Status",
                             renderCell: (params) => {

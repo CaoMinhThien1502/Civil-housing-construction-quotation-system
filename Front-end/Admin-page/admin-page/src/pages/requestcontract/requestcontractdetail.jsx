@@ -97,7 +97,7 @@ const RequestContractDetail = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: requestContractData?.status === true ? "lightGreen" : "orange" }}>{requestContractData?.status === true ? "Confirmed" : "Pending"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
