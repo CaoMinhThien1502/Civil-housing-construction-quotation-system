@@ -149,7 +149,7 @@ const RequestContract = () => {
             flex: 1,
             renderCell: (params) => (
                 <input
-                    type="text"
+                    type="date"
                     value={rowData.find(row => row.requestContractId === params.row.requestContractId)?.dateMeet || ''}
                     onChange={(event) => handleDateMeetInputChange(event, params.row.requestContractId)}
                 />

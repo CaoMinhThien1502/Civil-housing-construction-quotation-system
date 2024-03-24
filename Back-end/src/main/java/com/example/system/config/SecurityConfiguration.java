@@ -36,15 +36,15 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(c -> c.configurationSource(request -> {
-                    CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-                    config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT", "PATCH", "HEAD", "OPTIONS"));
-                    config.setAllowedHeaders(Arrays.asList("*"));
-                    config.addExposedHeader("Content-Type, Authorization");
-                    config.addExposedHeader("Access-Control-Allow-Origin, Access-Control-Allow-Credentials");
-                    config.setAllowCredentials(true);
-                    return config;
-                }));
+            CorsConfiguration config = new CorsConfiguration();
+            config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+            config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT", "PATCH", "HEAD", "OPTIONS"));
+            config.setAllowedHeaders(Arrays.asList("*"));
+            config.addExposedHeader("Content-Type, Authorization");
+            config.addExposedHeader("Access-Control-Allow-Origin, Access-Control-Allow-Credentials");
+            config.setAllowCredentials(true);
+            return config;
+        }));
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
@@ -58,7 +58,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         .requestMatchers(HttpMethod.PUT, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         //Dashboard
-                        .requestMatchers("/dashboard/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                        .requestMatchers("/dashboard/**").permitAll()
                         //Blog
                         //.requestMatchers("/blog/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/blog/**").permitAll()
@@ -77,7 +77,9 @@ public class SecurityConfiguration {
 //                                .requestMatchers(HttpMethod.POST, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
 //                                .requestMatchers(HttpMethod.PUT, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         //Payment
-                        .requestMatchers("/payment/**").permitAll().anyRequest().authenticated()).formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
+                        .requestMatchers("/payment/**").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
                         .loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
                 ) // URL mặc định sau khi đăng nhập thành công
                 .sessionManagement(sessionManagement -> sessionManagement

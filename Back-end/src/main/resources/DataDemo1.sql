@@ -527,16 +527,16 @@ INSERT INTO building_detail(building_id, item_id) VALUES (12,23);
 
 
 
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet ) VALUES(false, 200, '2023-10-23', '2023-10-30', 7, 1, 4, '2024-05-12');
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 300, '2023-11-03', '2023-11-10', 1, 2, 6);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 300, '2023-11-11', '2023-11-18', 15, 3, 6);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 300, '2021-10-05', '2021-10-12', 11, 4, 4);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 300, '2023-10-05', '2023-10-12', 3, 5, 1);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 300, '2023-04-15', '2023-04-22 ', 10, 6, 2);
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(false, 200, '2023-10-23', '2023-10-30', 7, 1, 4);
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2023-11-03', '2023-11-10', 1, 2, 6,'2024-05-12', "DakLak");
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2023-11-11', '2023-11-18', 15, 3, 6,'2024-05-12', "Kontum");
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2021-10-05', '2021-10-12', 11, 4, 4,'2024-05-12', "QuangNgai");
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2023-10-05', '2023-10-12', 3, 5, 1,'2024-05-12', "SaiGon");
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2023-04-15', '2023-04-22 ', 10, 6, 2,'2024-05-12', "GiaLai");
 INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(false, 300, '2024-02-29', '2024-03-06', 14, 7, 3);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 200, '2024-02-29', '2024-03-06', 2, 8, 4);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 200, '2023-10-21', '2023-10-28', 13, 9, 7);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 200, '2024-03-14', '2024-03-21', 3, 10, 6);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(true, 200, '2022-01-14', '2022-01-21', 9, 11, 4);
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 200, '2024-02-29', '2024-03-06', 2, 8, 4,'2024-05-12', "Baria");
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 200, '2023-10-21', '2023-10-28', 13, 9, 7,'2024-05-12', "KhanhHoa");
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 200, '2024-03-14', '2024-03-21', 3, 10, 6,'2024-05-12', "QuangBinh");
+INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 200, '2022-01-14', '2022-01-21', 9, 11, 4,'2024-05-12', "DakNong");
 INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(false, 200, '2024-03-05', '2024-03-12', 8, 12, 7);
 

@@ -4,6 +4,7 @@ import com.example.system.dto.buildingdto.BuildingDetailDto;
 import com.example.system.dto.buildingdto.BuildingDto;
 import com.example.system.dto.requestcontractdto.RCDetailDto;
 import com.example.system.dto.requestcontractdto.RequestContractDto;
+import com.example.system.mail.EmailSender;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.combo.ComboBuilding;
@@ -14,10 +15,12 @@ import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.repository.user.UserRepository;
 import com.example.system.service.building.BuildingService;
 import com.example.system.service.requestContract.RequestContractService;
+import com.example.system.validator.EmailValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +36,8 @@ public class RequestContractServiceImp implements RequestContractService {
     UserRepository userRepository;
     @Autowired
     ComboBuildingRepository comboBuildingRepository;
+    private final EmailValidator emailValidator;
+    private final EmailSender emailSender;
     @Override
     public RequestContract getByBuilding(Building building) {
         return requestContractRepository.findByBuilding(building);
@@ -164,11 +169,39 @@ public class RequestContractServiceImp implements RequestContractService {
         updaRequestContract.setDateMeet(dateMeet);
         updaRequestContract.setPlaceMeet(placeMeet);
         requestContractRepository.save(updaRequestContract);
+        String subject = "Confirm your construction quotes";
+        emailSender.send(
+                updaRequestContract.getUser().getEmail(),
+                buildEmail(updaRequestContract, dateMeet, placeMeet),
+                subject
+        );
         return getRequestContractDto(updaRequestContract);
     }
 
     @Override
     public RequestContract updateRequestContract(RequestContract requestContract) {
         return requestContractRepository.save(requestContract);
+    }
+
+    private String buildEmail(RequestContract requestContract, Date dateMeet, String placeMeet) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(dateMeet);
+        return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
+                "\n" +
+                "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
+                "\n" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Chào bạn,</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Chúng tôi rất vui thông báo rằng yêu cầu của bạn về dự án thi công xây dựng đã được xác nhận.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\"><strong>Thông tin chi tiết về cuộc họp như sau:</strong></p>" +
+                "<ul style=\"Margin:0;padding:0 0 20px 20px;font-size:16px;line-height:22px;color:#0b0c0c\">" +
+                "<li>Yêu cầu số <strong>" + requestContract.getRequestContractId() + "</strong> đã được xác nhận</li>" +
+                "<li>Địa điểm gặp mặt: <strong>" + placeMeet + "</strong></li>" +
+                "<li>Thời gian: <strong>" + formattedDate + "</strong></li>" +
+                "</ul>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Rất mong bạn có mặt đúng giờ. Xin cảm ơn bạn đã hợp tác.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\"><strong>Lưu ý:</strong> Nếu bạn không đến hoặc trễ hơn 30 phút, yêu cầu hẹn sẽ bị hủy và bạn sẽ mất 200k tiền đã đặt cọc.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Trân trọng,</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">[CILVIL HOUSING]</p>" +
+                "</div>";
     }
 }
