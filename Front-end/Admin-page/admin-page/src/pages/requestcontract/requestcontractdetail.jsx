@@ -97,16 +97,11 @@ const RequestContractDetail = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: requestContractData?.status === true ? "lightGreen" : "orange" }}>{requestContractData?.status === true ? "Confirmed" : "Pending"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/requestContractList")} color="secondary" variant="contained">
-                        Cancel
-                    </Button>
-                </Box>
                 <Box sx={{ gridColumn: "span 4" }}>
                     <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
                         Building Information
@@ -140,6 +135,11 @@ const RequestContractDetail = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Box display="flex" justifyContent="end" mt="20px">
+                    <Button onClick={() => navigate("/requestContractList")} color="secondary" variant="contained">
+                        Cancel
+                    </Button>
+                </Box>
             </Box>
         </Box>
     );

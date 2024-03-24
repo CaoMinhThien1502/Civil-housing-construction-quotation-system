@@ -69,7 +69,7 @@ const Header = () => {
             <li><a className="nav-link scrollto" href="/home#pricing">Pricing</a></li>
             <li><a className="nav-link scrollto" href="/home#contact">Contact us</a></li>
             <li><a className="nav-link scrollto" href="/home#blogreal">Blogs</a></li>
-        
+            <li><a className="nav-link scrollto" href="/home#combo">Combo</a></li>
             {isLoggedIn ? (
               <>
                 <li><a className="nav-link scrollto" href="/profile">Profile</a></li>
@@ -361,7 +361,99 @@ const BlogReal = () => {
     </section>
   );
 };
- 
+// combo building ----------------------------------------------------------------------------
+const Combo = () => {
+  const [combo, setCombo] = useState([]);
+  const navigate = useNavigate();
+  
+    const redirectToCombo = (id,userName) => {
+      // Navigate to /price with the id parameter
+      navigate(`/comboDetail/${id}`);
+    };
+  return (
+    <section id="combo" className="pricing">
+      <div className="container">
+        <div className="section-title aos-init aos-animate" data-aos="fade-up">
+          <h2>Combo</h2>
+          <p>Choose your combo building</p>
+        </div>
+        <div className="row">
+          {/* Repeat this block for each pricing option */}
+          <div className="col-lg-4 col-md-6">
+            <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
+              <h3>Rough Construction</h3>
+              {/* <h4><sup>+</sup>3<span> Combos</span></h4> */}
+              <ul>
+                <li>Count price</li>
+                <li>With rough combo building</li>
+                <li>Feel free to choose</li>
+                <li className="na">Finishing combo</li>
+                <li className="na">Package combo</li>
+              </ul>
+              <div className="btn-wrap">
+              <button
+                id="button0"
+                data-id="0"
+                onClick={() => redirectToCombo(0)}
+                className="btn-buy"
+              >
+              Detail
+              </button>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-md-6">
+            <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
+              <h3>Construction and finishing</h3>
+              {/* <h4><sup>+</sup>3<span> Combos</span></h4> */}
+              <ul>
+                <li>Count price</li>
+                <li>With finishing combo building</li>
+                <li>Feel free to choose</li>
+                <li className="na">Rough combo</li>
+                <li className="na">Package combo</li>
+              </ul>
+              <div className="btn-wrap">
+              <button
+                id="button1"
+                data-id="1"
+                onClick={() => redirectToCombo(1)}
+                className="btn-buy"
+              >
+              Detail
+              </button>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-md-6">
+            <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
+              <h3>Package construction</h3>
+              {/* <h4><sup>+</sup>4<span> Combos</span></h4> */}
+              <ul>
+                <li>Count price</li>
+                <li>With finishing combo building</li>
+                <li>Feel free to choose</li>
+                <li className="na">Rough combo</li>
+                <li className="na">Finishing combo</li>
+              </ul>
+              <div className="btn-wrap">
+              <button
+                id="button2"
+                data-id="2"
+                onClick={() => redirectToCombo(2)}
+                className="btn-buy"
+              >
+              Detail
+              </button>
+              </div>
+            </div>
+          </div>
+        </div>
+         {/* End pricing option */}
+      </div>
+    </section>
+  );
+};
 
 const PricingSection = () => {
     const navigate = useNavigate();
@@ -600,4 +692,4 @@ const BackToTopButton = () => {
 
 
 // Export the component for use in other parts of your React application
-export { Header, HeroSection, AboutUsSection,PersonIn4, TeamSection, PricingSection, ContactSection, Footer, BackToTopButton, BlogReal  };
+export { Header, HeroSection, AboutUsSection,PersonIn4, TeamSection, PricingSection, ContactSection, Footer, BackToTopButton, BlogReal, Combo };

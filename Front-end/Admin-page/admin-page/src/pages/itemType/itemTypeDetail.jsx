@@ -105,7 +105,7 @@ const ItemTypeDetail = () => {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: getItemType?.status === true ? "lightGreen" : "orangeRed" }}>{getItemType?.status === true ? "Active" : "Inactive"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -125,7 +125,12 @@ const ItemTypeDetail = () => {
                     columns={[
                         { field: "itemId", headerName: "Item ID", flex: 1 },
                         { field: "itemName", headerName: "Item Name", flex: 1 },
-                        { field: "priceItem", headerName: "Item Price", flex: 1 },
+                        { field: "priceItem", headerName: "Item Price", flex: 1,
+                            renderCell: (params) => {
+                                const { row: { priceItem } } = params; // Extract the type value
+                                return priceItem.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+                            },
+                        },
                         {
                             field: "status", headerName: "Status",
                             renderCell: (params) => {

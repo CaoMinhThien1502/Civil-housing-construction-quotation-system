@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -36,4 +37,10 @@ public class Material {
     @JsonIgnore
     Set<ComboDetail> comboDetails;
     private boolean status;
+    @OneToMany(mappedBy = "oldMate")
+    @JsonIgnore
+    List<CustomDetail> oldList;
+    @OneToMany(mappedBy = "newMate")
+    @JsonIgnore
+    List<CustomDetail> newList;
 }

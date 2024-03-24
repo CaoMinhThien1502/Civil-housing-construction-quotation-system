@@ -1,6 +1,6 @@
 package com.example.system.dto.requestcontractdto;
 
-import com.example.system.dto.buildingdto.BuildingDetailDto;
+import com.example.system.model.building.BuildingDetail;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,16 +12,21 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RCDetailDto {
+public class RequestDto {
     private Long requestContractId;
+    private Date requestDate;
+    private Double totalPrice;
+    private String placeMeet;
+    private Date dateMeet;
+    private boolean status;
+
     private Long userId;
     private String userName;
-    private Date requestDate;
     private String phone;
     private String email;
-    private Double totalPrice;
+
     private Long comboId;
     private String comboName;
-    private BuildingDetailDto buildingDto;
-    private boolean status;
+
+    private BuildingDetail buildingDetail;
 }

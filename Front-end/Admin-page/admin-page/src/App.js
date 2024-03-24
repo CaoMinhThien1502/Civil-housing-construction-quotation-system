@@ -19,15 +19,14 @@ import Item from './pages/itemlist';
 import ItemType from './pages/itemtype/index.jsx';
 import RequestContract from './pages/requestcontract';
 import UserList from './pages/userlist';
-import Blog from './pages/blogmanager';
-import BlogDetail from './pages/blogmanager/blogDetail.jsx'
-
-
+import BlogList from './pages/blogmanager';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
 import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+import BlogDetail from './pages/blogmanager/blogDetail.jsx'
+import ComboDetail from './pages/combobuilding/comboDetail.jsx'
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -35,6 +34,7 @@ import AddMaterialType from './pages/materialtype/addMaterialType';
 import AddItem from './pages/itemlist/addItem.jsx';
 import AddItemType from './pages/itemtype/addItemType.jsx';
 import AddBlog from './pages/blogmanager/addBlog.jsx';
+import AddBlogFixing from './pages/blogmanager/addBlog.jsx';
 
 import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
@@ -69,7 +69,8 @@ import {
   ContactSection,
   Footer,
   BackToTopButton,
-  BlogReal
+  BlogReal,
+  Combo
 } from './pages/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
 // bảng báo giá phụ
 import {
@@ -123,7 +124,8 @@ function App() {
       && location.pathname !== '/price1'
       && location.pathname !== '/price1/detail'
       && location.pathname !== '/register'
-      && !location.pathname.includes('/blogDetail') 
+      && !location.pathname.includes('/blogDetail')
+      && !location.pathname.includes('/comboDetail') 
       //&& location.pathname !== '/blogreal'
       && (
         <ThemeProvider theme={theme}>
@@ -164,9 +166,9 @@ function App() {
                   <Route path="/requestContractList" element={<RequestContract />} />
                   <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
 
-                  <Route path="/blogList" element={<Blog />} />
+                  <Route path="/blogList" element={<BlogList />} />
                   <Route path="/blogList/addBlog" element={<AddBlog />} />
-                  
+
                   <Route path="/userList" element={<UserList />} />
                   <Route path="/userList/:id" element={<EditUser />} />
 
@@ -208,10 +210,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
         <Route path='/blogDetail/:id' element={<BlogDetail/>}/> 
+        <Route path='/comboDetail/:id' element={<ComboDetail/>}/>
       </Routes>
     </ColorModeContext.Provider>
-  
-      </>
+    </>
   );
 }
 const QuotationPage = () => {
@@ -231,6 +233,7 @@ const HomePage = () => {
       <PersonIn4 />
       <TeamSection />
       <BlogReal/>
+      <Combo/>
       <PricingSection />
       <ContactSection />
       <Footer />
@@ -248,8 +251,6 @@ const BlogPage = () => {
   );
 }
 
-
-    
 export default App;
 
 // pls don't change anything related to logical code

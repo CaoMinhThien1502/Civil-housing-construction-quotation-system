@@ -1,22 +1,21 @@
 package com.example.system.dto.requestcontractdto;
 
-
-import com.example.system.dto.buildingdto.BuildingDto;
+import com.example.system.dto.combodto.custom.CustomInfor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestContractDto {
+public class CreateDto {
     private Long requestContractId;
-    private Long userId;
     private Long comboId;
-    private String comboName;
-    private BuildingDto buildingDto;
-    private boolean status;
-
+    private String email;
+    private Long buildingDetailId;
+    private CustomInfor mateIds;
 }

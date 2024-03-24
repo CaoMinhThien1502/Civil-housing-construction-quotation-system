@@ -1,16 +1,12 @@
 package com.example.system.serviceImplement;
 
-import com.example.system.dto.buildingdto.BuildingDto;
 import com.example.system.dto.invoicedto.InvoiceDto;
-import com.example.system.dto.requestcontractdto.RequestContractDto;
 import com.example.system.model.payment.Invoice;
 import com.example.system.model.requestcontract.RequestContract;
-import com.example.system.model.user.User;
 import com.example.system.repository.payment.InvoiceRepository;
 import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.repository.user.UserRepository;
 import com.example.system.service.payment.InvoiceService;
-import com.example.system.service.requestContract.RequestContractService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +21,6 @@ public class InvoiceServiceImp implements InvoiceService {
     @Autowired
     InvoiceRepository invoiceRepository;
     @Autowired
-    RequestContractService requestContractService;
-    @Autowired
     RequestContractRepository requestContractRepository;
     @Autowired
     UserRepository userRepository;
@@ -36,7 +30,7 @@ public class InvoiceServiceImp implements InvoiceService {
     }
 
     @Override
-    public Invoice createInvoice(InvoiceDto rqBody, Long comboId, Double area, Long userid) {
+    public Invoice createInvoice(InvoiceDto rqBody, Long rcId) {
         try{
             Invoice invoice = new Invoice();
             Double amount = Double.valueOf(rqBody.getAmount());
@@ -54,16 +48,16 @@ public class InvoiceServiceImp implements InvoiceService {
             invoice.setTransactionStatus(rqBody.getTransactionStatus());
             invoice.setTxnRef(rqBody.getTxnRef());
             invoice.setSecureHash(rqBody.getSecureHash());
-            User user = userRepository.findById(userid).orElseThrow();
-            BuildingDto bDto = new BuildingDto();
-            bDto.setArea(area);
-            bDto.setItemIdList(rqBody.getItemList());
-            RequestContractDto rcDto = requestContractService.createRequestContract(bDto,comboId,user.getUserId());
-            RequestContract rq = requestContractRepository.findById(rcDto.getRequestContractId()).orElseThrow();
+
+            RequestContract rq = requestContractRepository.findById(rcId).orElseThrow();
+            invoice.setUser(rq.getUser());
             invoice.setRequestContract(rq);
-            invoice.setUser(user);
             Invoice newInvoice = invoiceRepository.save(invoice);
             rq.setInvoice(invoice);
+            if(newInvoice.getTransactionStatus().equals("00")){
+                rq.setPayStatus(true);
+                rq.setTotalPrice(rq.getTotalPrice()- invoice.getAmount());
+            }
             requestContractRepository.save(rq);
             return newInvoice;
         }catch (Exception e){

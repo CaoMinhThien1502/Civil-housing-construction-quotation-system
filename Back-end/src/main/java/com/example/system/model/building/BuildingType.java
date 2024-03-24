@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -14,15 +15,16 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "item_type")
-public class ItemType {
+@Table(name = "building_type")
+public class BuildingType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long itemTypeId;
+    private Long buildingTypeId;
     @Column(nullable = false, columnDefinition = "varchar(255)")
-    private String itemTypeName;
-
-    @OneToMany(mappedBy = "itemType")
-    private Set<Item> items;
+    private String buildingTypeName;
     private boolean status;
+
+    @OneToMany(mappedBy = "buildingType")
+    @JsonIgnore
+    private List<Building> buildings;
 }
