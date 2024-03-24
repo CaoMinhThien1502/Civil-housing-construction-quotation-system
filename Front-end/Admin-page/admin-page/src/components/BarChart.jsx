@@ -42,7 +42,7 @@ const BarChart = ({ isDashboard = false }) => {
 
     return (
         <ResponsiveBar
-            height={800}
+            height={300}
             data={getTotalData}
             theme={{
                 // added

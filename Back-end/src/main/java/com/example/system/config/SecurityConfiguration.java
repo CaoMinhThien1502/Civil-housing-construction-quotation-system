@@ -71,8 +71,8 @@ public class SecurityConfiguration {
 
                         //Building
                         .requestMatchers(HttpMethod.GET, "/building/**").permitAll()
-//                                        .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
-//                                        .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                                        .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
+                                        .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         .requestMatchers("/building/form-consultant/**").permitAll()
                         //Request contract
                         .requestMatchers("/request-contract/**").permitAll()

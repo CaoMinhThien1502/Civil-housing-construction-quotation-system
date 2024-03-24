@@ -217,8 +217,8 @@ const Sidebar = () => {
                             </Typography>
                         )}
                         <Item
-                            title="Item List"
-                            to="/itemList"
+                            title="Building List"
+                            to="/buildingList"
                             icon={<FormatListBulletedOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
