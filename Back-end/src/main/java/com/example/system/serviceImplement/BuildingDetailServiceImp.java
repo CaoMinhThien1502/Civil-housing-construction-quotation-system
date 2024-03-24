@@ -1,20 +1,22 @@
 package com.example.system.serviceImplement;
 
+import com.example.system.dto.buildingdto.building.DetailDto;
+import com.example.system.dto.buildingdto.building.RequestBuildingDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
-import com.example.system.model.building.Item;
+import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.repository.building.BuildingDetailRepository;
 import com.example.system.repository.building.BuildingRepository;
+import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.service.building.BuildingDetailService;
-import com.example.system.service.building.BuildingService;
-import com.example.system.service.building.ItemService;
-import com.example.system.service.building.ItemTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -24,40 +26,61 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
     @Autowired
     BuildingRepository buildingRepository;
     @Autowired
-    ItemTypeService itemTypeService;
-    @Autowired
-    ItemService itemService;
+    RequestContractRepository requestContractRepository;
 
     @Override
-    public List<BuildingDetail> findAll() {
-        return buildingDetailRepository.findAll();
-    }
-
-    @Override
-    public BuildingDetail createBuildingDetail(Building building, Item item) {
-        try{
-            BuildingDetail buildingDetail = new BuildingDetail();
-            buildingDetail.setBuilding(building);
-            buildingDetail.setItem(item);
-            return buildingDetailRepository.saveAndFlush(buildingDetail);
-        }catch (Exception e){
-            return null;
+    public List<DetailDto> getBuildingDetails() {
+        List<DetailDto> result = new ArrayList<>();
+        for (BuildingDetail bd: buildingDetailRepository.findAll()) {
+            result.add(getDetailDto(bd));
         }
+        return result;
+    }
+    @Override
+    public DetailDto getBuildingDetail(Long requestContractId) {
+        RequestContract contract = requestContractRepository.findById(requestContractId).orElseThrow();
+        return getDetailDto(contract.getBuildingDetail());
     }
 
     @Override
-    public boolean updateBuildingDetail(Long id, List<Long> items) {
-        try{
-            List<BuildingDetail> buildingDetails = buildingDetailRepository.findByBuilding(buildingRepository.findByBuildingId(id));
-            for (int i = 0; i < itemTypeService.findAll().size(); i++) {
-                Item item = itemService.findByItemId(items.get(i));
-                buildingDetails.get(i).setItem(item);
-            }
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+    public DetailDto createBuildingDetail(Long buildingId, RequestBuildingDto buildingDto) {
+        BuildingDetail create = new BuildingDetail();
+        create.setBuilding(buildingRepository.findById(buildingId).orElseThrow());
+        create.setArea(buildingDto.getArea());
+        create.setNumOBathroom(buildingDto.getNumOBathroom());
+        create.setNumOKitchen(buildingDto.getNumOKitchen());
+        create.setNumOBedroom(buildingDto.getNumOBedroom());
+        create.setHasTunnel(buildingDto.isHasTunnel());
+        create.setStatus(-1);
+        RequestContract tmp = new RequestContract();
+        tmp.setPayStatus(false);
+        create.setRequestContract(requestContractRepository.save(tmp));
+        BuildingDetail added = buildingDetailRepository.save(create);
+        return getDetailDto(added);
     }
 
+//    @Override
+//    public DetailDto startBuildingDetail(Long buildingDetailId) {
+//        BuildingDetail buildingDetail = buildingDetailRepository.findById(buildingDetailId).orElseThrow();
+//        if(buildingDetail.getStatus()== -1){
+//            buildingDetail.setStartDate(new Date());
+//            buildingDetail.setStatus(1);
+//            buildingDetailRepository.save(buildingDetail);
+//        }else return null;
+//        return getDetailDto(buildingDetail);
+//    }
+//
+//    @Override
+//    public DetailDto checkBuildingDetail(Long buildingDetailId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public DetailDto finishBuildingDetail(Long buildingDetailId) {
+//        return null;
+//    }
 
+    private DetailDto getDetailDto(BuildingDetail bd){
+        return new DetailDto(bd, bd.getRequestContract().getRequestContractId());
+    }
 }

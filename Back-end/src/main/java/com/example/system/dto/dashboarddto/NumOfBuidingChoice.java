@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NumOfItemChoice {
-    private String itemName;
+public class NumOfBuidingChoice {
+    private String buildingName;
     private int quantity;
 }

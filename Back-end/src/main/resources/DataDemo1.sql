@@ -21,37 +21,6 @@ INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) V
 INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) VALUES (2,'TOP 25 Mẫu Nhà Phố Có Garage Đẹp Mới Nhất', 'Vị trí của gara cần được chọn sao cho thuận tiện cho việc vào ra của xe ô tô. Gara nên nằm ở mặt tiền hoặc mặt hậu của nhà, cách ranh lộ giới ít nhất 3m và có độ dốc không quá 15% so với mặt đường. Nếu bạn xây dựng gara ở tầng hầm hay bán hầm, bạn cần chú ý đến chiều cao trần và chiều rộng lối vào của gara. Chiều cao trần gara tối thiểu là 2m2, chiều rộng lối vào tối thiểu là 3m. Một số vị trí phổ biến để bố trí gara trong nhà phố là: Gara ở tầng trệt: Đây là vị trí thông dụng nhất, phù hợp với nhà diện tích rộng và giúp tiết kiệm chi phí xây dựng cũng như di chuyển xe dễ dàng. Tuy nhiên kiểu thiết kế này cũng có nhược điểm là chiếm diện tích sinh hoạt của gia đình. Gara ở tầng hầm: Là thiết kế lý tưởng cho nhà phố khi diện tích đất hạn chế hoặc khi muốn tạo ra không gian sinh hoạt rộng rãi ở tầng trệt. Gara ở tầng hầm giúp bảo vệ xe tốt hơn, không ảnh hưởng đến kiến trúc mặt tiền của ngôi nhà. Nhưng chi phí xây dựng cao và cần đảm bảo hệ thống thoát nước, thông gió và chiếu sáng hiệu quả. Gara ở tầng bán hầm: Là vị trí lai giữa gara ở tầng trệt và gara ở tầng hầm. Ưu điểm là tiết kiệm chi phí xây dựng, không chiếm diện tích sinh hoạt. Tuy nhiên, gara ở tầng bán hầm cũng cần chú ý độ cao từ mặt sàn đến mặt đường và không quá 1.2 mét để đảm bảo an toàn. Diện tích của gara sẽ phụ thuộc vào loại xe và số lượng xe mà bạn sử dụng. Theo tiêu chuẩn quy định, nếu để xe ô tô 4 chỗ, diện tích tối thiểu của gara thường là 3.5m x 5m hoặc 3.5m x 5.5m (đối với xe ô tô thân dài). Nếu dùng để lưu trữ xe ô tô 7 chỗ, diện tích tối thiểu yêu cầu là 4m x 6m. Trong trường hợp chứa nhiều xe ô tô trong gara thì còn phải tính toán sao cho có đủ khoảng cách an toàn giữa các xe và giữa xe với các bức tường. Khi xây dựng gara, bạn cần chú ý đến kết cấu của nó và phải đảm bảo sao cho bền chắc, an toàn cho xe cũng như người sử dụng.  Một số yếu tố cần lưu ý khi thiết kế kết cấu của gara là: Cửa gara: Là bộ phận quan trọng nên cần chọn vật liệu tốt, có khả năng chống chịu va đập, chống nước, chống rỉ sét và chống cháy. Các gia chủ có thể chọn các loại cửa cuốn, cửa kéo hay cửa tự động để tiện lợi cho việc mở đóng. Đặc biệt, kích thước rộng hơn kích thước xe ít nhất 0.5m2, để dễ dàng cho việc vào ra của xe. Sàn gara: Đây là nơi tiếp xúc trực tiếp với xe hơi do đó yêu cầu phải chịu được tải trọng lớn. Sàn gara nên được làm bằng bê tông cốt thép hoặc bê tông xi măng, có độ dày phù hợp và có độ bám dính cao để tránh trơn trượt khi xe vào ra. Ngoài ra, còn cần lưu ý đến hệ thống thoát nước và chống thấm hiệu quả để tránh ẩm mốc. Mái gara: Phần che phủ cho gara, có tác dụng bảo vệ xe khỏi các yếu tố thời tiết. Nếu gara ngoài trời thì các gia chủ có thể tham khảo thiết kế mái bằng, mái lệch, mái xanh. Hay sử dụng các vật liệu bền, nhẹ, chống cháy như tôn, nhựa, kính hoặc composite. Thiết kế gara không chỉ phải đảm bảo tính công năng và an toàn cho xe hơi mà còn phải hài hòa với kiến trúc tổng thể của ngôi nhà. Việc này đảm bảo tạo ra một không gian đẹp mắt, sang trọng và đồng bộ cho tổng thể công trình. Cụ thể: Phong cách kiến trúc: Gara nên được thiết kế theo phong cách kiến trúc của ngôi nhà. Ví dụ như hiện đại, cổ điển, tân cổ điển để có sự đồng điệu về màu sắc, hình dạng, chi tiết và vật liệu. Vị trí và kích thước: Gia chủ cần bố trí gara cho phù hợp với mặt bằng và diện tích của ngôi nhà. Không nên quá lớn hoặc quá nhỏ so với tổng thể để tránh làm mất sự cân đối, tính thẩm mỹ. Hoặc gây ảnh hưởng đến thông gió, ánh sáng của ngôi nhà. Hình ảnh và chi tiết: Các chi tiết trang trí cho gara như cột, mái hiên, lan can, đèn hoặc cây xanh cũng cần chú trọng để tạo điểm nhấn và sự liên kết với ngôi nhà. Vấn đề an toàn cháy nổ là một trong những yếu tố quan trọng khi xây dựng nhà phố có gara. Xe hơi là một nguồn nguy hiểm tiềm ẩn rủi ro cao do chứa nhiều chất dễ cháy như xăng, dầu, khí ga hoặc pin. Do đó, khi xây dựng gara bảo quản cất trữ xe ô tô, bạn cần phải tuân thủ các quy chuẩn kỹ thuật. Một số lưu ý mà gia chủ cần biết đó là: Thiết kế hệ thống thoát khí và thông gió cho gara. Đảm bảo hệ thống báo cháy tự động và phương tiện chữa cháy. Nên có biển báo ngăn cấm hút thuốc lá hoặc mang các nguồn lửa vào trong gara. Không để các vật liệu dễ cháy hoặc các dung dịch khác trong gara. Kiểm tra thường xuyên các thiết bị điện và các linh kiện của xe. Tiếng ồn khi vận hành ô tô có thể làm phiền hàng xóm hoặc các thành viên trong gia đình. Do đó, bạn nên lựa chọn các giải pháp để giảm tiếng ồn khi xây nhà phố có gara. Dưới đây là một số cách mà các gia chủ có thể tham khảo: Xây tường cách âm: Đây là một biện pháp hiệu quả để ngăn chặn tiếng ồn. Bạn có thể xây tường cách âm bằng các vật liệu hấp thụ âm hoặc vật liệu phản xạ âm.  Đặc biệt, chú ý đến độ dày nhất định để đảm bảo khả năng cách âm. Trồng cây xanh để giảm thiểu tiếng ồn: Cây xanh là một biện pháp tự nhiên và thân thiện với môi trường để giảm thiểu tiếng ồn cho gara. Chúng có tác dụng hấp thụ và phản xạ âm thanh, giúp giảm độ vang và tiếng ồn trong gara. Lắp đặt hệ thống cách âm cho xe ô tô: Bạn có thể dán các tấm chống ồn vào khoang động cơ, nắp ca-pô, gầm xe, cửa xe và các bộ phận khác để hấp thụ và triệt tiêu âm thanh từ động cơ và mặt đường. Lót sàn gỗ hoặc cao su: Đây là cách giảm tiếng ồn khi xe di chuyển, vận hành trong gara. Các loại vật liệu này có tác dụng hấp thụ và triệt tiêu âm thanh từ mặt sàn và gầm xe, giảm độ rung lắc xe.',2,'2023-02-05',null);
 INSERT INTO blog(blog_type,blog_name,blog_content,user_id,create_day,img_path) VALUES (2,'Bật Mí Xu Hướng Thiết Kế Nội Thất Phòng Khách Hiện Đại, Sang Trọng','Với những ngôi nhà có diện tích khiêm tốn, không gian phòng khách nhỏ thì nên thiết kế nội thất phòng khách theo xu hướng tối giản, tập trung vào công năng sử dụng của các đồ dùng nội thất là lựa chọn thích hợp nhất. Tuyệt đối không trang trí các vật dụng nội thất có kích thước quá lớn, hoa văn xa hoa, lộng lẫy. Vì như vậy chỉ tạo cảm giác chật hẹp cho không gian phòng khách của gia đình bạn mà thôi. Các vật dụng nội thất đơn giản, tinh tế, màu sắc trang nhã sẽ khiến phòng khách của bạn thông thoáng hơn rất nhiều. Nếu bạn yêu thích phong cách cổ điển có thể chọn một vài món đồ decor nội thất làm điểm nhấn không gian phòng khách. Chẳng hạn như một chiếc đèn gỗ, hoa văn tinh xảo hay một bộ tranh kim loại Phong Thủy sẽ giúp phòng khách của bạn nghiêng về sắc thái hoài cổ, kết hợp với nội thất hiện đại, đáp ứng yêu cầu và sở thích của chính bạn. Một trong những xu hướng thiết kế được đánh giá và phản hồi tích cực nhất hiện nay chính là phong cách đơn giản nhưng không đơn điệu, đủ tinh tế, trang nhã, đem lại không gian sống gần gũi, hiện đai, tiện ích và quan trọng nhất là không bao giờ bị “lỗi mốt”. Phòng khách theo phong cách thiết kế này thường sử dụng các đồ dùng nội thất tối giản, chẳng hạn như sofa đơn sắc tạo cảm giác mềm mại, uyển chuyển, làm điểm nhấn thú vị của không gian phòng khách, đồng thời đáp ứng được nhu cầu sử dụng gia chủ. Đơn giản nhưng không phải đơn điệu, ngoài sofa đơn sắc, bạn có thể trang trí thêm nội thất phòng khách bằng các vật dụng nhỏ nhắn, tinh xảo, để phòng khách thêm đẹp mắt. Tất nhiên, với nhưng không gian phòng khách có diện tích eo hẹp, đừng phô bày quá nhiều đồ dùng nội thất, chỉ sử dụng những vật dụng cơ bản kèm theo một hai vật trang tí nhỏ. Chỉ bấy nhiêu thôi cũng đủ cho phòng khách của bạn trở nên đặc biệt rồi. Cuộc sống hiện đại, công nghệ phát triển, con người có xu hướng tìm về chốn thiên nhiên xanh mát để lấy lại cân bằng, năng lượng trong cuộc sống. Cho nên thiết kế nội thất phòng khách gần gũi với tự nhiên đang là xu hướng HOT nhất trong vài năm trở lại đây. Việc trang trí phòng khách với cây xanh, hoa cỏ, giúp không gian rộng thoáng, tạo cảm giác mát mẻ, dịu nhẹ, tiết kiệm điện năng cho căn nhà của bạn. Có thể nói, đây chính là ưu điểm nổi bật của xu hướng thiết kế phòng khách gần gũi với thiên nhiên, cây cỏ. Với kiểu xu hướng thiết kế này, phòng khách của bạn phải có không gian vừa hoặc rộng. Nếu không gian nhỏ, chỉ nên trang trí một đến hai chậu cây nhỏ để tiết kiệm diện tích. Nếu không gian phòng khách đủ rộng, bạn có thể đầu tư các decor trang trí gắn liền với cây xanh, vừa đẹp, vừa tạo cảm giác xanh mát, thoải mái, nhất là vào ngày hè nắng nóng. Kết hợp nhiều loại vật liệu trong cùng một không gian sẽ phác họa lên vẻ đẹp xa hoa, lộng lẫy của phòng khách gia đình bạn. Xu hướng thiết kế này phù hợp với phòng khách diện tích có không gian rộng thoáng. Với các phòng khách eo hẹp về diện tích, xu hướng này không được phù hợp cho lắm. Cho nên, bạn hãy nhớ điều kiện đầu tiên sử dụng nhiều loại vât liệu trong thiết kế không gian phòng khách là diện tích phải đủ rộng. Phong cách thiết kế kết hợp nhiều loại vật liệu này đáp ứng mọi sở thích, mong muốn và khát khao của gia chủ. Bạn có thể chọn tất tần tật các loại vật liệu, vật dụng nội thất mà bạn thích, sau đó chỉ cần phối hợp sao cho ăn ý, dung hòa nhất là được. Để làm được điều này, chọn một nhà thiết kế nội thất chuyên nghiệp là điều quan trọng nhất. Phòng khách là nơi tiếp đón khách khứa cũng là nơi sinh hoạt chung của các thành viên trong gia đình. Cho nên, phòng khách thường có diện tích lớn nhất, rộng rãi nhất, thể hiện đầy đủ nét thẩm mỹ tổng hợp của các thành viên trong nhà. Đây chính là lý do xu hướng thiết kế nội thất cho phòng khách rộng mở ngày càng được ưa chuộng. Thường thì kiểu phòng khách này nối liên tiếp với các phòng khách, người ta thường sử dụng vách ngăn gỗ, kính hoặc kệ sách để phân chia không gian. Như vậy, phong cách thiết kế này vừa tiết kiệm diện tích, vừa tạo cảm giác rộng thoáng và tiện nghi hơn rất nhiều.',2,'2023-02-05',null);
 
-
--- item type
-INSERT INTO item_type(item_type_name, status) VALUES ('Loại Nhà',1);
-INSERT INTO item_type(item_type_name, status) VALUES ('Hầm',1);
-INSERT INTO item_type(item_type_name, status) VALUES ('Tầng',1);
-INSERT INTO item_type(item_type_name, status) VALUES ('Móng',1);
-INSERT INTO item_type(item_type_name, status) VALUES ('Mái',1);
--- item
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (1,'Nhà Phố ',3400000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (1,'Biệt Thự ',3800000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (1,'Biệt Thự Cổ Điển ',4500000, 3, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (1,'Nhà Cấp 4 ',2400000, 1, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (2,'Không Hầm ',0, 1, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (2,'Độ sâu 1.0 – 1.3 ',5100000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (2,'Độ sâu 1.3 – 1.7 ',5780000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (2,'Độ sâu 1.7 – 2.0 ',6800000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (2,'Độ sâu > 2.0 ',8500000, 3, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (3,'Tầng 1 ',3400000, 1, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (3,'Tầng 2 ',3400000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (3,'Tầng 3 ',3400000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (3,'Tầng 4 ',3400000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (3,'Tầng 5 ',3400000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (3,'Tầng Thượng ',3400000, 3, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (4,'Móng đơn ',960000, 1, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (4,'Móng băng ',2080000, 3, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (4,'Móng đài cọc ',1600000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (5,'Mái Tôn ',1020000, 1 ,1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (5,'Mái BTCT ',1360000, 1, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (5,'Mái BTCT Dán Ngói ',3400000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (5,'Mái Kèo Thép Lợp Ngói ',1450000, 2, 1);
-INSERT INTO item(item_type_id,item_name,price_item, level, status) VALUES (5,'Xà Gỗ Lợp Ngói ',2380000, 3, 1);
 -- material type
 INSERT INTO material_type(type_name, status) VALUES ('Sắt Thép',1);
 INSERT INTO material_type(type_name, status) VALUES ('Cát Xây Dựng',1);
@@ -452,91 +421,49 @@ INSERT INTO combo_detail(combo_building_id,material_id, quantity) VALUES (15,128
 INSERT INTO combo_detail(combo_building_id,material_id, quantity) VALUES (15,134,1);
 INSERT INTO combo_detail(combo_building_id,material_id, quantity) VALUES (15,135,5);
 
+-- building type
+INSERT INTO building_type (status, building_type_name) VALUES (true, 'biet thu');
+INSERT INTO building_type (status, building_type_name) VALUES (true, 'nha pho');
+INSERT INTO building_type (status, building_type_name) VALUES (true, 'nha cap 4');
+
+-- building
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (130, true, 1, 'Biet thu kieu 3');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (120, true, 1, 'Biet thu kieu 2');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (110, true, 1, 'Biet thu kieu 1');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (100, true, 2, 'Nha pho kieu 1');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (105, true, 2, 'Nha pho kieu 2');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (95, true, 3, 'Nha cap 4 kieu 1');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (100, true, 3, 'Nha cap 4 kieu 2');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (105, false, 3, 'Nha cap 4 kieu 3');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (110, false, 2, 'Nha pho kieu 3');
 
 
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (125, null, null, null, -1);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (230, null, null, null, 0);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (114,'2023-11-21', '2024-01-22', null, 1);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (152,'2021-10-23', '2021-12-30', '2022-03-03', 2);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (225,'2023-10-23', '2024-02-28', null, 1);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (180,'2023-05-13', '2023-08-23', '2024-02-29', 2);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (220, null, null, null, -1);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (221, null, null, null, 0);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (179,'2023-11-11', '2024-03-11', null, 1);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (145, null, null, null, 0);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (365,'2022-02-28', '2022-05-31', '2022-12-15', 2);
-INSERT INTO building(area, start_date, check_date, finish_date, status) VALUES (183, null, null, null, -1);
+-- building detail
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (100, null, null, false, 1, 2, 1, null, 0, 5);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (140, '2024-03-08', null, true, 2, 2, 2, '2024-01-01', 1, 7);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (300, '2023-08-04', '2024-10-11', true, 3, 3, 2, '2023-06-07', 2, 3);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (200, null, null, false, 2, 1, 1, null, -1, 5);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (400, '2022-09-03', '2023-01-02', false, 3, 3, 2, '2022-07-14', 2, 2);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (540, '2023-12-28', null, true, 2, 4, 2, '2023-09-02', 1, 3);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (170, null, null, true, 1, 1, 1, '2024-02-23', 1, 6);
 
-INSERT INTO building_detail(building_id, item_id) VALUES (1,1);
-INSERT INTO building_detail(building_id, item_id) VALUES (1,6);
-INSERT INTO building_detail(building_id, item_id) VALUES (1,12);
-INSERT INTO building_detail(building_id, item_id) VALUES (1,19);
-INSERT INTO building_detail(building_id, item_id) VALUES (1,20);
-INSERT INTO building_detail(building_id, item_id) VALUES (2,5);
-INSERT INTO building_detail(building_id, item_id) VALUES (2,9);
-INSERT INTO building_detail(building_id, item_id) VALUES (2,12);
-INSERT INTO building_detail(building_id, item_id) VALUES (2,18);
-INSERT INTO building_detail(building_id, item_id) VALUES (2,21);
-INSERT INTO building_detail(building_id, item_id) VALUES (3,1);
-INSERT INTO building_detail(building_id, item_id) VALUES (3,6);
-INSERT INTO building_detail(building_id, item_id) VALUES (3,11);
-INSERT INTO building_detail(building_id, item_id) VALUES (3,17);
-INSERT INTO building_detail(building_id, item_id) VALUES (3,23);
-INSERT INTO building_detail(building_id, item_id) VALUES (4,3);
-INSERT INTO building_detail(building_id, item_id) VALUES (4,6);
-INSERT INTO building_detail(building_id, item_id) VALUES (4,11);
-INSERT INTO building_detail(building_id, item_id) VALUES (4,19);
-INSERT INTO building_detail(building_id, item_id) VALUES (5,4);
-INSERT INTO building_detail(building_id, item_id) VALUES (5,8);
-INSERT INTO building_detail(building_id, item_id) VALUES (5,16);
-INSERT INTO building_detail(building_id, item_id) VALUES (5,18);
-INSERT INTO building_detail(building_id, item_id) VALUES (5,22);
-INSERT INTO building_detail(building_id, item_id) VALUES (6,3);
-INSERT INTO building_detail(building_id, item_id) VALUES (6,6);
-INSERT INTO building_detail(building_id, item_id) VALUES (6,13);
-INSERT INTO building_detail(building_id, item_id) VALUES (6,19);
-INSERT INTO building_detail(building_id, item_id) VALUES (6,20);
-INSERT INTO building_detail(building_id, item_id) VALUES (7,4);
-INSERT INTO building_detail(building_id, item_id) VALUES (7,6);
-INSERT INTO building_detail(building_id, item_id) VALUES (7,19);
-INSERT INTO building_detail(building_id, item_id) VALUES (7,23);
-INSERT INTO building_detail(building_id, item_id) VALUES (8,5);
-INSERT INTO building_detail(building_id, item_id) VALUES (8,9);
-INSERT INTO building_detail(building_id, item_id) VALUES (8,12);
-INSERT INTO building_detail(building_id, item_id) VALUES (8,18);
-INSERT INTO building_detail(building_id, item_id) VALUES (8,21);
-INSERT INTO building_detail(building_id, item_id) VALUES (9,4);
-INSERT INTO building_detail(building_id, item_id) VALUES (9,8);
-INSERT INTO building_detail(building_id, item_id) VALUES (9,16);
-INSERT INTO building_detail(building_id, item_id) VALUES (9,18);
-INSERT INTO building_detail(building_id, item_id) VALUES (9,22);
-INSERT INTO building_detail(building_id, item_id) VALUES (10,5);
-INSERT INTO building_detail(building_id, item_id) VALUES (10,9);
-INSERT INTO building_detail(building_id, item_id) VALUES (10,12);
-INSERT INTO building_detail(building_id, item_id) VALUES (10,18);
-INSERT INTO building_detail(building_id, item_id) VALUES (10,22);
-INSERT INTO building_detail(building_id, item_id) VALUES (11,3);
-INSERT INTO building_detail(building_id, item_id) VALUES (11,6);
-INSERT INTO building_detail(building_id, item_id) VALUES (11,13);
-INSERT INTO building_detail(building_id, item_id) VALUES (11,19);
-INSERT INTO building_detail(building_id, item_id) VALUES (11,20);
-INSERT INTO building_detail(building_id, item_id) VALUES (12,4);
-INSERT INTO building_detail(building_id, item_id) VALUES (12,6);
-INSERT INTO building_detail(building_id, item_id) VALUES (12,19);
-INSERT INTO building_detail(building_id, item_id) VALUES (12,23);
+-- request contract
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ( null, true, '2022-03-08', false, '2022-03-14', 130000000, 1, 2, 1, null);
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2023-12-28', true, '2023-12-25', true, '2024-01-01', 100000000, 2, 3, 2, 'Nha toi');
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2023-06-04', true, '2023-06-01', true, '2023-06-08', 1000002000, 3, 9, 2, 'Chua 2 tang');
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES (null, false, '2024-03-22', false, '2024-03-28', 19900000000, 4, 2, 4, null);
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2022-07-09', true, '2022-07-06', true, '2022-07-13', 1200000000, 5, 4, 5, 'Nha to');
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2023-08-31', true, '2023-08-28', true, '2023-09-04', 3300000000, 6, 6, 3, 'Nha chung ta');
+INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ('2024-02-20', true, '2024-02-16', true, '2024-02-23', 1040000000, 7, 7, 6, 'Nha minh');
 
 
 
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(false, 200, '2023-10-23', '2023-10-30', 7, 1, 4);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2023-11-03', '2023-11-10', 1, 2, 6,'2024-05-12', "DakLak");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2023-11-11', '2023-11-18', 15, 3, 6,'2024-05-12', "Kontum");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2021-10-05', '2021-10-12', 11, 4, 4,'2024-05-12', "QuangNgai");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2023-10-05', '2023-10-12', 3, 5, 1,'2024-05-12', "SaiGon");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 300, '2023-04-15', '2023-04-22 ', 10, 6, 2,'2024-05-12', "GiaLai");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(false, 300, '2024-02-29', '2024-03-06', 14, 7, 3);
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 200, '2024-02-29', '2024-03-06', 2, 8, 4,'2024-05-12', "Baria");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 200, '2023-10-21', '2023-10-28', 13, 9, 7,'2024-05-12', "KhanhHoa");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 200, '2024-03-14', '2024-03-21', 3, 10, 6,'2024-05-12', "QuangBinh");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id, date_meet, place_meet) VALUES(true, 200, '2022-01-14', '2022-01-21', 9, 11, 4,'2024-05-12', "DakNong");
-INSERT INTO request_contract(status, total_price, request_date, timeout_date, combo_building_id, building_id, user_id ) VALUES(false, 200, '2024-03-05', '2024-03-12', 8, 12, 7);
+-- invoice
+INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 1, '2022-03-08 14:46:58.000000', 1, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',1);
+INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 2, '2023-12-25 19:49:27.000000', 2, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',2);
+INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 3, '2023-06-01 17:49:54.000000', 2, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',3);
+INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 4, '2024-03-22 17:50:12.000000', 4, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '01', 'hai', '4RJNZIHK', '20170829153052', '01', '23554',4);
+INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 5, '2022-07-06 15:45:40.000000', 5, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',5);
+INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 6, '2023-08-28 17:50:58.000000', 3, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',6);
+INSERT INTO invoice (amount, invoice_id, pay_date, user_id, bank_code, bank_tran_no, card_type, order_info, response_code, secure_hash, tmn_code, transaction_no, transaction_status, txn_ref, request_contract_id) VALUES (200000, 7, '2024-02-16 17:51:11.000000', 6, 'NCB', 'NCB20170829152730', 'ATM', 'hi', '00', 'hai', '4RJNZIHK', '20170829153052', '00', '23554',7);
 

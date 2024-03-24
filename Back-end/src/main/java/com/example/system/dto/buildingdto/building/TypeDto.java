@@ -1,6 +1,6 @@
-package com.example.system.dto.buildingdto.itemdto;
+package com.example.system.dto.buildingdto.building;
 
-
+import com.example.system.model.building.BuildingDetail;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDto {
-    private Long itemId;
-    private String itemName;
-    private Double priceItem;
+public class TypeDto {
+    private String buildingName;
     private boolean status;
-    private String itemTypeName;
-
 }

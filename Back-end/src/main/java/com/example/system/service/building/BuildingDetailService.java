@@ -1,17 +1,17 @@
 package com.example.system.service.building;
 
+import com.example.system.dto.buildingdto.building.DetailDto;
+import com.example.system.dto.buildingdto.building.RequestBuildingDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
-import com.example.system.model.building.Item;
 
 import java.util.List;
-import java.util.Set;
 
 public interface BuildingDetailService {
-    List<BuildingDetail> findAll();
-
-    BuildingDetail createBuildingDetail(Building building, Item item);
-
-    boolean updateBuildingDetail(Long id, List<Long> items);
-
+    List<DetailDto> getBuildingDetails();
+    DetailDto getBuildingDetail(Long requestContractId);
+    DetailDto createBuildingDetail(Long buildingId, RequestBuildingDto buildingDto);
+//    DetailDto startBuildingDetail(Long buildingDetailId);
+//    DetailDto checkBuildingDetail(Long buildingDetailId);
+//    DetailDto finishBuildingDetail(Long buildingDetailId);
 }

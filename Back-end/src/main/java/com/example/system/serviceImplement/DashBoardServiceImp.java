@@ -1,11 +1,12 @@
 package com.example.system.serviceImplement;
 
 import com.example.system.dto.dashboarddto.DashboardDto;
-import com.example.system.dto.dashboarddto.NumOfItemChoice;
+import com.example.system.dto.dashboarddto.NumOfBuidingChoice;
+import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
-import com.example.system.model.building.Item;
+import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.repository.building.BuildingDetailRepository;
-import com.example.system.repository.building.ItemRepository;
+import com.example.system.repository.building.BuildingRepository;
 import com.example.system.repository.combo.MaterialRepository;
 import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.repository.user.UserRepository;
@@ -25,39 +26,39 @@ public class DashBoardServiceImp implements DashBoardService {
     @Autowired
     MaterialRepository materialRepository;
     @Autowired
-    ItemRepository itemRepository;
-    @Autowired
     RequestContractRepository requestContractRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    BuildingRepository buildingRepository;
     @Autowired
     BuildingDetailRepository buildingDetailRepository;
     @Override
     public DashboardDto getNumbers() {
         try{
             DashboardDto dashboardDto = new DashboardDto();
-            dashboardDto.setItemCount(Long.valueOf(itemRepository.findAll().size()));
+            dashboardDto.setBuildingCount(Long.valueOf(buildingRepository.findAll().size()));
             dashboardDto.setMaterialCount(Long.valueOf(materialRepository.findAll().size()));
             dashboardDto.setRequestContractCount(Long.valueOf(requestContractRepository.findAll().size()));
             dashboardDto.setUserCount(Long.valueOf(userRepository.findAll().size()));
+            List<NumOfBuidingChoice> listBuildingChoice = new ArrayList<>();
 
-            List<NumOfItemChoice> listItemChoice = new ArrayList<>();
 
-
-            Set<Long> uniqueItemIds = new HashSet<>();
+            Set<Long> uniqueBuildingIds = new HashSet<>();
             List<BuildingDetail> buildingDetails = buildingDetailRepository.findAll();
             // Lặp qua danh sách và chỉ thêm các mục có item_id duy nhất vào danh sách đã lọc
             for (BuildingDetail b : buildingDetails) {
-                uniqueItemIds.add(b.getItem().getItemId());
+                uniqueBuildingIds.add(b.getBuilding().getBuildingId());
             }
-            NumOfItemChoice numOfItemChoice;
-            for (Long i:uniqueItemIds) {
-                List<BuildingDetail> numberOfItem = buildingDetailRepository.findByItemId(i);
-                Item item = itemRepository.findByItemId(i);
-                numOfItemChoice = new NumOfItemChoice(item.getItemName(), numberOfItem.size());
-               listItemChoice.add(numOfItemChoice);
+            NumOfBuidingChoice numOfBuidingChoice;
+            for (Long i:uniqueBuildingIds) {
+                Building building = buildingRepository.findById(i).orElseThrow();
+                numOfBuidingChoice = new NumOfBuidingChoice();
+                numOfBuidingChoice.setQuantity(requestContractRepository.findAllSameBuilding(i).size());
+                numOfBuidingChoice.setBuildingName(building.getBuildingName());
+                listBuildingChoice.add(numOfBuidingChoice);
             }
-            dashboardDto.setListItemChoice(listItemChoice);
+            dashboardDto.setListBuildingChoice(listBuildingChoice);
             return dashboardDto;
         }catch (Exception e){
             return null;
