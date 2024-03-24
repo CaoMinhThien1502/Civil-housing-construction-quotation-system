@@ -10,10 +10,5 @@ import java.util.List;
 
 @Repository
 public interface RequestContractRepository extends JpaRepository<RequestContract, Long>{
-    RequestContract findByBuilding(Building building);
-
-    @Override
-    List<RequestContract> findAll();
-
     List<RequestContract> findByUser(User user);
 }

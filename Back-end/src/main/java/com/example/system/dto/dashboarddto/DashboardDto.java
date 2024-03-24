@@ -16,11 +16,11 @@ import java.util.List;
 public class DashboardDto {
     @JsonProperty("material_count")
     private Long materialCount;
-    @JsonProperty("item_count")
-    private Long itemCount;
+    @JsonProperty("building_count")
+    private Long buildingCount;
     @JsonProperty("request_contract_count")
     private Long requestContractCount;
     @JsonProperty("user_count")
     private Long userCount;
-    private List<NumOfItemChoice> listItemChoice;
+    private List<NumOfBuidingChoice> listBuildingChoice;
 }

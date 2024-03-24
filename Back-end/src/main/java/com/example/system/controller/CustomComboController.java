@@ -1,6 +1,5 @@
 package com.example.system.controller;
 
-import com.example.system.dto.buildingdto.itemtypedto.ItemTypeDto;
 import com.example.system.dto.combodto.custom.CustomComboDto;
 import com.example.system.dto.combodto.custom.CustomDetailDto;
 import com.example.system.dto.combodto.custom.CustomForm;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

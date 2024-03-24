@@ -55,7 +55,7 @@ public class CustomDetailServiceImp implements CustomDetailService {
         for (ComboDetail cd: combo.getComboDetails()) {
             mateList.add(new CustomMateTypeDto(cd.getMaterial().getMaterialType().getMaterialTypeId()
                     ,cd.getMaterial().getMaterialType().getTypeName()
-                    ,new CustomMateDto(cd.getMaterial().getMaterialId(),cd.getMaterial().getMaterialName())));
+                    ,new CustomMateDto(cd.getMaterial().getMaterialId(),cd.getMaterial().getMaterialName(),cd.getMaterial().getUnitPrice())));
         }
         infor.setMateList(mateList);
         form.setInfor(infor);
@@ -67,7 +67,7 @@ public class CustomDetailServiceImp implements CustomDetailService {
             type.setMateTypeName(mt.getTypeName());
             List<CustomMateDto> mates = new ArrayList<>();
             for (Material m: mt.getMaterials()) {
-                mates.add(new CustomMateDto(m.getMaterialId(),m.getMaterialName()));
+                mates.add(new CustomMateDto(m.getMaterialId(),m.getMaterialName(),m.getUnitPrice()));
             }
             type.setMates(mates);
             allMates.add(type);
@@ -107,12 +107,31 @@ public class CustomDetailServiceImp implements CustomDetailService {
         return result;
     }
 
+    @Override
+    public List<Material> getMateByRequestContract(RequestContract contract) {
+        List<CustomDetail> newMates = customDetailRepository.findAllByRequestContract(contract);
+        List<ComboDetail> oldMates = comboDetailRepository.findByComboBuilding(contract.getComboBuilding());
+        List<Material> mateOfCombo = new ArrayList<>();
+        for (ComboDetail cod: oldMates) {
+            boolean added = false;
+            for (CustomDetail cud: newMates) {
+                if(cod.getMaterial().equals(cud.getOldMate())){
+                    mateOfCombo.add(cud.getNewMate());
+                    added = true;
+                    break;
+                }
+            }
+            if(!added) mateOfCombo.add(cod.getMaterial());
+        }
+        return mateOfCombo;
+    }
+
     private CustomDetailDto getCustomDto(CustomDetail customDetail){
         return new CustomDetailDto(customDetail.getCustomId()
                 ,customDetail.getNewMate().getMaterialType().getMaterialTypeId()
                 ,customDetail.getNewMate().getMaterialType().getTypeName()
-                ,new CustomMateDto(customDetail.getOldMate().getMaterialId(),customDetail.getOldMate().getMaterialName())
-                ,new CustomMateDto(customDetail.getNewMate().getMaterialId(),customDetail.getNewMate().getMaterialName()));
+                ,new CustomMateDto(customDetail.getOldMate().getMaterialId(),customDetail.getOldMate().getMaterialName(),customDetail.getOldMate().getUnitPrice())
+                ,new CustomMateDto(customDetail.getNewMate().getMaterialId(),customDetail.getNewMate().getMaterialName(),customDetail.getNewMate().getUnitPrice()));
     }
     private CustomMateTypeDto getMate(ComboDetail cod, List<CustomDetail> customMates) {
         CustomMateTypeDto mate = new CustomMateTypeDto();
@@ -121,7 +140,7 @@ public class CustomDetailServiceImp implements CustomDetailService {
             if(cod.getMaterial().equals(cud.getOldMate())){
                 mate.setMateTypeId(cud.getNewMate().getMaterialType().getMaterialTypeId());
                 mate.setMateTypeName(cud.getNewMate().getMaterialType().getTypeName());
-                mate.setMate(new CustomMateDto(cud.getNewMate().getMaterialId(), cud.getNewMate().getMaterialName()));
+                mate.setMate(new CustomMateDto(cud.getNewMate().getMaterialId(), cud.getNewMate().getMaterialName(),cud.getNewMate().getUnitPrice()));
                 didAdd = true;
                 break;
             }
@@ -129,7 +148,7 @@ public class CustomDetailServiceImp implements CustomDetailService {
         if (!didAdd){
             mate.setMateTypeId(cod.getMaterial().getMaterialType().getMaterialTypeId());
             mate.setMateTypeName(cod.getMaterial().getMaterialType().getTypeName());
-            mate.setMate(new CustomMateDto(cod.getMaterial().getMaterialId(), cod.getMaterial().getMaterialName()));
+            mate.setMate(new CustomMateDto(cod.getMaterial().getMaterialId(), cod.getMaterial().getMaterialName(), cod.getMaterial().getUnitPrice()));
         }
         return mate;
     }

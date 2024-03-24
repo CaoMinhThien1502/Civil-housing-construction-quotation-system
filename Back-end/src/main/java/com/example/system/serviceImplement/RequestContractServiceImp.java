@@ -1,24 +1,23 @@
 package com.example.system.serviceImplement;
 
-import com.example.system.dto.buildingdto.BuildingDetailDto;
-import com.example.system.dto.buildingdto.BuildingDto;
-import com.example.system.dto.requestcontractdto.RCDetailDto;
-import com.example.system.dto.requestcontractdto.RequestContractDto;
-import com.example.system.model.building.Building;
-import com.example.system.model.building.BuildingDetail;
-import com.example.system.model.combo.ComboBuilding;
+import com.example.system.dto.requestcontractdto.CreateDto;
+import com.example.system.dto.requestcontractdto.RequestDto;
+import com.example.system.model.combo.Material;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
+import com.example.system.repository.building.BuildingDetailRepository;
 import com.example.system.repository.combo.ComboBuildingRepository;
+import com.example.system.repository.combo.CustomDetailRepository;
 import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.repository.user.UserRepository;
-import com.example.system.service.building.BuildingService;
+import com.example.system.service.combobuilding.CustomDetailService;
 import com.example.system.service.requestContract.RequestContractService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,39 +27,42 @@ public class RequestContractServiceImp implements RequestContractService {
     @Autowired
     RequestContractRepository requestContractRepository;
     @Autowired
-    BuildingService buildingService;
+    BuildingDetailRepository buildingDetailRepository;
+    @Autowired
+    CustomDetailRepository customDetailRepository;
     @Autowired
     UserRepository userRepository;
     @Autowired
     ComboBuildingRepository comboBuildingRepository;
-    @Override
-    public RequestContract getByBuilding(Building building) {
-        return requestContractRepository.findByBuilding(building);
-    }
-
+    @Autowired
+    CustomDetailService customDetailService;
     @Override
     public List<RequestContract> findAll() {
         return requestContractRepository.findAll();
     }
 
     @Override
-    public List<RCDetailDto> findAllDto() {
+    public List<RequestDto> findAllDto() {
         List<RequestContract> requestContractList = requestContractRepository.findAll();
-        List<RCDetailDto> dtos = new ArrayList<>();
+        List<RequestDto> dtos = new ArrayList<>();
         for (RequestContract rc: requestContractList) {
-            dtos.add(findById(rc.getRequestContractId()));
+            dtos.add(getRCDto(rc));
         }
         return dtos;
     }
-
     @Override
-    public List<RequestContractDto> findDtosByEmail(String email) {
+    public RequestDto getById(Long rcId) {
+        RequestContract rc = requestContractRepository.findById(rcId).orElseThrow();
+        return getRCDto(rc);
+    }
+    @Override
+    public List<RequestDto> findDtosByEmail(String email) {
         try{
             User u = userRepository.findByEmail(email).orElseThrow();
             List<RequestContract> requestContractList = requestContractRepository.findByUser(u);
-            List<RequestContractDto> dtos = new ArrayList<>();
+            List<RequestDto> dtos = new ArrayList<>();
             for (RequestContract rq: requestContractList){
-                RequestContractDto dto = getRequestContractDto(rq);
+                RequestDto dto = getRCDto(rq);
                 dtos.add(dto);
             }
             return dtos;
@@ -70,105 +72,83 @@ public class RequestContractServiceImp implements RequestContractService {
     }
 
     @Override
-    public RCDetailDto findById(Long rcId) {
+    public RequestDto createRequestContract(CreateDto dto) {
         try{
-            RequestContract rc = requestContractRepository.findById(rcId).orElseThrow();
-            RCDetailDto detail = new RCDetailDto();
-            detail.setStatus(rc.isStatus());
-            detail.setRequestDate(rc.getRequestDate());
-            detail.setRequestContractId(rc.getRequestContractId());
-            detail.setComboId(rc.getComboBuilding().getComboBuildingId());
-            detail.setComboName(rc.getComboBuilding().getComboBuildingName());
-            detail.setUserId(rc.getUser().getUserId());
-            detail.setUserName(rc.getUser().getName());
-            detail.setPhone(rc.getUser().getPhone());
-            detail.setEmail(rc.getUser().getEmail());
-            detail.setTotalPrice(rc.getTotalPrice());
-            detail.setDateMeet(rc.getDateMeet());
-            detail.setPlaceMeet(rc.getPlaceMeet());
-            BuildingDetailDto bdto = new BuildingDetailDto();
-            bdto.setBuildingId(rc.getBuilding().getBuildingId());
-            bdto.setLandArea(rc.getBuilding().getArea());
-            bdto.setStatus(rc.getBuilding().getStatus());
-            bdto.setUserId(rc.getUser().getUserId());
-            List<String> itemNames = new ArrayList<>();
-            for (BuildingDetail bd: rc.getBuilding().getBuildingDetails()
-                 ) {
-                itemNames.add(bd.getItem().getItemName());
-            }
-            bdto.setItemNameList(itemNames);
-            detail.setBuildingDto(bdto);
+            RequestContract contract = requestContractRepository.findById(dto.getRequestContractId()).orElseThrow();
+            contract.setUser(userRepository.findByEmail(dto.getEmail()).orElseThrow());
+            contract.setRequestDate(new Date());
+            contract.setComboBuilding(comboBuildingRepository.findById(dto.getComboId()).orElseThrow());
+            contract.setBuildingDetail(buildingDetailRepository.findById(dto.getBuildingDetailId()).orElseThrow());
+            contract.setCustomDetails(customDetailRepository.findAllByRequestContract(contract));
+            contract.setPayStatus(false);
+            contract.setStatus(false);
 
+            //set timeout
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, 7); // Thêm 7 ngày vào ngày hiện tại
+            Date dateAfter7Days = calendar.getTime();
+            contract.setTimeoutDate(dateAfter7Days);
 
-            return detail;
+            //create custom combo
+            customDetailService.makeCustomCombo(dto.getMateIds(), dto.getRequestContractId());
+
+            //price
+            Double total = getComboPrice(contract)*contract.getBuildingDetail().getArea();
+            contract.setTotalPrice(total);
+            return getRCDto(requestContractRepository.save(contract));
         }catch (Exception e){
             return null;
         }
     }
 
     @Override
-    public RequestContractDto getRequestContractDto(RequestContract rc) {
-        try{
-            RequestContractDto dto = new RequestContractDto();
-            dto.setRequestContractId(rc.getRequestContractId());
-            dto.setUserId(rc.getUser().getUserId());
-            dto.setComboId(rc.getComboBuilding().getComboBuildingId());
-            dto.setComboName(rc.getComboBuilding().getComboBuildingName());
-            dto.setDateMeet(rc.getDateMeet());
-            dto.setPlaceMeet(rc.getPlaceMeet());
-            dto.setStatus(rc.isStatus());
-            dto.setBuildingDto(buildingService.findByBuilding(rc.getBuilding()));
-            return dto;
-        }catch(Exception e){
-            return null;
-        }
-    }
-
-    @Override
-    public RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId) {
-        try{
-            RequestContract newData = new RequestContract();
-            Building building = buildingService.createBuilding(dto, comboId);
-            ComboBuilding combo = comboBuildingRepository.findByComboBuildingId(comboId);
-            User user = userRepository.findByUserId(userId);
-            newData.setBuilding(building);
-            newData.setRequestDate(new Date());
-            newData.setComboBuilding(combo);
-            newData.setUser(user);
-            newData.setStatus(false);
-            double total = newData.getBuilding().getArea()*newData.getComboBuilding().getUnitPrice();
-            for (BuildingDetail bd: newData.getBuilding().getBuildingDetails()
-                 ) {
-                total += bd.getItem().getPriceItem();
-            }
-            newData.setTotalPrice(total);
-            newData = requestContractRepository.save(newData);
-            RequestContractDto newDto = new RequestContractDto();
-            newDto.setBuildingDto(dto);
-            newDto.setUserId(newData.getUser().getUserId());
-            newDto.setStatus(newData.isStatus());
-            newDto.setComboId(newData.getComboBuilding().getComboBuildingId());
-            newDto.setRequestContractId(newData.getRequestContractId());
-            return newDto;
-        }catch (Exception e){
-            return null;
-        }
-    }
-
-    @Override
-    public RequestContractDto confirmRequestContract(Long rcId, Date dateMeet, String placeMeet) {
+    public RequestDto confirmRequestContract(Long rcId, Date dateMeet, String placeMeet) {
         RequestContract updaRequestContract = requestContractRepository.findById(rcId)
                 .orElseThrow(
                         () -> new IllegalStateException("Request contract with id " + rcId + " does not exists"));
-        updaRequestContract.setStatus(true);
-        updaRequestContract.setDateMeet(dateMeet);
-        updaRequestContract.setPlaceMeet(placeMeet);
-        requestContractRepository.save(updaRequestContract);
-        return getRequestContractDto(updaRequestContract);
+        if(updaRequestContract.isPayStatus()){
+            updaRequestContract.setStatus(true);
+            updaRequestContract.setDateMeet(dateMeet);
+            updaRequestContract.setPlaceMeet(placeMeet);
+            requestContractRepository.save(updaRequestContract);
+        }else throw new IllegalStateException("This contract is unpaid");
+        return getRCDto(updaRequestContract);
     }
 
-    @Override
-    public RequestContract updateRequestContract(RequestContract requestContract) {
-        return requestContractRepository.save(requestContract);
+    private RequestDto getRCDto(RequestContract contract){
+        RequestDto dto = new RequestDto();
+        dto.setRequestContractId(contract.getRequestContractId());
+        dto.setRequestDate(contract.getRequestDate());
+        dto.setTotalPrice(contract.getTotalPrice());
+        dto.setDateMeet(contract.getDateMeet());
+        dto.setPlaceMeet(contract.getPlaceMeet());
+        dto.setStatus(contract.isStatus());
+
+        dto.setComboId(contract.getComboBuilding().getComboBuildingId());
+        dto.setComboName(contract.getComboBuilding().getComboBuildingName());
+
+        dto.setUserId(contract.getUser().getUserId());
+        dto.setUserName(contract.getUser().getName());
+        dto.setEmail(contract.getUser().getEmail());
+        dto.setPhone(contract.getUser().getPhone());
+
+        dto.setBuildingDetail(contract.getBuildingDetail());
+        return dto;
+    }
+    private Double getComboPrice(RequestContract contract){
+        Double comboPrice = 0.0;
+        List<Material> materials = customDetailService.getMateByRequestContract(contract);
+        for (Material m: materials) {
+            comboPrice += m.getUnitPrice();
+        }
+        comboPrice = comboPrice*80/100;
+        comboPrice = comboPrice*(contract.getBuildingDetail().getBuilding().getPercentPrice())/100;
+        int count = 0;
+        if (contract.getBuildingDetail().isHasTunnel()) count++;
+        if(contract.getBuildingDetail().getNumOBathroom() > 1) count += contract.getBuildingDetail().getNumOBathroom() - 1;
+        if(contract.getBuildingDetail().getNumOBedroom() > 1) count += contract.getBuildingDetail().getNumOBedroom() - 1;
+        if(contract.getBuildingDetail().getNumOKitchen() > 1) count += contract.getBuildingDetail().getNumOKitchen() - 1;
+        comboPrice = count*(((double) count*3+100)/100);
+        return comboPrice;
     }
 }

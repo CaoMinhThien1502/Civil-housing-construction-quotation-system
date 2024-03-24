@@ -26,5 +26,4 @@ public class InvoiceDto {
     private String transactionStatus;
     private String txnRef;
     private String secureHash;
-    private List<Long> itemList;
 }
