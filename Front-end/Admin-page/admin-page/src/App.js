@@ -25,7 +25,10 @@ import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
 import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+
 import BlogDetail from './pages/blogmanager/blogDetail.jsx'
+import ComboDetail from './pages/combobuilding/comboDetail.jsx'
+
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
@@ -67,7 +70,8 @@ import {
   ContactSection,
   Footer,
   BackToTopButton,
-  BlogReal
+  BlogReal,
+  Combo
 } from './pages/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
 import {
   ConstructionForm,
@@ -118,7 +122,8 @@ function App() {
       && location.pathname !== '/detail'
       && location.pathname !== '/profile'
       && location.pathname !== '/register'
-      && !location.pathname.includes('/blogDetail') 
+      && !location.pathname.includes('/blogDetail')
+      && !location.pathname.includes('/comboDetail') 
       //&& location.pathname !== '/blogreal'
       && (
         <ThemeProvider theme={theme}>
@@ -203,6 +208,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
         <Route path='/blogDetail/:id' element={<BlogDetail/>}/> 
+        <Route path='/comboDetail/:id' element={<ComboDetail/>}/>
       </Routes>
     </ColorModeContext.Provider>
     </>
@@ -218,6 +224,7 @@ const HomePage = () => {
       <PersonIn4 />
       <TeamSection />
       <BlogReal/>
+      <Combo/>
       <PricingSection />
       <ContactSection />
       <Footer />
