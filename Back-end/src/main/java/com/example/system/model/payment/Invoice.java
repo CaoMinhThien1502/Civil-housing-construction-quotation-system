@@ -47,10 +47,13 @@ public class Invoice {
     @Column(nullable = false, columnDefinition = "varchar(200)")
     private String secureHash;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
-    @OneToOne(mappedBy = "invoice")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "request_contract_id", referencedColumnName = "requestContractId")
+    @JsonIgnore
     private RequestContract requestContract;
 }

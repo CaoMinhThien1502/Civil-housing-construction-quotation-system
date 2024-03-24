@@ -12,4 +12,5 @@ import lombok.Setter;
 public class CustomMateDto {
     private Long mateId;
     private String mateName;
+    private Long matePrice;
 }

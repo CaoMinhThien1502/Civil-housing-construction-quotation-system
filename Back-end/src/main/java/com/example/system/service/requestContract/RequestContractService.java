@@ -1,22 +1,17 @@
 package com.example.system.service.requestContract;
 
-import com.example.system.dto.buildingdto.BuildingDto;
-import com.example.system.dto.requestcontractdto.RCDetailDto;
-import com.example.system.dto.requestcontractdto.RequestContractDto;
-import com.example.system.model.building.Building;
+import com.example.system.dto.requestcontractdto.CreateDto;
+import com.example.system.dto.requestcontractdto.RequestDto;
 import com.example.system.model.requestcontract.RequestContract;
 
 import java.util.Date;
 import java.util.List;
 
 public interface RequestContractService {
-    RequestContract getByBuilding(Building building);
     List<RequestContract> findAll();
-    List<RCDetailDto> findAllDto();
-    List<RequestContractDto> findDtosByEmail(String email);
-    RCDetailDto findById(Long rcId);
-    RequestContractDto getRequestContractDto(RequestContract rc);
-    RequestContractDto createRequestContract(BuildingDto dto, Long comboId, Long userId);
-    RequestContractDto confirmRequestContract(Long rcId, Date dateMeet, String placeMeet);
-    RequestContract updateRequestContract(RequestContract requestContract);
+    List<RequestDto> findAllDto();
+    RequestDto getById(Long rcId);
+    List<RequestDto> findDtosByEmail(String email);
+    RequestDto createRequestContract(CreateDto createDto);
+    RequestDto confirmRequestContract(Long rcId, Date dateMeet, String placeMeet);
 }
