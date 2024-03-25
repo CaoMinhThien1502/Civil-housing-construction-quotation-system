@@ -104,6 +104,7 @@ const RequestContract = () => {
             headerName: "ID",
             headerAlign: "center",
             align: "center",
+            flex: 0.5,
         },
         {
             field: "userName",
@@ -114,12 +115,12 @@ const RequestContract = () => {
         {
             field: "comboName",
             headerName: "Combo selected",
-            flex: 1,
+            flex: 0.8,
         },
         {
             field: "totalPrice",
             headerName: "Price",
-            flex: 0.5,
+            flex: 1,
             renderCell: (params) => {
                 const { value } = params; // Use `value` directly for clarity (optional)
                 return value.toLocaleString('vi', { style: 'currency', currency: 'VND' });
@@ -156,12 +157,12 @@ const RequestContract = () => {
         {
             field: "requestDate",
             headerName: "Request Date",
-            flex: 0.8,
+            flex: 0.7,
         },
         {
             field: "dateMeet",
             headerName: "Date Meet",
-            flex: 1,
+            flex: 1.3,
             renderCell: (params) => (
                 <TextField
                     type="date"
@@ -173,7 +174,7 @@ const RequestContract = () => {
         {
             field: "place",
             headerName: "Place",
-            flex: 1.5,
+            flex: 1.3,
             renderCell: (params) => (
                 <TextField
                     type="text"

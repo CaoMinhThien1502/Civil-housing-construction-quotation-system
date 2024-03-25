@@ -9,22 +9,22 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 const initialValues = {
-    itemId: 0,
-    itemName: "",
-    priceItem: "",
-    status: "",
+    buildingId: 0,
+    buildingName: "",
+    percentPrice: "",
+    status: 1,
+    buildingTypeId: 0
 };
 
 const userSchema = yup.object().shape({
-    itemName: yup.string().required("Item Name is required"),
-    priceItem: yup.number().required("Unit Price is required"),
-}); 
+    buildingName: yup.string().required("Building Name is required"),
+    percentPrice: yup.string().required("Percent Price is required"),
+});
 
-const EditItem = () => {
+const EditBuilding = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     const {id} = useParams();
-    const [getItemTypeId, setItemTypeID] = useState("");
 
     const [openSuccess, setOpenSuccess] = useState(false);
 
@@ -34,7 +34,7 @@ const EditItem = () => {
         }
 
         setOpenSuccess(false);
-        navigate('/itemList');
+        navigate('/buildingList');
     };
 
     const [openError, setOpenError] = useState(false);
@@ -47,11 +47,13 @@ const EditItem = () => {
         setOpenError(false);
     };
 
-    const [getItem, setItem] = useState({});
+    const [getBuilding, setBuilding] = useState({});
+    const [getPreviousBuildingName, setPreviousBuildingName] = useState("");
+    const [getPreviousBuildingId, setPreviousBuildingId] = useState("");
     useEffect(() => {
-        const fetchItemById = async () => {
+        const fetchBuildingById = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/building/item/id?itemid=${id}`, {
+                const response = await fetch(`http://localhost:8080/building/get?buildingId=${id}`, {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -60,28 +62,31 @@ const EditItem = () => {
                 });
 
                 const data = await response.json();
-                setItem(data);
+                setBuilding(data);
+                setPreviousBuildingName(data.buildingType.buildingTypeName);
+                setPreviousBuildingId(data.buildingType.buildingTypeId);
             } catch (error) {
                 console.error('Error fetching materials:', error);
             }
         };
 
-        fetchItemById();
+        fetchBuildingById();
     }, []); // Empty dependency array to fetch data only once on component mount
-
+    
     const formik = useFormik({
         initialValues: {
-            itemId: 0,
-            itemName: `${getItem.itemName}`,
-            priceItem: `${getItem.priceItem}`,
-            status: `${getItem.status}`,
+            buildingId: id,
+            buildingName: `${getBuilding.buildingName}`,
+            percentPrice: `${getBuilding.percentPrice}`,
+            status: `${getBuilding.status}`,
+            buildingTypeId: `${getPreviousBuildingId}`
         },
         enableReinitialize: true,
 
         onSubmit: async (values) => {
             console.log("Values in onSubmit:", values);
             try {
-                const response = await fetch(`http://localhost:8080/building/item/update?itemId=${id}&itemTypeId=${getItemTypeId}`, {
+                const response = await fetch(`http://localhost:8080/building/update`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values),
@@ -96,7 +101,7 @@ const EditItem = () => {
     
                 // Handle successful (e.g., navigate to a different page, store user data)
                 setOpenSuccess(true);
-                // navigate('/itemList');
+                // navigate('/buildingList');
             } catch (error) {
                 console.error('Error during submit:', error);
                 setOpenError(true);
@@ -107,20 +112,24 @@ const EditItem = () => {
         validationSchema: userSchema,
     });
 
-    // event of select item type
-    const [anchorElItemType, setAnchorElItemType] = useState(null); // State to manage dropdown menu
-    const handleOpenItemType = (event) => {
-        setAnchorElItemType(event.currentTarget); // Open dropdown on click
+    // event of select building type
+    const [anchorElBuildingType, setAnchorElBuildingType] = useState(null); // State to manage dropdown menu
+    const handleOpenBuildingType = (event) => {
+        setAnchorElBuildingType(event.currentTarget); // Open dropdown on click
     };
-    const handleCloseItemType = () => {
-        setAnchorElItemType(null); // Close dropdown on selection or outside click
+    const handleCloseBuildingType = () => {
+        setAnchorElBuildingType(null); // Close dropdown on selection or outside click
     };
+    const handleChangesBuildingType = (event) => {
+        formik.setFieldValue("buildingTypeId", event.target.value);
+        console.log(event.target.value);
+    }
 
-    const [getItemTypes, setItemTypes] = useState([]);
+    const [getBuildingTypes, setBuildingTypes] = useState([]);
     useEffect(() => {
-        const fetchItemTypes = async () => {
+        const fetchBuildingTypes = async () => {
             try {
-                const response = await fetch('http://localhost:8080/building/item-type/list', {
+                const response = await fetch('http://localhost:8080/building/type/list', {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -129,19 +138,15 @@ const EditItem = () => {
                 });
 
                 const data = await response.json();
-                setItemTypes(data);
+                setBuildingTypes(data);
             } catch (error) {
                 console.error('Error fetching material types:', error);
             }
         };
 
-        fetchItemTypes(); 
+        fetchBuildingTypes();
     }, []); // Empty dependency array to fetch data only once on component mount
-
-    const handleChangesItemType = (event) => {
-        setItemTypeID(event.target.value);
-        console.log(event.target.value);
-    }
+    
     // Event of status
     const [anchorEl, setAnchorEl] = useState(null); // State to manage dropdown menu
     const handleOpen = (event) => {
@@ -158,7 +163,7 @@ const EditItem = () => {
 
     return (
         <Box m="20px">
-            <Header title="Edit Item" subtitle="Edit an Existing Item" />
+            <Header title="Edit Building" subtitle="Edit an Existing Building" />
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
@@ -178,53 +183,53 @@ const EditItem = () => {
                             fullWidth
                             variant="filled"
                             type="text"
-                            label="Item Name"
+                            label="Building Name"
                             onBlur={handleBlur}
                             onChange={(event) => {
                                 handleChange(event); // handleChange for validation userSchema
                                 formik.handleChange(event); // handleChange for formik
                             }}
-                            value={formik.values.itemName}
-                            name="itemName"
-                            error={!!touched.itemName && !!errors.itemName}
-                            helperText={touched.itemName && errors.itemName}
+                            value={formik.values.buildingName}
+                            name="buildingName"
+                            error={!!touched.buildingName && !!errors.buildingName}
+                            helperText={touched.buildingName && errors.buildingName}
                             sx={{ gridColumn: "span 4" }}
                             />
                             <TextField
                             fullWidth
                             variant="filled"
                             type="number"
-                            label="Unit Price"
+                            label="Percent Price"
                             onBlur={handleBlur}
                             onChange={(event) => {
                                 handleChange(event); // handleChange for validation userSchema
                                 formik.handleChange(event); // handleChange for formik
                             }}
-                            value={formik.values.priceItem}
-                            name="priceItem"
-                            error={!!touched.priceItem && !!errors.priceItem}
-                            helperText={touched.priceItem && errors.priceItem}
+                            value={formik.values.percentPrice}
+                            name="percentPrice"
+                            error={!!touched.percentPrice && !!errors.percentPrice}
+                            helperText={touched.percentPrice && errors.percentPrice}
                             sx={{ gridColumn: "span 4"}}
                             />
                             <Box sx={{ gridColumn: "span 4" }}>
-                                <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4"}}>
-                                    Item Type:
+                                <Typography variant="h6" gutterBottom sx={{ gridColumn: "span 4" }}>
+                                    Previous Building Type: {getPreviousBuildingName}
                                 </Typography>
                                 <Select
-                                    labelId="item-type-label"
-                                    id="item-type"
+                                    labelId="building-type-label"
+                                    id="building-type"
                                     defaultValue="" 
-                                    onChange={handleChangesItemType}
-                                    error={!!touched.itemType && !!errors.itemType} // Add error logic
-                                    open={Boolean(anchorElItemType)} // Open dropdown based on state
-                                    onClose={handleCloseItemType} // Close dropdown on selection or outside click
-                                    onOpen={handleOpenItemType} // Open dropdown on click
+                                    onChange={handleChangesBuildingType}
+                                    error={!!touched.buildingType && !!errors.buildingType} // Add error logic
+                                    open={Boolean(anchorElBuildingType)} // Open dropdown based on state
+                                    onClose={handleCloseBuildingType} // Close dropdown on selection or outside click
+                                    onOpen={handleOpenBuildingType} // Open dropdown on click
                                     fullWidth={true}
                                 >
-                                    {/* get menu item name from api above */}
-                                    {getItemTypes.filter((itemType) => itemType.status === true).map((itemType) => (
-                                        <MenuItem key={itemType.itemTypeId} value={itemType.itemTypeId}>
-                                            {itemType.itemTypeName}
+                                    {/* get menu building type name from api above */}
+                                    {getBuildingTypes.filter((buildingType) => buildingType.status === true).map((buildingType) => (
+                                        <MenuItem key={buildingType.buildingTypeId} value={buildingType.buildingTypeId}>
+                                            {buildingType.buildingTypeName}
                                         </MenuItem>
                                     ))}
                                 </Select>
@@ -236,11 +241,11 @@ const EditItem = () => {
                         </Box>
                         <Box sx={{ gridColumn: "span 4" }}>
                             <Select
-                                labelId="item-status-label"
-                                id="item-status"
+                                labelId="building-status-label"
+                                id="building-status"
                                 defaultValue="" 
                                 onChange={handleChanges}
-                                error={!!touched.itemId && !!errors.itemId} // Add error logic
+                                error={!!touched.buildingId && !!errors.buildingId} // Add error logic
                                 open={Boolean(anchorEl)} // Open dropdown based on state
                                 onClose={handleClose} // Close dropdown on selection or outside click
                                 onOpen={handleOpen} // Open dropdown on click
@@ -256,12 +261,12 @@ const EditItem = () => {
                         </Box>
                         
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <Button onClick={() => navigate("/itemList")} color="secondary" variant="contained">
+                            <Button onClick={() => navigate("/buildingList")} color="secondary" variant="contained">
                                 Cancel
                             </Button>
                             <Box ml="10px"/>
                             <Button type="submit" color="secondary" variant="contained">
-                                Edit Item
+                                Edit Building
                             </Button>
                         </Box>
                         
@@ -275,7 +280,7 @@ const EditItem = () => {
                     // variant="outlined"
                     sx={{ fontSize: 15 }}
                 >
-                    Item edited successfully!
+                    Building edited successfully!
                 </Alert>
             </Snackbar>
             <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
@@ -285,11 +290,11 @@ const EditItem = () => {
                     // variant="outlined"
                     sx={{ fontSize: 15 }}
                 >
-                    Item edited error!
+                    Building edited error!
                 </Alert>
             </Snackbar>
         </Box>
     )
 }
 
-export default EditItem;
+export default EditBuilding;
