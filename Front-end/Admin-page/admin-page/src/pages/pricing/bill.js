@@ -1,8 +1,12 @@
 import React from 'react';
 import logo from '../../img/homepage/logoSystem.jpg'
 import './bill.css'
+import { useEffect,useState } from 'react';
 import { FaBlackTie } from 'react-icons/fa';
-const Invoice = ({items}) => {
+import { redirect } from "react-router-dom"
+const Invoice = ({items,area}) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const url_Area = urlParams.get("area");
     return (
         <div className='invoice-container'>
         <div className="bg-white rounded-lg shadow-lg px-1 py-1 mt-4 max-w-md mx-auto my-custom-form-size">
@@ -27,6 +31,7 @@ const Invoice = ({items}) => {
                     </tr>
                 </thead>
                 <tbody>
+                <div className="flex items-start h-4 w-26 ">Area : {url_Area}m2</div>
                     {items.map((item)=>
                     <tr key={item.id}>
                         <td className="py-2 text-gray-700">{item.name}</td>
@@ -45,7 +50,7 @@ const Invoice = ({items}) => {
                 <div className="text-gray-700 mr-3">Tax:</div>
                 <div className="text-gray-700 mr-0">$25.50</div>
             </div> */}
-            <div className="flex justify-end mb-2 mr-10">
+            <div className="flex justify-end mb-2 mr-10"> 
                 <div className="text-gray-700 mr-2">Total:</div>
                 <div className="text-gray-700 font-bold text-xl">$450.50</div>
             </div>

@@ -35,14 +35,28 @@ function ItemDescription({ item, setShowModal }) {
                             </li>
                             <li class="table-item-row">
                                 <div class="col col-1" data-label="No">00001</div>
-                                <div class="col col-2" data-label="Material Name">
-                                    <select value={selectedProduct} onChange={handleProductChange}>
-                                        <option value="Xi măng loại 1">Xi măng Loại 1</option>
-                                        <option value="Xi măng loại 2">Xi măng loại 2</option>
-                                        <option value="Xi măng loại 3">Xi măng loại 3</option>
-                                    </select>
+                                <div class="col col-2" data-label="Material Name">Xi măng loại 1</div>
+                                <div class="col col-3" data-label="New Material">
+                                <select value={selectedProduct} onChange={handleProductChange}>
+                                        <option value="">Chọn nếu bạn muốn thay đổi</option>
+                                        <option value="Xi măng loại 1">Xi măng Hà Tiên</option>
+                                        <option value="Xi măng loại 2">Xi măng Tân Phú</option>
+                                        <option value="Xi măng loại 3">Xi măng 205</option>
+                                </select>
                                 </div>
-                                <div class="col col-3" data-label="New Material">Xi măng Hà Tiên</div>
+                                <div class="col col-4" data-label="Unit Price">2 triệu</div>
+                            </li>
+                            <li class="table-item-row">
+                                <div class="col col-1" data-label="No">00002</div>
+                                <div class="col col-2" data-label="Material Name">Xi măng loại 2</div>
+                                <div class="col col-3" data-label="New Material">
+                                <select value={selectedProduct} onChange={handleProductChange}>
+                                        <option value="">Chọn nếu bạn muốn thay đổi</option>
+                                        <option value="Xi măng loại 4">Xi măng Hà Tiên</option>
+                                        <option value="Xi măng loại 5">Xi măng Tân Phú</option>
+                                        <option value="Xi măng loại 6">Xi măng 205</option>
+                                </select>
+                                </div>
                                 <div class="col col-4" data-label="Unit Price">2 triệu</div>
                             </li>
                         </ul>

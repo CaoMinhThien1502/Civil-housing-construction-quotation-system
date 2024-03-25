@@ -15,6 +15,16 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 function ModalInputArea({ show, handleClose, handleAccept }) {
+    const [area, setArea] = useState(""); // Thêm state cho area
+
+    const handleAreaChange = (event) => {
+        setArea(event.target.value);
+    }
+
+    const handleAcceptWithArea = () => {
+        handleAccept(area); // Truyền giá trị của diện tích vào hàm handleAccept
+    }
+
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Body>
@@ -23,8 +33,10 @@ function ModalInputArea({ show, handleClose, handleAccept }) {
                         <Form.Label>Nhập diện tích đất (m2)</Form.Label>
                         <Form.Control
                             type="text"
+                            name="area"
                             placeholder="m2"
                             autoFocus
+                            onChange={handleAreaChange} // Gọi hàm handleAreaChange khi có sự thay đổi trong ô input
                         />
                     </Form.Group>
                 </Form>
@@ -33,13 +45,14 @@ function ModalInputArea({ show, handleClose, handleAccept }) {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleAccept}>
+                <Button variant="primary" onClick={handleAcceptWithArea}> {/* Sử dụng hàm handleAcceptWithArea thay vì handleAccept */}
                     Accept
                 </Button>
             </Modal.Footer>
         </Modal>
     );
 }
+
 
 function ProductCard({ imageSrc, title, rating, price, discountedPrice }) {
     const [showModal, setShowModal] = useState(false);
@@ -51,9 +64,9 @@ function ProductCard({ imageSrc, title, rating, price, discountedPrice }) {
     const handleCloseModal = () => {
         setShowModal(false);
     };
-    const handleCloseAccept = () => {
+    const handleAccept = (area) => {
         setShowModal(false);
-        navigate('/price1/detail');
+        navigate(`/price1/detail?area=${area}`);
     }
 
     return (
@@ -82,7 +95,7 @@ function ProductCard({ imageSrc, title, rating, price, discountedPrice }) {
                     </div>
                 </div>
             </div>
-            <ModalInputArea show={showModal} handleClose={handleCloseModal} handleAccept={handleCloseAccept}/>
+            <ModalInputArea show={showModal} handleClose={handleCloseModal} handleAccept={handleAccept}/>
         </div>
     );
 }

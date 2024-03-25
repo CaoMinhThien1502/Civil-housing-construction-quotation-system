@@ -5,6 +5,7 @@ import bedroom from '../../img/bedroom.jpg'
 import kitchen from '../../img/kitchen.jpg'
 import bathroom from '../../img/bathroom.jpg'
 import toilet from '../../img/toilet.jpg'
+import basement from '../../img/basement.jpg'
 import Button from 'react-bootstrap/Button';
 import ItemDescription from "./description";
 function ListItem() {
@@ -34,6 +35,13 @@ function ListItem() {
       id: 3,
       image: toilet,
       name: "Nhà vệ sinh",
+      description: "",
+      quantity: 1
+    },
+    {
+      id: 4,
+      image: basement,
+      name: "Hầm",
       description: "",
       quantity: 1
     },
@@ -109,16 +117,30 @@ function ListItem() {
                 </tr>
                    
               ))}
+                  <tr>
+                  <td>5</td>
+                  <td>
+                    <a>
+                      <img style = {{width: "120px", height: "110px", objectFit: "cover"}}src={basement} alt="Tầng hầm" />
+                    </a>
+                  </td>
+                  <td>Tầng hầm</td>
+                  <td><input
+                  type="number"
+                  value= "1"
+                  style={{width: "80px",textAlign: "center"}}
+                  />
+                  </td>
+                  <td><Button variant="outline-primary" size='sm'>Yes</Button></td>
+                  <td>
+                    <Button 
+                    variant="outline-danger"
+                    size = "sm"
+                    >No</Button>
+                  </td>
+                  </tr>
             </tbody>
             <tbody>
-              <tr>
-                <td colSpan="4"></td>
-                <td>
-                  <a className="Add-item" onClick={handleAdd} id="Add">
-                    Add
-                  </a>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -146,7 +168,7 @@ function ListItem() {
         </div>
       </div>
       <Invoice items={items} />
-      {showModal && <ItemDescription item={selectedItem} setShowModal={setShowModal} />}
+     {showModal && <ItemDescription item={selectedItem} setShowModal={setShowModal} />}
     </>
   );
 }
