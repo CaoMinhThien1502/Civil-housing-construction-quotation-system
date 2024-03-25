@@ -25,6 +25,5 @@ public class BuildingType {
     private boolean status;
 
     @OneToMany(mappedBy = "buildingType")
-    @JsonIgnore
     private List<Building> buildings;
 }

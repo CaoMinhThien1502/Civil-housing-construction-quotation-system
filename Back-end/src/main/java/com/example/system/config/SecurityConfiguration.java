@@ -35,16 +35,16 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors(c -> c.configurationSource(request -> {
-            CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-            config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT", "PATCH", "HEAD", "OPTIONS"));
-            config.setAllowedHeaders(Arrays.asList("*"));
-            config.addExposedHeader("Content-Type, Authorization");
-            config.addExposedHeader("Access-Control-Allow-Origin, Access-Control-Allow-Credentials");
-            config.setAllowCredentials(true);
-            return config;
-        }));
+//        http.cors(c -> c.configurationSource(request -> {
+//            CorsConfiguration config = new CorsConfiguration();
+//            config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+//            config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT", "PATCH", "HEAD", "OPTIONS"));
+//            config.setAllowedHeaders(Arrays.asList("*"));
+//            config.addExposedHeader("Content-Type, Authorization");
+//            config.addExposedHeader("Access-Control-Allow-Origin, Access-Control-Allow-Credentials");
+//            config.setAllowCredentials(true);
+//            return config;
+//        }));
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests

@@ -34,5 +34,6 @@ public class Building {
     private List<BuildingDetail> buildingDetails;
     @ManyToOne
     @JoinColumn(name = "building_type_id")
+    @JsonIgnore
     private BuildingType buildingType;
 }
