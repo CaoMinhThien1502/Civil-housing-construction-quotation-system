@@ -15,32 +15,41 @@ import Register from './pages/register/register.js';
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
-import Item from './pages/itemlist';
+
+import BuildingList from './pages/buildinglist';
 import ItemType from './pages/itemtype/index.jsx';
+
 import RequestContract from './pages/requestcontract';
 import UserList from './pages/userlist';
 import BlogList from './pages/blogmanager';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
+
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
+
 import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+
 import BlogDetail from './pages/blogmanager/blogDetail.jsx'
 import ComboDetail from './pages/combobuilding/comboDetail.jsx'
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
-import AddItem from './pages/itemlist/addItem.jsx';
+
+import AddBuilding from './pages/buildinglist/addBuilding';
 import AddItemType from './pages/itemtype/addItemType.jsx';
+
 import AddBlog from './pages/blogmanager/addBlog.jsx';
 import AddBlogFixing from './pages/blogmanager/addBlog.jsx';
 
 import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
-import EditItem from './pages/itemlist/editItem.jsx';
+
+import EditBuilding from './pages/buildinglist/editBuilding';
 import EditItemType from './pages/itemtype/editItemType.jsx';
+
 import EditUser from './pages/userlist/editUser.jsx';
 import './App.css'
 import Login from './pages/login/login';
@@ -154,9 +163,9 @@ function App() {
                     <Route path="/materialType/:id" element={<EditMaterialType />} />
                     <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
 
-                    <Route path="/itemList" element={<Item />} />
-                    <Route path="/itemList/:id" element={<EditItem />} />
-                    <Route path="/itemList/addItem" element={<AddItem />} />
+                    <Route path="/buildingList" element={<BuildingList />} />
+                    <Route path="/buildingList/:id" element={<EditBuilding />} />
+                    <Route path="/buildingList/addBuilding" element={<AddBuilding />} />
 
                     <Route path="/itemType" element={<ItemType />} />
                     <Route path="/itemType/:id" element={<EditItemType />} />

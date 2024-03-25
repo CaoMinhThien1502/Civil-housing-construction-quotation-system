@@ -21,9 +21,9 @@ const BarChart = ({ isDashboard = false }) => {
                 });
 
                 const data = await response.json();
-                const chartData = data.listItemChoice.map((item) => ({
-                    itemName: item.itemName,
-                    [item.itemName]: item.quantity,
+                const chartData = data.listBuildingChoice.map((building) => ({
+                    buildingName: building.buildingName,
+                    [building.buildingName]: building.quantity,
                 }));
                 setTotalData(chartData);
             } catch (error) {
@@ -42,7 +42,7 @@ const BarChart = ({ isDashboard = false }) => {
 
     return (
         <ResponsiveBar
-            height={800}
+            height={300}
             data={getTotalData}
             theme={{
                 // added
@@ -73,8 +73,8 @@ const BarChart = ({ isDashboard = false }) => {
                     },
                 },
             }}
-            keys={getTotalData.map((item) => item.itemName)}
-            indexBy="itemName"
+            keys={getTotalData.map((building) => building.buildingName)}
+            indexBy="buildingName"
             layout="horizontal"
             margin={{ top: 50, right: 60, bottom: 50, left: 150 }}
             padding={0.2}

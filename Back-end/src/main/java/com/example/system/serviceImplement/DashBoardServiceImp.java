@@ -4,6 +4,7 @@ import com.example.system.dto.dashboarddto.DashboardDto;
 import com.example.system.dto.dashboarddto.NumOfBuidingChoice;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
+import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.repository.building.BuildingDetailRepository;
 import com.example.system.repository.building.BuildingRepository;
 import com.example.system.repository.combo.MaterialRepository;
@@ -52,8 +53,9 @@ public class DashBoardServiceImp implements DashBoardService {
             NumOfBuidingChoice numOfBuidingChoice;
             for (Long i:uniqueBuildingIds) {
                 Building building = buildingRepository.findById(i).orElseThrow();
-                List<BuildingDetail> numberOfBuilding = buildingDetailRepository.findAllByBuilding(building);
-                numOfBuidingChoice = new NumOfBuidingChoice(building.getBuildingName(), numberOfBuilding.size());
+                numOfBuidingChoice = new NumOfBuidingChoice();
+                numOfBuidingChoice.setQuantity(requestContractRepository.findAllSameBuilding(i).size());
+                numOfBuidingChoice.setBuildingName(building.getBuildingName());
                 listBuildingChoice.add(numOfBuidingChoice);
             }
             dashboardDto.setListBuildingChoice(listBuildingChoice);

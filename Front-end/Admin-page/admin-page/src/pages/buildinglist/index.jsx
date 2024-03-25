@@ -8,12 +8,12 @@ import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const ItemList = () => {
-    const [getItemList, setItemList] = useState([]);
+const BuildingList = () => {
+    const [getBuildingList, setBuildingList] = useState([]);
     useEffect(() => {
-        const fetchItemList = async () => {
+        const fetchBuildingList = async () => {
             try {
-                const response = await fetch('http://localhost:8080/building/item/list', {
+                const response = await fetch('http://localhost:8080/building/list', {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -22,16 +22,16 @@ const ItemList = () => {
                 });
 
                 const data = await response.json();
-                setItemList(data);
+                setBuildingList(data);
             } catch (error) {
-                console.error('Error fetching items:', error);
+                console.error('Error fetching buildings:', error);
             }
         };
 
-        fetchItemList();
+        fetchBuildingList();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-    console.log(getItemList);
+    console.log(getBuildingList);
 
     const navigate = useNavigate();
     // const handleRowClick = (row) => {
@@ -42,30 +42,34 @@ const ItemList = () => {
     const colors = tokens(theme.palette.mode);
     const columns = [
         { 
-            field: "itemId", 
+            field: "buildingId", 
             headerName: "ID",
             headerAlign: "center",
             align: "center",
         },
         {
-            field: "itemName",
-            headerName: "Item Name",
+            field: "buildingName",
+            headerName: "Building Name",
             cellClassName: "name-column--cell",
             flex: 1,
         },
         {
-            field: "priceItem",
-            headerName: "Price",
+            field: "percentPrice",
+            headerName: "Percent Price",
             flex: 1,
             renderCell: (params) => {
                 const { value } = params;
-                return value?.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+                // return value with %
+                return value + '%';
             },
         },
         {
-            field: "itemTypeName",
+            field: "buildingType", // Access the entire buildingType object
             headerName: "Type",
             flex: 1,
+            renderCell: ({ value }) => ( // Use renderCell to extract buildingTypeName
+                value ? value.buildingTypeName : '-' // Handle potential undefined value
+            ),
         },
         {
             field: "status",
@@ -91,7 +95,7 @@ const ItemList = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Link                    to={`/itemList/${row.itemId}`}
+                <Link                    to={`/buildingList/${row.buildingId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
@@ -104,7 +108,7 @@ const ItemList = () => {
 
     return (
         <Box m="20px">
-            <Header title="Item List" subtitle="Managing the Item List" />
+            <Header title="Building List" subtitle="Managing the Building List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -138,14 +142,14 @@ const ItemList = () => {
                 }}
             >
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/itemList/addItem")} color="secondary" variant="contained">
-                        Add Item
+                    <Button onClick={() => navigate("/buildingList/addBuilding")} color="secondary" variant="contained">
+                        Add Building
                     </Button>
                 </Box>
                 <DataGrid
-                    rows={getItemList}
+                    rows={getBuildingList}
                     columns={columns}
-                    getRowId={(row) => row.itemId}
+                    getRowId={(row) => row.buildingId}
                     components={{ Toolbar: GridToolbar }}
                 />
             </Box>
@@ -153,4 +157,4 @@ const ItemList = () => {
     );
 };
 
-export default ItemList;
+export default BuildingList;

@@ -1,5 +1,8 @@
 package com.example.system.serviceImplement;
-
+import com.example.system.mail.EmailSender;
+import com.example.system.model.building.Building;
+import com.example.system.model.building.BuildingDetail;
+import com.example.system.model.combo.ComboBuilding;
 import com.example.system.dto.requestcontractdto.CreateDto;
 import com.example.system.dto.requestcontractdto.RequestDto;
 import com.example.system.model.combo.Material;
@@ -12,10 +15,12 @@ import com.example.system.repository.requestcontract.RequestContractRepository;
 import com.example.system.repository.user.UserRepository;
 import com.example.system.service.combobuilding.CustomDetailService;
 import com.example.system.service.requestContract.RequestContractService;
+import com.example.system.validator.EmailValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,8 +39,12 @@ public class RequestContractServiceImp implements RequestContractService {
     UserRepository userRepository;
     @Autowired
     ComboBuildingRepository comboBuildingRepository;
+    private final EmailValidator emailValidator;
+    private final EmailSender emailSender;
+
     @Autowired
     CustomDetailService customDetailService;
+
     @Override
     public List<RequestContract> findAll() {
         return requestContractRepository.findAll();
@@ -106,12 +115,16 @@ public class RequestContractServiceImp implements RequestContractService {
         RequestContract updaRequestContract = requestContractRepository.findById(rcId)
                 .orElseThrow(
                         () -> new IllegalStateException("Request contract with id " + rcId + " does not exists"));
-        if(updaRequestContract.isPayStatus()){
-            updaRequestContract.setStatus(true);
-            updaRequestContract.setDateMeet(dateMeet);
-            updaRequestContract.setPlaceMeet(placeMeet);
-            requestContractRepository.save(updaRequestContract);
-        }else throw new IllegalStateException("This contract is unpaid");
+        updaRequestContract.setStatus(true);
+        updaRequestContract.setDateMeet(dateMeet);
+        updaRequestContract.setPlaceMeet(placeMeet);
+        requestContractRepository.save(updaRequestContract);
+        String subject = "Confirm your construction quotes";
+        emailSender.send(
+                updaRequestContract.getUser().getEmail(),
+                buildEmail(updaRequestContract, dateMeet, placeMeet),
+                subject
+        );
         return getRCDto(updaRequestContract);
     }
 
@@ -136,19 +149,48 @@ public class RequestContractServiceImp implements RequestContractService {
         return dto;
     }
     private Double getComboPrice(RequestContract contract){
-        Double comboPrice = 0.0;
+        double comboPrice = 0.0;
         List<Material> materials = customDetailService.getMateByRequestContract(contract);
         for (Material m: materials) {
             comboPrice += m.getUnitPrice();
         }
-        comboPrice = comboPrice*80/100;
-        comboPrice = comboPrice*(contract.getBuildingDetail().getBuilding().getPercentPrice())/100;
+        comboPrice = comboPrice * 0.95;
+        comboPrice = comboPrice * contract.getBuildingDetail().getBuilding().getPercentPrice();
+        int count = getCount(contract);
+        comboPrice = count*(((double) count*5+100)/100);
+        return comboPrice;
+    }
+
+    private int getCount(RequestContract contract) {
         int count = 0;
         if (contract.getBuildingDetail().isHasTunnel()) count++;
         if(contract.getBuildingDetail().getNumOBathroom() > 1) count += contract.getBuildingDetail().getNumOBathroom() - 1;
         if(contract.getBuildingDetail().getNumOBedroom() > 1) count += contract.getBuildingDetail().getNumOBedroom() - 1;
         if(contract.getBuildingDetail().getNumOKitchen() > 1) count += contract.getBuildingDetail().getNumOKitchen() - 1;
-        comboPrice = count*(((double) count*3+100)/100);
-        return comboPrice;
+        if(contract.getBuildingDetail().getNumOFloor() > 1) count = count * contract.getBuildingDetail().getNumOFloor() - 1;
+        if(contract.getBuildingDetail().isHasTunnel()) count++;
+        return count;
+    }
+
+    private String buildEmail(RequestContract requestContract, Date dateMeet, String placeMeet) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(dateMeet);
+        return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
+                "\n" +
+                "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
+                "\n" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Chào bạn,</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Chúng tôi rất vui thông báo rằng yêu cầu của bạn về dự án thi công xây dựng đã được xác nhận.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\"><strong>Thông tin chi tiết về cuộc họp như sau:</strong></p>" +
+                "<ul style=\"Margin:0;padding:0 0 20px 20px;font-size:16px;line-height:22px;color:#0b0c0c\">" +
+                "<li>Yêu cầu số <strong>" + requestContract.getRequestContractId() + "</strong> đã được xác nhận</li>" +
+                "<li>Địa điểm gặp mặt: <strong>" + placeMeet + "</strong></li>" +
+                "<li>Thời gian: <strong>" + formattedDate + "</strong></li>" +
+                "</ul>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Rất mong bạn có mặt đúng giờ. Xin cảm ơn bạn đã hợp tác.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\"><strong>Lưu ý:</strong> Nếu bạn không đến hoặc trễ hơn 30 phút, yêu cầu hẹn sẽ bị hủy và bạn sẽ mất 200k tiền đã đặt cọc.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Trân trọng,</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">[CILVIL HOUSING]</p>" +
+                "</div>";
     }
 }
