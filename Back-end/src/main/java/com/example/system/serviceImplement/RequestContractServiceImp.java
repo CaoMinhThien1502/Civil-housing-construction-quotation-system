@@ -149,20 +149,27 @@ public class RequestContractServiceImp implements RequestContractService {
         return dto;
     }
     private Double getComboPrice(RequestContract contract){
-        Double comboPrice = 0.0;
+        double comboPrice = 0.0;
         List<Material> materials = customDetailService.getMateByRequestContract(contract);
         for (Material m: materials) {
             comboPrice += m.getUnitPrice();
         }
-        comboPrice = comboPrice*80/100;
-        comboPrice = comboPrice*(contract.getBuildingDetail().getBuilding().getPercentPrice())/100;
+        comboPrice = comboPrice * 0.95;
+        comboPrice = comboPrice * contract.getBuildingDetail().getBuilding().getPercentPrice();
+        int count = getCount(contract);
+        comboPrice = count*(((double) count*5+100)/100);
+        return comboPrice;
+    }
+
+    private int getCount(RequestContract contract) {
         int count = 0;
         if (contract.getBuildingDetail().isHasTunnel()) count++;
         if(contract.getBuildingDetail().getNumOBathroom() > 1) count += contract.getBuildingDetail().getNumOBathroom() - 1;
         if(contract.getBuildingDetail().getNumOBedroom() > 1) count += contract.getBuildingDetail().getNumOBedroom() - 1;
         if(contract.getBuildingDetail().getNumOKitchen() > 1) count += contract.getBuildingDetail().getNumOKitchen() - 1;
-        comboPrice = count*(((double) count*3+100)/100);
-        return comboPrice;
+        if(contract.getBuildingDetail().getNumOFloor() > 1) count = count * contract.getBuildingDetail().getNumOFloor() - 1;
+        if(contract.getBuildingDetail().isHasTunnel()) count++;
+        return count;
     }
 
     private String buildEmail(RequestContract requestContract, Date dateMeet, String placeMeet) {

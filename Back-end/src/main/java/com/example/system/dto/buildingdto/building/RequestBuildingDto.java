@@ -19,6 +19,7 @@ public class RequestBuildingDto {
     private Integer numOKitchen;
     private Integer numOBathroom;
     private Integer numOBedroom;
+    private Integer numOFloor;
     private boolean hasTunnel;
     private int status;
 }

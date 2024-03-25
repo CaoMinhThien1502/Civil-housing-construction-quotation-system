@@ -30,6 +30,8 @@ public class BuildingDetail {
     @Column(nullable = false)
     private Integer numOBedroom;
     @Column(nullable = false)
+    private Integer numOFloor;
+    @Column(nullable = false)
     private boolean hasTunnel;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)

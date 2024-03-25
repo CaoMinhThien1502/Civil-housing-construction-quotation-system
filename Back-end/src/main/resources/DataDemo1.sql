@@ -427,25 +427,24 @@ INSERT INTO building_type (status, building_type_name) VALUES (true, 'nha pho');
 INSERT INTO building_type (status, building_type_name) VALUES (true, 'nha cap 4');
 
 -- building
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (130, true, 1, 'Biet thu kieu 3');
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (120, true, 1, 'Biet thu kieu 2');
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (110, true, 1, 'Biet thu kieu 1');
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (100, true, 2, 'Nha pho kieu 1');
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (105, true, 2, 'Nha pho kieu 2');
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (95, true, 3, 'Nha cap 4 kieu 1');
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (100, true, 3, 'Nha cap 4 kieu 2');
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (105, false, 3, 'Nha cap 4 kieu 3');
-INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (110, false, 2, 'Nha pho kieu 3');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (1.2, true, 1, 'Biet thu co');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (1.1, true, 1, 'Biet thu hien dai');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (1.0, true, 2, 'Nha pho thuong');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (1.05, true, 2, 'Nha pho cao cap');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (0.95, true, 3, 'Nha cap 4 thuong');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (1.0, true, 3, 'Nha cap 4 cao cap');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (1.05, true, 3, 'Nha cap 4 hien dai');
+INSERT INTO building (percent_price, status, building_type_id, building_name) VALUES (1.1, true, 2, 'Nha pho hien dai');
 
 
 -- building detail
-INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (100, null, null, false, 1, 2, 1, null, 0, 5);
-INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (140, '2024-03-08', null, true, 2, 2, 2, '2024-01-01', 1, 7);
-INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (300, '2023-08-04', '2024-10-11', true, 3, 3, 2, '2023-06-07', 2, 3);
-INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (200, null, null, false, 2, 1, 1, null, -1, 5);
-INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (400, '2022-09-03', '2023-01-02', false, 3, 3, 2, '2022-07-14', 2, 2);
-INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (540, '2023-12-28', null, true, 2, 4, 2, '2023-09-02', 1, 3);
-INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (170, null, null, true, 1, 1, 1, '2024-02-23', 1, 6);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numofloor, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (100, null, null, false, 1, 1, 2, 1, null, 0, 5);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numofloor, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (140, '2024-03-08', null, true, 1, 2, 2, 2, '2024-01-01', 1, 7);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numofloor, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (300, '2023-08-04', '2024-10-11', true, 3, 3, 3, 2, '2023-06-07', 2, 3);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numofloor, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (200, null, null, false, 1, 2, 1, 1, null, -1, 5);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numofloor, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (400, '2022-09-03', '2023-01-02', false, 1, 3, 3, 2, '2022-07-14', 2, 2);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numofloor, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (540, '2023-12-28', null, true, 3, 2, 4, 2, '2023-09-02', 1, 3);
+INSERT INTO building_detail (area, check_date, finish_date, has_tunnel, numofloor, numobathroom, numobedroom, numokitchen, start_date, status, building_id) VALUES (170, null, null, true, 1, 2, 1, 1, '2024-02-23', 1, 6);
 
 -- request contract
 INSERT INTO request_contract (date_meet, pay_status, request_date, status, timeout_date, total_price, building_detail_id, combo_building_id, user_id, place_meet) VALUES ( null, true, '2022-03-08', false, '2022-03-14', 130000000, 1, 2, 1, null);

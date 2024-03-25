@@ -1,9 +1,8 @@
 package com.example.system.controller;
 
-import com.example.system.dto.buildingdto.building.BuildingDto;
-import com.example.system.dto.buildingdto.building.DetailDto;
-import com.example.system.dto.buildingdto.building.RequestBuildingDto;
-import com.example.system.dto.buildingdto.building.TypeDto;
+import com.example.system.dto.buildingdto.building.*;
+import com.example.system.dto.buildingdto.pricedto.PriceDetailDto;
+import com.example.system.dto.buildingdto.pricedto.RequestPriceDto;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingType;
 import com.example.system.service.building.BuildingDetailService;
@@ -101,4 +100,9 @@ public class BuildingController{
 //    }
 
 
+    // Get each price
+    @PostMapping("/price/detail")
+    public ResponseEntity<PriceDetailDto> getPriceDetail(@RequestBody RequestPriceDto priceDto){
+        return ResponseEntity.ok(buildingDetailService.getPriceDetail(priceDto));
+    }
 }
