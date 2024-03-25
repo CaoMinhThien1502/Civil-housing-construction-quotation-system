@@ -138,26 +138,66 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
         return getDetailDto(added);
     }
 
-//    @Override
-//    public DetailDto startBuildingDetail(Long buildingDetailId) {
-//        BuildingDetail buildingDetail = buildingDetailRepository.findById(buildingDetailId).orElseThrow();
-//        if(buildingDetail.getStatus()== -1){
-//            buildingDetail.setStartDate(new Date());
-//            buildingDetail.setStatus(1);
-//            buildingDetailRepository.save(buildingDetail);
-//        }else return null;
-//        return getDetailDto(buildingDetail);
-//    }
-//
-//    @Override
-//    public DetailDto checkBuildingDetail(Long buildingDetailId) {
-//        return null;
-//    }
-//
-//    @Override
-//    public DetailDto finishBuildingDetail(Long buildingDetailId) {
-//        return null;
-//    }
+    @Override
+    public DetailDto startBuildingDetail(Long buildingDetailId) {
+        try{
+            BuildingDetail buildingDetail = buildingDetailRepository.findById(buildingDetailId).orElseThrow();
+            RequestContract requestContract = requestContractRepository.findByBuildingDetail(buildingDetail);
+            if(buildingDetail.getStatus() == -1 && requestContract.isStatus()) {
+                buildingDetail.setStatus(1);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedDate = sdf.format(new Date());
+                buildingDetail.setStartDate(sdf.parse(formattedDate));
+                return getDetailDto(buildingDetailRepository.save(buildingDetail));
+            }else {
+                throw new IllegalStateException("Wrong!!");
+            }
+        }catch (Exception e){
+            return null;
+        }
+
+/*        BuildingDetail buildingDetail = buildingDetailRepository.findById(buildingDetailId).orElseThrow();
+        if(buildingDetail.getStatus()== -1){
+            buildingDetail.setStartDate(new Date());
+            buildingDetail.setStatus(1);
+            buildingDetailRepository.save(buildingDetail);
+        }else return null;*/
+    }
+
+    @Override
+    public DetailDto checkBuildingDetail(Long buildingDetailId) {
+        try{
+            BuildingDetail buildingDetail = buildingDetailRepository.findById(buildingDetailId).orElseThrow();
+            BuildingDetail checked = new BuildingDetail();
+            if(buildingDetail.getStatus() == 1) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedDate = sdf.format(new Date());
+                buildingDetail.setCheckDate(sdf.parse(formattedDate));
+                checked = buildingDetailRepository.save(buildingDetail);
+            }
+            return getDetailDto(checked);
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public DetailDto finishBuildingDetail(Long buildingDetailId) {
+        try{
+            BuildingDetail buildingDetail = buildingDetailRepository.findById(buildingDetailId).orElseThrow();
+            if(buildingDetail.getStatus() == 1) {
+                buildingDetail.setStatus(2);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedDate = sdf.format(new Date());
+                buildingDetail.setFinishDate(sdf.parse(formattedDate));
+                return getDetailDto(buildingDetailRepository.save(buildingDetail));
+            }else {
+                throw new IllegalStateException("Wrong!!");
+            }
+        }catch (Exception e){
+            return null;
+        }
+    }
 
     private DetailDto getDetailDto(BuildingDetail bd){
         return new DetailDto(bd, bd.getRequestContract().getRequestContractId());

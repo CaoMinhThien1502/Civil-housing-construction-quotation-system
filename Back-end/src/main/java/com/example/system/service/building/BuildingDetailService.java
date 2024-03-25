@@ -14,7 +14,7 @@ public interface BuildingDetailService {
     DetailDto getBuildingDetail(Long requestContractId);
     PriceDetailDto getPriceDetail(RequestPriceDto dto);
     DetailDto createBuildingDetail(Long buildingId, RequestBuildingDto buildingDto);
-//    DetailDto startBuildingDetail(Long buildingDetailId);
-//    DetailDto checkBuildingDetail(Long buildingDetailId);
-//    DetailDto finishBuildingDetail(Long buildingDetailId);
+    DetailDto startBuildingDetail(Long buildingDetailId);
+    DetailDto checkBuildingDetail(Long buildingDetailId);
+    DetailDto finishBuildingDetail(Long buildingDetailId);
 }
