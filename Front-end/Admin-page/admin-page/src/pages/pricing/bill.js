@@ -3,12 +3,113 @@ import logo from '../../img/homepage/logoSystem.jpg'
 import './bill.css'
 import { useEffect, useState } from 'react';
 import { FaBlackTie } from 'react-icons/fa';
-import { redirect } from "react-router-dom";
+import { Navigate, redirect } from "react-router-dom";
 import MaterialDescription from './description';
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+// Deposit -- Please be careful
+import { HmacSHA256Hash, IpAddr, URL_API, URL_VNPay, commandPay, currCode, locale, locate, reciveURL, secretKey, tmnCode, txnRef, version } from '../payment/configpayment';
+import { HmacSHA256, HmacSHA512 } from 'crypto-js';
+import CryptoJS from "crypto-js";
+import Thanks from "../payment/success";
+//payment
+function parseDate() {
+    var today = new Date();
+    today.setHours(today.getHours() + 7);
+    today = today.toISOString();
+    today = today.replaceAll('-', '');
+    today = today.replaceAll(":", '');
+    today = today.replaceAll("T", '');
+    let split = today.split(".");
+    today = split[0];
+    return today;
+}
 
+// Hàm bắt khách hàng đăng nhập trước khi báo giá
+const LoginModal = ({ show, handleClose }) => {
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+
+    const login = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:8080/api/v1/auth/login", {
+                email: email,
+                password: password,
+            }, { withCredentials: true });
+
+            if (response.status === 200) {
+                const token = jwtDecode(response.data.access_Token);
+                localStorage.setItem('token', response.data.access_Token);
+                localStorage.setItem('tokenTime', token.exp);
+                localStorage.setItem('mail', token.sub);
+                localStorage.setItem('role', response.data.role);
+                handleClose();
+                if (response.data.role === "CUSTOMER") {
+                    console.log("Hello Customer");
+                } else {
+                    console.log("Hello Admin");
+                }
+            } else {
+                setError(`Đăng nhập thất bại với mã trạng thái: ${response.status}`);
+            }
+        } catch (error) {
+            console.error("Lỗi trong quá trình đăng nhập:", error);
+
+            if (error.response) {
+                setError(error.response.data || "Unknown error");
+            } else {
+                setError("Đăng nhập thất bại. Vui lòng thử lại.");
+            }
+        }
+    };
+
+    return (
+        <Modal show={show}>
+            <Modal.Header closeButton>
+                <Modal.Title>Login</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Email </Form.Label>
+                        <Form.Control
+                            type="email"
+                            placeholder="name@example.com"
+                            onChange={(e) => setEmail(e.target.value)}
+                            autoFocus
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Password </Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Your Password"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowLoginModal(false)}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={login}>
+                    Login
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
 
 const InputLockForm = ({ area, typeId, comboName }) => {
+    //
     const [combo, setCombo] = useState([]);
     const [selectedComboId, setSelectedComboId] = useState("");
     const [isFormOpen, setIsFormOpen] = useState(true); // Thêm state để kiểm soát trạng thái của form
@@ -29,8 +130,8 @@ const InputLockForm = ({ area, typeId, comboName }) => {
             withCredentials: true
         })
             .then(response => {
-                    setCombo(response.data);
-                    console.log(response.data);
+                setCombo(response.data);
+                console.log(response.data);
             })
             .catch(error => console.error('Error fetching Combo Type data:', error));
     }, []); // Thêm typeId vào dependency array của useEffect
@@ -77,18 +178,102 @@ const InputLockForm = ({ area, typeId, comboName }) => {
 
 const Invoice = ({ items, area, comboId }) => {
     const [show, setShow] = useState(true);
-    const [price,setPrice] = useState([]);
+    const [object, setObject] = useState([]);
+    const [contractId, setContractId] = useState(0);
     const [numOBathroom, setNumOBathroom] = useState(0);
     const [numOBedroom, setNumOBedroom] = useState(0);
     const [numOKitchen, setNumOKitchen] = useState(0);
     const [numOFloor, setNumOFloor] = useState(0);
-
+    const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
     const buildingId = urlParams.get("buildingId");
     const url_Area = urlParams.get("area");
     const typeId = urlParams.get("comboTypeId");
     const comboName = urlParams.get("title");
+    // handle Deposit
+    const [buildingDetailId, setBuildingDetailId] = useState(0);
 
+    // handle send Quotation 
+    const [loginModalShow, setLoginModalShow] = useState(false);
+
+    const handleSendQuotation = async () => {
+        if (localStorage.getItem('token') == null) {
+            setLoginModalShow(true);
+        } else {
+            alert("Gửi báo giá thành công! Check email");
+            try {
+                const requestBody = {
+                    "buildingId": object.buildingId,
+                    "buildingName": object.buildingName,
+                    "percentPrice": object.percentPrice,
+                    "area": object.area,
+                    "numOBathroom": object.numOBathroom,
+                    "numOBedroom": object.numOBedroom,
+                    "numOKitchen": object.numOKitchen,
+                    "numOFloor": object.numOFloor,
+                    "hasTunnel": object.hasTunnel,
+                    "comboId": object.comboId,
+                    "matesInCustom": object.matesInCustom,
+                    "comboPrice": object.comboPrice,
+                    "totalPrice": object.totalPrice
+                }
+                const response = await axios.post(`http://localhost:8080/request-contract/sendQuote?email=${localStorage.getItem("mail")}`, requestBody).then(res => console.log(res));
+            } catch (error) {
+                console.error("Lỗi trong quá trình gửi giá:", error);
+            }
+        }
+    };
+    const handleDeposit = async () => {
+        // Component Thanks
+
+        if (localStorage.getItem('token') == null) {
+            setLoginModalShow(true);
+        }
+        else {
+            // Get contractId
+            try {
+                const requestBody = {
+                    "buildingDetailId": 0,
+                    "area": object.area,
+                    "numOKitchen": object.numOKitchen,
+                    "numOBathroom": object.numOBathroom,
+                    "numOBedroom": object.numOBedroom,
+                    "numOFloor": object.numOFloor,
+                    "hasTunnel": object.hasTunnel,
+                    "status": 0
+                }
+                const response = await axios.post(`http://localhost:8080/building/detail/create?buildingId=${buildingId}`, requestBody)
+                    .then(res => { 
+                        setContractId(res.data.requestContractId); 
+                        setBuildingDetailId(res.data.buildingDetailId);
+            
+                        // Now that contractId and buildingDetailId are set, create the VNPay URL
+                        let amount = 'vnp_Amount=' + '20000000';
+                        let command = '&vnp_Command=' + commandPay;
+                        let createDate = '&vnp_CreateDate=' + parseDate();
+                        let curCode = '&vnp_CurrCode=' + currCode;
+                        let ipAdd = '&vnp_IpAddr=' + IpAddr;
+                        let local = '&vnp_Locale=' + locale;
+                        let orderInfor = '&vnp_OrderInfo=' + res.data.requestContractId + '+' + comboId + '+' + res.data.requestContractId;
+                        let orderType = '&vnp_OrderType=' + 'BaoGia';
+                        let returnUrl = '&vnp_ReturnUrl=' + reciveURL;
+                        let tmn = '&vnp_TmnCode=' + tmnCode;
+                        let ref = '&vnp_TxnRef=' + txnRef;
+                        let vpnVersion = '&vnp_Version=' + version;
+                        let plainText = amount + command + createDate + curCode + ipAdd + local + orderInfor + orderType
+                            + returnUrl + tmn + ref + vpnVersion;
+                        let sercureHash = HmacSHA512(plainText, secretKey).toString();
+                        var vnPayURLRequest = URL_VNPay + plainText + "&vnp_SecureHash=" + sercureHash;
+            
+                        // Redirect to the VNPay URL
+                        window.location = vnPayURLRequest;
+                    });
+            } catch (error) {
+                console.error("Lỗi tạo building Detail");
+            }
+            
+        }
+    }
     useEffect(() => {
         // Count occurrences of specific items to get missing information
         let bathroomCount = 0;
@@ -135,12 +320,12 @@ const Invoice = ({ items, area, comboId }) => {
             withCredentials: true
         })
             .then(response => {
-                setPrice(response.data);
-                console.log(response);
+                setObject(response.data);
+                console.log("setPrice: ", response.data);
             })
             .catch(error => console.error('Error fetching Price data:', error));
-    }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area,comboId]);
-    
+    }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area, comboId]);
+
 
     return (
         <>
@@ -172,10 +357,10 @@ const Invoice = ({ items, area, comboId }) => {
                         </thead>
                         <tbody>
                             <tr>
-                                    <td className="py-2 text-gray-700">Area</td>
-                                    <td className="py-2 text-gray-700"> {url_Area} m2</td>
-                                    
-                                </tr>
+                                <td className="py-2 text-gray-700">Area</td>
+                                <td className="py-2 text-gray-700"> {url_Area} m2</td>
+
+                            </tr>
                             {items.map((item) =>
                                 <tr key={item.id}>
                                     <td className="py-2 text-gray-700">{item.name}</td>
@@ -186,18 +371,20 @@ const Invoice = ({ items, area, comboId }) => {
                     </table>
                     <div className="flex justify-end mb-2 mr-10">
                         <div className="text-gray-700 mr-2">Total:</div>
-                        <div className="text-gray-700 font-bold text-xl">{Math.round(price.totalPrice)} VND</div>
+                        <div className="text-gray-700 font-bold text-xl">{Math.round(object.totalPrice)} VND</div>
                     </div>
                     <div className="flex justify-between">
                         <input
                             type="button"
                             className="btn-checkout btn-send-quote"
                             value='Gửi Báo Giá'
+                            onClick={() => handleSendQuotation()}
                         />
                         <input
                             type="button"
                             className="btn-checkout btn-deposit"
                             value='Đặt cọc'
+                            onClick={() => handleDeposit()}
                         />
                     </div>
                     <div className="border-t-2 border-gray-300 pt-2 mb-2">
@@ -207,6 +394,7 @@ const Invoice = ({ items, area, comboId }) => {
                     </div>
                 </div>
             </div>
+            <LoginModal show={loginModalShow} handleClose={() => setLoginModalShow(false)} />
         </>
     );
 };

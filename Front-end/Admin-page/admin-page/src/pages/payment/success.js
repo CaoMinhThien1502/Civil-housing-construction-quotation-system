@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { redirect } from "react-router-dom";
+import { Navigate, redirect } from "react-router-dom";
 import './loader.css'
 
-function Thanks({itemIdList}) {
+function Thanks({ itemIdList }) {
   const urlParams = new URLSearchParams(window.location.search);
   const vnp_Amount = urlParams.get("vnp_Amount");
   const vnp_BankCode = urlParams.get("vnp_BankCode");
@@ -18,24 +18,16 @@ function Thanks({itemIdList}) {
   const vnp_TxnRef = urlParams.get("vnp_TxnRef");
   const vnp_SecureHash = urlParams.get("vnp_SecureHash");
 
-  const [invoiceSent, setInvoiceSent] = useState(false);
-  const [redirect, setRedirect] = useState(false);
-
   useEffect(() => {
     handleInvoice();
   }, []);
-
   const handleInvoice = async () => {
     try {
-      if (!vnp_OrderInfo) {
-        console.error("vnp_OrderInfo is missing.");
-        return;
-      }
 
       const requestDetail = vnp_OrderInfo.split(' ');
 
-      const [comboId, area, userId, ...items] = requestDetail;
-      
+      const [contractId, comboId, buildingDetailId] = requestDetail;
+
       const postData = {
         invoiceId: 0, // Invoice ID is missing, you may need to provide this
         amount: vnp_Amount,
@@ -50,43 +42,45 @@ function Thanks({itemIdList}) {
         transactionStatus: vnp_TransactionStatus,
         txnRef: vnp_TxnRef,
         secureHash: vnp_SecureHash,
-        itemList: items,
       };
 
-      const token = localStorage.getItem("token");
-      const response = await axios.post(
-        `http://localhost:8080/payment/create?comboId=${comboId}&area=${area}&userid=${userId}`,
-        postData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
+      const requestBody = {
+        "requestContractId": contractId,
+        "comboId": comboId,
+        "email": localStorage.getItem("mail"),
+        "buildingDetailId": buildingDetailId,
+        "mateIds": {
+          "newMateList": [
+          ]
         }
-      );
+      }
+      const response1 = await axios.post(`http://localhost:8080/request-contract/request-contract/create`, requestBody)
+        .then(async (res) => {
+          await axios.post(`http://localhost:8080/payment/create?rcId=${contractId}`, postData).then(res => console.log(res))
+        }
+        );
 
-      setInvoiceSent(true);
-      
+
     } catch (error) {
       console.error("Error sending invoice:", error);
     }
   };
 
-  if (redirect) {
-    return <redirect to="/home" />;
-  }
+  setTimeout(function(){
+    window.location.href = '/home';
+  }, 5000);
+
 
   return (
     <>
-    <div className="page-render" style={{ alignItems: 'center', textAlign: 'center' }}>
-      <p style={{ fontSize: '50px' }}>Thank you for your purchase!</p>
-      <br />
-      <span className="loader"></span>
-      <div class="back-button">
-    <a href="/home" class="label">Back Home </a>
-    </div>
-    </div>
+      <div className="page-render" style={{ alignItems: 'center', textAlign: 'center' }}>
+        <p style={{ fontSize: '50px' }}>Thank you for your purchase!</p>
+        <br />
+        <span className="loader"></span>
+        <div class="back-button">
+          <a href="/home" class="label">Back Home </a>
+        </div>
+      </div>
     </>
   );
 }

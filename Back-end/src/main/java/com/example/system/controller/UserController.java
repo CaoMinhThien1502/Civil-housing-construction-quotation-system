@@ -31,7 +31,6 @@ public class UserController {
     @GetMapping("/profile")
     public ResponseEntity<UserDto> getProfile(@RequestParam String email){
         UserDto profile = userService.getProfile(email);
-        //UserDto profile = userService.getUserLoginFromJWT(request);
         return ResponseEntity.ok(profile);
     }
 
