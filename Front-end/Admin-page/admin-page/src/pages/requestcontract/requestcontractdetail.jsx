@@ -26,17 +26,36 @@ const RequestContractDetail = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const handleStart = () => {
-        // Xử lý khi người dùng nhấn nút "Nhấn Start"
+    const handleStart = async () => {
+        try {
+            const response = await axios.post(`http://localhost:8080/building/detail/start-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
+            console.log(response.data);
+            // Xử lý khi gọi API thành công
+        } catch (error) {
+            console.error('Error fetching start date:', error);
+        }
     };
-
-    const handleCheck = () => {
-        // Xử lý khi người dùng nhấn nút "Check"
+    
+    const handleCheck = async () => {
+        try {
+            const response = await axios.post(`http://localhost:8080/building/detail/check-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
+            console.log(response.data);
+            // Xử lý khi gọi API thành công
+        } catch (error) {
+            console.error('Error fetching check date:', error);
+        }
     };
-
-    const handleFinish = () => {
-        // Xử lý khi người dùng nhấn nút "Finish"
+    
+    const handleFinish = async () => {
+        try {
+            const response = await axios.post(`http://localhost:8080/building/detail/finish-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
+            console.log(response.data);
+            // Xử lý khi gọi API thành công
+        } catch (error) {
+            console.error('Error fetching finish date:', error);
+        }
     };
+    
 
 
     return (
@@ -192,6 +211,7 @@ const RequestContractDetail = () => {
                                             </Button>
                                         </>
                                     )}
+                                    {requestContractData && requestContractData.buildingDetail.startDate !== null && requestContractData.buildingDetail.finishDate !== null ? 'Complete' : null}
                                 </TableCell>
                             </TableRow>
                         </TableBody>
