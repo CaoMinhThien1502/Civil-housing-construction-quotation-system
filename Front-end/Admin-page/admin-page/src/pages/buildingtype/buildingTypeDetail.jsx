@@ -9,25 +9,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const ItemTypeDetail = () => {
+const BuildingTypeDetail = () => {
     const {id} = useParams();
-    // const [itemData, setItemData] = useState([]);
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8080/combobuilding/item/getByItemTypeId?itemTypeId=${id}`)
-    //         .then(response => {
-    //             setItemData(response.data);
-    //             console.log("Item Data:", response.data)
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching item data:', error);
-    //         });
-    // }, [id]);
 
-    const [getItemType, setItemType] = useState([]);
+    const [getBuildingType, setBuildingType] = useState([]);
     useEffect(() => {
-        const fetchItemTypeById = async () => {
+        const fetchBuildingTypeById = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/building/item-type/id?typeId=${id}`, {
+                const response = await fetch(`http://localhost:8080/building/type/get?buildingTypeId=${id}`, {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -36,15 +25,15 @@ const ItemTypeDetail = () => {
                 });
 
                 const data = await response.json();
-                setItemType(data);
+                setBuildingType(data);
             } catch (error) {
-                console.error('Error fetching item type:', error);
+                console.error('Error fetching building type:', error);
             }
         };
 
-        fetchItemTypeById();
+        fetchBuildingTypeById();
     }, []); // Empty dependency array to fetch data only once on component mount
-    const items = getItemType?.items || [];
+    const buildings = getBuildingType?.buildings || [];
 
     const navigate = useNavigate();
 
@@ -53,7 +42,7 @@ const ItemTypeDetail = () => {
 
     return (
         <Box m="20px" >
-            <Header title="Item Type Detail" subtitle="View the Item Type Detail" />
+            <Header title="Building Type Detail" subtitle="View the Building Type Detail" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -89,7 +78,7 @@ const ItemTypeDetail = () => {
                 {/* display many materials detail info from api using map */}
                 <Box sx={{ gridColumn: "span 4" }}>
                     <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
-                        Item Type Detail Information
+                        Building Type Detail Information
                     </Typography>
                 </Box>
                 <TableContainer>
@@ -97,38 +86,38 @@ const ItemTypeDetail = () => {
                         <TableBody>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>ID:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.itemTypeId}</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{getBuildingType?.buildingTypeId}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Name:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.itemTypeName}</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{getBuildingType?.buildingTypeName}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15, color: getItemType?.status === true ? "lightGreen" : "orangeRed" }}>{getItemType?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: getBuildingType?.status === true ? "lightGreen" : "orangeRed" }}>{getBuildingType?.status === true ? "Active" : "Inactive"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
 
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/itemType")} color="secondary" variant="contained">
+                    <Button onClick={() => navigate("/buildingType")} color="secondary" variant="contained">
                         Cancel
                     </Button>
                 </Box>
 
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Items Included Information: </Typography>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>Buildings Included Information</Typography>
                 </Box>
                 <DataGrid
-                    rows={items}
+                    rows={buildings}
                     columns={[
-                        { field: "itemId", headerName: "Item ID", flex: 1 },
-                        { field: "itemName", headerName: "Item Name", flex: 1 },
-                        { field: "priceItem", headerName: "Item Price", flex: 1,
+                        { field: "buildingId", headerName: "Building ID", flex: 1 },
+                        { field: "buildingName", headerName: "Building Name", flex: 1 },
+                        { field: "percentPrice", headerName: "Percent Price", flex: 1,
                             renderCell: (params) => {
-                                const { row: { priceItem } } = params; // Extract the type value
-                                return priceItem.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+                                const { row: { percentPrice } } = params; // Extract the type value
+                                return percentPrice + "%";
                             },
                         },
                         {
@@ -139,13 +128,14 @@ const ItemTypeDetail = () => {
                             },
                         },
                     ]}
-                    getRowId={(row) => row.itemId}
+                    getRowId={(row) => row.buildingId}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
+                <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
             </Box>
         </Box>
     );
 };
 
-export default ItemTypeDetail;
+export default BuildingTypeDetail;

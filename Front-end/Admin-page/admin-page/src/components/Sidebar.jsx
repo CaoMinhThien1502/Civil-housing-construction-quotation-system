@@ -78,8 +78,7 @@ const Sidebar = () => {
                 "& .pro-menu-item.active": {
                     color: "#6870fa !important",
                 },
-
-                height: "100vh",
+                height: "570%",
             }}
         
         >
@@ -225,8 +224,8 @@ const Sidebar = () => {
                             setSelected={setSelected}
                         />
                         <Item
-                            title="Item Type"
-                            to="/itemType"
+                            title="Building Type"
+                            to="/buildingType"
                             icon={<ReceiptOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
