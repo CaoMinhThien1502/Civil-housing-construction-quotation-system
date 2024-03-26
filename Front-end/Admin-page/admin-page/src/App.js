@@ -47,6 +47,7 @@ import EditUser from './pages/userlist/editUser';
 
 import Login from './pages/login/login';
 import PrivateRoutes from './utils/PrivateRoutes';
+import GuestPrivateRoutes from './utils/GuestPrivateRoutes';
 import axios from 'axios';
 // import Detail from './pages/pricing/detail.js';
 import ListItem from './pages/pricing/detail1.js';
@@ -200,15 +201,17 @@ function App() {
       <Routes> 
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path='/price1' element={<QuotationPage/>}/>
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="price1/detail" element={<ListItem />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/success" element={<Success />} />
-        <Route path='/blogDetail/:id' element={<BlogDetail/>}/> 
-        <Route path='/comboDetail/:id' element={<ComboDetail/>}/>
+        <Route element={<GuestPrivateRoutes />} >
+          <Route path="/home" element={<HomePage />} />
+          <Route path='/price1' element={<QuotationPage/>}/>
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="price1/detail" element={<ListItem />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/success" element={<Success />} />
+          <Route path='/blogDetail/:id' element={<BlogDetail/>}/> 
+          <Route path='/comboDetail/:id' element={<ComboDetail/>}/>
+        </Route>
       </Routes>
     </ColorModeContext.Provider>
     </>
