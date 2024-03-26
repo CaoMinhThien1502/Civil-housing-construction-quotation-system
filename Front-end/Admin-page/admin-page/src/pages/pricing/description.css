@@ -2,9 +2,10 @@
     font-family: 'lato', sans-serif;
   } */
  .item-description {
-    max-width: 1000px;
-    margin-left: auto;
+    max-width: 800px;
+    margin-left: 30px;
     margin-right: auto;
+    margin-top: 50px;
     padding-left: 10px;
     padding-right: 10px;
   }
