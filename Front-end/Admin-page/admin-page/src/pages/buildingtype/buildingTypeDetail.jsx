@@ -10,7 +10,7 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const BuildingTypeDetail = () => {
-    const {id} = useParams();
+    const { id } = useParams();
 
     const [getBuildingType, setBuildingType] = useState([]);
     useEffect(() => {

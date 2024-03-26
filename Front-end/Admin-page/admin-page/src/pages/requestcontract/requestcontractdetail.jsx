@@ -51,7 +51,7 @@ const RequestContractDetail = () => {
                 console.error('Error fetching combo data:', error);
             });
     }, [id]);
-    console.log(requestContractData);
+    // console.log(requestContractData);
 
     const navigate = useNavigate();
     const theme = useTheme();
@@ -59,18 +59,18 @@ const RequestContractDetail = () => {
     const handleStart = async () => {
         try {
             const response = await axios.post(`http://localhost:8080/building/detail/start-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
-            console.log(response.data);
+            // console.log(response.data);
             // Xử lý khi gọi API thành công
             setOpenSuccessStart(true);
         } catch (error) {
             console.error('Error fetching start date:', error);
         }
     };
-    
+
     const handleCheck = async () => {
         try {
             const response = await axios.post(`http://localhost:8080/building/detail/check-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
-            console.log(response.data);
+            // console.log(response.data);
             // Xử lý khi gọi API thành công
             setOpenSuccessCheck(true);
         } catch (error) {
@@ -81,13 +81,40 @@ const RequestContractDetail = () => {
     const handleFinish = async () => {
         try {
             const response = await axios.post(`http://localhost:8080/building/detail/finish-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
-            console.log(response.data);
+            // console.log(response.data);
             // Xử lý khi gọi API thành công
             setOpenSuccessFinish(true);
         } catch (error) {
             console.error('Error fetching finish date:', error);
         }
     };
+
+    const [getCustomCombo, setCustomCombo] = useState([]);
+    useEffect(() => {
+        const fetchCustomComboByRequestContractId = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/custom-combo/get?requestContractId=${id}`, {
+                    method: 'GET',
+                    headers: {
+                        // 'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                setCustomCombo(data);
+                console.log(data)
+            } catch (error) {
+                console.error('Error fetching custom combo:', error);
+            }
+        };
+
+        fetchCustomComboByRequestContractId();
+    }, []); // Empty dependency array to fetch data only once on component mount
+    const combos = getCustomCombo?.mateList || [];
+    // sort by mateTypeId
+    combos.sort((a, b) => a.mateTypeId - b.mateTypeId);
+    console.log(combos)
 
     return (
         <Box m="20px" >
@@ -236,7 +263,38 @@ const RequestContractDetail = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-
+                <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
+                <Box sx={{ gridColumn: "span 4" }}>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>Combo: {getCustomCombo.comboName}</Typography>
+                </Box>
+                <DataGrid
+                    rows={combos}
+                    columns={[
+                        { field: "mateTypeId", headerName: "Material Type ID", flex: 0.5 },
+                        { field: "mateTypeName", headerName: "Material Type Name", flex: 1.5 },
+                        { field: "mateId", headerName: "Material ID", flex: 0.5,
+                            renderCell: (params) => {
+                                const mateId = params.row.mate.mateId; // Extract the type value
+                                return mateId;
+                            }
+                        },
+                        { field: "mateName", headerName: "Material Name", flex: 1.5,
+                            renderCell: (params) => {
+                                const mateName = params.row.mate.mateName; // Extract the type value
+                                return mateName;
+                            }
+                        },
+                        { field: "matePrice", headerName: "Material Price", flex: 1,
+                            renderCell: (params) => {
+                                const matePrice = params.row.mate.matePrice; // Extract the type value
+                                return matePrice?.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+                            }
+                        }
+                    ]}
+                    getRowId={(row) => row.mateTypeId}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                />
                 <Box display="flex" justifyContent="end" mt="20px">
                     <Button onClick={() => navigate("/requestContractList")} color="secondary" variant="contained">
                         Cancel
