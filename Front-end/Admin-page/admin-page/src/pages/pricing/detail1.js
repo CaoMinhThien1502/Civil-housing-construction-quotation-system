@@ -168,7 +168,7 @@ function ListItem() {
           </table>
         </div>
       </div>
-      <Invoice items={items} />
+      <Invoice items={items} selectedComboId={selectedComboId}/>
       {showModal && <ItemDescription item={selectedItem} setShowModal={setShowModal} />}
     </>
   );
