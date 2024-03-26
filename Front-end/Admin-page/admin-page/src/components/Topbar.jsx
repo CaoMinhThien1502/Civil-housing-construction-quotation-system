@@ -35,11 +35,11 @@ const Topbar = () => {
     const handleLogout = async (e) => {
         e.preventDefault();
         setAnchorEl(null);
-       await localStorage.removeItem('mail');
-       await localStorage.removeItem('role');
-       await localStorage.removeItem('tokenTime'); 
-       await localStorage.removeItem('token');
-         window.location.href = 'http://localhost:8080/api/v1/auth/logout';
+        localStorage.removeItem('mail');
+        localStorage.removeItem('role');
+        localStorage.removeItem('tokenTime'); 
+        localStorage.removeItem('token');
+        window.location.href = 'http://localhost:8080/api/v1/auth/logout';
     };
 
     return (

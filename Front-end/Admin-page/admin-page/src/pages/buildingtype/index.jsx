@@ -8,12 +8,12 @@ import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const ItemType = () => {
-    const [getItemTypeList, setItemTypelList] = useState([]);
+const BuildingType = () => {
+    const [getBuildingTypeList, setBuildingTypelList] = useState([]);
     useEffect(() => {
-        const fetchIteTypelList = async () => {
+        const fetchBuildingTypelList = async () => {
             try {
-                const response = await fetch('http://localhost:8080/building/item-type/list', {
+                const response = await fetch('http://localhost:8080/building/type/list', {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -22,16 +22,16 @@ const ItemType = () => {
                 });
 
                 const data = await response.json();
-                setItemTypelList(data);
+                setBuildingTypelList(data);
             } catch (error) {
-                console.error('Error fetching items:', error);
+                console.error('Error fetching building types:', error);
             }
         };
 
-        fetchIteTypelList();
+        fetchBuildingTypelList();
     }, []); // Empty dependency array to fetch data only once on component mount
 
-    console.log(getItemTypeList);
+    console.log(getBuildingTypeList);
 
     const navigate = useNavigate();
     // const handleRowClick = (row) => {
@@ -42,14 +42,14 @@ const ItemType = () => {
     const colors = tokens(theme.palette.mode);
     const columns = [
         { 
-            field: "itemTypeId", 
+            field: "buildingTypeId", 
             headerName: "ID",
             headerAlign: "center",
             align: "center",
         },
         {
-            field: "itemTypeName",
-            headerName: "Item Name",
+            field: "buildingTypeName",
+            headerName: "Building Type Name",
             cellClassName: "name-column--cell",
             flex: 1,
         },
@@ -77,7 +77,7 @@ const ItemType = () => {
             align: "center",
             flex: 1,
             renderCell: ({ row }) => (
-                <Link                    to={`/itemType/${row.itemTypeId}`}
+                <Link                    to={`/buildingType/${row.buildingTypeId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
@@ -94,7 +94,7 @@ const ItemType = () => {
             flex: 1,
             renderCell: ({ row }) => (
                 <Link
-                    to={`/itemType/detail/${row.itemTypeId}`}
+                    to={`/buildingType/detail/${row.buildingTypeId}`}
                     style={{ textDecoration: 'none' }}
                 >
                     <Button color="primary" variant="contained">
@@ -107,7 +107,7 @@ const ItemType = () => {
 
     return (
         <Box m="20px">
-            <Header title="Item Type List" subtitle="Managing the Item Type List" />
+            <Header title="Building Type List" subtitle="Managing the Building Type List" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -141,14 +141,14 @@ const ItemType = () => {
                 }}
             >
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/itemType/addItemType")} color="secondary" variant="contained">
-                        Add Item type
+                    <Button onClick={() => navigate("/buildingType/addBuildingType")} color="secondary" variant="contained">
+                        Add Building type
                     </Button>
                 </Box>
                 <DataGrid
-                    rows={getItemTypeList}
+                    rows={getBuildingTypeList}
                     columns={columns}
-                    getRowId={(row) => row.itemTypeId}
+                    getRowId={(row) => row.buildingTypeId}
                     components={{ Toolbar: GridToolbar }}
                 />
             </Box>
@@ -156,4 +156,4 @@ const ItemType = () => {
     );
 };
 
-export default ItemType;
+export default BuildingType;

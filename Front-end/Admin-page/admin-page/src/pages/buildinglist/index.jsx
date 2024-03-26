@@ -63,14 +63,14 @@ const BuildingList = () => {
                 return value + '%';
             },
         },
-        {
-            field: "buildingType", // Access the entire buildingType object
-            headerName: "Type",
-            flex: 1,
-            renderCell: ({ value }) => ( // Use renderCell to extract buildingTypeName
-                value ? value.buildingTypeName : '-' // Handle potential undefined value
-            ),
-        },
+        // {
+        //     field: "buildingType", // Access the entire buildingType object
+        //     headerName: "Type",
+        //     flex: 1,
+        //     renderCell: ({ value }) => ( // Use renderCell to extract buildingTypeName
+        //         value ? value.buildingTypeName : '-' // Handle potential undefined value
+        //     ),
+        // },
         {
             field: "status",
             headerName: "Status",

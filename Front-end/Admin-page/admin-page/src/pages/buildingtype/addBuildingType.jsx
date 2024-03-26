@@ -9,15 +9,15 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 const initialValues = {
-    itemTypeName: "",
+    buildingName: "", // should be buildingTypeName instead of buildingName
     status: 1,
 };
 
 const userSchema = yup.object().shape({
-    itemTypeName: yup.string().required("Item Type Name is required"),
+    buildingName: yup.string().required("Building Type Name is required"),
 });
 
-const AddItemType = () => {
+const AddBuildingType = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     
@@ -29,7 +29,7 @@ const AddItemType = () => {
         }
 
         setOpenSuccess(false);
-        navigate('/itemType');
+        navigate('/buildingType');
     };
 
     const [openError, setOpenError] = useState(false);
@@ -44,14 +44,14 @@ const AddItemType = () => {
 
     const formik = useFormik({
         initialValues: {
-            itemTypeName: "",
+            buildingName: "",
             status: 1,
         },
 
         onSubmit: async (values) => {
             console.log("Values in onSubmit:", values);
             try {
-                const response = await fetch(`http://localhost:8080/building/item-type/create`, {
+                const response = await fetch(`http://localhost:8080/building/type/create`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values),
@@ -67,7 +67,7 @@ const AddItemType = () => {
     
                 // Handle successful (e.g., navigate to a different page, store user data)
                 setOpenSuccess(true);
-                // navigate('/itemType');
+                // navigate('/buildingType');
             } catch (error) {
                 console.error('Error during submit:', error);
                 setOpenError(true);
@@ -80,7 +80,7 @@ const AddItemType = () => {
     
     return (
         <Box m="20px">
-            <Header title="Add Item Type" subtitle="Create a New Item Type" />
+            <Header title="Add Building Type" subtitle="Create a New Building Type" />
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
@@ -100,16 +100,16 @@ const AddItemType = () => {
                             fullWidth
                             variant="filled"
                             type="text"
-                            label="Item Type Name"
+                            label="Building Type Name"
                             onBlur={handleBlur}
                             onChange={(event) => {
                                 handleChange(event); // handleChange for validation userSchema
                                 formik.handleChange(event); // handleChange for formik
                             }}
-                            value={formik.values.itemTypeName}
-                            name="itemTypeName"
-                            error={!!touched.itemTypeName && !!errors.itemTypeName}
-                            helperText={touched.itemTypeName && errors.itemTypeName}
+                            value={formik.values.buildingName}
+                            name="buildingName"
+                            error={!!touched.buildingName && !!errors.buildingName}
+                            helperText={touched.buildingName && errors.buildingName}
                             sx={{ gridColumn: "span 4"}}
                             />
                             <Typography sx={{ gridColumn: "span 4"}} variant="h6" gutterBottom>
@@ -117,12 +117,12 @@ const AddItemType = () => {
                             </Typography>
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <Button onClick={() => navigate("/itemType")} color="secondary" variant="contained">
+                            <Button onClick={() => navigate("/buildingType")} color="secondary" variant="contained">
                                 Cancel
                             </Button>
                             <Box ml="10px"/>
                             <Button type="submit" color="secondary" variant="contained">
-                                Create New Item Type
+                                Create New Building Type
                             </Button>
                         </Box>
                         
@@ -136,7 +136,7 @@ const AddItemType = () => {
                     // variant="outlined"
                     sx={{ fontSize: 15 }}
                 >
-                    Item Type added successfully!
+                    Building Type added successfully!
                 </Alert>
             </Snackbar>
             <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
@@ -146,7 +146,7 @@ const AddItemType = () => {
                     // variant="outlined"
                     sx={{ fontSize: 15 }}
                 >
-                    Item Type added error!
+                    Building Type added error!
                 </Alert>
             </Snackbar>
         </Box>
@@ -154,4 +154,4 @@ const AddItemType = () => {
     
 }
 
-export default AddItemType;
+export default AddBuildingType;

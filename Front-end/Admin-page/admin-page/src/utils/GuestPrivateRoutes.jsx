@@ -1,11 +1,11 @@
 // export default PrivateRoutes;
 import { Outlet, Navigate } from 'react-router-dom';
 
-const PrivateRoutes = ({ children, ...rest }) => {
+const GuestPrivateRoutes = ({ children, ...rest }) => {
     const role = localStorage.getItem('role');
 
     // Kiểm tra nếu role không tồn tại hoặc không hợp lệ (ví dụ: null hoặc undefined), redirect đến trang login
-    if (!role || (role !== "ADMIN" && role !== "MANAGER")) {
+    if (role == "ADMIN" || role == "MANAGER") {
         // handle logout
         localStorage.removeItem('mail');
         localStorage.removeItem('role');
@@ -19,4 +19,4 @@ const PrivateRoutes = ({ children, ...rest }) => {
     return <Outlet />;
 }
 
-export default PrivateRoutes;
+export default GuestPrivateRoutes;

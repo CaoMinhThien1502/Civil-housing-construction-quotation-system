@@ -8,7 +8,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-
 const RequestContract = () => {
     const [getRequestContract, setRequestContract] = useState([]);
     const [openSuccess, setOpenSuccess] = useState(false);

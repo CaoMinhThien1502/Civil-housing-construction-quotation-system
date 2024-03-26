@@ -9,16 +9,16 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 const initialValues = {
-    itemTypeId: 0,
-    itemTypeName: "",
+    buildingTypeId: 0,
+    buildingName: "", // should be buildingTypeName instead of buildingName
     status: "",
 };
 
 const userSchema = yup.object().shape({
-    itemTypeName: yup.string().required("Item Type Name is required"),
+    buildingName: yup.string().required("Building Type Name is required"),
 });
 
-const EditItemType = () => {
+const EditBuildingType = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const navigate = useNavigate();
     const {id} = useParams();
@@ -31,7 +31,7 @@ const EditItemType = () => {
         }
 
         setOpenSuccess(false);
-        navigate('/itemType');
+        navigate('/buildingType');
     };
 
     const [openError, setOpenError] = useState(false);
@@ -44,11 +44,11 @@ const EditItemType = () => {
         setOpenError(false);
     };
 
-    const [getItemType, setItemType] = useState({});
+    const [getBuildingType, setBuildingType] = useState({});
     useEffect(() => {
-        const fetchMaterialTypeById = async () => {
+        const fetchBuildingTypeById = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/building/item-type/id?typeId=${id}`, {
+                const response = await fetch(`http://localhost:8080/building/type/get?buildingTypeId=${id}`, {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -57,26 +57,26 @@ const EditItemType = () => {
                 });
 
                 const data = await response.json();
-                setItemType(data);
+                setBuildingType(data);
             } catch (error) {
                 console.error('Error fetching materials:', error);
             }
         };
 
-        fetchMaterialTypeById();
+        fetchBuildingTypeById();
     }, []); // Empty dependency array to fetch data only once on component mount
 
     const formik = useFormik({
         initialValues: {
-            itemTypeName: `${getItemType.itemTypeName}`,
-            status: `${getItemType.status}`,
+            buildingName: `${getBuildingType.buildingTypeName}`,
+            status: `${getBuildingType.status}`,
         },
         enableReinitialize: true,
 
         onSubmit: async (values) => {
             console.log("Values in onSubmit:", values);
             try {
-                const response = await fetch(`http://localhost:8080/building/item-type/update?itemTypeId=${id}`, {
+                const response = await fetch(`http://localhost:8080/building/type/update?typeId=${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values),
@@ -91,7 +91,7 @@ const EditItemType = () => {
                 
                 // Handle successful (e.g., navigate to a different page, store user data)
                 setOpenSuccess(true);
-                // navigate('/itemType');
+                // navigate('/buildingType');
             } catch (error) {
                 console.error('Error during submit:', error);
                 setOpenError(true);
@@ -117,7 +117,7 @@ const EditItemType = () => {
 
     return (
         <Box m="20px">
-            <Header title="Edit Item Type" subtitle="Edit an Existing Item Type" />
+            <Header title="Edit Building Type" subtitle="Edit an Existing Building Type" />
             <Formik
             onSubmit={formik.handleSubmit}
             initialValues={initialValues}
@@ -137,16 +137,16 @@ const EditItemType = () => {
                             fullWidth
                             variant="filled"
                             type="text"
-                            label="Item Type Name"
+                            label="Building Type Name"
                             onBlur={handleBlur}
                             onChange={(event) => {
                                 handleChange(event); // handleChange for validation userSchema
                                 formik.handleChange(event); // handleChange for formik
                             }}
-                            value={formik.values.itemTypeName}
-                            name="itemTypeName"
-                            error={!!touched.itemTypeName && !!errors.itemTypeName}
-                            helperText={touched.itemTypeName && errors.itemTypeName}
+                            value={formik.values.buildingName}
+                            name="buildingName"
+                            error={!!touched.buildingName && !!errors.buildingName}
+                            helperText={touched.buildingName && errors.buildingName}
                             sx={{ gridColumn: "span 4" }}
                             />
                             <Typography sx={{ gridColumn: "span 4" }} variant="h6" gutterBottom>
@@ -159,7 +159,7 @@ const EditItemType = () => {
                                 id="material-type-status"
                                 defaultValue="" 
                                 onChange={handleChanges}
-                                error={!!touched.itemTypeId && !!errors.itemTypeId} // Add error logic
+                                error={!!touched.buildingTypeId && !!errors.buildingTypeId} // Add error logic
                                 open={Boolean(anchorEl)} // Open dropdown based on state
                                 onClose={handleClose} // Close dropdown on selection or outside click
                                 onOpen={handleOpen} // Open dropdown on click
@@ -175,12 +175,12 @@ const EditItemType = () => {
                         </Box>
                         
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <Button onClick={() => navigate("/itemType")} color="secondary" variant="contained">
+                            <Button onClick={() => navigate("/buildingType")} color="secondary" variant="contained">
                                 Cancel
                             </Button>
                             <Box ml="10px"/>
                             <Button type="submit" color="secondary" variant="contained">
-                                Edit Item Type
+                                Edit Building Type
                             </Button>
                         </Box>
                         
@@ -194,7 +194,7 @@ const EditItemType = () => {
                     // variant="outlined"
                     sx={{ fontSize: 15 }}
                 >
-                    Item Type edited successfully!
+                    Building Type edited successfully!
                 </Alert>
             </Snackbar>
             <Snackbar open={openError} autoHideDuration={3000} onClose={handleCloseError} >
@@ -204,11 +204,11 @@ const EditItemType = () => {
                     // variant="outlined"
                     sx={{ fontSize: 15 }}
                 >
-                    Item Type edited error!
+                    Building Type edited error!
                 </Alert>
             </Snackbar>
         </Box>
     )
 }
 
-export default EditItemType;
+export default EditBuildingType;

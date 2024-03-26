@@ -8,9 +8,39 @@ import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const RequestContractDetail = () => {
     const { id } = useParams();
+
+    const [openSuccessStart, setOpenSuccessStart] = useState(false);
+    const handleCloseSuccessStart = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSuccessStart(false);
+        window.location.reload();
+    };
+
+    const [openSuccessCheck, setOpenSuccessCheck] = useState(false);
+    const handleCloseSuccessCheck = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSuccessCheck(false);
+        window.location.reload();
+    };
+
+    const [openSuccessFinish, setOpenSuccessFinish] = useState(false);
+    const handleCloseSuccessFinish = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSuccessFinish(false);
+        window.location.reload();
+    };
+
     const [requestContractData, setRequestContractData] = useState(null);
     useEffect(() => {
         axios.get(`http://localhost:8080/request-contract/request-contract/get/id?id=${id}`)
@@ -31,6 +61,7 @@ const RequestContractDetail = () => {
             const response = await axios.post(`http://localhost:8080/building/detail/start-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
             console.log(response.data);
             // Xử lý khi gọi API thành công
+            setOpenSuccessStart(true);
         } catch (error) {
             console.error('Error fetching start date:', error);
         }
@@ -41,6 +72,7 @@ const RequestContractDetail = () => {
             const response = await axios.post(`http://localhost:8080/building/detail/check-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
             console.log(response.data);
             // Xử lý khi gọi API thành công
+            setOpenSuccessCheck(true);
         } catch (error) {
             console.error('Error fetching check date:', error);
         }
@@ -51,12 +83,11 @@ const RequestContractDetail = () => {
             const response = await axios.post(`http://localhost:8080/building/detail/finish-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
             console.log(response.data);
             // Xử lý khi gọi API thành công
+            setOpenSuccessFinish(true);
         } catch (error) {
             console.error('Error fetching finish date:', error);
         }
     };
-    
-
 
     return (
         <Box m="20px" >
@@ -93,89 +124,77 @@ const RequestContractDetail = () => {
                     },
                 }}
             >
-                {/* display the Request Contract detail info from api */}
-                <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
-                        Request Contract Detail Information
-                    </Typography>
-                </Box>
                 <TableContainer>
                     <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell sx={{ fontSize: 15, width: "25%" }}>
+                                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
+                                        Request Contract Information 
+                                    </Typography>
+                                </TableCell>
+                                <TableCell sx={{ fontSize: 15, width: "25%" }}></TableCell>
+                                <TableCell sx={{ fontSize: 15, width: "25%" }}>
+                                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
+                                        Architecture Detail Information
+                                    </Typography>
+                                </TableCell>
+                                <TableCell sx={{ fontSize: 15, width: "25%" }}></TableCell>
+                            </TableRow>
+                        </TableHead>
                         <TableBody>
                             <TableRow>
-                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>ID:</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>ID:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.requestContractId}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>ID:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.buildingDetailId}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Creator:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.userName}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Phone:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.phone}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Email:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.email}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Combo selected:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.comboName}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Price:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.totalPrice}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15, color: requestContractData?.status === true ? "lightGreen" : "orange" }}>{requestContractData?.status === true ? "Confirmed" : "Pending"}</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
-                        Architecture
-                    </Typography>
-                </Box>
-                <TableContainer>
-                    <Table>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>ID:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.buildingDetailId}</TableCell>
-                            </TableRow>
-                            <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Area:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.area}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>Kitchen:</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Phone:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.phone}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Kitchen:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.numOKitchen}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>Bathroom:</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Email:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.email}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Bathroom:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.numOBathroom}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>Bedroom:</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Combo selected:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.comboName}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Bedroom:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.numOBedroom}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>Floor:</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Price:</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.totalPrice}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Floor:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.numOFloor}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>Tunnel:</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: requestContractData?.status === true ? "lightGreen" : "orange" }}>{requestContractData?.status === true ? "Confirmed" : "Pending"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Tunnel:</TableCell>
                                 <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.hasTunnel ? "Has Tunnel" : "No Tunnel"}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>Process:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{requestContractData?.buildingDetail.status === -1 ? "Mẫu" : requestContractData?.buildingDetail.status === 0 ? "Hủy" : requestContractData?.buildingDetail.status === 1 ? "Đang thi công" : "Đã xong"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}></TableCell>
+                                <TableCell sx={{ fontSize: 15 }}></TableCell>
+                                <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Process:</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: requestContractData?.buildingDetail.status === 2 ? "lightGreen" : "orange" }}>{requestContractData?.buildingDetail.status === -1 ? "Mẫu" : requestContractData?.buildingDetail.status === 0 ? "Hủy" : requestContractData?.buildingDetail.status === 1 ? "Đang thi công" : "Đã xong"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
                 <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
                     Manage Process
                 </Typography>
@@ -218,14 +237,40 @@ const RequestContractDetail = () => {
                     </Table>
                 </TableContainer>
 
-
-
                 <Box display="flex" justifyContent="end" mt="20px">
                     <Button onClick={() => navigate("/requestContractList")} color="secondary" variant="contained">
                         Cancel
                     </Button>
                 </Box>
+                <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
             </Box>
+            <Snackbar open={openSuccessStart} autoHideDuration={3000} onClose={handleCloseSuccessStart} >
+                <Alert
+                    onClose={handleCloseSuccessStart}
+                    severity="success"
+                    sx={{ fontSize: 15 }}
+                >
+                    Start Date has been confirmed!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openSuccessCheck} autoHideDuration={3000} onClose={handleCloseSuccessCheck} >
+                <Alert
+                    onClose={handleCloseSuccessCheck}
+                    severity="success"
+                    sx={{ fontSize: 15 }}
+                >
+                    Check Date has been confirmed!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openSuccessFinish} autoHideDuration={3000} onClose={handleCloseSuccessFinish} >
+                <Alert
+                    onClose={handleCloseSuccessFinish}
+                    severity="success"
+                    sx={{ fontSize: 15 }}
+                >
+                    Finish Date has been confirmed!
+                </Alert>
+            </Snackbar>
         </Box>
     );
 };

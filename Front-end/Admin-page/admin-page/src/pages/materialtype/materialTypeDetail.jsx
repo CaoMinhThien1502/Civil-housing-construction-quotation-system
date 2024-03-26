@@ -117,7 +117,7 @@ const MaterialTypeDetail = () => {
                 </Box>
 
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Materials Included Information: </Typography>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>Materials Included Information</Typography>
                 </Box>
                 <DataGrid
                     rows={materialData} // Access the material list for each type
@@ -143,6 +143,7 @@ const MaterialTypeDetail = () => {
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
+                <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
             </Box>
         </Box>
     );

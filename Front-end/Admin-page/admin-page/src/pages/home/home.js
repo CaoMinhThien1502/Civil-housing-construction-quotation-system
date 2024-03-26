@@ -66,10 +66,10 @@ const Header = () => {
             <li><a className="nav-link scrollto active" href="/home#">Home</a></li>
             <li><a className="nav-link scrollto" href="/home#about">About</a></li>
             <li><a className="nav-link scrollto" href="/home#blog" >Sample Building</a></li>
-            <li><a className="nav-link scrollto" href="/home#pricing">Pricing</a></li>
-            <li><a className="nav-link scrollto" href="/home#contact">Contact us</a></li>
             <li><a className="nav-link scrollto" href="/home#blogreal">Blogs</a></li>
             <li><a className="nav-link scrollto" href="/home#combo">Combo</a></li>
+            <li><a className="nav-link scrollto" href="/home#pricing">Pricing</a></li>
+            <li><a className="nav-link scrollto" href="/home#contact">Contact us</a></li>
             {isLoggedIn ? (
               <>
                 <li><a className="nav-link scrollto" href="/profile">Profile</a></li>
@@ -460,7 +460,7 @@ const PricingSection = () => {
   
     const redirectToPrice = (id,userName) => {
       // Navigate to /price with the id parameter
-      navigate(`/price?id=${id}`);
+      navigate(`/price1?id=${id}`);
     };
   return (
     <section id="pricing" className="pricing">
