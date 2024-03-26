@@ -12,52 +12,44 @@ import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
 import Form from "./pages/form";
 import Register from './pages/register/register.js';
+
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
 import MaterialType from "./pages/materialtype"
-
 import BuildingList from './pages/buildinglist';
-import ItemType from './pages/itemtype/index.jsx';
-
+import BuildingType from './pages/buildingtype';
 import RequestContract from './pages/requestcontract';
 import UserList from './pages/userlist';
 import BlogList from './pages/blogmanager';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
-
-import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
-
-import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
-
-import BlogDetail from './pages/blogmanager/blogDetail.jsx'
-import ComboDetail from './pages/combobuilding/comboDetail.jsx'
+import BuildingTypeDetail from './pages/buildingtype/buildingTypeDetail';
+import RequestContractDetail from './pages/requestcontract/requestContractDetail';
+import BlogDetail from './pages/blogmanager/blogDetail'
+import ComboDetail from './pages/combobuilding/comboDetail'
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
 
 import AddBuilding from './pages/buildinglist/addBuilding';
-import AddItemType from './pages/itemtype/addItemType.jsx';
-
-import AddBlog from './pages/blogmanager/addBlog.jsx';
-import AddBlogFixing from './pages/blogmanager/addBlog.jsx';
+import AddBuildingType from './pages/buildingtype/addBuildingType';
+import AddBlog from './pages/blogmanager/addBlog';
+import AddBlogFixing from './pages/blogmanager/addBlog';
 
 import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
-
 import EditBuilding from './pages/buildinglist/editBuilding';
-import EditItemType from './pages/itemtype/editItemType.jsx';
-
-import EditUser from './pages/userlist/editUser.jsx';
+import EditBuildingType from './pages/buildingtype/editBuildingType';
+import EditUser from './pages/userlist/editUser';
 
 import Login from './pages/login/login';
-import PrivateRoutes from './utils/PrivateRoutes.jsx';
+import PrivateRoutes from './utils/PrivateRoutes';
 import axios from 'axios';
 import Detail from './pages/pricing/detail.js';
 import ProfilePage from './pages/profile/profile.js';
-
 import Success from './pages/payment/success.js'
 
 // import Bar from "./pages/bar";
@@ -87,7 +79,6 @@ import {
 import { HistoryToggleOffRounded, NorthEastOutlined, OneK, Sailing, ViewHeadline } from '@mui/icons-material';
 import { keyboard } from '@testing-library/user-event/dist/keyboard/index.js';
 // import { dc } from '@fullcalendar/core/internal-common.js';
-
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -143,30 +134,30 @@ function App() {
            
               <Route element={<PrivateRoutes />} >
 
-                    <Route path="/dashboard" element={<Dashboard />} exact />
+                  <Route path="/dashboard" element={<Dashboard />} exact />
 
-                    <Route path="/comboBuilding" element={<ComboBuilding />} />
-                    <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
-                    <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
-                    <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
+                  <Route path="/comboBuilding" element={<ComboBuilding />} />
+                  <Route path="/comboBuilding/addComboBuilding" element={<AddComboBuilding />} />
+                  <Route path="/comboBuilding/:id" element={<EditComboBuilding />} />
+                  <Route path="/comboBuilding/detail/:id" element={<ComboBuildingDetail />} />
 
-                    <Route path="/materialList" element={<MaterialList />} />
-                    <Route path="/materialList/addMaterial" element={<AddMaterial />} />
-                    <Route path="/materialList/:id" element={<EditMaterial />} />
+                  <Route path="/materialList" element={<MaterialList />} />
+                  <Route path="/materialList/addMaterial" element={<AddMaterial />} />
+                  <Route path="/materialList/:id" element={<EditMaterial />} />
 
-                    <Route path="/materialType" element={<MaterialType />} />
-                    <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
-                    <Route path="/materialType/:id" element={<EditMaterialType />} />
-                    <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
+                  <Route path="/materialType" element={<MaterialType />} />
+                  <Route path="/materialType/addMaterialType" element={<AddMaterialType />} />
+                  <Route path="/materialType/:id" element={<EditMaterialType />} />
+                  <Route path="/materialType/detail/:id" element={<MaterialTypeDetail />} />
 
-                    <Route path="/buildingList" element={<BuildingList />} />
-                    <Route path="/buildingList/:id" element={<EditBuilding />} />
-                    <Route path="/buildingList/addBuilding" element={<AddBuilding />} />
+                  <Route path="/buildingList" element={<BuildingList />} />
+                  <Route path="/buildingList/:id" element={<EditBuilding />} />
+                  <Route path="/buildingList/addBuilding" element={<AddBuilding />} />
 
-                    <Route path="/itemType" element={<ItemType />} />
-                    <Route path="/itemType/:id" element={<EditItemType />} />
-                    <Route path="/itemType/addItemType" element={<AddItemType />} />
-                    <Route path="/itemType/detail/:id" element={<ItemTypeDetail />} />
+                  <Route path="/buildingType" element={<BuildingType />} />
+                  <Route path="/buildingType/:id" element={<EditBuildingType />} />
+                  <Route path="/buildingType/addBuildingType" element={<AddBuildingType />} />
+                  <Route path="/buildingType/detail/:id" element={<BuildingTypeDetail />} />
 
                   <Route path="/requestContractList" element={<RequestContract />} />
                   <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />

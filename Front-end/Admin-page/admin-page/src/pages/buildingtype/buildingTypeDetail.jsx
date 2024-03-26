@@ -9,23 +9,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const ItemTypeDetail = () => {
+const BuildingTypeDetail = () => {
     const {id} = useParams();
-    // const [itemData, setItemData] = useState([]);
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8080/combobuilding/item/getByItemTypeId?itemTypeId=${id}`)
-    //         .then(response => {
-    //             setItemData(response.data);
-    //             console.log("Item Data:", response.data)
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching item data:', error);
-    //         });
-    // }, [id]);
 
-    const [getItemType, setItemType] = useState([]);
+    const [getBuildingType, setBuildingType] = useState([]);
     useEffect(() => {
-        const fetchItemTypeById = async () => {
+        const fetchBuildingTypeById = async () => {
             try {
                 const response = await fetch(`http://localhost:8080/building/item-type/id?typeId=${id}`, {
                     method: 'GET',
@@ -36,15 +25,15 @@ const ItemTypeDetail = () => {
                 });
 
                 const data = await response.json();
-                setItemType(data);
+                setBuildingType(data);
             } catch (error) {
                 console.error('Error fetching item type:', error);
             }
         };
 
-        fetchItemTypeById();
+        fetchBuildingTypeById();
     }, []); // Empty dependency array to fetch data only once on component mount
-    const items = getItemType?.items || [];
+    const items = getBuildingType?.items || [];
 
     const navigate = useNavigate();
 
@@ -97,15 +86,15 @@ const ItemTypeDetail = () => {
                         <TableBody>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, width: "50%", color: "#4cceac" }}>ID:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.itemTypeId}</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{getBuildingType?.buildingTypeId}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Name:</TableCell>
-                                <TableCell sx={{ fontSize: 15 }}>{getItemType?.itemTypeName}</TableCell>
+                                <TableCell sx={{ fontSize: 15 }}>{getBuildingType?.buildingTypeName}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, color: "#4cceac" }}>Status:</TableCell>
-                                <TableCell sx={{ fontSize: 15, color: getItemType?.status === true ? "lightGreen" : "orangeRed" }}>{getItemType?.status === true ? "Active" : "Inactive"}</TableCell>
+                                <TableCell sx={{ fontSize: 15, color: getBuildingType?.status === true ? "lightGreen" : "orangeRed" }}>{getBuildingType?.status === true ? "Active" : "Inactive"}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -118,14 +107,14 @@ const ItemTypeDetail = () => {
                 </Box>
 
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Items Included Information: </Typography>
+                    <Typography variant="h3" gutterBottom>Buildings Included Information: </Typography>
                 </Box>
                 <DataGrid
                     rows={items}
                     columns={[
-                        { field: "itemId", headerName: "Item ID", flex: 1 },
-                        { field: "itemName", headerName: "Item Name", flex: 1 },
-                        { field: "priceItem", headerName: "Item Price", flex: 1,
+                        { field: "buildingId", headerName: "Building ID", flex: 1 },
+                        { field: "buildingName", headerName: "Building Name", flex: 1 },
+                        { field: "percentPrice", headerName: "Percent Price", flex: 1,
                             renderCell: (params) => {
                                 const { row: { priceItem } } = params; // Extract the type value
                                 return priceItem.toLocaleString('vi', {style : 'currency', currency : 'VND'});
@@ -148,4 +137,4 @@ const ItemTypeDetail = () => {
     );
 };
 
-export default ItemTypeDetail;
+export default BuildingTypeDetail;
