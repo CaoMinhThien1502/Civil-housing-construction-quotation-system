@@ -62,13 +62,13 @@ public class SecurityConfiguration {
 //                        .requestMatchers(HttpMethod.GET, "/combobuilding/**").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
 //                        .requestMatchers(HttpMethod.PUT, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
-                        .requestMatchers( "/combobuilding/**").permitAll()
+                        .requestMatchers("/combobuilding/**").permitAll()
                         //Dashboard
                         .requestMatchers("/dashboard/**").permitAll()
                         //Blog
-                        //.requestMatchers("/blog/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/blog/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/blog/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                        .requestMatchers("/blog/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/blog/**").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/blog/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
 //                        .requestMatchers(HttpMethod.POST, "/blog/**").hasAnyAuthority(Permission.ADMIN_FULLACCESS.name(), Permission.MANAGER_FULLACCSESS.name())
 //                        .requestMatchers(HttpMethod.PUT, "/blog/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         /// ----------------------Cường chơi dưới này, đừng đụng trên của t nha
@@ -76,7 +76,7 @@ public class SecurityConfiguration {
                         //.requestMatchers(HttpMethod.GET, "/custom-combo/**").permitAll()
                         .requestMatchers("/custom-combo/**").permitAll()
                         //Building
-                        .requestMatchers( "/building/**").permitAll()
+                        .requestMatchers("/building/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/building/**").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
 //                        .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
@@ -87,13 +87,12 @@ public class SecurityConfiguration {
 //                                .requestMatchers(HttpMethod.POST, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
 //                                .requestMatchers(HttpMethod.PUT, "/request-contract/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         //Payment
-
                         .requestMatchers("/payment/**").permitAll()
                         .anyRequest().authenticated())
 
-//.formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
-//.loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
-//) // URL mặc định sau khi đăng nhập thành công
+                .formLogin(form -> form // Cấu hình xác thực dựa trên biểu mẫu (form-based authentication)
+                        .loginPage(LOGIN_URL) // Xác định trang đăng nhập của ứng dụng
+                ) // URL mặc định sau khi đăng nhập thành công
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

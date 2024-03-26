@@ -1,4 +1,6 @@
 package com.example.system.serviceImplement;
+import com.example.system.dto.buildingdto.pricedto.PriceDetailDto;
+import com.example.system.dto.combodto.custom.CustomMateTypeDto;
 import com.example.system.mail.EmailSender;
 import com.example.system.model.building.Building;
 import com.example.system.model.building.BuildingDetail;
@@ -18,6 +20,7 @@ import com.example.system.service.requestContract.RequestContractService;
 import com.example.system.validator.EmailValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -128,6 +131,7 @@ public class RequestContractServiceImp implements RequestContractService {
         return getRCDto(updaRequestContract);
     }
 
+
     private RequestDto getRCDto(RequestContract contract){
         RequestDto dto = new RequestDto();
         dto.setRequestContractId(contract.getRequestContractId());
@@ -193,4 +197,43 @@ public class RequestContractServiceImp implements RequestContractService {
                 "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">[CILVIL HOUSING]</p>" +
                 "</div>";
     }
+    @Override
+    public PriceDetailDto sendQuote(PriceDetailDto priceDetailDto, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow();
+        String subject = "DETAILED EXAM QUOTE";
+        emailSender.send(
+                user.getEmail(),
+                sendQuoteToMail(priceDetailDto),
+                subject
+        );
+        return priceDetailDto;
+    }
+    private String sendQuoteToMail(PriceDetailDto priceDetailDto) {
+        StringBuilder emailContent = new StringBuilder();
+        emailContent.append("<h2>Báo giá chi tiết</h2>\n");
+        emailContent.append("<p>Đây là chi tiết báo giá của công trình dựa theo thông số bạn đã lựa chọn:</p>\n");
+        emailContent.append("<ul>\n");
+        emailContent.append("  <li><strong>Loại nhà: </strong>").append(priceDetailDto.getBuildingName()).append("</li>\n");
+        emailContent.append("  <li><strong>Diện tích: </strong>").append(priceDetailDto.getArea()).append("</li>\n");
+        emailContent.append("  <li><strong>Số phòng ngủ: </strong>").append(priceDetailDto.getNumOBedroom()).append("</li>\n");
+        emailContent.append("  <li><strong>Số phòng tắm: </strong>").append(priceDetailDto.getNumOBathroom()).append("</li>\n");
+        emailContent.append("  <li><strong>Số phòng bếp: </strong>").append(priceDetailDto.getNumOKitchen()).append("</li>\n");
+        emailContent.append("  <li><strong>Số tầng: </strong>").append(priceDetailDto.getNumOFloor()).append("</li>\n");
+        emailContent.append("  <li><strong>Hầm: </strong>").append(priceDetailDto.isHasTunnel() ? "Có" : "Không").append("</li>\n");
+        emailContent.append("</ul>\n");
+        emailContent.append("<p><strong>Gói xây dựng có giá:</strong>").append(priceDetailDto.getComboPrice()).append("</p>\n");
+        emailContent.append("<p><strong>Chi tiết nguyên liệu:</strong></p>\n");
+        emailContent.append("<ul>\n");
+
+        // Thêm chi tiết nguyên liệu từ danh sách nguyên liệu
+        for (CustomMateTypeDto c : priceDetailDto.getMatesInCustom()) {
+            emailContent.append("  <li>Loại nguyên liệu: ").append(c.getMateTypeName()).append(", Nguyên liệu: ").append(c.getMate().getMateName()).append(", Giá: ").append(c.getMate().getMatePrice()).append("</li>\n");
+        }
+        emailContent.append("</ul>\n");
+        emailContent.append("<p><strong>Tổng tiền là:</strong>").append(priceDetailDto.getTotalPrice()).append("</p>\n");
+        emailContent.append("<p><strong>Lưu ý:</strong></p>\n");
+        emailContent.append("<p>Mặc định: Một căn hộ ban đầu chỉ có 1 phòng ngủ, 1 phòng tắm, 1 phòng bếp, 1 lầu và không có hầm. Khi bạn tăng số lượng các thành phần trên thì giá sẽ được cộng thêm 3-5% tùy loại.<br>Giá của loại nhà sẽ được tăng theo kiểu và loại nhà bạn chọn thì sẽ tăng theo hệ số: ").append(priceDetailDto.getPercentPrice()).append("</p>\n");
+        emailContent.append("<p>Cám ơn đã tin tưởng và sử dụng dịch vụ báo giá thi công nhà ở của hệ thống CHCQS!</p>");
+        return emailContent.toString();
+}
 }
