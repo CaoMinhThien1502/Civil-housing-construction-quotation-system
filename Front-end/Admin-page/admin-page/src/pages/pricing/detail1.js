@@ -9,6 +9,7 @@ import toilet from '../../img/toilet.jpg'
 import basement from '../../img/basement.jpg'
 import Button from 'react-bootstrap/Button';
 import ItemDescription from "./description";
+import MaterialDescription from './description';
 function ListItem() {
   const [combo, setCombo] = useState([]);
   const [items, setItems] = useState([
@@ -56,8 +57,9 @@ function ListItem() {
     },
   ]);
   const [showModal, setShowModal] = useState(false);
+  const [isClick, setIsClick] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedComboId, setSelectedComboId] = useState("");
+  const [selectedComboId, setSelectedComboId] = useState(0);
   const urlParams = new URLSearchParams(window.location.search);
   const typeId = urlParams.get("comboTypeId");
   useEffect(() => {
@@ -67,13 +69,17 @@ function ListItem() {
     })
       .then(response => {
         setCombo(response.data);
-        console.log("hi" + response.data);
       })
       .catch(error => console.error('Error fetching Combo Type data:', error));
   }, []);
   const handleComboTypeChange = (event) => {
     setSelectedComboId(event.target.value);
+    console.log("selectedComboId: ",event.target.value);
   };
+  // Hàm gọi Material Description
+  const handleMaterialDescription = () => {
+    setIsClick(true);
+  }
   const handleDetail = (item) => {
     setSelectedItem(item);
     setShowModal(true);
@@ -139,7 +145,8 @@ function ListItem() {
                       </div>
                     )}
                     {item.name === "Combo" && (
-                      <select id="comboType" value={selectedComboId} onChange={handleComboTypeChange}>
+                      <select id="comboType" onChange={handleComboTypeChange}>
+                      <option value="">Chọn combo</option>
                       {combo.map((item) => (
                         <option key={item.comboBuildingId} value={item.comboBuildingId}>
                           {item.comboBuildingName}
@@ -157,7 +164,13 @@ function ListItem() {
                     {item.name !== "Tunnel" && item.name !== "Combo"  && (
                       <div>room</div>
                     )}
+                    {item.name === "Combo" && (
+                      <Button variant="outline-primary" size='sm' onClick={() => handleMaterialDescription}>
+                      Deatail
+                    </Button>
+                    )}
                   </td>
+                  
                   <br />
                 </tr>
               ))}
@@ -168,8 +181,8 @@ function ListItem() {
           </table>
         </div>
       </div>
-      <Invoice items={items} />
-      {showModal && <ItemDescription item={selectedItem} setShowModal={setShowModal} />}
+      <Invoice items={items} comboId={selectedComboId}/>
+      {(selectedComboId !== 0)&& <MaterialDescription comboId={selectedComboId} />}
     </>
   );
 }
