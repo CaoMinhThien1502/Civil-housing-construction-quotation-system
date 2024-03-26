@@ -5,7 +5,7 @@ import './description.css';
 
 function MaterialDescription({ comboId }) {
     const [allMateList, setAllMateList] = useState([]);
-    const [showModal,setShowModal] = useState(false);
+    const [showModal,setShowModal] = useState(false);   
     const [selectedMaterial, setSelectedMaterial] = useState({ mateId: '', matePrice: 0 });
     const [defaultPrices, setDefaultPrices] = useState({});
 
@@ -98,6 +98,7 @@ function MaterialDescription({ comboId }) {
                                 <li>Loading...</li>
                             )}
                         </ul>
+                        <input type='button' value="Submit"/>
                     </div>
                 </Modal.Body>
             </Modal>
