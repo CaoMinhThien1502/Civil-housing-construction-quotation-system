@@ -217,7 +217,7 @@ const Invoice = ({ items, area, comboId }) => {
                     "comboPrice": object.comboPrice,
                     "totalPrice": object.totalPrice
                 }
-                const response = await axios.post(`http://localhost:8080/request-contract/sendQuote?email=thien010502%40gmail.com`, requestBody).then(res => console.log(res));
+                const response = await axios.post(`http://localhost:8080/request-contract/sendQuote?email=${localStorage.getItem("mail")}`, requestBody).then(res => console.log(res));
             } catch (error) {
                 console.error("Lỗi trong quá trình gửi giá:", error);
             }

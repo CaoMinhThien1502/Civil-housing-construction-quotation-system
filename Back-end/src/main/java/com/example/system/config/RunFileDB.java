@@ -71,7 +71,7 @@ public class RunFileDB implements CommandLineRunner {
                 .status(true)
                 .phone("0779558502")
                 .address("Ba ria - Vung Tau")
-                .gender(false)
+                .gender(true)
                 .birthday(LocalDate.parse("2002-01-05"))
                 .build();
         userRepository.save(user);
