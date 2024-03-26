@@ -114,7 +114,6 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
         detail.setComboPrice(total);
 
         //total price
-
         detail.setTotalPrice(total * detail.getArea() * detail.getPercentPrice());
 
         return detail;

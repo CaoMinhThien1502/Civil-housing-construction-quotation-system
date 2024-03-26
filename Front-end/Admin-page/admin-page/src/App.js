@@ -28,7 +28,7 @@ import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 
 import ItemTypeDetail from './pages/itemtype/itemTypeDetail.jsx';
 
-import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestcontractdetail.jsx';
 
 import BlogDetail from './pages/blogmanager/blogDetail.jsx'
 import ComboDetail from './pages/combobuilding/comboDetail.jsx'
