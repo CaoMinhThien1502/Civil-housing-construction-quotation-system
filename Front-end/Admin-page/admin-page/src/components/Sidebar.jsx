@@ -79,7 +79,7 @@ const Sidebar = () => {
                     color: "#6870fa !important",
                 },
 
-                height: "300%",
+                height: "570%",
             }}
         >
             <ProSidebar collapsed={isCollapsed}>

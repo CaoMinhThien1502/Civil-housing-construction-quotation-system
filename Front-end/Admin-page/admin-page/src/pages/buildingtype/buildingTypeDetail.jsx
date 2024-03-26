@@ -16,7 +16,7 @@ const BuildingTypeDetail = () => {
     useEffect(() => {
         const fetchBuildingTypeById = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/building/item-type/id?typeId=${id}`, {
+                const response = await fetch(`http://localhost:8080/building/type/get?buildingTypeId=${id}`, {
                     method: 'GET',
                     headers: {
                         // 'Access-Control-Allow-Origin': '*',
@@ -27,13 +27,13 @@ const BuildingTypeDetail = () => {
                 const data = await response.json();
                 setBuildingType(data);
             } catch (error) {
-                console.error('Error fetching item type:', error);
+                console.error('Error fetching building type:', error);
             }
         };
 
         fetchBuildingTypeById();
     }, []); // Empty dependency array to fetch data only once on component mount
-    const items = getBuildingType?.items || [];
+    const buildings = getBuildingType?.buildings || [];
 
     const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ const BuildingTypeDetail = () => {
 
     return (
         <Box m="20px" >
-            <Header title="Item Type Detail" subtitle="View the Item Type Detail" />
+            <Header title="Building Type Detail" subtitle="View the Building Type Detail" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -78,7 +78,7 @@ const BuildingTypeDetail = () => {
                 {/* display many materials detail info from api using map */}
                 <Box sx={{ gridColumn: "span 4" }}>
                     <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
-                        Item Type Detail Information
+                        Building Type Detail Information
                     </Typography>
                 </Box>
                 <TableContainer>
@@ -101,7 +101,7 @@ const BuildingTypeDetail = () => {
                 </TableContainer>
 
                 <Box display="flex" justifyContent="end" mt="20px">
-                    <Button onClick={() => navigate("/itemType")} color="secondary" variant="contained">
+                    <Button onClick={() => navigate("/buildingType")} color="secondary" variant="contained">
                         Cancel
                     </Button>
                 </Box>
@@ -110,14 +110,14 @@ const BuildingTypeDetail = () => {
                     <Typography variant="h3" gutterBottom>Buildings Included Information: </Typography>
                 </Box>
                 <DataGrid
-                    rows={items}
+                    rows={buildings}
                     columns={[
                         { field: "buildingId", headerName: "Building ID", flex: 1 },
                         { field: "buildingName", headerName: "Building Name", flex: 1 },
                         { field: "percentPrice", headerName: "Percent Price", flex: 1,
                             renderCell: (params) => {
-                                const { row: { priceItem } } = params; // Extract the type value
-                                return priceItem.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+                                const { row: { percentPrice } } = params; // Extract the type value
+                                return percentPrice + "%";
                             },
                         },
                         {
@@ -128,7 +128,7 @@ const BuildingTypeDetail = () => {
                             },
                         },
                     ]}
-                    getRowId={(row) => row.itemId}
+                    getRowId={(row) => row.buildingId}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
