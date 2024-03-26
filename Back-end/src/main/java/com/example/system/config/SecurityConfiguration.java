@@ -32,8 +32,13 @@ public class SecurityConfiguration {
 
     public static final String LOGOUT_URL = "/api/v1/auth/logout";
     public static final String LOGIN_URL = "http://localhost:3000/login";
-    public static final String[] ENDPOINTS_WHITELIST = {"http://localhost:3000/login", "/logout", "/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**", "/api/v1/auth/**", "/confirm-register/**"};
-
+    public static final String[] ENDPOINTS_WHITELIST = {
+            "http://localhost:3000/login",
+            "/logout", "/swagger-ui/**",
+            "/swagger-resources/*",
+            "/v3/api-docs/**",
+            "/api/v1/auth/**",
+            "/confirm-register/**"};
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(c -> c
