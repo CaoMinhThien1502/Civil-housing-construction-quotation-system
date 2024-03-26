@@ -1,15 +1,12 @@
 import { Box, Typography, useTheme, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import RequestContractPDF from './exportContract.jsx';
 
 const RequestContractDetail = () => {
     const { id } = useParams();
@@ -66,7 +63,7 @@ const RequestContractDetail = () => {
             console.error('Error fetching start date:', error);
         }
     };
-    
+
     const handleCheck = async () => {
         try {
             const response = await axios.post(`http://localhost:8080/building/detail/check-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
@@ -77,7 +74,7 @@ const RequestContractDetail = () => {
             console.error('Error fetching check date:', error);
         }
     };
-    
+
     const handleFinish = async () => {
         try {
             const response = await axios.post(`http://localhost:8080/building/detail/finish-date?buildingDetailID=${requestContractData?.buildingDetail.buildingDetailId}`);
@@ -88,10 +85,26 @@ const RequestContractDetail = () => {
             console.error('Error fetching finish date:', error);
         }
     };
+    const [showPDF, setShowPDF] = useState(false); // State để điều khiển hiển thị PDF
+    // Function để toggle hiển thị PDF
+    const togglePDF = () => {
+        setShowPDF(!showPDF);
+    };
 
     return (
         <Box m="20px" >
             <Header title="Request Contract Detail" subtitle="View the Request Contract Detail" />
+            <div>
+                {/* Hiển thị nút để toggle hiển thị PDF */}
+                <Button onClick={togglePDF} color="primary" variant="contained">
+                    {showPDF ? 'Ẩn PDF' : 'Xem PDF'}
+                </Button>
+
+                {/* Hiển thị RequestContractPDF nếu showPDF là true */}
+                {showPDF && <RequestContractPDF requestContractData={requestContractData} />}
+
+                {/* Rest of your component */}
+            </div>
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -130,7 +143,7 @@ const RequestContractDetail = () => {
                             <TableRow>
                                 <TableCell sx={{ fontSize: 15, width: "25%" }}>
                                     <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>
-                                        Request Contract Information 
+                                        Request Contract Information
                                     </Typography>
                                 </TableCell>
                                 <TableCell sx={{ fontSize: 15, width: "25%" }}></TableCell>
