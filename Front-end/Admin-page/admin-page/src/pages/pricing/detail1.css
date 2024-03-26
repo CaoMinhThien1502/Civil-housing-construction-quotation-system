@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.container-item * {
+    font-family: 'Poppins', sans-serif;
+}
+
+.container-item {
+    max-width: 992px;
+    margin: auto;
+    width: 100%;
+    padding: 0 15px;
+    overflow: auto;
+    position: fixed; /* hoặc position: absolute; */
+    left: 0; /* Đặt vị trí bên trái của màn hình */
+    top: 0; /* Đặt vị trí bên trên của màn hình */
+    height: 100%; /* Đặt chiều cao để lấp đầy màn hình */
+    margin-left: 20px;
+}
+
+
+.container-item h1 {
+    color: #004985;
+}
+
+.container-item #table-container-item {
+    overflow: auto;
+}
+
+.container-item table {
+    margin-top: 28px;
+    max-width: 100%;
+    text-align: center;
+    min-width: 50rem;
+    width: 100%;
+    border-collapse: collapse; /* Xoá đường biên giữa các ô */
+}
+
+.container-item table tbody:last-child {
+    box-shadow: 0px 1px #004985;
+}
+
+.container-item table tbody tr:nth-child(even) {
+    background-color: #00648512;
+}
+
+.container-item table thead {
+    background: #004985;
+    color: white;
+}
+
+.container-item table tbody:last-child td {
+    padding: 19px 0;
+}
+
+.container-item td img {
+    width: 90px;
+    height: auto;
+}
+
+.container-item th,
+.container-item td {
+    padding: 10px;
+    font-size: 13px;
+}
+
+.container-item .Remove-item {
+    background: #004985;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container-item .Add-item,
+.container-item #addTotable {
+    color: #004985;
+    border: 1px solid #004985;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#popup-item {
+    background: #fff;
+    width: 100%;
+    z-index: 9;
+    padding: 15px;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.popup-content-item {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0 20px 20px;
+    border: 1px solid #888;
+    max-width: 500px;
+    width: 100%;
+}
+
+.popup-header-item {
+    position: relative;
+}
+.popup-header-item span {
+    display: flex;
+    justify-content: end;
+    color: #004985;
+    font-size: 24px;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.input-group-item label {
+    display: block;
+    margin-top: 1rem;
+}
+
+.input-group-item input[type="text"] {
+    outline: none;
+    border: 1px solid #004985;
+    width: -webkit-fill-available;
+    padding: 7px;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+.input-group-item:focus-within label {
+    color: #004985;
+}
+
+.btn-group-item {
+    width: fit-content;
+    margin: 2rem auto 1rem;
+    margin-right: 0;
+}

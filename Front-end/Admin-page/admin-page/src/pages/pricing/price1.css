@@ -1,0 +1,118 @@
+
+#price-quotation-mbody {
+  height: 700px;
+  display: flex;
+  justify-content: flex-start;
+  align-items:center;
+  background-color: white;
+  padding: 10px 10px; /* Thêm lề trái và phải mỗi bên tầm 10px */
+}
+.nav-container .nav-tabs {
+  position: relative;
+  margin-left: 50px;
+  border-bottom: 2px solid #dee2e6;
+  padding: 0 10px; /* Thêm lề trái và phải mỗi bên tầm 10px */
+  margin-top: 10px;
+}
+
+.nav-container .nav-link.active {
+  background-color: #e9ecef;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-container .nav-item {
+  margin: 0 10px; /* Thêm khoảng cách giữa các tab */
+}
+#root {
+  height: 150px;
+}
+
+/* Phần productcard */
+.card-title {
+  font-size: 22px; /* Increase font size */
+  font-weight: 600; /* Use semi-bold font weight */
+  margin-bottom: 15px; /* Add space below the title */
+  color: #333; /* Set the color of the title */
+  text-transform: capitalize; /* Capitalize the text */
+  text-align: center; /*Center-align the title  */
+  font-family: Arial, sans-serif; /* Specify a font family */
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Rating section */
+.ratings {
+  color: #ffc107; /* Set the color for the stars */
+  margin-bottom: 10px; /* Add space below the rating */
+}
+
+/* Specs section */
+.specs {
+  color: #666;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.spec-line {
+  display: flex;
+  align-items: center; /* Center-align items vertically */
+  margin-left: 20px;
+}
+
+.spec-line span {
+  display: flex; /* Make the span a flex container */
+  align-items: center; /* Center-align items vertically */
+  padding-left: 20px;
+}
+
+.icon {
+  margin-right: 5px;    
+}
+
+/* Price section */
+.price-section {
+  margin-top: 15px; /* Add space above the price section */
+}
+
+.price {
+  display: flex; /* Use flexbox for price and discounted price */
+  align-items: center; /* Center align the items vertically */
+}
+
+.price h4 {
+  margin-right: 10px; /* Add spacing between price and discounted price */
+  font-weight: bold; /* Make the price bold */
+}
+
+.strike-text {
+  color: #999; /* Set the color for the discounted price */
+  text-decoration: line-through; /* Add strike-through for discounted price */
+}
+
+.text-success {
+  color: #28a745; /* Set the color for the "Tham Khảo" text */
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.buttons button {
+  margin: 0 5px;
+  flex-grow: 1; /* Allow buttons to grow and take up available space */
+  max-width: 150px; /* Set a maximum width for each button */
+}
