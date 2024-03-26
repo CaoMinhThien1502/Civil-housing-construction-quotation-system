@@ -28,13 +28,20 @@ function ListItem() {
       id: 2,
       image: bathroom,
       name: "Phòng tắm",
-      description: "", 
+      description: "",
       quantity: 1
     },
     {
       id: 3,
       image: basement,
       name: "Tầng",
+      description: "",
+      quantity: 1
+    },
+    {
+      id: 4,
+      image: basement,
+      name: "Hầm",
       description: "",
       quantity: 1
     },
@@ -51,10 +58,10 @@ function ListItem() {
   const handleRemove = (id) => {
     setItems(items.filter((item) => item.id !== id));
   };
-  const handleQuantityChange = (id,newQuantity) => {
-    setItems(items.map(item => 
-      item.id === id? {...item,quantity: newQuantity} : item));
-  } 
+  const handleQuantityChange = (id, newQuantity) => {
+    setItems(items.map(item =>
+      item.id === id ? { ...item, quantity: newQuantity } : item));
+  }
   return (
     <>
       <div className="container-item">
@@ -77,52 +84,36 @@ function ListItem() {
                   <td>{item.id}</td>
                   <td>
                     <a>
-                      <img style = {{width: "120px", height: "110px", objectFit: "cover"}}src={item.image} alt={item.name} />
+                      <img style={{ width: "120px", height: "110px", objectFit: "cover" }} src={item.image} alt={item.name} />
                     </a>
                   </td>
                   <td>{item.name}</td>
-                  <td><input
-                  type="number"
-                  value={item.quantity}
-                  onChange={(e)=>handleQuantityChange(item.id,parseInt(e.target.value))}
-                  style={{width: "80px",textAlign: "center"}}
-                  />
-                  </td>
-                  <td><Button variant="outline-primary" size='sm' onClick={() => handleDetail(item)}>Detail</Button></td>
                   <td>
-                    <Button 
-                    variant="outline-danger"
-                    size = "sm"
-                    onClick={() => handleRemove(item.id)}
-                    >Remove</Button>
+                    <input
+                      type="number"
+                      value={item.quantity}
+                      onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                      style={{ width: "80px", textAlign: "center" }}
+                    />
                   </td>
-                  <br/>
+                  <td>
+                    <Button variant="outline-primary" size='sm' onClick={() => handleDetail(item)}>
+                      {item.name === "Hầm" ? "Yes" : "Detail"}
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      variant="outline-danger"
+                      size="sm"
+                      onClick={() => handleRemove(item.id)}
+                    >
+                      {item.name === "Hầm" ? "No" : "Remove"}
+                    </Button>
+                  </td>
+                  <br />
                 </tr>
-                   
               ))}
-                  <tr key="5">
-                  <td>5</td>
-                  <td>
-                    <a>
-                      <img style = {{width: "120px", height: "110px", objectFit: "cover"}}src={basement} alt="Tầng hầm" />
-                    </a>
-                  </td>
-                  <td>Tầng hầm</td>
-                  <td><input
-                  type="number"
-                  value= "1"
-                  style={{width: "80px",textAlign: "center"}}
-                  />
-                  </td>
-                  <td><Button variant="outline-primary" size='sm'>Yes</Button></td>
-                  <td>
-                    <Button 
-                    variant="outline-danger"
-                    size = "sm"
-                    onClick={() => handleNo(5)}
-                    >No</Button>
-                  </td>
-                  </tr>
+
             </tbody>
             <tbody>
             </tbody>
@@ -130,7 +121,7 @@ function ListItem() {
         </div>
       </div>
       <Invoice items={items} />
-     {showModal && <ItemDescription item={selectedItem} setShowModal={setShowModal} />}
+      {showModal && <ItemDescription item={selectedItem} setShowModal={setShowModal} />}
     </>
   );
 }

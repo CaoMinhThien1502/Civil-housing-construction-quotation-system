@@ -29,27 +29,30 @@
 
 .lock-icon {
     /* Customize lock icon styles */
-    color: black; /* Set lock icon color */
-    font-size: 80px; /* Set lock icon size */
+    background-color: black ; /* Semi-transparent black background */
+    color: white; /* Set lock icon color */
+    font-size: 20px; /* Set lock icon size */
     /* Add any other styles as needed */
     position: absolute;
-    top: 200px; /* Adjust as needed */
-    left: 1250px; /* Adjust as needed */
+    top: 370px; /* Adjust to cover the total price section */
+    left: 1300px; /* Adjust to cover the total price section */
+    right: 30px; /* Adjust to cover the total price section */
+    bottom: auto; /* Remove bottom positioning */
     z-index: 1; /* Ensure the lock icon is above other content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.invoice-container {
-    margin-left: 1000px;
-    opacity: 0.1;
-} 
-.btn-checkout { 
+
+.btn-checkout {
     display: inline-block;
     outline: none;
     cursor: pointer;
     font-size: 14px;
     line-height: 1;
     border-radius: 500px;
-    transition-property: background-color,border-color,color,box-shadow,filter;
-    transition-duration: .3s;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: 0.3s;
     border: 1px solid transparent;
     letter-spacing: 2px;
     min-width: 140px;
@@ -59,10 +62,29 @@
     text-align: center;
     padding: 12px 12px 12px;
     color: #fff;
-    background-color:#1d9ab9 ;
-    height: 44px;
-    margin-bottom: 2px;
-}
-.btn-checkout:hover{
     background-color: #1d9ab9;
+    height: 44px;
+    margin-bottom: 10px; /* Increased margin for better spacing */
+}
+
+.btn-checkout:hover {
+    background-color: #0e6c84; /* Darken the color on hover */
+}
+
+.invoice-container {
+    margin-left: 1000px; /* Keeping your existing styles */
+    opacity: 1.0; /* Keeping your existing styles */
+}
+
+/* Additional style for the buttons */
+.btn-send-quote {
+    background-color: #28a745; /* Green color for "Gửi Báo Giá" button */
+}
+
+.btn-deposit {
+    background-color: #07a0ff; /* Yellow color for "Đặt cọc" button */
+}
+.flex {
+    display: flex;
+    justify-content: space-between; /* Align items with space between */
 }
