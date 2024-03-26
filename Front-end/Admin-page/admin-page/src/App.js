@@ -48,7 +48,8 @@ import EditUser from './pages/userlist/editUser';
 import Login from './pages/login/login';
 import PrivateRoutes from './utils/PrivateRoutes';
 import axios from 'axios';
-import Detail from './pages/pricing/detail.js';
+// import Detail from './pages/pricing/detail.js';
+import ListItem from './pages/pricing/detail1.js';
 import ProfilePage from './pages/profile/profile.js';
 import Success from './pages/payment/success.js'
 
@@ -72,10 +73,12 @@ import {
   BlogReal,
   Combo
 } from './pages/home/home.js'; // Thay đổi đường dẫn này với đường dẫn thực tế của bạn
+// bảng báo giá phụ
 import {
-  ConstructionForm,
-  ConsultImg
-} from './pages/pricing/price.js';
+  FillExample,
+  ProductCard,
+  PriceQuotation
+} from './pages/pricing/price1.js'
 import { HistoryToggleOffRounded, NorthEastOutlined, OneK, Sailing, ViewHeadline } from '@mui/icons-material';
 import { keyboard } from '@testing-library/user-event/dist/keyboard/index.js';
 // import { dc } from '@fullcalendar/core/internal-common.js';
@@ -114,11 +117,12 @@ function App() {
       {location.pathname !== '/login'
       && location.pathname !== '/'
       && location.pathname !== '/home'
-      && location.pathname !== '/price'
       && location.pathname !== '/success'
       && location.pathname !== '/blog'
       && location.pathname !== '/detail'
       && location.pathname !== '/profile'
+      && location.pathname !== '/price1'
+      && location.pathname !== '/price1/detail'
       && location.pathname !== '/register'
       && !location.pathname.includes('/blogDetail')
       && !location.pathname.includes('/comboDetail') 
@@ -199,9 +203,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/price" element={<PricePage />} />
+        <Route path='/price1' element={<QuotationPage/>}/>
         <Route path="/blog" element={<BlogPage />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="price1/detail" element={<ListItem />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
@@ -212,7 +216,14 @@ function App() {
     </>
   );
 }
-
+const QuotationPage = () => {
+  return (
+  <>
+   {/* <FillExample/> */}
+  <PriceQuotation/>
+  </>
+  );
+}
 const HomePage = () => {
   return (
     <>
@@ -231,14 +242,6 @@ const HomePage = () => {
   );
 };
 
-const PricePage = () => {
-  return (
-    <>
-      <ConstructionForm />
-      {/* <ConsultImg/> */}
-    </>
-  );
-}
 
 const BlogPage = () => {
   return (

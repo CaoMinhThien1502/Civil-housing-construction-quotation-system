@@ -1,6 +1,7 @@
 package com.example.system.repository.requestcontract;
 
 import com.example.system.model.building.Building;
+import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.requestcontract.RequestContract;
 import com.example.system.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,6 @@ public interface RequestContractRepository extends JpaRepository<RequestContract
 
     @Query("SELECT rq FROM RequestContract rq WHERE rq.buildingDetail.building.buildingId = :buildingId")
     List<RequestContract> findAllSameBuilding(@Param("buildingId") Long buildingId);
+
+    RequestContract findByBuildingDetail(BuildingDetail buildingDetail);
 }

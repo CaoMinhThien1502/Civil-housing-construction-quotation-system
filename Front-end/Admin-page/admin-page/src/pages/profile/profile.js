@@ -22,6 +22,7 @@ import "mdbreact/dist/css/mdb.css";
 
 import { MDBIcon } from "mdbreact";
 import DetailProfile from './detailprofile';
+import ContractDetail from './detailbuilding';
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -137,7 +138,7 @@ const ProfilePage = () => {
                     src={userData?.gender? "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp":"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4.webp"}
                     alt="avatar"
                     className="rounded-circle"
-                    style={{ width: '150px' }}
+                    style={{ width: '150px', marginLeft: "72px"}}
                     fluid
                   />
                   <p className="text-muted mb-1">{userData?.fullName || "Name"}</p>
@@ -245,12 +246,14 @@ const ProfilePage = () => {
           </MDBRow>
         </MDBContainer>
       </section>
-      {/* Modal Detail */}
       <DetailProfile
         contractDetail={contractDetail}
         handleCloseDetail={handleCloseDetail}
         show={showDetailModal} // Truyền prop show cho modal
       />
+      {/* Modal Detail */}
+      {/* ------------------------------------------------------------------------- */}
+      
     </>
   );
 };

@@ -4,6 +4,7 @@ import com.example.system.dto.buildingdto.building.*;
 import com.example.system.dto.buildingdto.pricedto.PriceDetailDto;
 import com.example.system.dto.buildingdto.pricedto.RequestPriceDto;
 import com.example.system.model.building.Building;
+import com.example.system.model.building.BuildingDetail;
 import com.example.system.model.building.BuildingType;
 import com.example.system.service.building.BuildingDetailService;
 import com.example.system.service.building.BuildingService;
@@ -84,20 +85,23 @@ public class BuildingController{
     public ResponseEntity<DetailDto> createBuilding(@RequestBody RequestBuildingDto dto, @RequestParam Long buildingId){
         return ResponseEntity.ok(buildingDetailService.createBuildingDetail(buildingId, dto));
     }
-//    @PostMapping("/detail/start-date")
-//    public ResponseEntity<DetailDto> startBuilding(@RequestParam Long buildingDetailID){
-//        return ResponseEntity.ok();
-//    }
-//
-//    @PostMapping("/detail/finish-date")
-//    public ResponseEntity<Building> finishBuilding(@RequestParam Long buildingDetailID){
-//        return ResponseEntity.ok(finishDate);
-//    }
-//
-//    @PostMapping("/detail/check-date")
-//    public ResponseEntity<Building> checkBuilding(@RequestParam Long buildingDetailID){
-//        return ResponseEntity.ok(checkDate);
-//    }
+    @PostMapping("/detail/start-date")
+    public ResponseEntity<DetailDto> startBuilding(@RequestParam Long buildingDetailID){
+        DetailDto startDate = buildingDetailService.startBuildingDetail(buildingDetailID);
+        return ResponseEntity.ok(startDate);
+    }
+
+    @PostMapping("/detail/finish-date")
+    public ResponseEntity<DetailDto> finishBuilding(@RequestParam Long buildingDetailID){
+        DetailDto finishDate = buildingDetailService.finishBuildingDetail(buildingDetailID);
+        return ResponseEntity.ok(finishDate);
+    }
+
+    @PostMapping("/detail/check-date")
+    public ResponseEntity<DetailDto> checkBuilding(@RequestParam Long buildingDetailID){
+        DetailDto checkDate = buildingDetailService.checkBuildingDetail(buildingDetailID);
+        return ResponseEntity.ok(checkDate);
+    }
 
 
     // Get each price
