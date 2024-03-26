@@ -5,19 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe172c7d-7f70-40ab-9776-7b944a44445e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_22_2024_8_37_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_22_2024_8_37_PM__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/src/redux/slice/comboBillSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/src/redux/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b4c0b0a3-1bab-4d2c-b981-3e410fac991a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b4c0b0a3-1bab-4d2c-b981-3e410fac991a.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/mail/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/mail/EmailSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/mail/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/mail/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/security/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/security/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/controller/RequestContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/controller/RequestContractController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/requestContract/RequestContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/service/requestContract/RequestContractService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/RequestContractServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/java/com/example/system/serviceImplement/RequestContractServiceImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Back-end/src/main/resources/DataDemo1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/resources/DataDemo1.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/src/pages/requestcontract/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/src/pages/requestcontract/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/src/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/Admin-page/admin-page/src/components/Sidebar.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +88,8 @@
       <workItem from="1711175546810" duration="394000" />
       <workItem from="1711175958592" duration="68000" />
       <workItem from="1711176224150" duration="81000" />
+      <workItem from="1711454756580" duration="291000" />
+      <workItem from="1711455070459" duration="54000" />
     </task>
     <servers />
   </component>

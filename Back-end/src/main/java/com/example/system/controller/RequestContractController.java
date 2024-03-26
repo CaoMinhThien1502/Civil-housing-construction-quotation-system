@@ -1,5 +1,6 @@
 package com.example.system.controller;
 
+import com.example.system.dto.buildingdto.pricedto.PriceDetailDto;
 import com.example.system.dto.requestcontractdto.CreateDto;
 import com.example.system.dto.requestcontractdto.RequestDto;
 import com.example.system.service.requestContract.RequestContractService;
@@ -62,5 +63,10 @@ public class RequestContractController {
         String placeMeet = requestData.get("placeMeet");
         RequestDto dto = requestContractService.confirmRequestContract(requestContractId, dateMeet, placeMeet);
         return ResponseEntity.ok(dto);
+    }
+    @PostMapping("/sendQuote")
+    public ResponseEntity<PriceDetailDto> sendQuoteToUser(@RequestBody PriceDetailDto priceDetailDto, @RequestParam String email){
+        PriceDetailDto detailPrice = requestContractService.sendQuote(priceDetailDto, email);
+        return ResponseEntity.ok(detailPrice);
     }
 }
