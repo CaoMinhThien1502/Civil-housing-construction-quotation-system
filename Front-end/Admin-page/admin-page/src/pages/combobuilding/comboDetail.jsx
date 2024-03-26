@@ -86,6 +86,7 @@ const ComboDetail = () => {
                     <Link to="http://localhost:3000/home" style={{ backgroundColor: 'blue', padding: '10px 20px', color: 'white', textDecoration: 'none', borderRadius: '5px' }}>Back</Link> {/* Styled link to go back */}
                 </div>
             </div>
+            <div >&nbsp;</div>
             <Footer />
         </div>
     );

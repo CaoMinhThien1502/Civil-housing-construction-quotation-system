@@ -135,9 +135,7 @@ function App() {
             <main className="content">
               <Topbar />
               <Routes>
-           
-              <Route element={<PrivateRoutes />} >
-
+                <Route element={<PrivateRoutes />} >
                   <Route path="/dashboard" element={<Dashboard />} exact />
 
                   <Route path="/comboBuilding" element={<ComboBuilding />} />
@@ -193,12 +191,12 @@ function App() {
                   <Route path="/calendar" element={<Calendar />} />
                   <Route path="/geography" element={<Geography />} /> */}
            
-                  </Route>
-                </Routes>
-              </main>
-            </div>
-          </ThemeProvider>
-        )}
+                </Route>
+              </Routes>
+            </main>
+          </div>
+        </ThemeProvider>
+      )}
       <Routes> 
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />

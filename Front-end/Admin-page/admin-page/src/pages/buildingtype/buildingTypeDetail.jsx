@@ -107,7 +107,7 @@ const BuildingTypeDetail = () => {
                 </Box>
 
                 <Box sx={{ gridColumn: "span 4" }}>
-                    <Typography variant="h3" gutterBottom>Buildings Included Information: </Typography>
+                    <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>Buildings Included Information</Typography>
                 </Box>
                 <DataGrid
                     rows={buildings}
@@ -132,6 +132,7 @@ const BuildingTypeDetail = () => {
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
+                <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
             </Box>
         </Box>
     );

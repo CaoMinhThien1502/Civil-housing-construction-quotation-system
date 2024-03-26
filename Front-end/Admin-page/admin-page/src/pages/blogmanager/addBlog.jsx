@@ -262,6 +262,7 @@ const AddBlog = () => {
                     Blog added error!
                 </Alert>
             </Snackbar>
+            <Box sx={{ gridColumn: "span 4" }}>&nbsp;</Box>
         </Box>
     )
 }
