@@ -75,7 +75,7 @@ const InputLockForm = ({ area, typeId, comboName }) => {
     );
 }
 
-const Invoice = ({ items, area }) => {
+const Invoice = ({ items, area, comboId }) => {
     const [show, setShow] = useState(true);
     const [price,setPrice] = useState([]);
     const [numOBathroom, setNumOBathroom] = useState(0);
@@ -126,7 +126,7 @@ const Invoice = ({ items, area }) => {
             "numOKitchen": numOKitchen,
             "numOFloor": numOFloor,
             "hasTunnel": true,
-            "comboId": typeId,
+            "comboId": comboId,
             "newMateIds": [],
             "area": url_Area
         };
@@ -139,7 +139,7 @@ const Invoice = ({ items, area }) => {
                 console.log(response);
             })
             .catch(error => console.error('Error fetching Price data:', error));
-    }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area]);
+    }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area,comboId]);
     
 
     return (

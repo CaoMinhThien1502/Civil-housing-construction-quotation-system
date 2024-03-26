@@ -3,17 +3,18 @@ import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import './description.css';
 
-function MaterialDescription({ comboId }) {
-    const [allMateList, setAllMateList] = useState([]);
+function MaterialDescription({comboId,}) {
+    const [allMaterialList, setAllMaterialList] = useState([]);
+    const [allMaterialList1, setAllMaterialList1] = useState([]);
     const [showModal,setShowModal] = useState(false);   
     const [selectedMaterial, setSelectedMaterial] = useState({ mateId: '', matePrice: 0 });
     const [defaultPrices, setDefaultPrices] = useState({});
-
+    const [mateNames,setMateNames] = useState([])
     const handleProductChange = (event, mateTypeName) => {
         const selectedMateId = event.target.value;
-        const mateType = allMateList.find(type => type.mateTypeName === mateTypeName);
+        const mateType = allMaterialList?.find(type => type.mateTypeName === mateTypeName);
         if (mateType) {
-            const selectedMate = mateType.mateList.find(mate => mate.mateId === selectedMateId);
+            const selectedMate = mateType.mateList?.find(mate => mate.mateId === selectedMateId);
             setSelectedMaterial(selectedMate ? { mateId: selectedMateId, matePrice: selectedMate.mate.matePrice } : { mateId: '', matePrice: 0 });
         }
     };
@@ -25,11 +26,13 @@ function MaterialDescription({ comboId }) {
         })
             .then(response => {
                 if (response.status === 200) {
-                    setAllMateList(response.data.infor.mateList);
+                    setAllMaterialList(response.data.infor.mateList);
+                    setAllMaterialList1(response.data.allMateList);
+                   
                     const defaultPricesObj = {};
-                    response.data.infor.mateList.forEach(item => {
-                        defaultPricesObj[item.mate.mateName] = item.mate.matePrice;
-                    });
+                    // response.data.infor.mateList.forEach(item => {
+                    //     defaultPricesObj[item.mate.mateName] = item.mate.matePrice;
+                    // });
                     setDefaultPrices(defaultPricesObj);
                     setShowModal(true);
                 } else {
@@ -39,22 +42,35 @@ function MaterialDescription({ comboId }) {
             .catch(error => console.error('Error fetching Combo Type data:', error));
     }, [comboId]);
 
-    const getAlternativeMaterials = (mateTypeName) => {
-        let mateNames = [];
-        if (Array.isArray(allMateList) && allMateList.length > 0) {
-            allMateList.forEach(item => {
-                if (item.mateTypeName === mateTypeName) {
-                    if (Array.isArray(item.mateList) && item.mateList.length > 0) {
-                        item.mateList.forEach(mate => {
-                            mateNames.push({ mateId: mate.mate.mateId, mateName: mate.mate.mateName });
-                        });
-                    }
-                }
-            });
-        }
-        return mateNames;
-    };
+    // const getAlternativeMaterials = (mateTypeName) => {
+    //     let mateNames = [];
+    //     allMaterialList && allMaterialList.map((item) => {
+    //         if (item.mateTypeName === mateTypeName){
+    //             mateNames.push(item);
+    //         }
 
+    //     })
+        // console.log("allMaterialList: ", allMaterialList); // Kiểm tra giá trị của allMaterialList
+        // if (Array.isArray(allMaterialList) && allMaterialList.length > 0) {
+        //     allMaterialList.forEach((item) => {
+        //         console.log("mateTypeName: ", mateTypeName); // Kiểm tra giá trị của mateTypeName
+        //         console.log("item.mateTypeName: ", item.mateTypeName); // Kiểm tra giá trị của item.mateTypeName
+        //         if (item.mateTypeName === mateTypeName) {
+        //             if (Array.isArray(item.mateList) && item.mateList.length > 0) {
+        //                 item.mateList.forEach(mate => {
+        //                     mateNames.push({ mateId: mate.mate.mateId, mateName: mate.mate.mateName });
+        //                 });
+        //             }
+        //         }
+        //     });
+        // }
+        // setMateNames(mateNames)
+       
+    //     return mateNames;
+    // };
+
+    console.log("allMaterialist: ",allMaterialList);
+    console.log(allMaterialList1);
     return (
         <>
             <Modal
@@ -78,25 +94,28 @@ function MaterialDescription({ comboId }) {
                                 <div className="col col-3">New Material</div>
                                 <div className="col col-4">Unit Price</div>
                             </li>
-                            {Array.isArray(allMateList) ? (
-                                allMateList.map((item, index) => (
-                                    <li className="table-item-row" key={index}>
-                                        <div className="col col-1" data-label="Material Type">{item.mateTypeName}</div>
-                                        <div className="col col-2" data-label="Material Name">{item.mate.mateName}</div>
-                                        <div className="col col-3" data-label="New Material">
-                                            <select value={selectedMaterial.mateId} onChange={(event) => handleProductChange(event, item.mateTypeName)}>
-                                                <option value="">Chọn nếu bạn muốn thay đổi</option>
-                                                {getAlternativeMaterials(item.mateTypeName).map((altItem, altIndex) => (
-                                                    <option value={altItem.mateId} key={altIndex}>{altItem.mateName}</option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                        <div className="col col-4" data-label="Unit Price">{defaultPrices[item.mate.mateName]}</div>
-                                    </li>
-                                ))
-                            ) : (
-                                <li>Loading...</li>
-                            )}
+                            {allMaterialList && allMaterialList.map((item, index) => (
+    <li className="table-item-row" key={index}>
+        <div className="col col-1" data-label="Material Type">{item.mateTypeId}</div>
+        <div className="col col-2" data-label="Material Name">{item.mate.mateName}</div>
+        <div className="col col-3" data-label="New Material">
+    <select>
+        <option value="">Select new material</option>
+        {allMaterialList1?.map((itemMate, altIndex) => {
+            if (itemMate.mateTypeId === item.mateTypeId) {
+                return itemMate.mates?.map((itemMatess, optionIndex) => (
+                    <option value={itemMatess.mateId} key={optionIndex}>{itemMatess.mateName}</option>
+                ));
+            }
+            return null; 
+        })}
+    </select>
+</div>
+
+        <div className="col col-4" data-label="Unit Price">{item.mate.matePrice}</div>
+    </li>
+))}
+                         
                         </ul>
                         <input type='button' value="Submit"/>
                     </div>
