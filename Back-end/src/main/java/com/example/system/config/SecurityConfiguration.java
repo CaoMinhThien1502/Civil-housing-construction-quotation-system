@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.Arrays;
@@ -35,16 +36,19 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.cors(c -> c.configurationSource(request -> {
-//            CorsConfiguration config = new CorsConfiguration();
-//            config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-//            config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT", "PATCH", "HEAD", "OPTIONS"));
-//            config.setAllowedHeaders(Arrays.asList("*"));
-//            config.addExposedHeader("Content-Type, Authorization");
-//            config.addExposedHeader("Access-Control-Allow-Origin, Access-Control-Allow-Credentials");
-//            config.setAllowCredentials(true);
-//            return config;
-//        }));
+        http.cors(c -> c
+                .configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+                    config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT", "PATCH", "HEAD", "OPTIONS"));
+                    config.setAllowedHeaders(Arrays.asList("*"));
+                    config.addExposedHeader("Content-Type");
+                    config.addExposedHeader("Authorization");
+                    config.addExposedHeader("Access-Control-Allow-Origin");
+                    config.setAllowCredentials(true); // Cho phép gửi cookie trong các yêu cầu CORS
+                    return config;
+                })
+        );
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
@@ -55,7 +59,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/user/update-role").hasRole(Role.ADMIN.name())
                         //Combo building
                         .requestMatchers(HttpMethod.GET, "/combobuilding/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                        .requestMatchers(HttpMethod.POST, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
                         .requestMatchers(HttpMethod.PUT, "/combobuilding/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
                         //Dashboard
                         .requestMatchers("/dashboard/**").permitAll()
@@ -70,10 +74,11 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/custom-combo/**").permitAll()
 
                         //Building
-                        .requestMatchers(HttpMethod.GET, "/building/**").permitAll()
-//                                        .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
-//                                        .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
-                        .requestMatchers("/building/form-consultant/**").permitAll()
+                        .requestMatchers( "/building/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/building/**").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name(), Role.CUSTOMER.name())
+//                        .requestMatchers(HttpMethod.PUT, "/building/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+//                        .requestMatchers("/building/form-consultant/**").permitAll()
                         //Request contract
                         .requestMatchers("/request-contract/**").permitAll()
 //                                .requestMatchers(HttpMethod.GET,"/request-contract/**").permitAll()
