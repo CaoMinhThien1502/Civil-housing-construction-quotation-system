@@ -1,5 +1,6 @@
 package com.example.system.service.requestContract;
 
+import com.example.system.dto.buildingdto.pricedto.PriceDetailDto;
 import com.example.system.dto.requestcontractdto.CreateDto;
 import com.example.system.dto.requestcontractdto.RequestDto;
 import com.example.system.model.requestcontract.RequestContract;
@@ -14,4 +15,6 @@ public interface RequestContractService {
     List<RequestDto> findDtosByEmail(String email);
     RequestDto createRequestContract(CreateDto createDto);
     RequestDto confirmRequestContract(Long rcId, Date dateMeet, String placeMeet);
+
+    PriceDetailDto sendQuote(PriceDetailDto priceDetailDto, String email);
 }

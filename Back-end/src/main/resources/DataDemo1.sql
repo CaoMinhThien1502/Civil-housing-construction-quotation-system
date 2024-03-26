@@ -6,7 +6,7 @@ VALUES (true,'2002-10-21','08 Nguyen Binh Khiem, Quang Ngai','quangtin1@gmail.co
 INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (true,'2000-10-21','18 Hoang Hoa Tham, Thu Duc ','manager123@gmail.com','manager2','manager12345','manager','0395115976',1);
 INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
-VALUES (true,'2003-10-23','2123 Le Viet Luong','tintq2@gmail.com','tintq2','123456a~','customer','0938472725',1);
+VALUES (true,'2003-10-23','2123 Le Viet Luong','thien010502@gmail.com','thien','123456a~','customer','0938472725',1);
 INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
 VALUES (true,'2002-02-02','DakLak','thiencm02@gmail.com','thiencm02Aa','Tian1a)','manager','0938472720',1);
 INSERT INTO user(gender,birthday,address,email,name,password,role,phone,status)
