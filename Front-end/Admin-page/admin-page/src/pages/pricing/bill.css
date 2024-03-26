@@ -1,5 +1,45 @@
+/* CSS cho InputLockForm */
+.input-lock-form {
+    position: absolute;
+    top: 200px; 
+    left: 1130px; 
+    z-index: 1; /* Đảm bảo InputLockForm nằm trên các phần khác */
+    background-color: white; 
+    padding: 20px; 
+    border: 1px solid black; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+/* CSS cho các phần tử bên trong InputLockForm */
+.input-lock-form label {
+    margin-right: 10px; 
+    font-weight: bold; 
+}
+
+.input-lock-form input,
+.input-lock-form select {
+    width: 150px; 
+    height: 30px; 
+    margin-bottom: 10px; 
+}
+
+.input-lock-form span {
+    margin-left: 5px; 
+}
+
+.lock-icon {
+    /* Customize lock icon styles */
+    color: black; /* Set lock icon color */
+    font-size: 80px; /* Set lock icon size */
+    /* Add any other styles as needed */
+    position: absolute;
+    top: 200px; /* Adjust as needed */
+    left: 1250px; /* Adjust as needed */
+    z-index: 1; /* Ensure the lock icon is above other content */
+}
 .invoice-container {
     margin-left: 1000px;
+    opacity: 0.1;
 } 
 .btn-checkout { 
     display: inline-block;

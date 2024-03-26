@@ -33,15 +33,8 @@ function ListItem() {
     },
     {
       id: 3,
-      image: toilet,
-      name: "Nhà vệ sinh",
-      description: "",
-      quantity: 1
-    },
-    {
-      id: 4,
       image: basement,
-      name: "Hầm",
+      name: "Tầng",
       description: "",
       quantity: 1
     },
@@ -52,21 +45,11 @@ function ListItem() {
     setSelectedItem(item);
     setShowModal(true);
   }
+  const handleNo = (id) => {
+    setItems(items.filter((item) => item.id !== id));
+  }
   const handleRemove = (id) => {
     setItems(items.filter((item) => item.id !== id));
-  };
-
-  const handleAdd = () => {
-    const image = document.getElementById('image').value;
-    const name = document.getElementById('name').value;
-    const description = document.getElementById('description').value;
-    const newItem = {
-      id: items.length,
-      image: image,
-      name: name,
-      description: description
-    };
-    setItems([...items, newItem]);
   };
   const handleQuantityChange = (id,newQuantity) => {
     setItems(items.map(item => 
@@ -117,7 +100,7 @@ function ListItem() {
                 </tr>
                    
               ))}
-                  <tr>
+                  <tr key="5">
                   <td>5</td>
                   <td>
                     <a>
@@ -136,6 +119,7 @@ function ListItem() {
                     <Button 
                     variant="outline-danger"
                     size = "sm"
+                    onClick={() => handleNo(5)}
                     >No</Button>
                   </td>
                   </tr>
@@ -143,28 +127,6 @@ function ListItem() {
             <tbody>
             </tbody>
           </table>
-        </div>
-      </div>
-      <div id="popup-item">
-        <div className="popup-content-item">
-          <div className="popup-header-item">
-            <span className="close-item">&times;</span>
-          </div>
-          <div className="input-group-item">
-            <label htmlFor="image">Link Image</label>
-            <input type="text" id="image" name="image" />
-          </div>
-          <div className="input-group-item">
-            <label htmlFor="name">Name</label>
-            <input type="text" id="name" name="name" />
-          </div>
-          <div className="input-group-item">
-            <label htmlFor="description">description</label>
-            <input type="text" id="description" name="description" />
-          </div>
-          <div className="btn-group-item">
-            <a id="addTotable">Add To Table</a>
-          </div>
         </div>
       </div>
       <Invoice items={items} />
