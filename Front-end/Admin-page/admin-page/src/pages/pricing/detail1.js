@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useEffect, useState } from 'react';
+import axios from "axios";
 import './detail1.css'
 import Invoice from "./bill";
 import bedroom from '../../img/bedroom.jpg'
@@ -9,45 +10,70 @@ import basement from '../../img/basement.jpg'
 import Button from 'react-bootstrap/Button';
 import ItemDescription from "./description";
 function ListItem() {
+  const [combo, setCombo] = useState([]);
   const [items, setItems] = useState([
     {
       id: 0,
       image: bedroom,
-      name: "Phòng ngủ",
-      description: "",
+      name: "Combo",
+      action: "",
       quantity: 1
     },
     {
       id: 1,
-      image: kitchen,
-      name: "Phòng bếp",
-      description: "",
+      image: bedroom,
+      name: "Bedroom",
+      action: "",
       quantity: 1
     },
     {
       id: 2,
-      image: bathroom,
-      name: "Phòng tắm",
-      description: "",
+      image: kitchen,
+      name: "Kitchen",
+      action: "",
       quantity: 1
     },
     {
       id: 3,
-      image: basement,
-      name: "Tầng",
-      description: "",
+      image: bathroom,
+      name: "Bathroom",
+      action: "",
       quantity: 1
     },
     {
       id: 4,
       image: basement,
-      name: "Hầm",
-      description: "",
+      name: "Floor",
+      action: "",
       quantity: 1
+    },
+    {
+      id: 5,
+      image: basement,
+      name: "Tunnel",
+      action: "",
+      quantity: 0
     },
   ]);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedComboId, setSelectedComboId] = useState("");
+  const urlParams = new URLSearchParams(window.location.search);
+  const typeId = urlParams.get("comboTypeId");
+  useEffect(() => {
+    axios.get(`http://localhost:8080/combobuilding/combo/getbytype?typeId=${typeId}`, {}, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+    })
+      .then(response => {
+        setCombo(response.data);
+        console.log("hi" + response.data);
+      })
+      .catch(error => console.error('Error fetching Combo Type data:', error));
+  }, []);
+  const handleComboTypeChange = (event) => {
+    setSelectedComboId(event.target.value);
+  };
   const handleDetail = (item) => {
     setSelectedItem(item);
     setShowModal(true);
@@ -61,7 +87,17 @@ function ListItem() {
   const handleQuantityChange = (id, newQuantity) => {
     setItems(items.map(item =>
       item.id === id ? { ...item, quantity: newQuantity } : item));
-  }
+  };
+  const handleChangeStatus = (id) => {
+    setItems(items.map((item) => {
+      if (item.id === id) {
+        return { ...item, quantity: item.quantity === 0 ? 1 : 0 };
+      }
+      return item;
+    }));
+  };
+
+
   return (
     <>
       <div className="container-item">
@@ -73,8 +109,7 @@ function ListItem() {
                 <th>id</th>
                 <th>image</th>
                 <th>name</th>
-                <th>quantity</th>
-                <th>description</th>
+                <th>detail</th>
                 <th></th>
               </tr>
             </thead>
@@ -89,26 +124,39 @@ function ListItem() {
                   </td>
                   <td>{item.name}</td>
                   <td>
-                    <input
-                      type="number"
-                      value={item.quantity}
-                      onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                      style={{ width: "80px", textAlign: "center" }}
-                    />
+                    {item.name !== "Tunnel" && item.name !== "Combo"  && (
+                      <input
+                        type="number"
+                        min="1"
+                        value={item.quantity}          
+                        onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                        style={{ width: "80px", textAlign: "center" }}
+                      />
+                    )}
+                    {item.name === "Tunnel" && (
+                      <div>
+                        {item.quantity === 1 ? 'Yes' : 'No'}
+                      </div>
+                    )}
+                    {item.name === "Combo" && (
+                      <select id="comboType" value={selectedComboId} onChange={handleComboTypeChange}>
+                      {combo.map((item) => (
+                        <option key={item.comboBuildingId} value={item.comboBuildingId}>
+                          {item.comboBuildingName}
+                        </option>
+                      ))}
+                    </select>
+                    )}
                   </td>
                   <td>
-                    <Button variant="outline-primary" size='sm' onClick={() => handleDetail(item)}>
-                      {item.name === "Hầm" ? "Yes" : "Detail"}
-                    </Button>
-                  </td>
-                  <td>
-                    <Button
-                      variant="outline-danger"
-                      size="sm"
-                      onClick={() => handleRemove(item.id)}
-                    >
-                      {item.name === "Hầm" ? "No" : "Remove"}
-                    </Button>
+                    {item.name === "Tunnel" && (
+                      <Button variant="outline-primary" size='sm' onClick={() => handleChangeStatus(item.id)}>
+                        Yes
+                      </Button>
+                    )}
+                    {item.name !== "Tunnel" && item.name !== "Combo"  && (
+                      <div>room</div>
+                    )}
                   </td>
                   <br />
                 </tr>

@@ -9,7 +9,7 @@ import axios from "axios";
 
 
 const InputLockForm = ({ area, typeId, comboName }) => {
-    const [comboType, setComboType] = useState([]);
+    const [combo, setCombo] = useState([]);
     const [selectedComboId, setSelectedComboId] = useState("");
     const [isFormOpen, setIsFormOpen] = useState(true); // Thêm state để kiểm soát trạng thái của form
 
@@ -24,20 +24,16 @@ const InputLockForm = ({ area, typeId, comboName }) => {
     };
 
     useEffect(() => {
-        axios.post(`http://localhost:8080/combobuilding/combo/getbytype?typeId=${typeId}`, {}, {
+        axios.get(`http://localhost:8080/combobuilding/combo/getbytype?typeId=${typeId}`, {}, {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true
         })
             .then(response => {
-                if (response.status === 200) {
-                    setComboType(response.data);
+                    setCombo(response.data);
                     console.log(response.data);
-                } else {
-                    console.error('Error fetching Combo Type data:', response);
-                }
             })
             .catch(error => console.error('Error fetching Combo Type data:', error));
-    }, [typeId]); // Thêm typeId vào dependency array của useEffect
+    }, []); // Thêm typeId vào dependency array của useEffect
 
     // Nếu form đã đóng, không hiển thị nữa
     if (!isFormOpen) {
@@ -55,22 +51,15 @@ const InputLockForm = ({ area, typeId, comboName }) => {
                 <tbody>
                     <tr>
                         <td>
-                            <label htmlFor="area">Area</label>
-                            <input type="text" id="area" value={area} readOnly />
-                            <span>m2</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label htmlFor="comboName">ComboName</label>
+                            <label htmlFor="comboName">Building Name</label>
                             <input type="text" id="comboName" value={comboName} readOnly />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label htmlFor="comboType">ComboType:</label>
+                            <label htmlFor="comboType">Combo:</label>
                             <select id="comboType" value={selectedComboId} onChange={handleComboTypeChange}>
-                                {comboType.map((item) => (
+                                {combo.map((item) => (
                                     <option key={item.comboBuildingId} value={item.comboBuildingId}>
                                         {item.comboBuildingName}
                                     </option>
@@ -108,13 +97,13 @@ const Invoice = ({ items, area }) => {
         let floorCount = 0;
 
         items.forEach((item) => {
-            if (item.name === "Phòng tắm") {
+            if (item.name === "Bathroom") {
                 bathroomCount += item.quantity;
-            } else if (item.name === "Phòng ngủ") {
+            } else if (item.name === "Bedroom") {
                 bedroomCount += item.quantity;
-            } else if (item.name === "Phòng bếp") {
+            } else if (item.name === "Kitchen") {
                 kitchenCount += item.quantity;
-            } else if (item.name === "Tầng") {
+            } else if (item.name === "Floor") {
                 floorCount += item.quantity;
             }
         });
@@ -135,19 +124,19 @@ const Invoice = ({ items, area }) => {
             "numOBathroom": numOBathroom,
             "numOBedroom": numOBedroom,
             "numOKitchen": numOKitchen,
-            "NumOFloor": numOFloor,
+            "numOFloor": numOFloor,
             "hasTunnel": true,
             "comboId": typeId,
             "newMateIds": [],
             "area": url_Area
         };
-        axios.post(`http://localhost:8080/building/price/detail`, requestBody)
+        axios.post(`http://localhost:8080/building/price/detail`, requestBody, {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        })
             .then(response => {
-                if (response.status === 200) {
-                    setPrice(response.data);
-                } else {
-                    console.error('Error fetching Price data:', response);
-                }
+                setPrice(response.data);
+                console.log(response);
             })
             .catch(error => console.error('Error fetching Price data:', error));
     }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area]);
@@ -178,26 +167,26 @@ const Invoice = ({ items, area }) => {
                         <thead>
                             <tr>
                                 <th className="text-gray-700 font-bold uppercase py-2">Name</th>
-                                <th className="text-gray-700 font-bold uppercase py-2">Quantity</th>
-                                {/* <th className="text-gray-700 font-bold uppercase py-2">Price</th>
-                                <th className="text-gray-700 font-bold uppercase py-2">Total</th> */}
+                                <th className="text-gray-700 font-bold uppercase py-2">Deatail</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <div className="flex items-start h-4 w-26 ">Area : {url_Area}m2</div>
+                            <tr>
+                                    <td className="py-2 text-gray-700">Area</td>
+                                    <td className="py-2 text-gray-700"> {url_Area} m2</td>
+                                    
+                                </tr>
                             {items.map((item) =>
                                 <tr key={item.id}>
                                     <td className="py-2 text-gray-700">{item.name}</td>
-                                    <td className="py-2 text-gray-700">{item.quantity}</td>
-                                    {/* <td className="py-2 text-gray-700">$100.00</td>
-                                    <td className="py-2 text-gray-700">$100.00</td> */}
+                                    <td className="py-2 text-gray-700">{item.quantity} room</td>
                                 </tr>
                             )}
                         </tbody>
                     </table>
                     <div className="flex justify-end mb-2 mr-10">
                         <div className="text-gray-700 mr-2">Total:</div>
-                        <div className="text-gray-700 font-bold text-xl">{price.totalPrice}</div>
+                        <div className="text-gray-700 font-bold text-xl">{Math.round(price.totalPrice)} VND</div>
                     </div>
                     <div className="flex justify-between">
                         <input
