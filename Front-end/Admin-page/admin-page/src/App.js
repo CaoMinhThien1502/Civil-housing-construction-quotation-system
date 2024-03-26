@@ -21,11 +21,12 @@ import BuildingType from './pages/buildingtype';
 import RequestContract from './pages/requestcontract';
 import UserList from './pages/userlist';
 import BlogList from './pages/blogmanager';
+//import Contract from './pages/requestcontract/exportContract.jsx';
 
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import BuildingTypeDetail from './pages/buildingtype/buildingTypeDetail';
-import RequestContractDetail from './pages/requestcontract/requestContractDetail';
+import RequestContractDetail from './pages/requestcontract/requestcontractdetail';
 import BlogDetail from './pages/blogmanager/blogDetail'
 import ComboDetail from './pages/combobuilding/comboDetail'
 
@@ -36,7 +37,6 @@ import AddMaterialType from './pages/materialtype/addMaterialType';
 import AddBuilding from './pages/buildinglist/addBuilding';
 import AddBuildingType from './pages/buildingtype/addBuildingType';
 import AddBlog from './pages/blogmanager/addBlog';
-import AddBlogFixing from './pages/blogmanager/addBlog';
 
 import EditComboBuilding from './pages/combobuilding/editComboBuilding';
 import EditMaterialType from './pages/materialtype/editMaterialType';
@@ -164,6 +164,7 @@ function App() {
 
                   <Route path="/requestContractList" element={<RequestContract />} />
                   <Route path="/requestContractList/detail/:id" element={<RequestContractDetail />} />
+                  {/* <Route path="/exportFilePdf" element={<Contract />} /> */}
 
                   <Route path="/blogList" element={<BlogList />} />
                   <Route path="/blogList/addBlog" element={<AddBlog />} />
