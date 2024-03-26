@@ -106,7 +106,7 @@ function MaterialDescription({comboId,}) {
                 return itemMate.mates?.map((itemMatess, optionIndex) => (
                     <option value={itemMatess.mateId} key={optionIndex}>{itemMatess.mateName}</option>
                 ));
-            }
+            }   
             return null; 
         })}
     </select>

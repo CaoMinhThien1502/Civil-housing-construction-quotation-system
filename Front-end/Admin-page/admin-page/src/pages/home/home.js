@@ -458,9 +458,9 @@ const Combo = () => {
 const PricingSection = () => {
     const navigate = useNavigate();
   
-    const redirectToPrice = (id,userName) => {
+    const redirectToPrice = () => {
       // Navigate to /price with the id parameter
-      navigate(`/price1?id=${id}`);
+      navigate(`/price1`);
     };
   return (
     <section id="pricing" className="pricing">
@@ -471,30 +471,8 @@ const PricingSection = () => {
         </div>
         <div className="row">
           {/* Repeat this block for each pricing option */}
-          <div className="col-lg-4 col-md-6">
-            <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
-              <h3>Rough Construction</h3>
-              <h4><sup>+</sup>3<span> Combos</span></h4>
-              <ul>
-                <li>Count price</li>
-                <li>With rough combo building</li>
-                <li>Feel free to choose</li>
-                <li className="na">Finishing combo</li>
-                <li className="na">Package combo</li>
-              </ul>
-              <div className="btn-wrap">
-              <button
-                id="button0"
-                data-id="0"
-                onClick={() => redirectToPrice(0)}
-                className="btn-buy"
-              >
-              Count
-              </button>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
+          
+          <div className="col-lg-12 col-md-6">
             <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
               <h3>Construction and finishing</h3>
               <h4><sup>+</sup>3<span> Combos</span></h4>
@@ -509,7 +487,7 @@ const PricingSection = () => {
               <button
                 id="button1"
                 data-id="1"
-                onClick={() => redirectToPrice(1)}
+                onClick={() => redirectToPrice()}
                 className="btn-buy"
               >
               Count
@@ -517,29 +495,7 @@ const PricingSection = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="box" data-aos="zoom-in-right" data-aos-delay="200">
-              <h3>Package construction</h3>
-              <h4><sup>+</sup>4<span> Combos</span></h4>
-              <ul>
-                <li>Count price</li>
-                <li>With finishing combo building</li>
-                <li>Feel free to choose</li>
-                <li className="na">Rough combo</li>
-                <li className="na">Finishing combo</li>
-              </ul>
-              <div className="btn-wrap">
-              <button
-                id="button2"
-                data-id="2"
-                onClick={() => redirectToPrice(2)}
-                className="btn-buy"
-              >
-              Count
-              </button>
-              </div>
-            </div>
-          </div>
+          
           {/* End pricing option */}
         </div>
       </div>

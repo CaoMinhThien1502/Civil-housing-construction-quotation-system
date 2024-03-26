@@ -156,12 +156,12 @@ public class RequestContractServiceImp implements RequestContractService {
         double comboPrice = 0.0;
         List<Material> materials = customDetailService.getMateByRequestContract(contract);
         for (Material m: materials) {
-            comboPrice += m.getUnitPrice();
+            comboPrice = comboPrice + (double)m.getUnitPrice();
         }
         comboPrice = comboPrice * 0.95;
         comboPrice = comboPrice * contract.getBuildingDetail().getBuilding().getPercentPrice();
         int count = getCount(contract);
-        comboPrice = count*(((double) count*5+100)/100);
+        comboPrice = comboPrice*((((double)count*5)+100)/100);
         return comboPrice;
     }
 
@@ -171,7 +171,7 @@ public class RequestContractServiceImp implements RequestContractService {
         if(contract.getBuildingDetail().getNumOBathroom() > 1) count += contract.getBuildingDetail().getNumOBathroom() - 1;
         if(contract.getBuildingDetail().getNumOBedroom() > 1) count += contract.getBuildingDetail().getNumOBedroom() - 1;
         if(contract.getBuildingDetail().getNumOKitchen() > 1) count += contract.getBuildingDetail().getNumOKitchen() - 1;
-        if(contract.getBuildingDetail().getNumOFloor() > 1) count = count * contract.getBuildingDetail().getNumOFloor() - 1;
+        if(contract.getBuildingDetail().getNumOFloor() > 1) count = count + count * contract.getBuildingDetail().getNumOFloor() - 1;
         if(contract.getBuildingDetail().isHasTunnel()) count++;
         return count;
     }
