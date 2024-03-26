@@ -113,22 +113,18 @@ const RequestContract = () => {
             flex: 0.8,
         },
         {
-            field: "comboName",
-            headerName: "Combo selected",
+            field: "phone",
+            headerName: "Phone Number",
             flex: 0.8,
         },
         {
-            field: "totalPrice",
-            headerName: "Price",
-            flex: 1,
-            renderCell: (params) => {
-                const { value } = params; // Use `value` directly for clarity (optional)
-                return value.toLocaleString('vi', { style: 'currency', currency: 'VND' });
-            },
+            field: "email",
+            headerName: "Email",
+            flex: 0.8,
         },
         {
             field: "buildingDetail.status",
-            headerName: "Type",
+            headerName: "Process",
             headerAlign: "center",
             align: "center",
             flex: 0.8,
@@ -190,14 +186,18 @@ const RequestContract = () => {
             align: "center",
             flex: 0.8,
             renderCell: ({ row }) => (
-                <Link
-                    to={`/requestContractList/detail/${row.requestContractId}`}
-                    style={{ textDecoration: 'none' }}
-                >
-                    <Button color="primary" variant="contained">
-                        Detail
-                    </Button>
-                </Link>
+                row.status === true ? (
+                    <Link
+                        to={`/requestContractList/detail/${row.requestContractId}`}
+                        style={{ textDecoration: 'none' }}
+                    >
+                        <Button color="primary" variant="contained">
+                            DETAIL
+                        </Button>
+                    </Link>
+                ) : (
+                    <span>DETAIL</span>
+                )
             ),
         },
         {

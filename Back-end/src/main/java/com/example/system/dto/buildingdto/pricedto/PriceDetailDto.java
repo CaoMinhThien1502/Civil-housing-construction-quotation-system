@@ -28,6 +28,5 @@ public class PriceDetailDto {
     private List<CustomMateTypeDto> matesInCustom;
 
     private Double comboPrice;
-
     private Double totalPrice;
 }
