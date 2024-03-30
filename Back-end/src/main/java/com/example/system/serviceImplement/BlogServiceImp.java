@@ -30,7 +30,7 @@ public class BlogServiceImp implements BlogService {
 
     @Override
     public boolean createBlog(BlogDto blog) {
-        try{
+        try {
             User user = userRepository.findByEmail(blog.getUserEmail()).orElseThrow();
             Blog newBlog = new Blog();
             newBlog.setBlogName(blog.getBlogName());
@@ -41,7 +41,7 @@ public class BlogServiceImp implements BlogService {
             newBlog.setImgPath(blog.getImgPath());
             blogRepository.save(newBlog);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -49,5 +49,21 @@ public class BlogServiceImp implements BlogService {
     @Override
     public List<Blog> getListBlogByType(int blogType) {
         return blogRepository.findAllBlogByType(blogType);
+    }
+
+    @Override
+    public boolean updateBlog(Long blogId, BlogDto blog) {
+        try {
+            User user = userRepository.findByEmail(blog.getUserEmail()).orElseThrow();
+            Blog updateBlog = blogRepository.findById(blogId).orElseThrow();
+            updateBlog.setBlogName(blog.getBlogName());
+            updateBlog.setBlogContent(blog.getBlogContent());
+            updateBlog.setBlogType(blog.getBlogType());
+            updateBlog.setUser(user);
+            blogRepository.save(updateBlog);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
