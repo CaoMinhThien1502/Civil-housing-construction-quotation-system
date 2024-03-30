@@ -184,6 +184,7 @@ const Invoice = ({ items, area, comboId }) => {
     const [numOBedroom, setNumOBedroom] = useState(0);
     const [numOKitchen, setNumOKitchen] = useState(0);
     const [numOFloor, setNumOFloor] = useState(0);
+    const [tunnel, setTunnel] = useState(0);
     const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
     const buildingId = urlParams.get("buildingId");
@@ -280,7 +281,7 @@ const Invoice = ({ items, area, comboId }) => {
         let bedroomCount = 0;
         let kitchenCount = 0;
         let floorCount = 0;
-
+        let tunnelCount = 0;
         items.forEach((item) => {
             if (item.name === "Bathroom") {
                 bathroomCount += item.quantity;
@@ -290,6 +291,8 @@ const Invoice = ({ items, area, comboId }) => {
                 kitchenCount += item.quantity;
             } else if (item.name === "Floor") {
                 floorCount += item.quantity;
+            }else if (item.name === "Tunnel") {
+                tunnelCount += item.quantity;
             }
         });
 
@@ -297,6 +300,8 @@ const Invoice = ({ items, area, comboId }) => {
         setNumOBedroom(bedroomCount);
         setNumOKitchen(kitchenCount);
         setNumOFloor(floorCount);
+        setTunnel(tunnelCount)
+
     }, [items]);
 
     const handleClickLock = () => {
@@ -310,7 +315,7 @@ const Invoice = ({ items, area, comboId }) => {
             "numOBedroom": numOBedroom,
             "numOKitchen": numOKitchen,
             "numOFloor": numOFloor,
-            "hasTunnel": true,
+            "hasTunnel": tunnel,
             "comboId": comboId,
             "newMateIds": [],
             "area": url_Area
@@ -324,8 +329,7 @@ const Invoice = ({ items, area, comboId }) => {
                 console.log("setPrice: ", response.data);
             })
             .catch(error => console.error('Error fetching Price data:', error));
-    }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area, comboId]);
-
+    }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area, comboId, tunnel]);
 
     return (
         <>
