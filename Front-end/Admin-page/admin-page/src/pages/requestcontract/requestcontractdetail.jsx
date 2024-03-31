@@ -92,35 +92,30 @@ const RequestContractDetail = () => {
         setShowPDF(!showPDF);
     };
 
-    // const [getCustomCombo, setCustomCombo] = useState([]);
-    // useEffect(() => {
-    //     const fetchCustomComboByRequestContractId = async () => {
-    //         try {
-    //             const response = await fetch(`http://localhost:8080/custom-combo/get?requestContractId=${id}`, {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     // 'Access-Control-Allow-Origin': '*',
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //             });
+    const [getCustomCombo, setCustomCombo] = useState([]);
+    const [combos, setCombos] = useState([]);
+    useEffect(() => {
+        const fetchCustomComboByRequestContractId = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/custom-combo/get?requestContractId=${id}`, {
+                    method: 'GET',
+                    headers: {
+                        // 'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                });
 
-    //             const data = await response.json();
-    //             setCustomCombo(data);
-    //             console.log(data)
-    //         } catch (error) {
-    //             console.error('Error fetching custom combo:', error);
-    //         }
-    //     };
+                const data = await response.json();
+                setCustomCombo(data);
+                setCombos(data.mateList?.sort((a, b) => a.mateTypeId - b.mateTypeId) || []);
+            } catch (error) {
+                console.error('Error fetching custom combo:', error);
+            }
+        };
 
-    //     fetchCustomComboByRequestContractId();
-    // }, []); // Empty dependency array to fetch data only once on component mount
-    // const combos = getCustomCombo?.mateList || [];
-    // // Check if combos is not empty and is an array before sorting
-    // if (Array.isArray(combos) && combos.length > 0) {
-    //     // sort by mateTypeId
-    //     combos.sort((a, b) => a.mateTypeId - b.mateTypeId);
-    // }
-    
+        fetchCustomComboByRequestContractId();
+    }, []); // Empty dependency array to fetch data only once on component mount
+    // const combos = getCustomCombo.mateList?.sort((a, b) => a.mateTypeId - b.mateTypeId) || [];
 
     return (
         <Box m="20px" >
@@ -284,7 +279,7 @@ const RequestContractDetail = () => {
                 <Box sx={{ gridColumn: "span 4" }}>
                     <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>Combo bạn đã chọn</Typography>
                 </Box>
-                {/* <DataGrid
+                <DataGrid
                     rows={combos}
                     columns={[
                         { field: "mateTypeId", headerName: "Material Type ID", flex: 0.5 },
@@ -311,7 +306,7 @@ const RequestContractDetail = () => {
                     getRowId={(row) => row.mateTypeId}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
-                /> */}
+                />
                 <Box display="flex" justifyContent="end" mt="20px">
                     <Button onClick={() => navigate("/requestContractList")} color="secondary" variant="contained">
                         Cancel
