@@ -42,33 +42,6 @@ function MaterialDescription({comboId,}) {
             .catch(error => console.error('Error fetching Combo Type data:', error));
     }, [comboId]);
 
-    // const getAlternativeMaterials = (mateTypeName) => {
-    //     let mateNames = [];
-    //     allMaterialList && allMaterialList.map((item) => {
-    //         if (item.mateTypeName === mateTypeName){
-    //             mateNames.push(item);
-    //         }
-
-    //     })
-        // console.log("allMaterialList: ", allMaterialList); // Kiểm tra giá trị của allMaterialList
-        // if (Array.isArray(allMaterialList) && allMaterialList.length > 0) {
-        //     allMaterialList.forEach((item) => {
-        //         console.log("mateTypeName: ", mateTypeName); // Kiểm tra giá trị của mateTypeName
-        //         console.log("item.mateTypeName: ", item.mateTypeName); // Kiểm tra giá trị của item.mateTypeName
-        //         if (item.mateTypeName === mateTypeName) {
-        //             if (Array.isArray(item.mateList) && item.mateList.length > 0) {
-        //                 item.mateList.forEach(mate => {
-        //                     mateNames.push({ mateId: mate.mate.mateId, mateName: mate.mate.mateName });
-        //                 });
-        //             }
-        //         }
-        //     });
-        // }
-        // setMateNames(mateNames)
-       
-    //     return mateNames;
-    // };
-
     console.log("allMaterialist: ",allMaterialList);
     console.log(allMaterialList1);
     return (
