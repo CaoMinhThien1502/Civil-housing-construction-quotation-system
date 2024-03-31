@@ -220,6 +220,13 @@ const AddComboBuilding = () => {
                                                             const updatedMaterialIdList = [...formik.values.materialIdList]; // Create a copy of the existing list
                                                             if (event.target.checked) {
                                                                 updatedMaterialIdList.push(option.materialId); // Add ID if checked
+                                                                // remove other materialId of this materialType
+                                                                updatedMaterialIdList.forEach((materialId, index) => {
+                                                                    const correspondingMaterial = materialOptions.find((m) => m.materialId === materialId);
+                                                                    if (correspondingMaterial && correspondingMaterial.materialTypeId === option.materialTypeId && materialId !== option.materialId) {
+                                                                        updatedMaterialIdList.splice(index, 1);
+                                                                    }
+                                                                });
                                                             } else {
                                                                 updatedMaterialIdList.splice(updatedMaterialIdList.indexOf(option.materialId), 1); // Remove ID if unchecked
                                                             }

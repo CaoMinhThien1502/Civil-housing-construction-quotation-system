@@ -26,23 +26,23 @@ import BlogList from './pages/blogmanager';
 import ComboBuildingDetail from './pages/combobuilding/comboBuildingDetail';
 import MaterialTypeDetail from './pages/materialtype/materialTypeDetail';
 import BuildingTypeDetail from './pages/buildingtype/buildingTypeDetail';
-import RequestContractDetail from './pages/requestcontract/requestContractDetail.jsx';
+import RequestContractDetail from './pages/requestcontract/requestContractDetail';
 import BlogDetail from './pages/blogmanager/blogDetail'
 import ComboDetail from './pages/combobuilding/comboDetail'
 
 import AddComboBuilding from './pages/combobuilding/addComboBuilding';
 import AddMaterial from "./pages/materiallist/addMaterial";
 import AddMaterialType from './pages/materialtype/addMaterialType';
-
 import AddBuilding from './pages/buildinglist/addBuilding';
 import AddBuildingType from './pages/buildingtype/addBuildingType';
 import AddBlog from './pages/blogmanager/addBlog';
 
 import EditComboBuilding from './pages/combobuilding/editComboBuilding';
-import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditMaterial from './pages/materiallist/editMaterial';
+import EditMaterialType from './pages/materialtype/editMaterialType';
 import EditBuilding from './pages/buildinglist/editBuilding';
 import EditBuildingType from './pages/buildingtype/editBuildingType';
+import EditBlog from './pages/blogmanager/editBlog';
 import EditUser from './pages/userlist/editUser';
 
 import Login from './pages/login/login1.js';
@@ -82,6 +82,7 @@ import {
 } from './pages/pricing/price1.js'
 import { HistoryToggleOffRounded, NorthEastOutlined, OneK, Sailing, ViewHeadline } from '@mui/icons-material';
 import { keyboard } from '@testing-library/user-event/dist/keyboard/index.js';
+
 // import { dc } from '@fullcalendar/core/internal-common.js';
 
 function App() {
@@ -168,6 +169,7 @@ function App() {
 
                   <Route path="/blogList" element={<BlogList />} />
                   <Route path="/blogList/addBlog" element={<AddBlog />} />
+                  <Route path="/blogList/:id" element={<EditBlog />} />
 
                   <Route path="/userList" element={<UserList />} />
                   <Route path="/userList/:id" element={<EditUser />} />
