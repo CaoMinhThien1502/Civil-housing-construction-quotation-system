@@ -14,7 +14,7 @@ const initialValues = {
     blogContent: "",
     blogType: 0,
     userEmail: "",
-    imgPath: ""
+    imgPath: null
 };
 
 const userSchema = yup.object().shape({
@@ -86,15 +86,13 @@ const EditBlog = () => {
 
         fetchBlogById();
     }, []); // Empty dependency array to fetch data only once on component mount
-    console.log("getBlog:", getBlog)
     const formik = useFormik({
         initialValues: {
-            blogId: id,
             blogName: `${getBlog.blogName}`,
             blogContent: `${getBlog.blogContent}`,
             blogType: `${getBlog.blogType}`,
             userEmail: userEmail,
-            imgPath: `${getBlog.imgPath}`
+            imgPath: null,
         },
         enableReinitialize: true,
 
@@ -151,6 +149,7 @@ const EditBlog = () => {
 
         reader.onload = () => {
             const dataURL = reader.result;
+            console.log(dataURL);
             formik.setFieldValue("imgPath", dataURL); // Gán chuỗi base64 vào imgPath
         };
 
@@ -197,7 +196,7 @@ const EditBlog = () => {
                             />
                             <Box sx={{ gridColumn: "span 2" }}>
                                 <Typography sx={{ gridColumn: "span 4" }} variant="h6" gutterBottom>
-                                    Previous Blog Type: {formik.initialValues.status === 1 ? "Cẩm nang xây dựng" : "Thiết Kế Kiến Trúc"}
+                                    Previous Blog Type: {getBlog.blogType === 1 ? "Cẩm nang xây dựng" : "Thiết Kế Kiến Trúc"}
                                 </Typography>
                                 <Select
                                     labelId="blog-type-label"
