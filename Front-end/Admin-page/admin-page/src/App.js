@@ -11,7 +11,7 @@ import Team from "./pages/team";
 import Contacts from "./pages/contacts";
 import Invoices from "./pages/invoices";
 import Form from "./pages/form";
-import Register from './pages/register/register.js';
+import Register from './pages/register/register1.js';
 
 import ComboBuilding from "./pages/combobuilding";
 import MaterialList from "./pages/materiallist";
@@ -45,7 +45,7 @@ import EditBuilding from './pages/buildinglist/editBuilding';
 import EditBuildingType from './pages/buildingtype/editBuildingType';
 import EditUser from './pages/userlist/editUser';
 
-import Login from './pages/login/login';
+import Login from './pages/login/login1.js';
 import PrivateRoutes from './utils/PrivateRoutes';
 import GuestPrivateRoutes from './utils/GuestPrivateRoutes';
 import axios from 'axios';
