@@ -112,32 +112,34 @@ const ComboBuildingDetail = () => {
                 <Box sx={{ gridColumn: "span 4" }}>
                     <Typography variant="h3" gutterBottom sx={{ display: "flex", justifyContent: "center" }}>Combo Material Information</Typography>
                 </Box>
-                <DataGrid
-                    rows={comboData.materialTypeOfComboDto.flatMap((materialType) => materialType.materialList)} // Combine material lists
-                    columns={[
-                        { field: "materialId", headerName: "Material ID", flex: 1 },
-                        { field: "materialName", headerName: "Material Name", flex: 1 },
-                        {
-                            field: "unitPrice", headerName: "Unit Price", flex: 1,
-                            renderCell: (params) => {
-                                const { value } = params;
-                                return value?.toLocaleString('vi', { style: 'currency', currency: 'VND' });
-                            }
-                        },
-                        {
-                            field: "status", headerName: "Status", flex: 1,
-                            renderCell: (params) => {
-                                const { row: { status } } = params; // Extract the type value
-                                return status === true ? "Active" : "Inactive";
-                            }
-                        },
-                        // Add other fields as needed
-                    ]}
-                    getRowId={(row) => row.materialId}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
-                // ...other DataGrid props
-                />
+                {comboData && comboData.materialTypeOfComboDto?.length > 0 && (
+                    <DataGrid
+                        rows={comboData.materialTypeOfComboDto.flatMap((materialType) => materialType.materialList)} // Combine material lists
+                        columns={[
+                            { field: "materialId", headerName: "Material ID", flex: 0.7 },
+                            { field: "materialName", headerName: "Material Name", flex: 1.3 },
+                            {
+                                field: "unitPrice", headerName: "Unit Price", flex: 1,
+                                renderCell: (params) => {
+                                    const { value } = params;
+                                    return value?.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+                                }
+                            },
+                            {
+                                field: "status", headerName: "Status", flex: 1,
+                                renderCell: (params) => {
+                                    const { row: { status } } = params; // Extract the type value
+                                    return status === true ? "Active" : "Inactive";
+                                }
+                            },
+                            // Add other fields as needed
+                        ]}
+                        getRowId={(row) => row.materialId}
+                        pageSize={5}
+                        rowsPerPageOptions={[5]}
+                    // ...other DataGrid props
+                    />
+                )}
             </Box>
         </Box>
     );
