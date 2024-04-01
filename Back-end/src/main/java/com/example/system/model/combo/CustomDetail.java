@@ -22,7 +22,7 @@ public class CustomDetail {
     private boolean status;
 
     @ManyToOne
-    @JoinColumn(name = "old_mate_id")
+    @JoinColumn(name = "old_mate_id", unique = true)
     @JsonIgnore
     private Material oldMate;
     @ManyToOne

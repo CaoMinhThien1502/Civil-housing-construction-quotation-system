@@ -179,12 +179,11 @@ const InputLockForm = ({ area, typeId, comboName }) => {
 const Invoice = ({ items, area, comboId }) => {
     const [show, setShow] = useState(true);
     const [object, setObject] = useState([]);
-    const [contractId, setContractId] = useState(0);
     const [numOBathroom, setNumOBathroom] = useState(0);
     const [numOBedroom, setNumOBedroom] = useState(0);
     const [numOKitchen, setNumOKitchen] = useState(0);
     const [numOFloor, setNumOFloor] = useState(0);
-    const navigate = useNavigate();
+    const [tunnel, setTunnel] = useState(0);
     const urlParams = new URLSearchParams(window.location.search);
     const buildingId = urlParams.get("buildingId");
     const url_Area = urlParams.get("area");
@@ -244,9 +243,9 @@ const Invoice = ({ items, area, comboId }) => {
                 }
                 const response = await axios.post(`http://localhost:8080/building/detail/create?buildingId=${buildingId}`, requestBody)
                     .then(res => { 
-                        setContractId(res.data.requestContractId); 
-                        setBuildingDetailId(res.data.buildingDetailId);
-            
+                        //setContractId(res.data.requestContractId); 
+                        setBuildingDetailId(res.data.detail.buildingDetailId);
+                        console.log(res.data.requestContractId + '+' + comboId + '+' + res.data.detail.buildingDetailId);
                         // Now that contractId and buildingDetailId are set, create the VNPay URL
                         let amount = 'vnp_Amount=' + '20000000';
                         let command = '&vnp_Command=' + commandPay;
@@ -254,7 +253,7 @@ const Invoice = ({ items, area, comboId }) => {
                         let curCode = '&vnp_CurrCode=' + currCode;
                         let ipAdd = '&vnp_IpAddr=' + IpAddr;
                         let local = '&vnp_Locale=' + locale;
-                        let orderInfor = '&vnp_OrderInfo=' + res.data.requestContractId + '+' + comboId + '+' + res.data.requestContractId;
+                        let orderInfor = '&vnp_OrderInfo=' + res.data.requestContractId + '+' + comboId + '+' + res.data.detail.buildingDetailId;
                         let orderType = '&vnp_OrderType=' + 'BaoGia';
                         let returnUrl = '&vnp_ReturnUrl=' + reciveURL;
                         let tmn = '&vnp_TmnCode=' + tmnCode;
@@ -280,6 +279,7 @@ const Invoice = ({ items, area, comboId }) => {
         let bedroomCount = 0;
         let kitchenCount = 0;
         let floorCount = 0;
+        let tunnelCount = 0;
 
         items.forEach((item) => {
             if (item.name === "Bathroom") {
@@ -290,6 +290,8 @@ const Invoice = ({ items, area, comboId }) => {
                 kitchenCount += item.quantity;
             } else if (item.name === "Floor") {
                 floorCount += item.quantity;
+            } else if (item.name === "Tunnel") {
+                tunnelCount += item.quantity;
             }
         });
 
@@ -297,6 +299,7 @@ const Invoice = ({ items, area, comboId }) => {
         setNumOBedroom(bedroomCount);
         setNumOKitchen(kitchenCount);
         setNumOFloor(floorCount);
+        setTunnel(tunnelCount);
     }, [items]);
 
     const handleClickLock = () => {
@@ -310,7 +313,7 @@ const Invoice = ({ items, area, comboId }) => {
             "numOBedroom": numOBedroom,
             "numOKitchen": numOKitchen,
             "numOFloor": numOFloor,
-            "hasTunnel": true,
+            "hasTunnel": tunnel,
             "comboId": comboId,
             "newMateIds": [],
             "area": url_Area
@@ -324,7 +327,7 @@ const Invoice = ({ items, area, comboId }) => {
                 console.log("setPrice: ", response.data);
             })
             .catch(error => console.error('Error fetching Price data:', error));
-    }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area, comboId]);
+    }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area, comboId, tunnel]);
 
 
     return (
