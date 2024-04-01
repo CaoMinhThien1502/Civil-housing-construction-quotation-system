@@ -184,6 +184,7 @@ const Invoice = ({ items, area, comboId }) => {
     const [numOKitchen, setNumOKitchen] = useState(0);
     const [numOFloor, setNumOFloor] = useState(0);
     const [tunnel, setTunnel] = useState(0);
+    const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
     const buildingId = urlParams.get("buildingId");
     const url_Area = urlParams.get("area");
@@ -243,7 +244,7 @@ const Invoice = ({ items, area, comboId }) => {
                 }
                 const response = await axios.post(`http://localhost:8080/building/detail/create?buildingId=${buildingId}`, requestBody)
                     .then(res => { 
-                        //setContractId(res.data.requestContractId); 
+                        //setContractId(res.data.requestContractId);
                         setBuildingDetailId(res.data.detail.buildingDetailId);
                         console.log(res.data.requestContractId + '+' + comboId + '+' + res.data.detail.buildingDetailId);
                         // Now that contractId and buildingDetailId are set, create the VNPay URL
