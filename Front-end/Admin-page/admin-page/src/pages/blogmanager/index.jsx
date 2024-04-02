@@ -57,8 +57,8 @@ const Blog = () => {
             headerName: "Type",
             flex: 1,
             renderCell: (params) => {
-                const { row: { type } } = params; // Extract the type value
-                return type === 1 ? "Cẩm nang xây dựng" : "Thiết Kế Kiến Trúc";
+                const { value: type } = params; // Extract the type value
+                return type === 1 ? "Cẩm nang xây dựng" : "Thiết Kế Kiến Trúc"
             },
         },
         {
