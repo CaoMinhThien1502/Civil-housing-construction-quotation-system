@@ -132,7 +132,8 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
         create.setStatus(-1);
         RequestContract tmp = new RequestContract();
         tmp.setPayStatus(false);
-        create.setRequestContract(requestContractRepository.save(tmp));
+        RequestContract newRc = requestContractRepository.save(tmp);
+        create.setRequestContract(newRc);
         BuildingDetail added = buildingDetailRepository.save(create);
         return getDetailDto(added);
     }

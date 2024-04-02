@@ -13,4 +13,6 @@ public interface BlogService {
     boolean createBlog(BlogDto blog);
 
     List<Blog> getListBlogByType(int blogType);
+
+    boolean updateBlog(Long blogId,BlogDto blog);
 }

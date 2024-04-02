@@ -78,31 +78,38 @@ public class CustomDetailServiceImp implements CustomDetailService {
     @Override
     public List<CustomDetailDto> makeCustomCombo(CustomInfor infor, Long rcId) {
         RequestContract contract = requestContractRepository.findById(rcId).orElseThrow();
+        ComboBuilding combo = contract.getComboBuilding();
         List<CustomDetail> customList = customDetailRepository.findAllByRequestContract(contract);
         List<CustomDetailDto> result = new ArrayList<>();
-        for (Long mateId: infor.getNewMateList()) {
+        for (String mateId: infor.getNewMateList()) {
+            if (mateId.isEmpty()) break;
             CustomDetail add = new CustomDetail();
-            Material newMate = materialRepository.findById(mateId).orElseThrow();
+            Long id = Long.parseLong(mateId);
+            Material newMate = materialRepository.findById(id).orElseThrow();
             boolean flag = false;
             for (CustomDetail cd: customList) {
                 if(newMate.getMaterialType().equals(cd.getOldMate().getMaterialType())){
-                    cd.setNewMate(newMate);
-                    cd.setStatus(true);
-                    flag = true;
-                    add = customDetailRepository.save(cd);
+                    if(!newMate.getMaterialId().equals(cd.getOldMate().getMaterialId())){
+                        cd.setNewMate(newMate);
+                        cd.setStatus(true);
+                        flag = true;
+                        add = customDetailRepository.save(cd);
+                    }
                     break;
                 }
             }
             if(!flag){
                 CustomDetail cud = new CustomDetail();
                 ComboDetail cod = comboDetailRepository.findComboDetailByComboBuildingAndMaterial_MaterialType(contract.getComboBuilding(),newMate.getMaterialType());
-                cud.setRequestContract(contract);
-                cud.setOldMate(cod.getMaterial());
-                cud.setNewMate(newMate);
-                cud.setStatus(true);
-                add = customDetailRepository.save(cud);
+                if(!newMate.equals(cod.getMaterial())){
+                    cud.setRequestContract(contract);
+                    cud.setOldMate(cod.getMaterial());
+                    cud.setNewMate(newMate);
+                    cud.setStatus(true);
+                    add = customDetailRepository.save(cud);
+                }
             }
-            result.add(getCustomDto(add));
+            if(add.getNewMate() != null) result.add(getCustomDto(add));
         }
         return result;
     }
