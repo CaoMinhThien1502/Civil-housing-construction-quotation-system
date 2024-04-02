@@ -191,7 +191,7 @@ public class RequestContractServiceImp implements RequestContractService {
                 "<li>Địa điểm gặp mặt: <strong>" + placeMeet + "</strong></li>" +
                 "<li>Thời gian: <strong>" + formattedDate + "</strong></li>" +
                 "</ul>" +
-                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Rất mong bạn có mặt đúng giờ. Xin cảm ơn bạn đã hợp tác.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Rất mong bạn có mặt đúng hẹn. Xin cảm ơn bạn đã hợp tác.</p>" +
                 "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\"><strong>Lưu ý:</strong> Nếu bạn không đến hoặc trễ hơn 30 phút, yêu cầu hẹn sẽ bị hủy và bạn sẽ mất 200k tiền đã đặt cọc.</p>" +
                 "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Trân trọng,</p>" +
                 "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">[CILVIL HOUSING]</p>" +

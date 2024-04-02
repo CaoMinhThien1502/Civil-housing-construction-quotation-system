@@ -27,7 +27,7 @@ const ContractPDF = ({ requestContractData }) => {
 
       <Text style={styles.sectionTitle}>Article 3: Payment</Text>
       <Text>- Party A undertakes to pay Party B according to the following schedule:</Text>
-      <Text>  - {requestContractData?.totalPrice}% of the total contract value upon completion of all work and inspection of quality by the project inspector.</Text>
+      <Text>  - {requestContractData?.totalPrice} of the total contract value upon completion of all work and inspection of quality by the project inspector.</Text>
 
       <Text style={styles.sectionTitle}>Article 4: Warranty</Text>
       <Text>Party B undertakes to warranty the project for {requestContractData?.requestDate} from the date of project completion.</Text>
