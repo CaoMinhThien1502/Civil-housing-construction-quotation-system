@@ -82,7 +82,6 @@ import {
 } from './pages/pricing/price1.js'
 import { HistoryToggleOffRounded, NorthEastOutlined, OneK, Sailing, ViewHeadline } from '@mui/icons-material';
 import { keyboard } from '@testing-library/user-event/dist/keyboard/index.js';
-
 // import { dc } from '@fullcalendar/core/internal-common.js';
 
 function App() {

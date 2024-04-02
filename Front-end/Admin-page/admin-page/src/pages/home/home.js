@@ -235,7 +235,7 @@ const TeamSection = () => {
                   <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
                 </ul>
                 {/* <button className="button-51" type="button">Đọc ngay</button> */}
-                <Link to="/blog" className="button-51">Read now</Link>
+                <a href="/blog?id=1" className="button-51">Read now</a>
               </div>
             </div>
           </div>
@@ -256,7 +256,7 @@ const TeamSection = () => {
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
                   <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
-                <Link to="/blog" className="button-51">Read now</Link>
+                <a href="/blog?id=2" className="button-51">Read now</a>
               </div>
             </div>
           </div>
@@ -277,7 +277,7 @@ const TeamSection = () => {
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
                   <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
-                <Link to="/blog" className="button-51">Read now</Link>
+                <a href="/blog?id=3" className="button-51">Read now</a>
               </div>
             </div>
           </div>
@@ -298,7 +298,7 @@ const TeamSection = () => {
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
                   <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
                 </ul>
-                <Link to="/blog" className="button-51">Read now</Link>
+                <a href="/blog?id=4" className="button-51">Read now</a>
               </div>
             </div>
           </div>

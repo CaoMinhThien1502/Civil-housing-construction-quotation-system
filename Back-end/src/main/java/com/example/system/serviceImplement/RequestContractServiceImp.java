@@ -100,9 +100,9 @@ public class RequestContractServiceImp implements RequestContractService {
             calendar.add(Calendar.DATE, 7); // Thêm 7 ngày vào ngày hiện tại
             Date dateAfter7Days = calendar.getTime();
             contract.setTimeoutDate(dateAfter7Days);
-
+            RequestContract rc = requestContractRepository.save(contract);
             //create custom combo
-            customDetailService.makeCustomCombo(dto.getMateIds(), dto.getRequestContractId());
+            customDetailService.makeCustomCombo(dto.getMateIds(), rc.getRequestContractId());
 
             //price
             Double total = getComboPrice(contract)*contract.getBuildingDetail().getArea();

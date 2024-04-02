@@ -142,7 +142,7 @@ const InputLockForm = ({ area, typeId, comboName }) => {
     }
 
     return (
-        <div className="input-lock-form">
+        <div className="input-lock-form1">
             <table>
                 <thead>
                     <tr>
@@ -179,7 +179,6 @@ const InputLockForm = ({ area, typeId, comboName }) => {
 const Invoice = ({ items, area, comboId }) => {
     const [show, setShow] = useState(true);
     const [object, setObject] = useState([]);
-    const [contractId, setContractId] = useState(0);
     const [numOBathroom, setNumOBathroom] = useState(0);
     const [numOBedroom, setNumOBedroom] = useState(0);
     const [numOKitchen, setNumOKitchen] = useState(0);
@@ -245,9 +244,9 @@ const Invoice = ({ items, area, comboId }) => {
                 }
                 const response = await axios.post(`http://localhost:8080/building/detail/create?buildingId=${buildingId}`, requestBody)
                     .then(res => { 
-                        setContractId(res.data.requestContractId); 
-                        setBuildingDetailId(res.data.buildingDetailId);
-            
+                        //setContractId(res.data.requestContractId);
+                        setBuildingDetailId(res.data.detail.buildingDetailId);
+                        console.log(res.data.requestContractId + '+' + comboId + '+' + res.data.detail.buildingDetailId);
                         // Now that contractId and buildingDetailId are set, create the VNPay URL
                         let amount = 'vnp_Amount=' + '20000000';
                         let command = '&vnp_Command=' + commandPay;
@@ -255,7 +254,7 @@ const Invoice = ({ items, area, comboId }) => {
                         let curCode = '&vnp_CurrCode=' + currCode;
                         let ipAdd = '&vnp_IpAddr=' + IpAddr;
                         let local = '&vnp_Locale=' + locale;
-                        let orderInfor = '&vnp_OrderInfo=' + res.data.requestContractId + '+' + comboId + '+' + res.data.requestContractId;
+                        let orderInfor = '&vnp_OrderInfo=' + res.data.requestContractId + '+' + comboId + '+' + res.data.detail.buildingDetailId;
                         let orderType = '&vnp_OrderType=' + 'BaoGia';
                         let returnUrl = '&vnp_ReturnUrl=' + reciveURL;
                         let tmn = '&vnp_TmnCode=' + tmnCode;
@@ -282,6 +281,7 @@ const Invoice = ({ items, area, comboId }) => {
         let kitchenCount = 0;
         let floorCount = 0;
         let tunnelCount = 0;
+
         items.forEach((item) => {
             if (item.name === "Bathroom") {
                 bathroomCount += item.quantity;
@@ -291,7 +291,7 @@ const Invoice = ({ items, area, comboId }) => {
                 kitchenCount += item.quantity;
             } else if (item.name === "Floor") {
                 floorCount += item.quantity;
-            }else if (item.name === "Tunnel") {
+            } else if (item.name === "Tunnel") {
                 tunnelCount += item.quantity;
             }
         });
@@ -300,8 +300,7 @@ const Invoice = ({ items, area, comboId }) => {
         setNumOBedroom(bedroomCount);
         setNumOKitchen(kitchenCount);
         setNumOFloor(floorCount);
-        setTunnel(tunnelCount)
-
+        setTunnel(tunnelCount);
     }, [items]);
 
     const handleClickLock = () => {
@@ -331,19 +330,15 @@ const Invoice = ({ items, area, comboId }) => {
             .catch(error => console.error('Error fetching Price data:', error));
     }, [numOBathroom, numOBedroom, numOKitchen, numOFloor, typeId, url_Area, comboId, tunnel]);
 
+
     return (
         <>
-            {show && (
-                <div className="lock-icon" onClick={handleClickLock}>
-                    Unlock
-                </div>
-            )}
             {!show && <InputLockForm area={url_Area} typeId={typeId} comboName={comboName} />}
-            <div className='invoice-container'>
+            <div className='invoice-container1'>
                 <div className="bg-white rounded-lg shadow-lg px-1 py-1 mt-4 max-w-md mx-auto my-custom-form-size">
-                    <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center">
-                            <img className="h-12 w-12 mr-2" src={logo} alt="Logo" />
+                    <div className="flex1 items-center justify-between mb-2">
+                        <div className="flex1 items-center">
+                            <img className="h-2 w-2 mr-2" src={logo} alt="Logo" />
                             <div className="text-gray-700 font-semibold text-lg">CHCQS</div>
                         </div>
                         <div className="text-gray-700 mt-2">
@@ -373,20 +368,20 @@ const Invoice = ({ items, area, comboId }) => {
                             )}
                         </tbody>
                     </table>
-                    <div className="flex justify-end mb-2 mr-10">
+                    <div className="flex1 justify-end mb-2 mr-10">
                         <div className="text-gray-700 mr-2">Total:</div>
                         <div className="text-gray-700 font-bold text-xl">{Math.round(object.totalPrice)} VND</div>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex1 justify-between">
                         <input
                             type="button"
-                            className="btn-checkout btn-send-quote"
+                            className="btn-checkout1 btn-send-quote1"
                             value='Gửi Báo Giá'
                             onClick={() => handleSendQuotation()}
                         />
                         <input
                             type="button"
-                            className="btn-checkout btn-deposit"
+                            className="btn-checkout1 btn-deposit1"
                             value='Đặt cọc'
                             onClick={() => handleDeposit()}
                         />

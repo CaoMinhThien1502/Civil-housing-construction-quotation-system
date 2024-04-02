@@ -3,13 +3,13 @@ import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import './description.css';
 
-function MaterialDescription({comboId,}) {
+function MaterialDescription({ comboId, }) {
     const [allMaterialList, setAllMaterialList] = useState([]);
     const [allMaterialList1, setAllMaterialList1] = useState([]);
-    const [showModal,setShowModal] = useState(false);   
+    const [showModal, setShowModal] = useState(false);
     const [selectedMaterial, setSelectedMaterial] = useState({ mateId: '', matePrice: 0 });
     const [defaultPrices, setDefaultPrices] = useState({});
-    const [mateNames,setMateNames] = useState([])
+    const [mateNames, setMateNames] = useState([])
     const handleProductChange = (event, mateTypeName) => {
         const selectedMateId = event.target.value;
         const mateType = allMaterialList?.find(type => type.mateTypeName === mateTypeName);
@@ -17,6 +17,15 @@ function MaterialDescription({comboId,}) {
             const selectedMate = mateType.mateList?.find(mate => mate.mateId === selectedMateId);
             setSelectedMaterial(selectedMate ? { mateId: selectedMateId, matePrice: selectedMate.mate.matePrice } : { mateId: '', matePrice: 0 });
         }
+    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const values = Array.from(event.target.elements)
+            .filter(el => el.nodeName === 'SELECT')
+            .map(select => select.value);
+        localStorage.setItem("selectedIds", values);
+        console.log(values);
+        setShowModal(false);
     };
 
     useEffect(() => {
@@ -28,7 +37,7 @@ function MaterialDescription({comboId,}) {
                 if (response.status === 200) {
                     setAllMaterialList(response.data.infor.mateList);
                     setAllMaterialList1(response.data.allMateList);
-                   
+
                     const defaultPricesObj = {};
                     // response.data.infor.mateList.forEach(item => {
                     //     defaultPricesObj[item.mate.mateName] = item.mate.matePrice;
@@ -41,35 +50,7 @@ function MaterialDescription({comboId,}) {
             })
             .catch(error => console.error('Error fetching Combo Type data:', error));
     }, [comboId]);
-
-    // const getAlternativeMaterials = (mateTypeName) => {
-    //     let mateNames = [];
-    //     allMaterialList && allMaterialList.map((item) => {
-    //         if (item.mateTypeName === mateTypeName){
-    //             mateNames.push(item);
-    //         }
-
-    //     })
-        // console.log("allMaterialList: ", allMaterialList); // Kiểm tra giá trị của allMaterialList
-        // if (Array.isArray(allMaterialList) && allMaterialList.length > 0) {
-        //     allMaterialList.forEach((item) => {
-        //         console.log("mateTypeName: ", mateTypeName); // Kiểm tra giá trị của mateTypeName
-        //         console.log("item.mateTypeName: ", item.mateTypeName); // Kiểm tra giá trị của item.mateTypeName
-        //         if (item.mateTypeName === mateTypeName) {
-        //             if (Array.isArray(item.mateList) && item.mateList.length > 0) {
-        //                 item.mateList.forEach(mate => {
-        //                     mateNames.push({ mateId: mate.mate.mateId, mateName: mate.mate.mateName });
-        //                 });
-        //             }
-        //         }
-        //     });
-        // }
-        // setMateNames(mateNames)
-       
-    //     return mateNames;
-    // };
-
-    console.log("allMaterialist: ",allMaterialList);
+    console.log("allMaterialist: ", allMaterialList);
     console.log(allMaterialList1);
     return (
         <>
@@ -85,7 +66,8 @@ function MaterialDescription({comboId,}) {
                         Sản phẩm xây dựng
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body >
+                <form onSubmit={handleSubmit}>
                     <div className="item-description">
                         <ul className="responsive-table">
                             <li className="table-item-header">
@@ -95,30 +77,31 @@ function MaterialDescription({comboId,}) {
                                 <div className="col col-4">Unit Price</div>
                             </li>
                             {allMaterialList && allMaterialList.map((item, index) => (
-    <li className="table-item-row" key={index}>
-        <div className="col col-1" data-label="Material Type">{item.mateTypeId}</div>
-        <div className="col col-2" data-label="Material Name">{item.mate.mateName}</div>
-        <div className="col col-3" data-label="New Material">
-    <select>
-        <option value="">Select new material</option>
-        {allMaterialList1?.map((itemMate, altIndex) => {
-            if (itemMate.mateTypeId === item.mateTypeId) {
-                return itemMate.mates?.map((itemMatess, optionIndex) => (
-                    <option value={itemMatess.mateId} key={optionIndex}>{itemMatess.mateName}</option>
-                ));
-            }   
-            return null; 
-        })}
-    </select>
-</div>
+                                <li className="table-item-row" key={index}>
+                                    <div className="col col-1" data-label="Material Type">{item.mateTypeId}</div>
+                                    <div className="col col-2" data-label="Material Name">{item.mate.mateName}</div>
+                                    <div className="col col-3" data-label="New Material">
+                                        <select>
+                                            <option value="">Select new material</option>
+                                            {allMaterialList1?.map((itemMate, altIndex) => {
+                                                if (itemMate.mateTypeId === item.mateTypeId) {
+                                                    return itemMate.mates?.map((itemMatess, optionIndex) => (
+                                                        <option value={itemMatess.mateId} key={optionIndex}>{itemMatess.mateName}</option>
+                                                    ));
+                                                }
+                                                return null;
+                                            })}
+                                        </select>
+                                    </div>
 
-        <div className="col col-4" data-label="Unit Price">{item.mate.matePrice}</div>
-    </li>
-))}
-                         
+                                    <div className="col col-4" data-label="Unit Price">{item.mate.matePrice}</div>
+                                </li>
+                            ))}
+
                         </ul>
-                        <input type='button' value="Submit"/>
+                        <button type="submit">Submit</button>
                     </div>
+                    </form>
                 </Modal.Body>
             </Modal>
         </>
