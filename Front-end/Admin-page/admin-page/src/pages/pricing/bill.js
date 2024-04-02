@@ -142,7 +142,7 @@ const InputLockForm = ({ area, typeId, comboName }) => {
     }
 
     return (
-        <div className="input-lock-form">
+        <div className="input-lock-form1">
             <table>
                 <thead>
                     <tr>
@@ -333,17 +333,12 @@ const Invoice = ({ items, area, comboId }) => {
 
     return (
         <>
-            {show && (
-                <div className="lock-icon" onClick={handleClickLock}>
-                    Unlock
-                </div>
-            )}
             {!show && <InputLockForm area={url_Area} typeId={typeId} comboName={comboName} />}
-            <div className='invoice-container'>
+            <div className='invoice-container1'>
                 <div className="bg-white rounded-lg shadow-lg px-1 py-1 mt-4 max-w-md mx-auto my-custom-form-size">
-                    <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center">
-                            <img className="h-12 w-12 mr-2" src={logo} alt="Logo" />
+                    <div className="flex1 items-center justify-between mb-2">
+                        <div className="flex1 items-center">
+                            <img className="h-2 w-2 mr-2" src={logo} alt="Logo" />
                             <div className="text-gray-700 font-semibold text-lg">CHCQS</div>
                         </div>
                         <div className="text-gray-700 mt-2">
@@ -373,20 +368,20 @@ const Invoice = ({ items, area, comboId }) => {
                             )}
                         </tbody>
                     </table>
-                    <div className="flex justify-end mb-2 mr-10">
+                    <div className="flex1 justify-end mb-2 mr-10">
                         <div className="text-gray-700 mr-2">Total:</div>
                         <div className="text-gray-700 font-bold text-xl">{Math.round(object.totalPrice)} VND</div>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex1 justify-between">
                         <input
                             type="button"
-                            className="btn-checkout btn-send-quote"
+                            className="btn-checkout1 btn-send-quote1"
                             value='Gửi Báo Giá'
                             onClick={() => handleSendQuotation()}
                         />
                         <input
                             type="button"
-                            className="btn-checkout btn-deposit"
+                            className="btn-checkout1 btn-deposit1"
                             value='Đặt cọc'
                             onClick={() => handleDeposit()}
                         />
