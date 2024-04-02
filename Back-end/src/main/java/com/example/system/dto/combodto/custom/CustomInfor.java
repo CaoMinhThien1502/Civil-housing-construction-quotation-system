@@ -14,5 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomInfor {
-    private List<Long> newMateList;
+    private List<String> newMateList;
 }

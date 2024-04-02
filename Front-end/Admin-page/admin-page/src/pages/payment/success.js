@@ -27,7 +27,7 @@ function Thanks({ itemIdList }) {
       const requestDetail = vnp_OrderInfo.split(' ');
 
       const [contractId, comboId, buildingDetailId] = requestDetail;
-
+      console.log(contractId+"  "+comboId+"  "+buildingDetailId);
       const postData = {
         invoiceId: 0, // Invoice ID is missing, you may need to provide this
         amount: vnp_Amount,
@@ -43,15 +43,15 @@ function Thanks({ itemIdList }) {
         txnRef: vnp_TxnRef,
         secureHash: vnp_SecureHash,
       };
-
+      var string = localStorage.getItem("selectedIds");
+      var array = string.split(',').filter(item => item).map(Number);
       const requestBody = {
         "requestContractId": contractId,
         "comboId": comboId,
         "email": localStorage.getItem("mail"),
         "buildingDetailId": buildingDetailId,
         "mateIds": {
-          "newMateList": [
-          ]
+          "newMateList": array
         }
       }
       const response1 = await axios.post(`http://localhost:8080/request-contract/request-contract/create`, requestBody)
