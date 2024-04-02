@@ -1,90 +1,80 @@
-/* CSS cho InputLockForm */
-.input-lock-form {
-    position: absolute;
-    top: 200px; 
-    left: 1130px; 
-    z-index: 1; /* Đảm bảo InputLockForm nằm trên các phần khác */
-    background-color: white; 
-    padding: 20px; 
-    border: 1px solid black; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-/* CSS cho các phần tử bên trong InputLockForm */
-.input-lock-form label {
-    margin-right: 10px; 
-    font-weight: bold; 
-}
-
-.input-lock-form input,
-.input-lock-form select {
-    width: 150px; 
-    height: 30px; 
-    margin-bottom: 10px; 
-}
-
-.input-lock-form span {
-    margin-left: 5px; 
-}
-
-.lock-icon {
-    /* Customize lock icon styles */
-    background-color: black ; /* Semi-transparent black background */
-    color: white; /* Set lock icon color */
-    font-size: 20px; /* Set lock icon size */
-    /* Add any other styles as needed */
-    position: absolute;
-    top: 370px; /* Adjust to cover the total price section */
-    left: 1300px; /* Adjust to cover the total price section */
-    right: 30px; /* Adjust to cover the total price section */
-    bottom: auto; /* Remove bottom positioning */
-    z-index: 1; /* Ensure the lock icon is above other content */
+/* CSS cho Invoice */
+.invoice-container1 {
+    opacity: 1.0;
+    margin-top: 20px; /* Đẩy xuống một chút từ phần trên */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-left: 1200px;
 }
 
-.btn-checkout {
+/* CSS cho ảnh logo */
+.invoice-container1 img {
+    max-width: 120px; /* Giảm kích thước ảnh để không vượt quá chiều rộng của container */
+    height: auto; /* Đảm bảo tỷ lệ hình ảnh được giữ nguyên */
+}
+
+.invoice-details {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Tách biệt invoice details từ logo */
+}
+
+.invoice-details .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.invoice-details .table th,
+.invoice-details .table td {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.invoice-details .table th {
+    text-align: left;
+    font-weight: bold;
+}
+
+.invoice-details .total {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 18px;
+}
+
+/* Thay đổi nút Gửi Báo Giá */
+.btn-send-quote1,
+.btn-deposit1 {
     display: inline-block;
     outline: none;
     cursor: pointer;
     font-size: 14px;
     line-height: 1;
-    border-radius: 500px;
+    border-radius: 5px;
     transition-property: background-color, border-color, color, box-shadow, filter;
     transition-duration: 0.3s;
-    border: 1px solid transparent;
+    border: none;
     letter-spacing: 2px;
     min-width: 140px;
     text-transform: uppercase;
     white-space: normal;
     font-weight: 700;
     text-align: center;
-    padding: 12px 12px 12px;
+    padding: 12px 24px;
     color: #fff;
-    background-color: #1d9ab9;
-    height: 44px;
-    margin-bottom: 10px; /* Increased margin for better spacing */
 }
 
-.btn-checkout:hover {
-    background-color: #0e6c84; /* Darken the color on hover */
+.btn-send-quote1 {
+    background-color: #28a745; /* Màu nút Gửi Báo Giá */
+    margin-right: 10px; /* Tạo khoảng cách giữa các nút */
 }
 
-.invoice-container {
-    margin-left: 1000px; /* Keeping your existing styles */
-    opacity: 1.0; /* Keeping your existing styles */
+.btn-deposit1 {
+    background-color: #07a0ff; /* Màu nút Đặt cọc */
 }
 
-/* Additional style for the buttons */
-.btn-send-quote {
-    background-color: #28a745; /* Green color for "Gửi Báo Giá" button */
-}
-
-.btn-deposit {
-    background-color: #07a0ff; /* Yellow color for "Đặt cọc" button */
-}
-.flex {
-    display: flex;
-    justify-content: space-between; /* Align items with space between */
+.btn-send-quote1:hover,
+.btn-deposit1:hover {
+    opacity: 0.8;
 }

@@ -28,22 +28,16 @@ const DetailProfile = ({ contractDetail, handleCloseDetail, show }) => {
               <td>{contractDetail?.userName}</td>
             </tr>
             <tr>
-              <td>COMBO NAME</td>
-              <td>{contractDetail?.comboName}</td>
+              <td>REQUEST DATE</td>
+              <td>{contractDetail?.requestDate}</td>
             </tr>
             <tr>
               <td>BUILDING AREA</td>
-              <td>{contractDetail?.buildingDto?.landArea+"m²" || "-"}</td>
+              <td>{contractDetail?.buildingDetail?.area+" m²" || "-"}</td>
             </tr>
             <tr>
-              <td>ITEM LIST</td>
-              <td>
-                <ul>
-                  {contractDetail?.buildingDto?.itemNameList.map((item, index) => (
-                    <li key={index}>{item}</li>
-                    ))}
-                </ul>
-              </td>
+              <td>TOTAL PRICE</td>
+              <td>{contractDetail?.totalPrice+" VND" || "-"}</td>
             </tr>
             <tr>
               <td>STATUS</td>
