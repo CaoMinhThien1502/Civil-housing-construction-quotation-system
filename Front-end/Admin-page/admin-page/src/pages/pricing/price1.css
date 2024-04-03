@@ -1,6 +1,9 @@
-
+.custom-header {
+  height: 20px; /* Adjust the height as needed */
+  padding-top: 5px;
+}
 #price-quotation-mbody {
-  height: 700px;
+  height: 710px;
   display: flex;
   justify-content: flex-start;
   align-items:center;

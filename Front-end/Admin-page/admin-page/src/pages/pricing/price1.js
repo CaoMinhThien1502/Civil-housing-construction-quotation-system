@@ -209,8 +209,8 @@ function FillExample() {
 function PriceQuotation() {
     return (
         <>
-            <Header />
-            <section id='price-quotation-mbody' style = {{marginTop: "55px"}}>
+            <Header className="custom-header"/>
+            <section id='price-quotation-mbody' style = {{marginTop: "100px"}}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12">
