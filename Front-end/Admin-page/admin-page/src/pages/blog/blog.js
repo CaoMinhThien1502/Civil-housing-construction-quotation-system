@@ -31,18 +31,18 @@ function UncontrolledExample() {
     }, []);
 
     const slides = [
-        { image: docData && docData["Carousel"].anh1, interval: 1000 },
-        { image: docData && docData["Carousel"].anh2, interval: 1000 },
-        { image: docData && docData["Carousel"].anh3, interval: 1000 },
-        { image: docData && docData["Carousel"].anh4, interval: 1000 },
-        { image: docData && docData["Carousel"].anh5, interval: 1000 },
-        { image: docData && docData["Carousel"].anh6, interval: 1000 },
-        { image: docData && docData["Carousel"].anh7, interval: 1000 },
-        { image: docData && docData["Carousel"].anh8, interval: 1000 },
-        { image: docData && docData["Carousel"].anh9, interval: 1000 },
-        { image: docData && docData["Carousel"].anh10, interval: 1000 },
-        { image: docData && docData["Carousel"].anh11, interval: 1000 },
-        { image: docData && docData["Carousel"].anh12, interval: 1000 },
+        { image: anh1, interval: 1000 },
+        { image: anh2, interval: 1000 },
+        { image: anh3, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar4, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar5, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar6, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar7, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar8, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar9, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar10, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar11, interval: 1000 },
+        { image: docData && docData["Carousel"].avatar12, interval: 1000 },
     ];
 
     const [showModal, setShowModal] = useState(false);
@@ -67,7 +67,7 @@ function UncontrolledExample() {
                                 variant="top"
                                 src={docData["Card-Img"].avatar1}
                                 className="card-img-zoom"
-                                onClick={() => handleImageClick(docData["Card-Img"])}
+                                onClick={() => handleImageClick(docData["Card-Img"].avatar1)}
                             />
                             <Card.Body>
                                 <Card.Title>{docData["Card-Body"][0]}</Card.Title>
@@ -87,7 +87,40 @@ function UncontrolledExample() {
                 </div>
                 <div className="col-md-9 carousel-container">
                     <Carousel style={{ marginTop: '40px', border: '2px black' }}>
-                        {slides.map((slide, index) => (
+                        {blogId === "1" && slides.slice(0, 3).map((slide, index) => (
+                            <Carousel.Item key={index} interval={slide.interval}>
+                                <img
+                                    src={slide.image}
+                                    alt={`Slide ${index + 1}`}
+                                    style={{ width: '1000px', height: '600px', marginLeft: '40px'}}
+                                    onClick={() => handleImageClick(slide.image)}
+                                />
+                                <Carousel.Caption></Carousel.Caption>
+                            </Carousel.Item>
+                        ))}
+                        {blogId === "2" && slides.slice(3, 6).map((slide, index) => (
+                            <Carousel.Item key={index} interval={slide.interval}>
+                                <img
+                                    src={slide.image}
+                                    alt={`Slide ${index + 1}`}
+                                    style={{ width: '1000px', height: '600px', marginLeft: '40px'}}
+                                    onClick={() => handleImageClick(slide.image)}
+                                />
+                                <Carousel.Caption></Carousel.Caption>
+                            </Carousel.Item>
+                        ))}
+                        {blogId === "3" && slides.slice(6, 9).map((slide, index) => (
+                            <Carousel.Item key={index} interval={slide.interval}>
+                                <img
+                                    src={slide.image}
+                                    alt={`Slide ${index + 1}`}
+                                    style={{ width: '1000px', height: '600px', marginLeft: '40px'}}
+                                    onClick={() => handleImageClick(slide.image)}
+                                />
+                                <Carousel.Caption></Carousel.Caption>
+                            </Carousel.Item>
+                        ))}
+                        {blogId === "4" && slides.slice(9, 12).map((slide, index) => (
                             <Carousel.Item key={index} interval={slide.interval}>
                                 <img
                                     src={slide.image}
