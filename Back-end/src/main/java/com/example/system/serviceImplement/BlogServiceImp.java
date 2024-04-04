@@ -57,6 +57,7 @@ public class BlogServiceImp implements BlogService {
             User user = userRepository.findByEmail(blog.getUserEmail()).orElseThrow();
             Blog updateBlog = blogRepository.findById(blogId).orElseThrow();
             updateBlog.setBlogName(blog.getBlogName());
+            updateBlog.setImgPath(blog.getImgPath());
             updateBlog.setBlogContent(blog.getBlogContent());
             updateBlog.setBlogType(blog.getBlogType());
             updateBlog.setUser(user);
