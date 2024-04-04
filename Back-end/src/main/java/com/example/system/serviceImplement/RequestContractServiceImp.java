@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -230,7 +231,13 @@ public class RequestContractServiceImp implements RequestContractService {
             emailContent.append("  <li>Loại nguyên liệu: ").append(c.getMateTypeName()).append(", Nguyên liệu: ").append(c.getMate().getMateName()).append(", Giá: ").append(c.getMate().getMatePrice()).append("</li>\n");
         }
         emailContent.append("</ul>\n");
-        emailContent.append("<p><strong>Tổng tiền là:</strong>").append(priceDetailDto.getTotalPrice()).append("</p>\n");
+        // Khởi tạo một định dạng cho số tiền
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        // Giả sử priceDetailDto.getTotalPrice() trả về số tiền tổng
+        double totalPrice = priceDetailDto.getTotalPrice();
+        // Định dạng giá tiền thành chuỗi
+        String formattedPrice = decimalFormat.format(totalPrice);
+        emailContent.append("<p><strong>Tổng tiền là:</strong>").append(formattedPrice).append("VND</p>\n");
         emailContent.append("<p><strong>Lưu ý:</strong></p>\n");
         emailContent.append("<p>Mặc định: Một căn hộ ban đầu chỉ có 1 phòng ngủ, 1 phòng tắm, 1 phòng bếp, 1 lầu và không có hầm. Khi bạn tăng số lượng các thành phần trên thì giá sẽ được cộng thêm 3-5% tùy loại.<br>Giá của loại nhà sẽ được tăng theo kiểu và loại nhà bạn chọn thì sẽ tăng theo hệ số: ").append(priceDetailDto.getPercentPrice()).append("</p>\n");
         emailContent.append("<p>Cám ơn đã tin tưởng và sử dụng dịch vụ báo giá thi công nhà ở của hệ thống CHCQS!</p>");
