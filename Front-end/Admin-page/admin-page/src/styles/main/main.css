@@ -102,7 +102,6 @@ h6 {
 
 #header .logo img {
   padding: 0;
-  margin: 0;
   max-height: 40px;
 }
 
@@ -943,10 +942,26 @@ section {
 }
 
 .team .member .member-info h4 {
-  font-weight: 700;
+  font-weight: normal; /* Change font weight to normal */
   margin-bottom: 5px;
   font-size: 18px;
   color: #222222;
+  font-family: Arial, sans-serif; /* Change font family */
+}
+
+.team .member .member-info ul {
+  padding: 0;
+  list-style: none;
+}
+
+.team .member .member-info ul li {
+  font-size: 14px; /* Reduce font size */
+  margin-bottom: 5px; /* Reduce margin */
+  color: #555555; /* Change color */
+}
+
+.team .member .member-info ul li i {
+  margin-right: 5px; /* Adjust margin */
 }
 
 .team .member .member-info span {
@@ -966,6 +981,7 @@ section {
 .team .member:hover .social {
   opacity: 1;
 }
+
 
 /*--------------------------------------------------------------
 # Pricing
