@@ -54,10 +54,9 @@ const Header = () => {
     window.location.href = 'http://localhost:8080/api/v1/auth/logout';
   };
   return (
-    <header id="header" className="fixed-top d-flex align-items-center">
+    <header id="header" className="fixed-top d-flex align-items-center" style={{height: "50px", marginTop: "20px"}}>
       <div className="container d-flex align-items-center justify-content-between">
-        <div className="logo">
-          {/* <h1><a href="/home">CHCQS</a></h1> */}
+        <div className="logo" style={{marginTop: "20px"}}>
           <a href="/home"><img  src={logo} alt="" width="50px" height="200px"/></a>
         </div>
 
@@ -190,25 +189,9 @@ const PersonIn4 = () => {
     </div>)
 };
 
-// Repeat the above pattern for other sections like Team, Pricing, etc.
 
 const TeamSection = () => {
   return (
-  //   <div className="container">
-  //   <img src={services1} alt="House" className="house-image" />
-  //   <div className="house-info">
-  //     <h1>MT 01</h1>
-  //     <p>Khu Vực Miền Trung</p>
-  //     <p>Phòng ngủ: 2</p>
-  //     <p>Diện tích: 135 m²</p>
-  //     <p>Giá: 870 triệu</p>
-  //     <p>Tầng: 1</p>
-  //     <div className="buttons">
-  //       <button className="button">Xem chi tiết</button>
-  //       <button className="button">Tùy chỉnh màu nhà</button>
-  //     </div>
-  //   </div>
-  // </div>
     <section id="blog" className="team section-bg">
       <div className="container">
         <div className="section-title" data-aos="fade-up">
@@ -229,6 +212,7 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
+              <h4> Biệt Thự </h4>
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
@@ -251,6 +235,7 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
+              <h4> Nhà Cấp 4</h4>
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
@@ -272,6 +257,7 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
+              <h4> Nhà Phố Cổ </h4>
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
@@ -284,7 +270,7 @@ const TeamSection = () => {
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay="100">
               <div className="member-img">
-                <img src={services3} style = {{height: 240}} className="img-fluid" alt="" />
+                <img src={services3} style = {{height: 240, objectFit: "cover"}} className="img-fluid" alt="" />
                 <div className="social">
                   <a href=""><i className="bi bi-twitter"></i></a>
                   <a href=""><i className="bi bi-facebook"></i></a>
@@ -293,6 +279,7 @@ const TeamSection = () => {
                 </div>
               </div>
               <div className="member-info">
+              <h4> Nhà Phố Hiện Đại </h4>
               <ul className="icon-list">
                   <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
                   <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
@@ -341,7 +328,7 @@ const BlogReal = () => {
                     <p className="blog-name">{blog.blogName}</p>
                   </div>
                   <div className="member-img">
-                    <img src={blog.imgPath} alt="Blog Image" className="img-fluid blog-img" />
+                    <img src={blog.imgPath} className="img-fluid blog-img" />
                   </div>
 
                   <div className="member-info flex-grow-1">
