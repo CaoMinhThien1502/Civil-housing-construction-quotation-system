@@ -8,12 +8,11 @@
     max-width: 1000px;
     margin: auto;
     width: 100%;
-    padding: 0 15px;
+    padding: 0 10px;
     overflow: auto;
     position: fixed; /* hoặc position: absolute; */
     left: 0; /* Đặt vị trí bên trái của màn hình */
-    top: 0; /* Đặt vị trí bên trên của màn hình */
-    height: 100%; /* Đặt chiều cao để lấp đầy màn hình */
+    top: 0; /* Đặt vị trí bên trên của màn hình *//* Đặt chiều cao để lấp đầy màn hình */
     margin-left: 20px;
 }
 
@@ -27,9 +26,9 @@
 }
 
 .container-item table {
-    margin-top: 28px;
+    margin-top: 12px;
     max-width: 1000px;
-    height: 800px;
+    max-height: 300px;
     text-align: center;
     min-width: 40rem;
     width: 100%;
@@ -49,22 +48,23 @@
     color: white;
 }
 
-.container-item table tbody:last-child td {
-    padding: 19px 0;
-}
+/* .container-item table tbody:last-child td {
+    padding: 5px 0;
+} */
 
 .container-item td img {
-    width: 90px;
+    width: 160px;
     height: auto;
+    object-fit: cover;
 }
 
 .container-item th,
 .container-item td {
-    padding: 10px;
+    padding: 5px;
     font-size: 13px;
 }
 
-.container-item .Remove-item {
+/* .container-item .Remove-item {
     background: #004985;
     color: white;
     padding: 10px;
@@ -80,5 +80,5 @@
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-}
+} */
 

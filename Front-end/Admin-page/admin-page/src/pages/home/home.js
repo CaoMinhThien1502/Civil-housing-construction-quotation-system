@@ -40,7 +40,9 @@ import '../../styles/main/main.css';
 import emailjs from 'emailjs-com';
 //blog real ne
 import axios from 'axios';
-
+// import firebase  
+import { doc, getDoc } from "firebase/firestore";
+import db from '../blog/firebase';
 // Create a functional component for the header
 const Header = () => {
   const isLoggedIn = !!localStorage.getItem('token');
@@ -191,6 +193,40 @@ const PersonIn4 = () => {
 
 
 const TeamSection = () => {
+  const [docData1, setDocData1] = useState(null);
+  const [docData2, setDocData2] = useState(null);
+  const [docData3, setDocData3] = useState(null);
+  const [docData4, setDocData4] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+        let docRef1;
+        let docRef2;
+        let docRef3;
+        let docRef4;
+        docRef1 = doc(db, "01", "sample-blog1");
+        docRef2 = doc(db, "01", "sample-blog2");
+        docRef3 = doc(db, "01", "sample-blog3");
+        docRef4 = doc(db, "01", "sample-blog4");
+        const docSnap1 = await getDoc(docRef1);
+        const docSnap2 = await getDoc(docRef2);
+        const docSnap3 = await getDoc(docRef3);
+        const docSnap4 = await getDoc(docRef4);
+        if (docSnap1.exists()) {
+            setDocData1(docSnap1.data());
+        } 
+        if (docSnap2.exists()) {
+          setDocData2(docSnap2.data());
+        }
+        if (docSnap3.exists()) {
+          setDocData3(docSnap3.data());
+        }
+        if (docSnap4.exists()) {
+          setDocData4(docSnap4.data());
+       }    
+
+    };
+    fetchData();
+}, []);
   return (
     <section id="blog" className="team section-bg">
       <div className="container">
@@ -214,9 +250,9 @@ const TeamSection = () => {
               <div className="member-info">
               <h4> Biệt Thự </h4>
               <ul className="icon-list">
-                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
-                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1.4B</span></li>
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Area: {docData1 && docData1["sp-home"] && docData1["sp-home"].area}</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : {docData1 && docData1["sp-home"] && docData1["sp-home"].room}</span> </li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: {docData1 && docData1["sp-home"] && docData1["sp-home"].price}B</span></li>
                 </ul>
                 {/* <button className="button-51" type="button">Đọc ngay</button> */}
                 <a href="/blog?id=1" className="button-51">Read now</a>
@@ -237,9 +273,9 @@ const TeamSection = () => {
               <div className="member-info">
               <h4> Nhà Cấp 4</h4>
               <ul className="icon-list">
-                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
-                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area: {docData2 && docData2["sp-home"] && docData2["sp-home"].area}</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : {docData2 && docData2["sp-home"] && docData2["sp-home"].room}</span> </li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: {docData2 && docData2["sp-home"] && docData2["sp-home"].price}B</span></li>
                 </ul>
                 <a href="/blog?id=2" className="button-51">Read now</a>
               </div>
@@ -259,9 +295,9 @@ const TeamSection = () => {
               <div className="member-info">
               <h4> Nhà Phố Cổ </h4>
               <ul className="icon-list">
-                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
-                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area: {docData3 && docData3["sp-home"] && docData3["sp-home"].area}</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : {docData3 && docData3["sp-home"] && docData3["sp-home"].room}</span> </li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: {docData3 && docData3["sp-home"] && docData3["sp-home"].price}B</span></li>
                 </ul>
                 <a href="/blog?id=3" className="button-51">Read now</a>
               </div>
@@ -281,9 +317,9 @@ const TeamSection = () => {
               <div className="member-info">
               <h4> Nhà Phố Hiện Đại </h4>
               <ul className="icon-list">
-                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area : 100m²</span> </li>
-                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : 3</span> </li>
-                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: 1B</span></li>
+                  <li><i className="bi bi-house-door"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}> Area: {docData4 && docData4["sp-home"] && docData4["sp-home"].area}</span> </li>
+                  <li><i className="bi bi-door-open"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Room : {docData4 && docData4["sp-home"] && docData4["sp-home"].room}</span> </li>
+                  <li><i className="bi bi-currency-dollar"></i> <span className="highlight" style={{marginLeft: 10, paddingTop: 4, color: "black"}}>Price: {docData4 && docData4["sp-home"] && docData4["sp-home"].price}B</span></li>
                 </ul>
                 <a href="/blog?id=4" className="button-51">Read now</a>
               </div>
@@ -330,11 +366,10 @@ const BlogReal = () => {
                   <div className="member-img">
                     <img src={blog.imgPath} className="img-fluid blog-img" />
                   </div>
-
                   <div className="member-info flex-grow-1">
                   <p style={{ color: blog.blogType === 1 ? 'red' : 'inherit' }}>
-  {blog.blogType === 1 ? 'Cẩm nang xây dựng' : 'Thiết kế kiến trúc'}
-</p>
+                   {blog.blogType === 1 ? 'Cẩm nang xây dựng' : 'Thiết kế kiến trúc'}
+                  </p>
                     <p className="blog-name">{blog.createDay}</p>
                   </div>
 

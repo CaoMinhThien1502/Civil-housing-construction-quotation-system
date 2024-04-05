@@ -10,6 +10,7 @@ import basement from '../../img/basement.jpg'
 import Button from 'react-bootstrap/Button';
 import ItemDescription from "./description";
 import MaterialDescription from './description';
+
 function ListItem() {
   const [combo, setCombo] = useState([]);
   const [items, setItems] = useState([
@@ -53,7 +54,8 @@ function ListItem() {
       image: basement,
       name: "Tunnel",
       action: "",
-      quantity: 0
+      quantity: 0,
+      tunnelStatus: false
     },
   ]);
   const [showModal, setShowModal] = useState(false);
@@ -62,6 +64,7 @@ function ListItem() {
   const [selectedComboId, setSelectedComboId] = useState(0);
   const urlParams = new URLSearchParams(window.location.search);
   const typeId = urlParams.get("comboTypeId");
+
   useEffect(() => {
     axios.get(`http://localhost:8080/combobuilding/combo/getbytype?typeId=${typeId}`, {}, {
       headers: { 'Content-Type': 'application/json' },
@@ -72,28 +75,42 @@ function ListItem() {
       })
       .catch(error => console.error('Error fetching Combo Type data:', error));
   }, []);
+
   const handleComboTypeChange = (event) => {
     setSelectedComboId(event.target.value);
     console.log("selectedComboId: ",event.target.value);
+    
   };
-  // Hàm gọi Material Description
+
   const handleMaterialDescription = () => {
     setIsClick(true);
   }
+
   const handleDetail = (item) => {
     setSelectedItem(item);
     setShowModal(true);
   }
+
   const handleNo = (id) => {
-    setItems(items.filter((item) => item.id !== id));
+    setItems(items.map(item => 
+      item.id === id ? { ...item, tunnelStatus: false, quantity: 0 } : item));
   }
+  
+  const handleYes = (id) => {
+    setItems(items.map(item => 
+      item.id === id ? { ...item, tunnelStatus: true, quantity: 1 } : item));
+  }
+  
+
   const handleRemove = (id) => {
     setItems(items.filter((item) => item.id !== id));
   };
+
   const handleQuantityChange = (id, newQuantity) => {
     setItems(items.map(item =>
       item.id === id ? { ...item, quantity: newQuantity } : item));
   };
+
   const handleChangeStatus = (id) => {
     setItems(items.map((item) => {
       if (item.id === id) {
@@ -107,16 +124,15 @@ function ListItem() {
   return (
     <>
       <div className="container-item">
-        {/* <h1> List Items </h1> */}
         <div id="table-container-item">
           <table>
             <thead>
               <tr>
-                <th>id</th>
-                <th>image</th>
-                <th>name</th>
-                <th>detail</th>
-                <th></th>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Detail</th>
+                <th>Unity</th>
               </tr>
             </thead>
             <tbody>
@@ -125,7 +141,7 @@ function ListItem() {
                   <td>{item.id}</td>
                   <td>
                     <a>
-                      <img style={{ width: "120px", height: "110px", objectFit: "cover" }} src={item.image} alt={item.name} />
+                      <img src={item.image} alt={item.name} />
                     </a>
                   </td>
                   <td>{item.name}</td>
@@ -140,9 +156,14 @@ function ListItem() {
                       />
                     )}
                     {item.name === "Tunnel" && (
-                      <div>
-                        {item.quantity === 1 ? 'Yes' : 'No'}
-                      </div>
+                      <>
+                        <Button variant="outline-primary" size='sm' onClick={() => handleYes(item.id)} className={item.tunnelStatus ? "yesButton active" : "yesButton"}>
+                          Yes
+                        </Button>
+                        <Button variant="outline-danger" size='sm' onClick={() => handleNo(item.id)} className={!item.tunnelStatus ? "noButton active" : "noButton"}>
+                          No
+                        </Button>
+                      </>
                     )}
                     {item.name === "Combo" && (
                       <select id="comboType" onChange={handleComboTypeChange}>
@@ -156,27 +177,17 @@ function ListItem() {
                     )}
                   </td>
                   <td>
-                    {item.name === "Tunnel" && (
-                      <Button variant="outline-primary" size='sm' onClick={() => handleChangeStatus(item.id)}>
-                        Yes
-                      </Button>
-                    )}
-                    {item.name !== "Tunnel" && item.name !== "Combo"  && (
+                    {item.name !== "Combo"  && (
                       <div>room</div>
                     )}
                     {item.name === "Combo" && (
                       <Button variant="outline-primary" size='sm' onClick={() => handleMaterialDescription}>
-                      Deatail
+                      Detail
                     </Button>
                     )}
                   </td>
-                  
-                  <br />
                 </tr>
               ))}
-
-            </tbody>
-            <tbody>
             </tbody>
           </table>
         </div>

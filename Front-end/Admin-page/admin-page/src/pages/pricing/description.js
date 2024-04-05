@@ -81,8 +81,8 @@ function MaterialDescription({ comboId, }) {
                                     <div className="col col-1" data-label="Material Type">{item.mateTypeId}</div>
                                     <div className="col col-2" data-label="Material Name">{item.mate.mateName}</div>
                                     <div className="col col-3" data-label="New Material">
-                                        <select>
-                                            <option value="">Select new material</option>
+                                        <select style={{width: "180px"}}>
+                                            <option value="" >Select new material</option>
                                             {allMaterialList1?.map((itemMate, altIndex) => {
                                                 if (itemMate.mateTypeId === item.mateTypeId) {
                                                     return itemMate.mates?.map((itemMatess, optionIndex) => (
@@ -94,7 +94,7 @@ function MaterialDescription({ comboId, }) {
                                         </select>
                                     </div>
 
-                                    <div className="col col-4" data-label="Unit Price">{item.mate.matePrice}</div>
+                                    <div className="col col-4" data-label="Unit Price">{item.mate.matePrice?.toLocaleString('vi', {style : 'currency', currency : 'VND'})}</div>
                                 </li>
                             ))}
 

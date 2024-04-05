@@ -1,46 +1,46 @@
 /* CSS cho Invoice */
 .invoice-container1 {
-    opacity: 1.0;
-    margin-top: 20px; /* Đẩy xuống một chút từ phần trên */
     display: flex;
-    margin-left: 1200px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1000px;
+    margin-right: auto;
+    max-width: 800px; /* Thay đổi kích thước tùy theo nhu cầu */
+    padding: 20px;
+    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước tổng thể */
+}
+
+.flex-container1 {
+    display: flex;
+    justify-content: space-between;
 }
 
 /* CSS cho ảnh logo */
 .invoice-container1 img {
-    max-width: 120px; /* Giảm kích thước ảnh để không vượt quá chiều rộng của container */
-    height: auto; /* Đảm bảo tỷ lệ hình ảnh được giữ nguyên */
+    max-width: 40px; 
+    height: auto; 
 }
 
-.invoice-details {
+.my-custom-form-size {
     padding: 20px;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px; /* Tách biệt invoice details từ logo */
+    box-sizing: border-box; 
 }
 
-.invoice-details .table {
+/* CSS cho bảng */
+.table-container table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
 }
 
-.invoice-details .table th,
-.invoice-details .table td {
-    padding: 10px;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.invoice-details .table th {
+.table-container th,
+.table-container td {
+    border: 1px solid #000;
+    padding: 8px;
     text-align: left;
-    font-weight: bold;
 }
 
-.invoice-details .total {
-    margin-top: 20px;
-    text-align: right;
-    font-size: 18px;
+.table-container th {
+    background-color: #f2f2f2;
 }
 
 /* Thay đổi nút Gửi Báo Giá */
