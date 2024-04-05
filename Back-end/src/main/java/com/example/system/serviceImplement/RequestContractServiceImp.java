@@ -190,7 +190,7 @@ public class RequestContractServiceImp implements RequestContractService {
                 "<li>Địa điểm gặp mặt: <strong>" + placeMeet + "</strong></li>" +
                 "<li>Thời gian: <strong>" + formattedDate + "</strong></li>" +
                 "</ul>" +
-                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Rất mong bạn có mặt đúng giờ. Xin cảm ơn bạn đã hợp tác.</p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Rất mong bạn có mặt đúng hẹn. Xin cảm ơn bạn đã hợp tác.</p>" +
                 "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\"><strong>Lưu ý:</strong> Nếu bạn không đến hoặc trễ hơn 30 phút, yêu cầu hẹn sẽ bị hủy và bạn sẽ mất 200k tiền đã đặt cọc.</p>" +
                 "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">Trân trọng,</p>" +
                 "<p style=\"Margin:0 0 20px 0;font-size:16px;line-height:22px;color:#0b0c0c\">[CILVIL HOUSING]</p>" +
@@ -230,7 +230,13 @@ public class RequestContractServiceImp implements RequestContractService {
             emailContent.append("  <li>Loại nguyên liệu: ").append(c.getMateTypeName()).append(", Nguyên liệu: ").append(c.getMate().getMateName()).append(", Giá: ").append(c.getMate().getMatePrice()).append("</li>\n");
         }
         emailContent.append("</ul>\n");
-        emailContent.append("<p><strong>Tổng tiền là: </strong>").append(decimalFormat.format(priceDetailDto.getTotalPrice())).append(" VND</p>\n");
+        // Khởi tạo một định dạng cho số tiền
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        // Giả sử priceDetailDto.getTotalPrice() trả về số tiền tổng
+        double totalPrice = priceDetailDto.getTotalPrice();
+        // Định dạng giá tiền thành chuỗi
+        String formattedPrice = decimalFormat.format(totalPrice);
+        emailContent.append("<p><strong>Tổng tiền là:</strong>").append(formattedPrice).append("VND</p>\n");
         emailContent.append("<p><strong>Lưu ý:</strong></p>\n");
         emailContent.append("<p>Mặc định: Một căn hộ ban đầu chỉ có 1 phòng ngủ, 1 phòng tắm, 1 phòng bếp, 1 lầu và không có hầm. Khi bạn tăng số lượng các thành phần trên thì giá sẽ được cộng thêm 3-5% tùy loại.<br>Giá của loại nhà sẽ được tăng theo kiểu và loại nhà bạn chọn thì sẽ tăng theo hệ số: ").append(priceDetailDto.getPercentPrice()).append("</p>\n");
         emailContent.append("<p>Cám ơn đã tin tưởng và sử dụng dịch vụ báo giá thi công nhà ở của hệ thống CHCQS!</p>");

@@ -99,7 +99,7 @@ const EditBlog = () => {
         onSubmit: async (values) => {
             console.log("Values in onSubmit:", values);
             try {
-                const response = await fetch(`http://localhost:8080/blog/create?blogId=${id}`, {
+                const response = await fetch(`http://localhost:8080/blog/update?blogId=${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values),
