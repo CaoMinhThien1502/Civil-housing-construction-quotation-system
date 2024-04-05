@@ -231,7 +231,6 @@ public class RequestContractServiceImp implements RequestContractService {
         }
         emailContent.append("</ul>\n");
         // Khởi tạo một định dạng cho số tiền
-        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
         // Giả sử priceDetailDto.getTotalPrice() trả về số tiền tổng
         double totalPrice = priceDetailDto.getTotalPrice();
         // Định dạng giá tiền thành chuỗi
