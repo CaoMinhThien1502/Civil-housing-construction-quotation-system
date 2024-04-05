@@ -48,7 +48,6 @@ public class BuildingDetail {
 
     @ManyToOne
     @JoinColumn(name = "building_id")
-    @JsonIgnore
     private Building building;
     @OneToOne(mappedBy = "buildingDetail")
     @JsonIgnore

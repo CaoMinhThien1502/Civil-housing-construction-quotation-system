@@ -100,11 +100,11 @@ function ProductCard({ imageSrc, title,id}) {
                         </div>
                         <div className="spec-line">
                             <span><FaUtensils className="icon" /> 1 phòng bếp</span>
-                            <span><FaToilet className="icon" /> 1 WC</span>
+                            <span><FaLayerGroup className="icon" /> 1 tầng</span>
                         </div>
                         <div className="spec-line">
                             <span><FaParking className="icon" /> 0 hầm</span>
-                            <span><FaLayerGroup className="icon" style={{marginLeft: "42px"}} /> 1 tầng</span>
+                            
                         </div>
                     </div>
                     <div className="buttons">

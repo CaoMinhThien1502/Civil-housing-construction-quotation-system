@@ -186,7 +186,6 @@ function Register() {
                         <span className="gender-title">Gender</span>
                         <div className="category">
                             <label htmlFor="male">
-                                {/* <span className="dot one"></span> */}
                                 <span className="gender">Male</span>
                                 <input
                                     type="radio"
@@ -213,7 +212,7 @@ function Register() {
                     </div>
                     <div className="button">
                         <input type="submit" value="Register" />
-                         Already have an account?<a href="/login">Sign in</a>
+                        Already have an account?<a href="/login">Sign in</a>
                     </div>
                 </form>
             </div>

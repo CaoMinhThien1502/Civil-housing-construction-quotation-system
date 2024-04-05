@@ -129,22 +129,21 @@ const ProfilePage = () => {
               </MDBBreadcrumb>
             </MDBCol>
           </MDBRow>
-
           <MDBRow>
             <MDBCol lg="4">
               <MDBCard className="mb-4">
-                <MDBCardBody className="text-center">
+                <MDBCardBody className="text-center"  style={{height: 'max'}}>
                   <MDBCardImage
                     src={userData?.gender? "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp":"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4.webp"}
                     alt="avatar"
                     className="rounded-circle"
-                    style={{ width: '150px', marginLeft: "72px"}}
+                    style={{ width: '150px'}}
                     fluid
                   />
                   <p className="text-muted mb-1">{userData?.fullName || "Name"}</p>
-                  <p className="text-muted mb-4">{userData?.address || "Address"}</p>
+                  <p className="text-muted mb-4">{contractData.length !== 0 ? contractData.length + " contracts" : "0 contract"}</p>
                   <div className="d-flex justify-content-center mb-2">
-                    <MDBBtn outline rounded className="ms-1"><a href='/profile/update'>Edit profile</a></MDBBtn>
+                    <MDBBtn outline rounded className="ms-1"><a href='/price1'>Create building</a></MDBBtn>
                   </div>
                 </MDBCardBody>
               </MDBCard>
@@ -219,6 +218,7 @@ const ProfilePage = () => {
                     <th scope='col' style={{textAlign: 'center'}}>No</th>
                     <th style={{textAlign: 'center'}} scope='col'>Combo Name</th>
                     <th style={{textAlign: 'center'}} scope='col'>Area</th>
+                    <th style={{textAlign: 'center'}} scope='col'>Request Date</th>
                     <th style={{textAlign: 'center'}} scope='col'>Status</th>
                     <th style={{textAlign: 'center'}} scope='col'>Action</th>
                   </tr>
@@ -228,7 +228,8 @@ const ProfilePage = () => {
                     <tr key={index} >
                       <td style={{textAlign: 'center'}}>{index + 1}</td>
                       <td style={{textAlign: 'center'}}>{contract.comboName}</td>
-                      <td style={{textAlign: 'center'}}>{contract.buildingDto ? contract.buildingDto.area : "-"}</td>
+                      <td style={{textAlign: 'center'}}>{contract.buildingDetail ? contract.buildingDetail.area : "-"}</td>
+                      <td style={{textAlign: 'center'}}>{contract? contract.requestDate : "-"}</td>
                       <td style={{textAlign: 'center'}}>
                         <MDBBtn color={contract.status ? 'success' : 'danger'} size='sm'>{contract.status ? "Confirmed" : "Processing"}</MDBBtn>
                       </td>

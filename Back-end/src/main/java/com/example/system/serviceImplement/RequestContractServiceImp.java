@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -164,7 +165,6 @@ public class RequestContractServiceImp implements RequestContractService {
         comboPrice = comboPrice*((((double)count*5)+100)/100);
         return comboPrice;
     }
-
     private int getCount(RequestContract contract) {
         int count = 0;
         if (contract.getBuildingDetail().isHasTunnel()) count++;
@@ -175,7 +175,6 @@ public class RequestContractServiceImp implements RequestContractService {
         if(contract.getBuildingDetail().isHasTunnel()) count++;
         return count;
     }
-
     private String buildEmail(RequestContract requestContract, Date dateMeet, String placeMeet) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = dateFormat.format(dateMeet);
@@ -210,6 +209,7 @@ public class RequestContractServiceImp implements RequestContractService {
     }
     private String sendQuoteToMail(PriceDetailDto priceDetailDto) {
         StringBuilder emailContent = new StringBuilder();
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0");
         emailContent.append("<h2>Báo giá chi tiết</h2>\n");
         emailContent.append("<p>Đây là chi tiết báo giá của công trình dựa theo thông số bạn đã lựa chọn:</p>\n");
         emailContent.append("<ul>\n");
@@ -221,8 +221,8 @@ public class RequestContractServiceImp implements RequestContractService {
         emailContent.append("  <li><strong>Số tầng: </strong>").append(priceDetailDto.getNumOFloor()).append("</li>\n");
         emailContent.append("  <li><strong>Hầm: </strong>").append(priceDetailDto.isHasTunnel() ? "Có" : "Không").append("</li>\n");
         emailContent.append("</ul>\n");
-        emailContent.append("<p><strong>Gói xây dựng có giá:</strong>").append(priceDetailDto.getComboPrice()).append("</p>\n");
-        emailContent.append("<p><strong>Chi tiết nguyên liệu:</strong></p>\n");
+        emailContent.append("<p><strong>Gói xây dựng có giá: </strong>").append(decimalFormat.format(priceDetailDto.getComboPrice())).append(" VND</p>\n");
+        emailContent.append("<p><strong>Chi tiết nguyên liệu: </strong></p>\n");
         emailContent.append("<ul>\n");
 
         // Thêm chi tiết nguyên liệu từ danh sách nguyên liệu
@@ -230,7 +230,7 @@ public class RequestContractServiceImp implements RequestContractService {
             emailContent.append("  <li>Loại nguyên liệu: ").append(c.getMateTypeName()).append(", Nguyên liệu: ").append(c.getMate().getMateName()).append(", Giá: ").append(c.getMate().getMatePrice()).append("</li>\n");
         }
         emailContent.append("</ul>\n");
-        emailContent.append("<p><strong>Tổng tiền là:</strong>").append(priceDetailDto.getTotalPrice()).append("</p>\n");
+        emailContent.append("<p><strong>Tổng tiền là: </strong>").append(decimalFormat.format(priceDetailDto.getTotalPrice())).append(" VND</p>\n");
         emailContent.append("<p><strong>Lưu ý:</strong></p>\n");
         emailContent.append("<p>Mặc định: Một căn hộ ban đầu chỉ có 1 phòng ngủ, 1 phòng tắm, 1 phòng bếp, 1 lầu và không có hầm. Khi bạn tăng số lượng các thành phần trên thì giá sẽ được cộng thêm 3-5% tùy loại.<br>Giá của loại nhà sẽ được tăng theo kiểu và loại nhà bạn chọn thì sẽ tăng theo hệ số: ").append(priceDetailDto.getPercentPrice()).append("</p>\n");
         emailContent.append("<p>Cám ơn đã tin tưởng và sử dụng dịch vụ báo giá thi công nhà ở của hệ thống CHCQS!</p>");

@@ -34,7 +34,7 @@ public class BlogController {
         boolean createBlog = blogService.createBlog(blog);
         return ResponseEntity.ok(createBlog);
     }
-    @PutMapping("/create")
+    @PutMapping("/update")
     public ResponseEntity<Boolean> updateBlog(@RequestParam Long blogId,@RequestBody BlogDto blog){
         boolean updateBlog = blogService.updateBlog(blogId, blog);
         return ResponseEntity.ok(updateBlog);

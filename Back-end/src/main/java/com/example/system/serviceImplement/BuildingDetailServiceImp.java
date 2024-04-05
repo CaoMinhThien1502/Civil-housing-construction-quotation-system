@@ -77,9 +77,9 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
         List<CustomMateTypeDto> matesCombo = new ArrayList<>();
         for (ComboDetail cd: combo.getComboDetails()) {
             boolean added = false;
-            for (Long id: dto.getNewMateIds()) {
-                Material newMate = materialRepository.findById(id).orElseThrow();
-                if(cd.getMaterial().getMaterialType().equals(newMate.getMaterialType())){
+            for (String id: dto.getNewMateIds()) {
+                Material newMate = materialRepository.findById(Long.parseLong(id)).orElseThrow();
+                if(cd.getMaterial().getMaterialType().equals(newMate.getMaterialType()) && !cd.getMaterial().getMaterialId().equals(newMate.getMaterialId())){
                     matesCombo.add(new CustomMateTypeDto(newMate.getMaterialType().getMaterialTypeId()
                             ,newMate.getMaterialType().getTypeName()
                             ,new CustomMateDto(newMate.getMaterialId(), newMate.getMaterialName(), newMate.getUnitPrice())));
@@ -91,9 +91,10 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
                 matesCombo.add(new CustomMateTypeDto(cd.getMaterial().getMaterialType().getMaterialTypeId()
                         ,cd.getMaterial().getMaterialType().getTypeName()
                         ,new CustomMateDto(cd.getMaterial().getMaterialId()
-                                        ,cd.getMaterial().getMaterialName()
-                                        ,cd.getMaterial().getUnitPrice())));
+                        ,cd.getMaterial().getMaterialName()
+                        ,cd.getMaterial().getUnitPrice())));
             }
+
         }
         detail.setComboId(combo.getComboBuildingId());
         detail.setMatesInCustom(matesCombo);
@@ -155,13 +156,6 @@ public class BuildingDetailServiceImp implements BuildingDetailService {
         }catch (Exception e){
             return null;
         }
-
-/*        BuildingDetail buildingDetail = buildingDetailRepository.findById(buildingDetailId).orElseThrow();
-        if(buildingDetail.getStatus()== -1){
-            buildingDetail.setStartDate(new Date());
-            buildingDetail.setStatus(1);
-            buildingDetailRepository.save(buildingDetail);
-        }else return null;*/
     }
 
     @Override

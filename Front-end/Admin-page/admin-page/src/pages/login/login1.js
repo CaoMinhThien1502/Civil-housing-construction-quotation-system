@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import BGL from '../../img/loginpage/2.jpg';
@@ -29,17 +29,17 @@ const Login = () => {
         email: email,
         password: password,
       }, { withCredentials: true });
-      
-      if (response.status === 200) {  
+
+      if (response.status === 200) {
         const token = jwtDecode(response.data.access_Token); // Make sure the key "access_Token" matches exactly with your server response
         localStorage.setItem('token', response.data.access_Token); // Store the token as a string without JSON.stringify
-        localStorage.setItem('tokenTime',token.exp)
+        localStorage.setItem('tokenTime', token.exp)
         localStorage.setItem('mail', token.sub); // Assuming token.sub contains the email
         localStorage.setItem('role', response.data.role); // Store role as received
-        if (response.data.role === "CUSTOMER") { 
+        if (response.data.role === "CUSTOMER") {
           console.log("Hello Customer");
           navigate("/home");
-        } else { 
+        } else {
           console.log("Hello Admin");
           navigate("/dashboard");
         }
@@ -56,69 +56,60 @@ const Login = () => {
       }
     }
   };
-  
+
   return (
     <section className="form-02-main">
-    <div className="container">
-      <div className="row">
-        <div className="col-md-12">
-          <div className="_lk_de">
-            <div className="form-03-main">
-              <div className="logo">
-                <img src={BGL} alt="Logo"/>
-              </div>
-              <form onSubmit={login}>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    className="form-control _ge_de_ol"
-                    placeholder="Enter Email"
-                    required
-                    aria-required="true"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="_lk_de">
+              <div className="form-03-main">
+                <div className="logo">
+                  <img src={BGL} alt="Logo" />
                 </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    name="password"
-                    className="form-control _ge_de_ol"
-                    placeholder="Enter Password"
-                    required
-                    aria-required="true"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                {/* <div className="checkbox form-group">
-                  <div className="form-check">
+                <form onSubmit={login}>
+                  <div className="form-group">
                     <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="rememberMe"
+                      type="email"
+                      name="email"
+                      className="form-control _ge_de_ol"
+                      placeholder="Enter Email"
+                      required
+                      aria-required="true"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
-                    <label className="form-check-label" htmlFor="rememberMe">
-                      Remember me
-                    </label>
                   </div>
-                  <a href="#" readonly>Forgot Password?</a>
-                </div> */}
-                <div className="form-group nm_lk">
+                  <div className="form-group">
+                    <input
+                      type="password"
+                      name="password"
+                      className="form-control _ge_de_ol"
+                      placeholder="Enter Password"
+                      required
+                      aria-required="true"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  {error && (
+                    <div className="alert alert-danger" role="alert">
+                      {error}
+                    </div>
+                  )}
+                  <div className="form-group nm_lk">
                     <button type="submit" className="_btn_04">Login</button>
-                </div>           
-              </form>
+                  </div>
+                </form>
                 <div className="form-group nm_lk">
-                   <a href='/register'><button type="submit" className="_btn_04" >Sign Up</button></a>
+                  <a href='/register'><button type="submit" className="_btn_04" >Sign Up</button></a>
                 </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   );
 };
 

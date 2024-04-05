@@ -200,7 +200,6 @@ const Invoice = ({ items, area, comboId }) => {
         if (localStorage.getItem('token') == null) {
             setLoginModalShow(true);
         } else {
-            alert("Gửi báo giá thành công! Check email");
             try {
                 const requestBody = {
                     "buildingId": object.buildingId,
@@ -218,6 +217,7 @@ const Invoice = ({ items, area, comboId }) => {
                     "totalPrice": object.totalPrice
                 }
                 const response = await axios.post(`http://localhost:8080/request-contract/sendQuote?email=${localStorage.getItem("mail")}`, requestBody).then(res => console.log(res));
+                alert("Gửi báo giá thành công! Check email");
             } catch (error) {
                 console.error("Lỗi trong quá trình gửi giá:", error);
             }
@@ -243,7 +243,7 @@ const Invoice = ({ items, area, comboId }) => {
                     "status": 0
                 }
                 const response = await axios.post(`http://localhost:8080/building/detail/create?buildingId=${buildingId}`, requestBody)
-                    .then(res => { 
+                    .then(res => {
                         //setContractId(res.data.requestContractId);
                         setBuildingDetailId(res.data.detail.buildingDetailId);
                         console.log(res.data.requestContractId + '+' + comboId + '+' + res.data.detail.buildingDetailId);
@@ -264,14 +264,14 @@ const Invoice = ({ items, area, comboId }) => {
                             + returnUrl + tmn + ref + vpnVersion;
                         let sercureHash = HmacSHA512(plainText, secretKey).toString();
                         var vnPayURLRequest = URL_VNPay + plainText + "&vnp_SecureHash=" + sercureHash;
-            
+
                         // Redirect to the VNPay URL
                         window.location = vnPayURLRequest;
                     });
             } catch (error) {
                 console.error("Lỗi tạo building Detail");
             }
-            
+
         }
     }
     useEffect(() => {
@@ -335,44 +335,54 @@ const Invoice = ({ items, area, comboId }) => {
         <>
             {!show && <InputLockForm area={url_Area} typeId={typeId} comboName={comboName} />}
             <div className='invoice-container1'>
-                <div className="bg-white rounded-lg shadow-lg px-1 py-1 mt-4 max-w-md mx-auto my-custom-form-size">
-                    <div className="flex1 items-center justify-between mb-2">
+                <div className="bg-white rounded-lg shadow-lg max-w-md mx-auto my-custom-form-size">
+                    <div className="flex-container1 items-center justify-between mb-2">
                         <div className="flex1 items-center">
                             <img className="h-2 w-2 mr-2" src={logo} alt="Logo" />
                             <div className="text-gray-700 font-semibold text-lg">CHCQS</div>
                         </div>
-                        <div className="text-gray-700 mt-2">
+                        <div className="flex1 items-center text-gray-700">
                             <div className="font-bold text-xl mb-2">INVOICE</div>
-                            <div className="text-sm">Date: 01/05/2023</div>
-                            <div className="text-sm">Invoice #: INV12345</div>
+                            <div className="text-sm">Date: 04/05/2024</div>
+                            <div className="text-sm">Invoice#: INV12345</div>
                         </div>
                     </div>
-                    <table className="w-full text-left mb-2">
-                        <thead>
-                            <tr>
-                                <th className="text-gray-700 font-bold uppercase py-2">Name</th>
-                                <th className="text-gray-700 font-bold uppercase py-2">Deatail</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="py-2 text-gray-700">Area</td>
-                                <td className="py-2 text-gray-700"> {url_Area} m2</td>
-
-                            </tr>
-                            {items.map((item) =>
-                                <tr key={item.id}>
-                                    <td className="py-2 text-gray-700">{item.name}</td>
-                                    <td className="py-2 text-gray-700">{item.quantity} room</td>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th className="text-gray-700 font-bold uppercase py-2">Name</th>
+                                    <th className="text-gray-700 font-bold uppercase py-2">Detail</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
-                    <div className="flex1 justify-end mb-2 mr-10">
-                        <div className="text-gray-700 mr-2">Total:</div>
-                        <div className="text-gray-700 font-bold text-xl">{Math.round(object.totalPrice)} VND</div>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td className="py-2 text-gray-700">Area</td>
+                                    <td className="py-2 text-gray-700">{url_Area} m2</td>
+                                </tr>
+                                {items.map((item) =>
+                                    <tr key={item.id}>
+                                        <td className="py-2 text-gray-700">{item.name}</td>
+                                        {item.name != "Tunnel" && item.name != "Floor" && (
+                                            <td className="py-2 text-gray-700">{item.quantity + " room"}</td>
+                                        )}
+                                        {item.name == "Floor" && (
+                                            <td className="py-2 text-gray-700">{item.quantity + " floor"}</td>
+                                        )}
+                                        {item.name == "Tunnel" && (
+                                            <td className="py-2 text-gray-700">{item.quantity == 1 ? "Yes" : "No"}</td>
+                                        )}
+                                        
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
                     </div>
-                    <div className="flex1 justify-between">
+                    <div className="flex-container1 items-center justify-between mb-2 mr-10">
+                        <div className="text-gray-700 mr-2" style={{ fontWeight: "bold" }}>TOTAL:</div>
+                        <div className="text-gray-700 font-bold text-xl">{object.totalPrice?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</div>
+                    </div>
+                    <div className="flex-container1 justify-between">
                         <input
                             type="button"
                             className="btn-checkout1 btn-send-quote1"

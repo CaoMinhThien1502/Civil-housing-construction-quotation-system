@@ -12,6 +12,7 @@ import ItemDescription from "./description";
 import MaterialDescription from './description';
 function ListItem() {
   const [combo, setCombo] = useState([]);
+  const [newMates, setNewMates] = useState([]);
   const [items, setItems] = useState([
     {
       id: 0,
@@ -74,23 +75,15 @@ function ListItem() {
   }, []);
   const handleComboTypeChange = (event) => {
     setSelectedComboId(event.target.value);
-    console.log("selectedComboId: ",event.target.value);
-  };
-  // Hàm gọi Material Description
-  const handleMaterialDescription = () => {
-    setIsClick(true);
-  }
-  const handleDetail = (item) => {
-    setSelectedItem(item);
-    setShowModal(true);
-  }
-  const handleNo = (id) => {
-    setItems(items.filter((item) => item.id !== id));
-  }
-  const handleRemove = (id) => {
-    setItems(items.filter((item) => item.id !== id));
   };
   const handleQuantityChange = (id, newQuantity) => {
+    const idsFromLocalStorage = localStorage.getItem('selectedIds');
+      if (idsFromLocalStorage) {
+        const array = idsFromLocalStorage.split(',').filter(item => item).map(Number);
+        setNewMates(array);
+      } else {
+        setNewMates([]);
+      }
     setItems(items.map(item =>
       item.id === id ? { ...item, quantity: newQuantity } : item));
   };
@@ -161,27 +154,26 @@ function ListItem() {
                         Yes
                       </Button>
                     )}
-                    {item.name !== "Tunnel" && item.name !== "Combo"  && (
+                    {item.name == "Floor"  && (
+                      <div>floor</div>
+                    )}
+                    {item.name !== "Tunnel" && item.name !== "Combo" && item.name !== "Floor"  && (
                       <div>room</div>
                     )}
-                    {item.name === "Combo" && (
-                      <Button variant="outline-primary" size='sm' onClick={() => handleMaterialDescription}>
-                      Deatail
-                    </Button>
+                    {item.name === "Combo" && (<div></div>
                     )}
                   </td>
                   
                   <br />
                 </tr>
               ))}
-
             </tbody>
             <tbody>
             </tbody>
           </table>
         </div>
       </div>
-      <Invoice items={items} comboId={selectedComboId}/>
+      <Invoice items={items} newMates={newMates} comboId={selectedComboId}/>
       {(selectedComboId !== 0)&& <MaterialDescription comboId={selectedComboId} />}
     </>
   );
