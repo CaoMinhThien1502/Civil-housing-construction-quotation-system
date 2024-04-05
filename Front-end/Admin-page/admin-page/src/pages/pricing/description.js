@@ -39,9 +39,6 @@ function MaterialDescription({ comboId, }) {
                     setAllMaterialList1(response.data.allMateList);
 
                     const defaultPricesObj = {};
-                    // response.data.infor.mateList.forEach(item => {
-                    //     defaultPricesObj[item.mate.mateName] = item.mate.matePrice;
-                    // });
                     setDefaultPrices(defaultPricesObj);
                     setShowModal(true);
                 } else {
@@ -50,8 +47,6 @@ function MaterialDescription({ comboId, }) {
             })
             .catch(error => console.error('Error fetching Combo Type data:', error));
     }, [comboId]);
-    console.log("allMaterialist: ", allMaterialList);
-    console.log(allMaterialList1);
     return (
         <>
             <Modal

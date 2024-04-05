@@ -165,7 +165,6 @@ public class RequestContractServiceImp implements RequestContractService {
         comboPrice = comboPrice*((((double)count*5)+100)/100);
         return comboPrice;
     }
-
     private int getCount(RequestContract contract) {
         int count = 0;
         if (contract.getBuildingDetail().isHasTunnel()) count++;
@@ -176,7 +175,6 @@ public class RequestContractServiceImp implements RequestContractService {
         if(contract.getBuildingDetail().isHasTunnel()) count++;
         return count;
     }
-
     private String buildEmail(RequestContract requestContract, Date dateMeet, String placeMeet) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = dateFormat.format(dateMeet);
@@ -211,6 +209,7 @@ public class RequestContractServiceImp implements RequestContractService {
     }
     private String sendQuoteToMail(PriceDetailDto priceDetailDto) {
         StringBuilder emailContent = new StringBuilder();
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0");
         emailContent.append("<h2>Báo giá chi tiết</h2>\n");
         emailContent.append("<p>Đây là chi tiết báo giá của công trình dựa theo thông số bạn đã lựa chọn:</p>\n");
         emailContent.append("<ul>\n");
@@ -222,8 +221,8 @@ public class RequestContractServiceImp implements RequestContractService {
         emailContent.append("  <li><strong>Số tầng: </strong>").append(priceDetailDto.getNumOFloor()).append("</li>\n");
         emailContent.append("  <li><strong>Hầm: </strong>").append(priceDetailDto.isHasTunnel() ? "Có" : "Không").append("</li>\n");
         emailContent.append("</ul>\n");
-        emailContent.append("<p><strong>Gói xây dựng có giá:</strong>").append(priceDetailDto.getComboPrice()).append("</p>\n");
-        emailContent.append("<p><strong>Chi tiết nguyên liệu:</strong></p>\n");
+        emailContent.append("<p><strong>Gói xây dựng có giá: </strong>").append(decimalFormat.format(priceDetailDto.getComboPrice())).append(" VND</p>\n");
+        emailContent.append("<p><strong>Chi tiết nguyên liệu: </strong></p>\n");
         emailContent.append("<ul>\n");
 
         // Thêm chi tiết nguyên liệu từ danh sách nguyên liệu

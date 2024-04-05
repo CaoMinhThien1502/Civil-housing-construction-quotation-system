@@ -22,7 +22,7 @@ public class RequestPriceDto {
     private boolean hasTunnel;
 
     private Long comboId;
-    private List<Long> newMateIds;
+    private List<String> newMateIds;
 
     private Double area;
 }
